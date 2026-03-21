@@ -4,13 +4,34 @@ using UnityEngine;
 using UnityEngine.Pool;
 using UnityEngine.Rendering.Universal;
 
-public class DecalPool : MonoBehaviour
+public class DecalPool
 {
-    [SerializeField] float timeBeforeFade = 10f;
-    [SerializeField] float fadeMultiplier = 3f;
-    [SerializeField] GameObject _prefab;
-    //bool[] _prefabInPool; 
+    DecalManager _parent;
+    float _timeBeforeFade;
+    float _fadeMultiplier;
+    GameObject _prefab;
     ObjectPool<DecalProjector> _decalPool;
+
+    public DecalPool()
+    {
+        _decalPool = new ObjectPool<DecalProjector>
+         (
+             createFunc: OnCreateDecal,
+             actionOnGet: OnGetDecal,
+             actionOnRelease: OnReleaseDecal,
+             actionOnDestroy: OnDestroyDecal,
+             true,
+             10,
+             100
+         );
+    }
+    public void Initialize(GameObject prefab, DecalManager parent, float timeBeforeFade, float fadeMulti)
+    {
+        _prefab = prefab;
+        _parent = parent;
+        _timeBeforeFade = timeBeforeFade;
+        _fadeMultiplier = fadeMulti;
+    }
 
     public DecalProjector GetDecal()
     {
@@ -20,52 +41,32 @@ public class DecalPool : MonoBehaviour
     {
         _decalPool.Release(decal);
     }
+
     private IEnumerator FadeAfterTime(DecalProjector decal)
     {
-        yield return new WaitForSeconds(timeBeforeFade);
-        StartCoroutine(BeginFade(decal));
+        yield return new WaitForSeconds(_timeBeforeFade);
+        _parent.StartCoroutine(BeginFade(decal));
     }
     private IEnumerator BeginFade(DecalProjector decal)
     {
         while (decal.fadeFactor > 0)
         {
-            decal.fadeFactor -= Time.deltaTime * fadeMultiplier;
+            decal.fadeFactor -= Time.deltaTime * _fadeMultiplier;
             yield return null;
         }
         ReleaseDecal(decal);
     }
 
-    private void Awake()
-    {
-        _decalPool = new ObjectPool<DecalProjector>
-            (
-                createFunc: OnCreateDecal,
-                actionOnGet: OnGetDecal,
-                actionOnRelease: OnReleaseDecal,
-                actionOnDestroy: OnDestroyDecal,
-                true,
-                10,
-                100
-            );
-
-        //_prefabInPool = new bool[_prefab.Length];
-        //for(int i = 0; i < _prefabInPool.Length; i++) _prefabInPool[i] = false;
-    }
-    private void Start()
-    {
-        //TESTING: REMOVE AFTER
-        DecalProjector decal = _decalPool.Get();
-        decal.transform.position = PlayerRef.Transform.position;
-    }
     private DecalProjector OnCreateDecal()
     {
-        GameObject newObject = Instantiate(_prefab, Vector3.zero, Quaternion.identity * Quaternion.AngleAxis(90f, Vector3.right), transform);
+        GameObject newObject = 
+            GameObject.Instantiate(_prefab, Vector3.zero, Quaternion.identity * Quaternion.AngleAxis(90f, Vector3.right), _parent.transform);
         return newObject.GetComponent<DecalProjector>();
     }
     private void OnGetDecal(DecalProjector decalProjector)
     {
         decalProjector.gameObject.SetActive(true);
-        StartCoroutine(FadeAfterTime(decalProjector));
+        _parent.StartCoroutine(FadeAfterTime(decalProjector));
     }
     private void OnReleaseDecal(DecalProjector decalProjector)
     {

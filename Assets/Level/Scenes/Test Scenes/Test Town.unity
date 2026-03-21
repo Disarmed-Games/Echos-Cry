@@ -1734,7 +1734,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 475309664}
-  - component: {fileID: 475309663}
+  - component: {fileID: 475309665}
   m_Layer: 0
   m_Name: BloodDecalPool
   m_TagString: Untagged
@@ -1742,21 +1742,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &475309663
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 475309662}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d90f82156c4cbb47850d80cda647ccf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Echos Cry Core::DecalPool
-  timeBeforeFade: 10
-  fadeMultiplier: 0.75
-  _prefab: {fileID: 4539410768166873776, guid: f92667749e9344b499cb8a9b37ff1d92, type: 3}
 --- !u!4 &475309664
 Transform:
   m_ObjectHideFlags: 0
@@ -1772,6 +1757,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &475309665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 475309662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d7f303928a3d4c4eb978e845ff6b3fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Echos Cry Core::DecalManager
+  _bloodPrefab: {fileID: 4539410768166873776, guid: f92667749e9344b499cb8a9b37ff1d92, type: 3}
+  _timeBeforeFade: 10
+  _fadeMultiplier: 3
 --- !u!1001 &495543370
 PrefabInstance:
   m_ObjectHideFlags: 0
