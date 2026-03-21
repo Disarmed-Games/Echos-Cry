@@ -14,14 +14,6 @@ public class DecalManager : NonSpawnableSingleton<DecalManager>
         _bloodPool.Initialize(_bloodPrefab, this, _timeBeforeFade, _fadeMultiplier);
     }
 
-    private void Start()
-    {
-
-        //TESTING: REMOVE AFTER
-        DecalProjector decal = GetBloodDecal();
-        decal.transform.position = PlayerRef.Transform.position;
-    }
-
     public DecalProjector GetBloodDecal()
     {
         return _bloodPool.GetDecal();
