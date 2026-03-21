@@ -1655,6 +1655,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Scarecrow
       objectReference: {fileID: 0}
+    - target: {fileID: 6802087171243017288, guid: 455a8e4cf5c982f479bdf9a75d562f0f, type: 3}
+      propertyPath: inkJSON
+      value: 
+      objectReference: {fileID: 4900000, guid: b2d75804432a1ed4092fc026cc89941d, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -1725,6 +1729,53 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 634d25a337674ae4dbe223ae4d933579, type: 3}
+--- !u!1 &475309662
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 475309664}
+  - component: {fileID: 475309665}
+  m_Layer: 0
+  m_Name: BloodDecalPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &475309664
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 475309662}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &475309665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 475309662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d7f303928a3d4c4eb978e845ff6b3fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Echos Cry Core::DecalManager
+  _bloodPrefab: {fileID: 4539410768166873776, guid: f92667749e9344b499cb8a9b37ff1d92, type: 3}
+  _timeBeforeFade: 10
+  _fadeMultiplier: 3
 --- !u!1001 &495543370
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3786,8 +3837,8 @@ MonoBehaviour:
     m_SceneAsset: {fileID: 102900000, guid: 309e65707ca7d8643b4487cd0073f99c, type: 3}
     m_SceneName: LevelOneScene
   portalSFX: {fileID: 11400000, guid: 3c2c25fd20eacfe4aaa9eeece1a7174c, type: 2}
-  _isLevelExit: 0
   _isFinalExit: 0
+  _inputTranslator: {fileID: 0}
 --- !u!65 &1102349920
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5989,8 +6040,8 @@ MonoBehaviour:
     m_SceneAsset: {fileID: 102900000, guid: 54131469adf76d748870efaec8ed3b1c, type: 3}
     m_SceneName: LevelThreeScene
   portalSFX: {fileID: 11400000, guid: 3c2c25fd20eacfe4aaa9eeece1a7174c, type: 2}
-  _isLevelExit: 0
   _isFinalExit: 0
+  _inputTranslator: {fileID: 0}
 --- !u!65 &1692363685
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6361,8 +6412,8 @@ MonoBehaviour:
     m_SceneAsset: {fileID: 102900000, guid: 0defd91a97699a643b7ff2f6fe832b04, type: 3}
     m_SceneName: LevelTwoScene
   portalSFX: {fileID: 11400000, guid: 3c2c25fd20eacfe4aaa9eeece1a7174c, type: 2}
-  _isLevelExit: 0
   _isFinalExit: 0
+  _inputTranslator: {fileID: 0}
 --- !u!65 &1751731148
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7975,3 +8026,4 @@ SceneRoots:
   - {fileID: 851566799}
   - {fileID: 1402615982}
   - {fileID: 1396118675}
+  - {fileID: 475309664}
