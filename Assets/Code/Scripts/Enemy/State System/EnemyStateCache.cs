@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using static EnemyStateCache;
 
 public class EnemyStateCache 
 {
@@ -13,6 +14,7 @@ public class EnemyStateCache
         WalkerSpawn, WalkerStagger, WalkerDeath, WalkerJump, WalkerAttack, WalkerIdle, WalkerChase,
         //Slime Enemy
         SlimeSpawn, SlimeStagger, SlimeDeath, SlimeCharge, SlimeAttack, SlimeIdle, SlimeChase,
+        //Bomb Enemy
     }
 
     private readonly Dictionary<EnemyStates, EnemyState> _stateCache;
@@ -51,5 +53,39 @@ public class EnemyStateCache
     {
         foreach (var state in _stateCache.Values)
             state.Disable();
+    }
+}
+
+public class NewEnemyStateCache
+{
+    public enum EnemyStates
+    {
+        UNASSIGNED = 0,
+        Spawn, Death, Idle, Stagger,
+        //Bat Enemy
+        BatSpawn, BatStagger, BatDeath, BatCharge, BatAttack, BatIdle, BatChase,
+        //Range Enemy
+        RangeSpawn, RangeStagger, RangeDeath, RangeCharge, RangeAttack, RangeIdle, RangeRoam,
+        //Walker Enemy
+        WalkerSpawn, WalkerStagger, WalkerDeath, WalkerJump, WalkerAttack, WalkerIdle, WalkerChase,
+        //Slime Enemy
+        SlimeSpawn, SlimeStagger, SlimeDeath, SlimeCharge, SlimeAttack, SlimeIdle, SlimeChase,
+        //Bomb Enemy
+    }
+    private Dictionary<EnemyStates, NewEnemyState> _stateCache;
+
+
+    public NewEnemyStateCache()
+    {
+        _stateCache = new();
+
+        //Init all states
+    }
+    
+
+    public NewEnemyState RequestState(NewEnemyStateCache.EnemyStates requestedState)
+    {
+        if (!_stateCache.ContainsKey(requestedState)) return null;
+        else return _stateCache[requestedState];
     }
 }

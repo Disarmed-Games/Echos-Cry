@@ -24,6 +24,9 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Collider _collider;
     [SerializeField] private PassiveEffectHandler _passiveEffectHandler;
     [SerializeField] private GameObject _deathEffect;
+    
+    private EnemyStateInfo _stateInfo;
+    public EnemyStateInfo StateInfo { get { return _stateInfo; } }
 
     [Header("Strategies")]
     [SerializeField] private AttackStrategy[] _attackStrats;
