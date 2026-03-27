@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddabb830e7b914f4fb031b6d809d92f9, type: 3}
   m_Name: Clarinet Heavy Attack 1
   m_EditorClassIdentifier: Assembly-CSharp::Attack
-  OverrideController: {fileID: 22100000, guid: 803ae644a4292e14283e7bbbf93cd350, type: 2}
+  OverrideController: {fileID: 22100000, guid: 62ae15eaa09a6214eb87116de6cc6f56, type: 2}
   AnimationClip: {fileID: 7400000, guid: 9220fa3fa40fc364496a19f14b47f85b, type: 2}
   AttackSound: {fileID: 11400000, guid: 32fc51584779ab5469383925ce9d3213, type: 2}
   BaseDamage: 7
