@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using static EnemyStateCache;
 
 public class EnemyStateCache 
 {
@@ -60,17 +59,17 @@ public class NewEnemyStateCache
 {
     public enum EnemyStates
     {
-        UNASSIGNED = 0,
+        Unassigned = 0,
         Spawn, Death, Idle, Stagger,
-        //Bat Enemy
-        BatSpawn, BatStagger, BatDeath, BatCharge, BatAttack, BatIdle, BatChase,
-        //Range Enemy
-        RangeSpawn, RangeStagger, RangeDeath, RangeCharge, RangeAttack, RangeIdle, RangeRoam,
-        //Walker Enemy
-        WalkerSpawn, WalkerStagger, WalkerDeath, WalkerJump, WalkerAttack, WalkerIdle, WalkerChase,
-        //Slime Enemy
-        SlimeSpawn, SlimeStagger, SlimeDeath, SlimeCharge, SlimeAttack, SlimeIdle, SlimeChase,
-        //Bomb Enemy
+        ////Bat Enemy
+        //BatSpawn, BatStagger, BatDeath, BatCharge, BatAttack, BatIdle, BatChase,
+        ////Range Enemy
+        //RangeSpawn, RangeStagger, RangeDeath, RangeCharge, RangeAttack, RangeIdle, RangeRoam,
+        ////Walker Enemy
+        //WalkerSpawn, WalkerStagger, WalkerDeath, WalkerJump, WalkerAttack, WalkerIdle, WalkerChase,
+        ////Slime Enemy
+        //SlimeSpawn, SlimeStagger, SlimeDeath, SlimeCharge, SlimeAttack, SlimeIdle, SlimeChase,
+        ////Bomb Enemy
     }
     private Dictionary<EnemyStates, NewEnemyState> _stateCache;
 

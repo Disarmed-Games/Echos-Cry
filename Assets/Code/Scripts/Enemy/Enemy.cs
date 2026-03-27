@@ -25,8 +25,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] private PassiveEffectHandler _passiveEffectHandler;
     [SerializeField] private GameObject _deathEffect;
     
-    private EnemyStateInfo _stateInfo;
-    public EnemyStateInfo StateInfo { get { return _stateInfo; } }
+    private EnemyStateData _stateData;
+    public EnemyStateData StateData { get { return _stateData; } }
 
     [Header("Strategies")]
     [SerializeField] private AttackStrategy[] _attackStrats;
@@ -54,6 +54,9 @@ public class Enemy : MonoBehaviour
         if (IsPooled)
         {
             _stateMachine.SwitchState(_stateCache.RequestState(_spawnState));
+            //_stateData.CurrentState.Exit(this);
+            //_stateData.CurrentState = _stateData.StartState;
+            //_stateData.CurrentState.Enter(this);
             _health.ResetSystem();
             _pool.ReleaseEnemy(this);
         }
