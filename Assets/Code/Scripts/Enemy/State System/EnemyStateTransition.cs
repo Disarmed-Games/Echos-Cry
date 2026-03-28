@@ -3,12 +3,12 @@ using System;
 public class EnemyStateTransition
 {
     private readonly NewEnemyState _targetState;
-    private readonly Func<bool> _condition;
+    private readonly Func<bool, Enemy> _condition;
     
     public NewEnemyState TargetState { get => _targetState; }
-    public bool MetCondition => _condition();
+    public bool MetCondition(Enemy enemy) => _condition(enemy);
     
-    public EnemyStateTransition(Func<bool> conditionFunc, NewEnemyState transitionState)
+    public EnemyStateTransition(Func<bool, Enemy> conditionFunc, NewEnemyState transitionState)
     {
         _condition = conditionFunc;
         _targetState = transitionState;

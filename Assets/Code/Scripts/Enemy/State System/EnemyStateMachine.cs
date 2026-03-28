@@ -35,7 +35,7 @@ public class NewEnemyStateMachine
         EnemyStateTransition[] transitions = stateData.TransitionDictionary[stateData.CurrentState].DefaultArray;
         foreach (EnemyStateTransition transition in transitions)
         {
-            if (transition.MetCondition)
+            if (transition.MetCondition(enemy))
             {
                 SwitchStates(transition.TargetState, enemy);
                 break;
@@ -48,7 +48,7 @@ public class NewEnemyStateMachine
         EnemyStateTransition[] transitions = stateInfo.TransitionDictionary[stateInfo.CurrentState].TickArray;
         foreach (EnemyStateTransition transition in transitions)
         {
-            if (transition.MetCondition)
+            if (transition.MetCondition(enemy))
             {
                 SwitchStates(transition.TargetState, enemy);
                 break;
