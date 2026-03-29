@@ -188,6 +188,7 @@ public class BatAttackState : EnemyState
         yield return new WaitForSeconds(_configFile.AttackDuration);
         isAttacking = false;
         _enemyContext.StartCoroutine(AttackCooldown());
+        _enemyContext.AttackStrategies[MeleeIndex].StopAllCoroutines();
     }
     private IEnumerator AttackCooldown()
     {
@@ -208,25 +209,27 @@ public class BatAttackState : EnemyState
         attackDirection = (PlayerRef.Transform.position - _enemyContext.transform.position).normalized;
         _enemyContext.Rigidbody.AddForce(_configFile.AttackDashForce * attackDirection, ForceMode.Impulse);
         _enemyContext.NPCAnimator.PlayAnimation(_configFile.AttackHashCode);
+        _enemyContext.AttackStrategies[MeleeIndex].Execute(_configFile.BaseDamage, attackDirection, _enemyContext.transform);
         _enemyContext.StartCoroutine(AttackDuration());
     }
     public override void Update()
     {
-        if (!isAttacking 
-            || _enemyContext.AttackStrategies.Length == 0 
-            || _enemyContext.AttackStrategies[MeleeIndex] == null) 
-            return;
+        //if (!isAttacking 
+        //    || _enemyContext.AttackStrategies.Length == 0 
+        //    || _enemyContext.AttackStrategies[MeleeIndex] == null) 
+        //    return;
 
-        if (_enemyContext.AttackStrategies[MeleeIndex]
-            .Execute(
-                _configFile.BaseDamage,
-                attackDirection, 
-                _enemyContext.transform)) 
-            isAttacking = false;
+        //if (_enemyContext.AttackStrategies[MeleeIndex]
+        //    .Execute(
+        //        _configFile.BaseDamage,
+        //        attackDirection, 
+        //        _enemyContext.transform)) 
+        //    isAttacking = false;
     }
     protected override void OnExit()
     {
         _enemyContext.Rigidbody.isKinematic = true;
+        _enemyContext.AttackStrategies[MeleeIndex].StopAllCoroutines();
         _enemyContext.NPCAnimator.PlayAnimation(_configFile.FlyHashCode);
     }
     public override void CheckSwitch()

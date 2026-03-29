@@ -1,8 +1,6 @@
-using AudioSystem;
 using UnityEngine;
 
-[CreateAssetMenu(menuName ="Echo's Cry/Enemy/Enemy Data/Bat")]
-public class BatData : ScriptableObject
+public class EnemyData : ScriptableObject
 {
     [SerializeField] private float _distanceCheck;
     [SerializeField] private float _attackChargeTime;
@@ -12,9 +10,6 @@ public class BatData : ScriptableObject
     [SerializeField] private float _staggerDuration;
     [SerializeField] private float _knockbackForce;
     [SerializeField] private float _baseDamage;
-
-    public readonly int FlyHashCode = Animator.StringToHash("Fly");
-    public readonly int AttackHashCode = Animator.StringToHash("Attack");
 
     public float DistanceCheck { get { return _distanceCheck; } }
     public float AttackChargeTime { get { return _attackChargeTime; } }

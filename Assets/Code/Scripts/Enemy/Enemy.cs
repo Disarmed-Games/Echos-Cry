@@ -24,12 +24,15 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Collider _collider;
     [SerializeField] private PassiveEffectHandler _passiveEffectHandler;
     [SerializeField] private GameObject _deathEffect;
+    [SerializeField] private EnemyData _data;
     
+    private EnemyStateContainer _stateContainer;
+    public EnemyStateContainer StateContainer { get => _stateContainer; }
     private EnemyStateData _stateData;
     public EnemyStateData StateData { get { return _stateData; } }
 
     [Header("Strategies")]
-    [SerializeField] private AttackStrategy[] _attackStrats;
+    [SerializeField] private AttackMethod[] _attackStrats;
     [SerializeField] private TargetStrategy[]   _targetStrats;
     [SerializeField] private MovementStrategy[] _movementStrats;
     [SerializeField] private ItemDropStrategy _drops;
@@ -42,6 +45,8 @@ public class Enemy : MonoBehaviour
     [Header("Event Channel (Broadcaster)")]
     [SerializeField] private IntEventChannel _updateWaveCount;
 
+
+    //IDEA: enemy sounds out message that they die, sends themselves as an argument and then outside system handles pooling and stuff
     public void HandleDeath()
     {
         //Effects and Updates
@@ -75,11 +80,12 @@ public class Enemy : MonoBehaviour
     public Collider Collider { get => _collider; }
     public PassiveEffectHandler PassiveEffectHandler { get => _passiveEffectHandler; }
 
-    public AttackStrategy[] AttackStrategies { get => _attackStrats; }
+    public AttackMethod[] AttackStrategies { get => _attackStrats; }
     public TargetStrategy[] TargetStrategy { get => _targetStrats; }
     public MovementStrategy[] MovementStrategy { get => _movementStrats; }
     public ItemDropStrategy DropsStrategy { get => _drops; }
     public SoundStrategy SoundStrategy { get => _soundStrategy; }
+    public EnemyData Data { get => _data; }
 
     public int EnemySpawnerID;
 

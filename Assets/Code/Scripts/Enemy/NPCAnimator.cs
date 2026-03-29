@@ -32,6 +32,7 @@ public class NPCAnimator : MonoBehaviour
     }
     public void PlayAnimation(int hashCode)
     {
+        if (!_animator.HasState(0, hashCode)) return; 
         _animator.Play(hashCode);
     }
 
@@ -66,4 +67,15 @@ public class NPCAnimator : MonoBehaviour
     {
         _npcSprite.material.SetColor(hashedTintColor, _defaultTintColor);
     }
+}
+
+namespace EchosCry.Enemy.Animation
+{
+    public class HashCodes
+    {
+        public static readonly int FlyHashCode = Animator.StringToHash("Fly");
+        public static readonly int IdleHashCode = Animator.StringToHash("Idle");
+        public static readonly int AttackHashCode = Animator.StringToHash("Attack");
+    }
+
 }

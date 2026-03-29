@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 public class EnemyStateCache 
 {
@@ -71,7 +72,7 @@ public class NewEnemyStateCache
         //SlimeSpawn, SlimeStagger, SlimeDeath, SlimeCharge, SlimeAttack, SlimeIdle, SlimeChase,
         ////Bomb Enemy
     }
-    private Dictionary<EnemyStates, NewEnemyState> _stateCache;
+    private readonly Dictionary<EnemyStates, NewEnemyState> _stateCache;
 
 
     public NewEnemyStateCache()

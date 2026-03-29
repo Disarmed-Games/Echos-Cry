@@ -10,6 +10,14 @@ public class GameManager : Singleton<GameManager>
     private static int _maxPlayerLives = 3;
     public static int PlayerLives = _maxPlayerLives;
 
+    private EnemyManager _enemyManager;
+    public EnemyManager EnemyManager { get => _enemyManager; }
+
+    protected override void OnAwake()
+    {
+        _enemyManager = new();
+    }
+
     public static void GameStart()
     {
         OnGameStartEvent?.Invoke();
@@ -26,5 +34,19 @@ public class GameManager : Singleton<GameManager>
             PlayerLives = _maxPlayerLives;
             OnGameOverEvent?.Invoke();
         }
+    }
+}
+
+public class EnemyManager
+{
+    private readonly NewEnemyStateMachine _stateMachine;
+    private readonly NewEnemyStateCache _stateCache;
+    public NewEnemyStateMachine StateMachine { get => _stateMachine; }
+    public NewEnemyStateCache StateCache { get => _stateCache; }
+
+    public EnemyManager()
+    {
+        _stateMachine = new NewEnemyStateMachine();
+        _stateCache = new();
     }
 }

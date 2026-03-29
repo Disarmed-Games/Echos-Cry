@@ -31,8 +31,7 @@ public class NewEnemyStateMachine
     }
     public void CheckSwitchStates(Enemy enemy)
     {
-        EnemyStateData stateData = enemy.StateData;
-        EnemyStateTransition[] transitions = stateData.TransitionDictionary[stateData.CurrentState].DefaultArray;
+        EnemyStateTransition[] transitions = enemy.StateContainer.TransitionDictionary[enemy.StateData.CurrentState].DefaultArray;
         foreach (EnemyStateTransition transition in transitions)
         {
             if (transition.MetCondition(enemy))
@@ -44,8 +43,7 @@ public class NewEnemyStateMachine
     }
     public void TickCheckSwitchStates(Enemy enemy)
     {
-        EnemyStateData stateInfo = enemy.StateData;
-        EnemyStateTransition[] transitions = stateInfo.TransitionDictionary[stateInfo.CurrentState].TickArray;
+        EnemyStateTransition[] transitions = enemy.StateContainer.TransitionDictionary[enemy.StateData.CurrentState].TickArray;
         foreach (EnemyStateTransition transition in transitions)
         {
             if (transition.MetCondition(enemy))

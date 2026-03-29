@@ -135,11 +135,11 @@ public class RangeAttackState : EnemyState
         count = 0;
         _enemyContext.AttackStrategies[0].Execute(10f, GetDirection(), _enemyContext.transform);
         _enemyContext.SoundStrategy.Execute(_enemyContext.SoundConfig.AttackSFX, _enemyContext.transform, 0);
-        _enemyContext.StartCoroutine(BetweenAttackPauseCoroutine());
     }
     public override void Update()
     {
         _enemyContext.NPCAnimator.UpdateSpriteDirection(GetDirection(), true);
+        if (_enemyContext.AttackStrategies[0].AttackEnded) _enemyContext.StartCoroutine(AttackCooldownCoroutine());
     }
     private Vector3 GetDirection()
     {
@@ -147,6 +147,7 @@ public class RangeAttackState : EnemyState
     }
     protected override void OnExit()
     {
+        _enemyContext.AttackStrategies[0].StopAllCoroutines();
         _enemyContext.StopAllCoroutines();
     }
     private IEnumerator AttackCooldownCoroutine()
@@ -157,14 +158,14 @@ public class RangeAttackState : EnemyState
     private IEnumerator BetweenAttackPauseCoroutine()
     {
         yield return new WaitForSeconds(TempoConductor.Instance.TimeBetweenBeats);
-        if (count + 1 >= _config.ProjectileCount) _enemyContext.StartCoroutine(AttackCooldownCoroutine());
-        else
-        {
-            _enemyContext.AttackStrategies[0].Execute(_config.BaseDamage, GetDirection(), _enemyContext.transform);
-            _enemyContext.SoundStrategy.Execute(_enemyContext.SoundConfig.AttackSFX, _enemyContext.transform, 0);
-            count++;
-            _enemyContext.StartCoroutine(BetweenAttackPauseCoroutine());
-        }
+       
+        _enemyContext.StartCoroutine(AttackCooldownCoroutine());
+        //else
+        //{
+        //    _enemyContext.AttackStrategies[0].Execute(_config.BaseDamage, GetDirection(), _enemyContext.transform);
+        //    _enemyContext.SoundStrategy.Execute(_enemyContext.SoundConfig.AttackSFX, _enemyContext.transform, 0);
+        //    count++;
+        //}
     }
 }
 public class RangeStaggerState : EnemyState

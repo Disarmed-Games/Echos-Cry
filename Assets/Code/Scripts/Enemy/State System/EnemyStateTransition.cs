@@ -1,34 +1,37 @@
 using System;
 
-public class EnemyStateTransition
+//The information related to transitioning from one state to another
+//Stores the target state, aka the state that will be transitioned to if a condition if met
+//Stores a bool function that takes in an Enemy which is the condition that must be met for transition
+public readonly struct EnemyStateTransition
 {
     private readonly NewEnemyState _targetState;
     private readonly Func<bool, Enemy> _condition;
     
-    public NewEnemyState TargetState { get => _targetState; }
-    public bool MetCondition(Enemy enemy) => _condition(enemy);
+    public readonly NewEnemyState TargetState { get => _targetState; }
+    public readonly bool MetCondition(Enemy enemy) => _condition(enemy);
     
-    public EnemyStateTransition(Func<bool, Enemy> conditionFunc, NewEnemyState transitionState)
+    public EnemyStateTransition(NewEnemyState transitionState, Func<bool, Enemy> conditionFunc)
     {
-        _condition = conditionFunc;
         _targetState = transitionState;
+        _condition = conditionFunc;
     }
 }
 
-public class EnemyTransitionsContainer
+//Container for transitions associated to a state
+//Default array represents the default transitions of a state aka transitions that need their conditions checked every frame
+//Tick array represents transitions of a state that can be checked based on a tick timer rather than every frame (ex. checking player distance)
+public readonly struct EnemyStateTransitionsContainer
 {
-    readonly EnemyStateTransition[] _defaultArray;
-    readonly EnemyStateTransition[] _tickArray;
-    readonly float _tickTime;
+    private readonly EnemyStateTransition[] _defaultArray;
+    private readonly EnemyStateTransition[] _tickArray;
 
-    public EnemyStateTransition[] DefaultArray { get => _defaultArray; }
-    public EnemyStateTransition[] TickArray { get => _tickArray; }
-    public float TickTime => _tickTime;
+    public readonly EnemyStateTransition[] DefaultArray { get => _defaultArray; }
+    public readonly EnemyStateTransition[] TickArray { get => _tickArray; }
 
-    public EnemyTransitionsContainer(float tickTime, EnemyStateTransition[] defaultList, EnemyStateTransition[] tickList)
+    public EnemyStateTransitionsContainer(EnemyStateTransition[] defaultList, EnemyStateTransition[] tickList)
     {
         _defaultArray = defaultList;
-        _tickTime = tickTime;
         _tickArray = tickList;
     }
 }

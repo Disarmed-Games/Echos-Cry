@@ -198,17 +198,6 @@ public class BombAttackState : EnemyState
     }
     public override void Update()
     {
-        if (!isAttacking
-            || _enemyContext.AttackStrategies.Length == 0
-            || _enemyContext.AttackStrategies[MeleeIndex] == null)
-            return;
-
-        if (_enemyContext.AttackStrategies[MeleeIndex]
-            .Execute(
-                _configFile.BaseDamage,
-                attackDirection,
-                _enemyContext.transform))
-            isAttacking = false;
     }
     protected override void OnExit()
     {
