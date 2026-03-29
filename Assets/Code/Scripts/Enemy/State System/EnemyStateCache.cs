@@ -61,7 +61,7 @@ public class NewEnemyStateCache
     public enum EnemyStates
     {
         Unassigned = 0,
-        Spawn, Death, Idle, Stagger,
+        Spawn, Death, Idle, Stagger, Pursue,
         ////Bat Enemy
         //BatSpawn, BatStagger, BatDeath, BatCharge, BatAttack, BatIdle, BatChase,
         ////Range Enemy
@@ -77,9 +77,15 @@ public class NewEnemyStateCache
 
     public NewEnemyStateCache()
     {
-        _stateCache = new();
-
-        //Init all states
+        _stateCache = new()
+        {
+            //Init all states
+            { EnemyStates.Death, new DeathEnemyState() },
+            { EnemyStates.Spawn, new SpawnEnemyState() },
+            { EnemyStates.Idle, new IdleEnemyState() },
+            { EnemyStates.Stagger, new StaggerEnemyState() },
+            { EnemyStates.Pursue, new PursueEnemyState() }
+        };
     }
     
 

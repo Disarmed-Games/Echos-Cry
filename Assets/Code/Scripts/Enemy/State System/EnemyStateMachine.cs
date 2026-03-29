@@ -13,25 +13,35 @@ public class EnemyStateMachine : AbstractStateMachine<EnemyState> { }
 
 public class NewEnemyStateMachine
 {
+    private NewEnemyStateCache _stateCache;
+
+    public NewEnemyStateMachine(NewEnemyStateCache stateCache)
+    {
+        _stateCache = stateCache;
+    }
+
     public void UpdateStates(Enemy enemy)
     {
-        enemy.StateData.CurrentState.Update(enemy);
+        enemy.StateContainer.StateNodes[enemy.StateData.CurrentState].State.Update(enemy);
     }
     public void FixedUpdateStates(Enemy enemy)
     {
-        enemy.StateData.CurrentState.FixedUpdate(enemy);
+        enemy.StateContainer.StateNodes[enemy.StateData.CurrentState].State.FixedUpdate(enemy);
     }
 
-    public void SwitchStates(NewEnemyState state, Enemy enemy)
+    public void SwitchStates(NewEnemyStateCache.EnemyStates state, Enemy enemy)
     {
-        if (enemy.StateData.CurrentState == null) return;
-        enemy.StateData.CurrentState.Exit(enemy);
+        NewEnemyState currentState = enemy.StateContainer.StateNodes[enemy.StateData.CurrentState].State;
+        if (currentState == null) return;
+
+        currentState.Exit(enemy);
         enemy.StateData.CurrentState = state;
-        enemy.StateData.CurrentState.Enter(enemy);
+        currentState = enemy.StateContainer.StateNodes[enemy.StateData.CurrentState].State;
+        currentState.Enter(enemy);
     }
     public void CheckSwitchStates(Enemy enemy)
     {
-        EnemyStateTransition[] transitions = enemy.StateContainer.TransitionDictionary[enemy.StateData.CurrentState].DefaultArray;
+        EnemyStateTransition[] transitions = enemy.StateContainer.StateNodes[enemy.StateData.CurrentState].DefaultArray;
         foreach (EnemyStateTransition transition in transitions)
         {
             if (transition.MetCondition(enemy))
@@ -43,7 +53,7 @@ public class NewEnemyStateMachine
     }
     public void TickCheckSwitchStates(Enemy enemy)
     {
-        EnemyStateTransition[] transitions = enemy.StateContainer.TransitionDictionary[enemy.StateData.CurrentState].TickArray;
+        EnemyStateTransition[] transitions = enemy.StateContainer.StateNodes[enemy.StateData.CurrentState].TickArray;
         foreach (EnemyStateTransition transition in transitions)
         {
             if (transition.MetCondition(enemy))

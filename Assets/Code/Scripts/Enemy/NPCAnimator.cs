@@ -73,7 +73,7 @@ namespace EchosCry.Enemy.Animation
 {
     public class HashCodes
     {
-        public static readonly int FlyHashCode = Animator.StringToHash("Fly");
+        public static readonly int FlyHashCode = Animator.StringToHash("Move");
         public static readonly int IdleHashCode = Animator.StringToHash("Idle");
         public static readonly int AttackHashCode = Animator.StringToHash("Attack");
     }

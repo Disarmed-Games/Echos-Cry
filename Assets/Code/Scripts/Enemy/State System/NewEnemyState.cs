@@ -4,6 +4,7 @@
 using Codice.CM.Client.Differences.Graphic;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 
 public abstract class NewEnemyState
 {
@@ -24,6 +25,45 @@ public class IdleEnemyState : NewEnemyState
 public class SpawnEnemyState : NewEnemyState
 {
 
+}
+
+public class PursueEnemyState : NewEnemyState
+{
+    public override void Enter(Enemy enemyContext)
+    {
+        SetEnemyTarget(enemyContext);
+        enemyContext.StartCoroutine(UpdateTarget(enemyContext));
+    }
+    public override void Exit(Enemy enemyContext)
+    {
+        enemyContext.StopAllCoroutines();
+    }
+    public override void Update(Enemy enemyContext)
+    {
+        enemyContext.NPCAnimator
+            .UpdateSpriteDirection((PlayerRef.Transform.position - enemyContext.transform.position).normalized, true);
+    }
+    private void SetEnemyTarget(Enemy enemyContext)
+    {
+        if (enemyContext.NavMeshAgent == null || PlayerRef.Transform == null) return;
+        enemyContext.NavMeshAgent.SetDestination(PlayerRef.Transform.position);
+    }
+    private IEnumerator UpdateTarget(Enemy enemyContext)
+    {
+        yield return new WaitForSeconds(0.2f);
+        SetEnemyTarget(enemyContext);
+        enemyContext.StartCoroutine(UpdateTarget(enemyContext));
+    }
+    private bool CheckNavMeshDistance(Enemy enemyContext)
+    {
+        NavMeshAgent agent = enemyContext.NavMeshAgent;
+        if (agent == null) return true;
+        if (agent.remainingDistance <= agent.stoppingDistance)
+        {
+            if (!agent.hasPath || agent.velocity.sqrMagnitude == 0f) return true;
+        }
+        return false;
+    }
 }
 
 public class StaggerEnemyState : NewEnemyState

@@ -3,6 +3,11 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.VFX;
 
+//ORDER:
+//- Create state transitions and then create StateNode
+//- Add StateNode to dictionary using enums
+//- Create a state container, setting the start state and placing dictionary 
+
 public class Enemy : MonoBehaviour
 {
     private EnemyStateCache _stateCache;
@@ -123,6 +128,6 @@ public class Enemy : MonoBehaviour
 
     public class Builder
     {
-        //TODO
+        
     }
 }

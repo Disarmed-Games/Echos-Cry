@@ -7,21 +7,21 @@ using System.Collections.Generic;
 public readonly struct EnemyStateContainer 
 {
     private readonly NewEnemyState _startState;
-    private readonly Dictionary<NewEnemyState, EnemyStateTransitionsContainer> _stateTransitions;
+    private readonly Dictionary<NewEnemyStateCache.EnemyStates, StateNode> _states;
 
-    public readonly NewEnemyState StartState => _startState;
-    public readonly Dictionary<NewEnemyState, EnemyStateTransitionsContainer> TransitionDictionary => _stateTransitions;
+    public NewEnemyState StartState { get => _startState; }
+    public Dictionary<NewEnemyStateCache.EnemyStates, StateNode> StateNodes { get => _states; }
 
-    public EnemyStateContainer(NewEnemyState startState, Dictionary<NewEnemyState, EnemyStateTransitionsContainer> stateTransitions)
+    public EnemyStateContainer(NewEnemyState startState, Dictionary<NewEnemyStateCache.EnemyStates, StateNode> states)
     {
         _startState = startState;
-        _stateTransitions = stateTransitions;
+        _states = states;
     }
 }
 
 public class EnemyStateData
 {
-    public NewEnemyState CurrentState;
+    public NewEnemyStateCache.EnemyStates CurrentState;
     public bool IsStaggered;
 
 }
