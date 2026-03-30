@@ -68,7 +68,7 @@ public class CalibrationManager : MonoBehaviour
         if (_hitCount == _maxHitCount)
         {
             HitAccuracy = _overallAccuracy;
-            SceneManager.LoadScene("TownScene");
+            SceneManager.LoadScene("TutorialScene");
         }
     }
     public void RetryButton()

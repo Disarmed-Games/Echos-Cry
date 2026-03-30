@@ -6,13 +6,6 @@ Ever since these demons came around nothin' has been the same.
 (blushes) ...You really mean that?
 -
 Well nevermind me, if you want to survive here, you'll need to learn a few things.
-The 'left mouse button' is used for your primary attack, and the 'right mouse button' is your heavy attack.
-Press 'left shift' to dash.
-Press 'f' to swap between your instruments.
-Oh! And the most important thing...
-Stay on beat!
-+ [Got it!]
-    Good luck!
-+ [No idea, but lets do this!]
-    Break a leg!
+That stump ahead has been blocking the path.
+Press 'LMB' to unleash your primary attack.
 - ->END
