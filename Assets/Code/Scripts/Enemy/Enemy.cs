@@ -13,6 +13,9 @@ public class Enemy : MonoBehaviour
     private EnemyStateCache _stateCache;
     private EnemyStateMachine _stateMachine;
     private EnemyPool _pool;
+    
+    private static NewEnemyStateMachine _newStateMachine;
+    private static NewEnemyStateCache   _newStateCache;
 
     [SerializeField] private EnemyStateCache.EnemyStates _spawnState;
     private bool IsPooled => _pool != null;
@@ -31,10 +34,11 @@ public class Enemy : MonoBehaviour
     [SerializeField] private GameObject _deathEffect;
     [SerializeField] private EnemyData _data;
     
-    private EnemyStateContainer _stateContainer;
-    public EnemyStateContainer StateContainer { get => _stateContainer; }
+    private EnemyStateHandler _stateHandler;
+    public EnemyStateHandler StateHandler { get => _stateHandler; set => _stateHandler = value; }
+    
     private EnemyStateData _stateData;
-    public EnemyStateData StateData { get { return _stateData; } }
+    public EnemyStateData StateData { get => _stateData; set => _stateData = value; }
 
     [Header("Strategies")]
     [SerializeField] private AttackMethod[] _attackStrats;
@@ -51,31 +55,12 @@ public class Enemy : MonoBehaviour
     [SerializeField] private IntEventChannel _updateWaveCount;
 
 
-    //IDEA: enemy sounds out message that they die, sends themselves as an argument and then outside system handles pooling and stuff
-    public void HandleDeath()
-    {
-        //Effects and Updates
-        _updateWaveCount.Invoke(EnemySpawnerID);
-
-        DeathEffectHandler deathEffectPrefab = Instantiate(_deathEffect, transform.position, Quaternion.identity).GetComponent<DeathEffectHandler>();
-        deathEffectPrefab.SetSpriteShape(_npcAnimator.NPCSprite);
-
-        //Enemy Pooling
-        if (IsPooled)
-        {
-            _stateMachine.SwitchState(_stateCache.RequestState(_spawnState));
-            //_stateData.CurrentState.Exit(this);
-            //_stateData.CurrentState = _stateData.StartState;
-            //_stateData.CurrentState.Enter(this);
-            _health.ResetSystem();
-            _pool.ReleaseEnemy(this);
-        }
-        else Destroy(gameObject);
-    }
-
     public EnemyStateCache StateCache { get => _stateCache; }
     public EnemyStateMachine StateMachine { get => _stateMachine; }
     public EnemyPool Pool { get => _pool; set => _pool = value; }
+
+    public NewEnemyStateMachine NewStateMachine { get => _newStateMachine; }
+    public NewEnemyStateCache NewStateCache { get => _newStateCache; }
 
     public HealthSystem Health { get => _health; }
     public NavMeshAgent NavMeshAgent { get => _navMeshAgent; }
@@ -94,23 +79,30 @@ public class Enemy : MonoBehaviour
 
     public int EnemySpawnerID;
 
-    protected virtual void Awake()
+   private void Awake()
     {   
-        _stateMachine = new();
-        _stateCache = new();
+        //_stateMachine = new();
+        //_stateCache = new();
+
+        _newStateMachine ??= new();
+        _newStateCache ??= new();
+
+        _stateData = new();
 
         _enemyCacheStrategy.Execute(_stateCache, this);
-        _stateMachine.Init(_stateCache.StartState); 
+        //_stateMachine.Init(_stateCache.StartState); 
     }
     private void OnEnable()
     {
-        _stateCache?.Enable();
+        //_stateCache?.Enable();
+        TickManager.Instance.GetTimer(0.2f).Tick += TickCheck;
         _playerAttackEndChannel.Channel += ResetCollider;
         ResetCollider();
     }
     private void OnDisable()
     {
-        _stateCache?.Disable();
+        //_stateCache?.Disable();
+        if(TickManager.Instance != null) TickManager.Instance.GetTimer(0.2f).Tick -= TickCheck;
         _playerAttackEndChannel.Channel -= ResetCollider; 
     }
     private void OnDestroy()
@@ -119,15 +111,57 @@ public class Enemy : MonoBehaviour
         _stateCache = null;
     }
 
-    protected virtual void Update()
+    private void Update()
     {
-        _stateMachine.UpdateState();
+        //_stateMachine.UpdateState();
+
+        if (_stateHandler == null || _stateData == null) return;
+        _newStateMachine.CheckSwitchStates(this);
+        _newStateMachine.UpdateStates(this);
+    }
+    private void FixedUpdate()
+    {
+        //_stateMachine.FixedUpdateState();
+
+        if (_stateHandler == null || _stateData == null) return;
+        _newStateMachine.FixedUpdateStates(this);
     }
 
     private void ResetCollider() => _collider.enabled = true;
 
+    public void HandleDeath()
+    {
+        //Effects and Updates
+        _updateWaveCount.Invoke(EnemySpawnerID);
+
+        DeathEffectHandler deathEffectPrefab = Instantiate(_deathEffect, transform.position, Quaternion.identity).GetComponent<DeathEffectHandler>();
+        deathEffectPrefab.SetSpriteShape(_npcAnimator.NPCSprite);
+
+        //Enemy Pooling
+        if (IsPooled)
+        {
+            _stateMachine.SwitchState(_stateCache.RequestState(_spawnState));
+
+            if (_stateHandler != null && _stateData != null)
+                _newStateMachine.SwitchStates(_stateHandler.StartState, this);
+
+            _health.ResetSystem();
+            _pool.ReleaseEnemy(this);
+        }
+        else Destroy(gameObject);
+    }
+
+    private void TickCheck()
+    {
+        _newStateMachine.CheckTickSwitchStates(this);
+    }
+
     public class Builder
     {
-        
+        public Enemy Build()
+        {
+            Enemy newEnemy = new GameObject("Enemy").AddComponent<Enemy>();
+            return newEnemy;
+        }
     }
 }

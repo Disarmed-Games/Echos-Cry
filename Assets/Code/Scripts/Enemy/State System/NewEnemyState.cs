@@ -5,6 +5,7 @@ using Codice.CM.Client.Differences.Graphic;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+using EchosCry.Enemy.Animation;
 
 public abstract class NewEnemyState
 {
@@ -14,25 +15,29 @@ public abstract class NewEnemyState
     public virtual void Exit(Enemy enemyContext) { }
 }
 
+public class SpawnEnemyState : NewEnemyState
+{
+
+}
+
 public class IdleEnemyState : NewEnemyState
 {
     public override void Enter(Enemy enemyContext)
     {
-        enemyContext.NPCAnimator.PlayAnimation(EchosCry.Enemy.Animation.HashCodes.IdleHashCode);
+        Debug.Log("Idle");
+        enemyContext.NPCAnimator.PlayAnimation(HashCodes.IdleHashCode);
     }
-}
-
-public class SpawnEnemyState : NewEnemyState
-{
-
 }
 
 public class PursueEnemyState : NewEnemyState
 {
     public override void Enter(Enemy enemyContext)
     {
+        Debug.Log("Pursue");
+        
         SetEnemyTarget(enemyContext);
         enemyContext.StartCoroutine(UpdateTarget(enemyContext));
+        enemyContext.NPCAnimator.PlayAnimation(HashCodes.MoveHashCode);
     }
     public override void Exit(Enemy enemyContext)
     {
@@ -54,23 +59,13 @@ public class PursueEnemyState : NewEnemyState
         SetEnemyTarget(enemyContext);
         enemyContext.StartCoroutine(UpdateTarget(enemyContext));
     }
-    private bool CheckNavMeshDistance(Enemy enemyContext)
-    {
-        NavMeshAgent agent = enemyContext.NavMeshAgent;
-        if (agent == null) return true;
-        if (agent.remainingDistance <= agent.stoppingDistance)
-        {
-            if (!agent.hasPath || agent.velocity.sqrMagnitude == 0f) return true;
-        }
-        return false;
-    }
 }
 
 public class StaggerEnemyState : NewEnemyState
 {
     public override void Enter(Enemy enemyContext)
     {
-        //Debug.Log("Enter Stagger State");
+        Debug.Log("Stagger");
         enemyContext.Rigidbody.isKinematic = false;
         Vector3 direction = (PlayerRef.Transform.position - enemyContext.transform.position).normalized;
         enemyContext.Rigidbody.AddForce(-(enemyContext.Data.KnockbackForce * direction), ForceMode.Impulse);
@@ -87,7 +82,86 @@ public class StaggerEnemyState : NewEnemyState
     {
         //Need to pass time
         yield return new WaitForSeconds(enemyContext.Data.StaggerDuration);
-        enemyContext.StateData.IsStaggered = false;
+        EnemyStateData data = enemyContext.StateData;
+        data.IsStaggered = false;
+        enemyContext.StateData = data;
+    }
+}
+
+public class ChargeEnemyState : NewEnemyState
+{
+    public override void Enter(Enemy enemyContext)
+    {
+        Debug.Log("Charge");
+        
+        enemyContext.StateData.ReadyToAttack = false;
+        enemyContext.StartCoroutine(ChargeAttackCoroutine(enemyContext));
+    }
+    public override void Exit(Enemy enemyContext)
+    {
+        enemyContext.StopAllCoroutines();
+    }
+    public override void Update(Enemy enemyContext)
+    {
+        enemyContext.NPCAnimator
+            .UpdateSpriteDirection((PlayerRef.Transform.position - enemyContext.transform.position).normalized, true);
+    }
+    private IEnumerator ChargeAttackCoroutine(Enemy enemyContext)
+    {
+        yield return new WaitForSeconds(enemyContext.Data.AttackChargeTime);
+        if (TempoConductor.Instance.IsOnBeat())
+        {
+            Debug.Log("Ready for attack");
+            enemyContext.StateData.ReadyToAttack = true;
+        }
+        else enemyContext.StartCoroutine(WaitUntilBeat(enemyContext));
+    }
+    private IEnumerator WaitUntilBeat(Enemy enemyContext)
+    {
+        while (!TempoConductor.Instance.IsOnBeat())
+        {
+            yield return new WaitForEndOfFrame();
+        }
+        Debug.Log("Ready for attack");
+        enemyContext.StateData.ReadyToAttack = true;
+    }
+}
+
+public class AttackEnemyState : NewEnemyState
+{
+    public override void Enter(Enemy enemyContext)
+    {
+        Debug.Log("Attack");
+
+        enemyContext.Rigidbody.isKinematic = false;
+        Vector3 attackDirection = (PlayerRef.Transform.position - enemyContext.transform.position).normalized;
+        enemyContext.Rigidbody.AddForce(enemyContext.Data.AttackDashForce * attackDirection, ForceMode.Impulse);
+        enemyContext.NPCAnimator.PlayAnimation(HashCodes.AttackHashCode);
+        enemyContext.AttackStrategies[0].Execute(enemyContext.Data.BaseDamage, attackDirection, enemyContext.transform);
+    }
+    public override void Exit(Enemy enemyContext)
+    {
+        enemyContext.Rigidbody.isKinematic = true;
+        enemyContext.AttackStrategies[0].StopAllCoroutines();
+    }
+}
+public class CooldownEnemyState : NewEnemyState
+{
+    public override void Enter(Enemy enemyContext)
+    {
+        Debug.Log("Cooldown");
+
+        enemyContext.StateData.OnCooldown = true;
+        enemyContext.StartCoroutine(Cooldown(enemyContext));
+    }
+    public override void Exit(Enemy enemyContext)
+    {
+        enemyContext.StopAllCoroutines();
+    }
+    private IEnumerator Cooldown(Enemy enemyContext)
+    {
+        yield return new WaitForSeconds(enemyContext.Data.AttackCooldown);
+        enemyContext.StateData.OnCooldown = false;
     }
 }
 
@@ -95,6 +169,7 @@ public class DeathEnemyState : NewEnemyState
 {
     public override void Enter(Enemy enemyContext)
     {
+        Debug.Log("Death");
         enemyContext.DropsStrategy.Execute(enemyContext.transform);
         enemyContext.HandleDeath();
     }

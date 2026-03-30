@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[CreateAssetMenu(menuName = "Echo's Cry/Enemy/Enemy Data/General")]
 public class EnemyData : ScriptableObject
 {
     [SerializeField] private float _distanceCheck;

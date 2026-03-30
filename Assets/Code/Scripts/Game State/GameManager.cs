@@ -22,7 +22,7 @@ public class GameManager : Singleton<GameManager>
     {
         OnGameStartEvent?.Invoke();
     }
-    //Player parameter may not be used idk yet
+
     public static void HandlePlayerDeath(Player player)
     {
         PlayerLives--;
@@ -46,7 +46,7 @@ public class EnemyManager
 
     public EnemyManager()
     {
-        _stateMachine = new NewEnemyStateMachine();
         _stateCache = new();
+        _stateMachine = new NewEnemyStateMachine();
     }
 }

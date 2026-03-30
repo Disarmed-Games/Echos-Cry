@@ -10,15 +10,16 @@ public class MeleeAttack : AttackMethod
     [SerializeField] private LayerMask _playerMask;
     [SerializeField] private float _distance;
     [SerializeField] private soundEffect _attackSound;
+    [SerializeField] private float duration;
 
     public override void Execute(float damage, Vector3 direction, Transform origin)
     {
         _attackEnded = false;
         StartCoroutine(StartAttack(damage, direction, origin));
+        StartCoroutine(AttackDuration());
     }
     private IEnumerator StartAttack(float damage, Vector3 direction, Transform origin)
     {
-        Debug.Log("Attack started");
         while (true)
         {
             if (Physics.BoxCast(
@@ -30,7 +31,6 @@ public class MeleeAttack : AttackMethod
                         maxDistance: _distance,
                         layerMask: _playerMask))
             {
-                Debug.Log("Hit");
                 hitInfo.collider.gameObject.GetComponent<IDamageable>().Execute(damage);
                 if (!SoundEffectManager.Instance.Builder.GetSoundPlayer().IsSoundPlaying())
                 {
@@ -44,6 +44,11 @@ public class MeleeAttack : AttackMethod
             }
             else yield return null;
         }
+    }
+    private IEnumerator AttackDuration()
+    {
+        yield return new WaitForSeconds(duration);
+        _attackEnded = true;
     }
 
     private void OnDrawGizmos()

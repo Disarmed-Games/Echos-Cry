@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.InputSystem.LowLevel;
 using static UnityEngine.EventSystems.EventTrigger;
 using static UnityEngine.UI.Selectable;
+using EchosCry.Enemy.StateSystem;
 
 public class EnemyStateMachine : AbstractStateMachine<EnemyState> { }
 
@@ -13,35 +14,28 @@ public class EnemyStateMachine : AbstractStateMachine<EnemyState> { }
 
 public class NewEnemyStateMachine
 {
-    private NewEnemyStateCache _stateCache;
-
-    public NewEnemyStateMachine(NewEnemyStateCache stateCache)
-    {
-        _stateCache = stateCache;
-    }
-
     public void UpdateStates(Enemy enemy)
     {
-        enemy.StateContainer.StateNodes[enemy.StateData.CurrentState].State.Update(enemy);
+        enemy.StateHandler.StateNodes[enemy.StateHandler.CurrentState].State.Update(enemy);
     }
     public void FixedUpdateStates(Enemy enemy)
     {
-        enemy.StateContainer.StateNodes[enemy.StateData.CurrentState].State.FixedUpdate(enemy);
+        enemy.StateHandler.StateNodes[enemy.StateHandler.CurrentState].State.FixedUpdate(enemy);
     }
 
-    public void SwitchStates(NewEnemyStateCache.EnemyStates state, Enemy enemy)
+    public void SwitchStates(EnemyStates state, Enemy enemy)
     {
-        NewEnemyState currentState = enemy.StateContainer.StateNodes[enemy.StateData.CurrentState].State;
+        NewEnemyState currentState = enemy.StateHandler.StateNodes[enemy.StateHandler.CurrentState].State;
         if (currentState == null) return;
 
         currentState.Exit(enemy);
-        enemy.StateData.CurrentState = state;
-        currentState = enemy.StateContainer.StateNodes[enemy.StateData.CurrentState].State;
+        enemy.StateHandler.CurrentState = state;
+        currentState = enemy.StateHandler.StateNodes[enemy.StateHandler.CurrentState].State;
         currentState.Enter(enemy);
     }
     public void CheckSwitchStates(Enemy enemy)
     {
-        EnemyStateTransition[] transitions = enemy.StateContainer.StateNodes[enemy.StateData.CurrentState].DefaultArray;
+        EnemyStateTransition[] transitions = enemy.StateHandler.StateNodes[enemy.StateHandler.CurrentState].DefaultArray;
         foreach (EnemyStateTransition transition in transitions)
         {
             if (transition.MetCondition(enemy))
@@ -51,9 +45,9 @@ public class NewEnemyStateMachine
             }
         }
     }
-    public void TickCheckSwitchStates(Enemy enemy)
+    public void CheckTickSwitchStates(Enemy enemy)
     {
-        EnemyStateTransition[] transitions = enemy.StateContainer.StateNodes[enemy.StateData.CurrentState].TickArray;
+        EnemyStateTransition[] transitions = enemy.StateHandler.StateNodes[enemy.StateHandler.CurrentState].TickArray;
         foreach (EnemyStateTransition transition in transitions)
         {
             if (transition.MetCondition(enemy))

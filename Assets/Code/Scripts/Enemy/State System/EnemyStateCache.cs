@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using EchosCry.Enemy.StateSystem;
 
 public class EnemyStateCache 
 {
@@ -56,24 +57,19 @@ public class EnemyStateCache
     }
 }
 
+
+
+
+
+
+
+
+
+
+
 public class NewEnemyStateCache
 {
-    public enum EnemyStates
-    {
-        Unassigned = 0,
-        Spawn, Death, Idle, Stagger, Pursue,
-        ////Bat Enemy
-        //BatSpawn, BatStagger, BatDeath, BatCharge, BatAttack, BatIdle, BatChase,
-        ////Range Enemy
-        //RangeSpawn, RangeStagger, RangeDeath, RangeCharge, RangeAttack, RangeIdle, RangeRoam,
-        ////Walker Enemy
-        //WalkerSpawn, WalkerStagger, WalkerDeath, WalkerJump, WalkerAttack, WalkerIdle, WalkerChase,
-        ////Slime Enemy
-        //SlimeSpawn, SlimeStagger, SlimeDeath, SlimeCharge, SlimeAttack, SlimeIdle, SlimeChase,
-        ////Bomb Enemy
-    }
     private readonly Dictionary<EnemyStates, NewEnemyState> _stateCache;
-
 
     public NewEnemyStateCache()
     {
@@ -84,12 +80,14 @@ public class NewEnemyStateCache
             { EnemyStates.Spawn, new SpawnEnemyState() },
             { EnemyStates.Idle, new IdleEnemyState() },
             { EnemyStates.Stagger, new StaggerEnemyState() },
-            { EnemyStates.Pursue, new PursueEnemyState() }
+            { EnemyStates.Pursue, new PursueEnemyState() },
+            {EnemyStates.Attack, new AttackEnemyState() },
+            {EnemyStates.Charge, new ChargeEnemyState() },
+            {EnemyStates.Cooldown, new CooldownEnemyState() },
         };
     }
     
-
-    public NewEnemyState RequestState(NewEnemyStateCache.EnemyStates requestedState)
+    public NewEnemyState RequestState(EnemyStates requestedState)
     {
         if (!_stateCache.ContainsKey(requestedState)) return null;
         else return _stateCache[requestedState];

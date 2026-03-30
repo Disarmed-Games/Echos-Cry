@@ -35,8 +35,11 @@ public class NPCDamageable : MonoBehaviour, IDamageable
         if(DamageLabelManager.Instance != null)
             DamageLabelManager.Instance.SpawnPopup(amount, _npc.transform.position, Color.white);
         
-        if(_npc.Health.CurrentArmor <= 0) 
-            _npc.StateMachine.SwitchState(_npc.StateCache.RequestState(_staggerState));
+        if(_npc.Health.CurrentArmor <= 0)
+        {
+            //_npc.StateMachine.SwitchState(_npc.StateCache.RequestState(_staggerState));
+            _npc.StateData.IsStaggered = true;
+        }
     }
 }
 
