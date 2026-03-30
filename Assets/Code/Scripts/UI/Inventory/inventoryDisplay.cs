@@ -28,7 +28,7 @@ public class InventoryDisplay : MonoBehaviour
     }
 
     void Update()
-    {
+    { //ISSUE: There is no reason to call this every frame. Should be updated only when items are added to inventory.
         OnUpdateInventory();
     }
 }

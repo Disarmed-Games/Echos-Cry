@@ -8003,6 +8003,7 @@ MonoBehaviour:
     value: {fileID: 3719974739477314785}
   _inputTranslator: {fileID: 11400000, guid: da8057efcf3a45a47bb320ce196e8d61, type: 2}
   _settingsManager: {fileID: 8356220327413182644}
+  hideHUD: 0
 --- !u!1 &8021913604966082911
 GameObject:
   m_ObjectHideFlags: 0
@@ -9987,6 +9988,10 @@ PrefabInstance:
     - target: {fileID: 852306770876195255, guid: 2ba960b8c1b9d3a4997206480d622fc9, type: 3}
       propertyPath: m_Name
       value: BeatTiming
+      objectReference: {fileID: 0}
+    - target: {fileID: 3277716805806395195, guid: 2ba960b8c1b9d3a4997206480d622fc9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7037231287620920825, guid: 2ba960b8c1b9d3a4997206480d622fc9, type: 3}
       propertyPath: m_Pivot.x
