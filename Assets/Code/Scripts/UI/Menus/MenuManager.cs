@@ -20,6 +20,7 @@ public class MenuManager : Singleton<MenuManager>
     [SerializeField] private List<StringGameobjectPair> menuDictionary;
     [SerializeField] private InputTranslator _inputTranslator;
     [SerializeField] private SettingsManager _settingsManager;
+    [SerializeField] private bool hideHUD = false;
 
     public static event Action PauseStarted;
     public static event Action PauseEnded;
@@ -97,6 +98,9 @@ public class MenuManager : Singleton<MenuManager>
     public void SetMenu(string menuName)
     {
         _currentMenu = menuName;
+
+        if (hideHUD && menuName == "HUD") return;
+
         foreach (StringGameobjectPair menu in menuDictionary) 
         { 
             if (menu.key == menuName) 
