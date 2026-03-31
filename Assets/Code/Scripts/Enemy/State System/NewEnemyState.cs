@@ -133,9 +133,7 @@ public class AttackEnemyState : NewEnemyState
     {
         Debug.Log("Attack");
 
-        enemyContext.Rigidbody.isKinematic = false;
         Vector3 attackDirection = (PlayerRef.Transform.position - enemyContext.transform.position).normalized;
-        enemyContext.Rigidbody.AddForce(enemyContext.Data.AttackDashForce * attackDirection, ForceMode.Impulse);
         enemyContext.NPCAnimator.PlayAnimation(HashCodes.AttackHashCode);
         enemyContext.AttackStrategies[0].Execute(enemyContext.Data.BaseDamage, attackDirection, enemyContext.transform);
     }
@@ -145,6 +143,7 @@ public class AttackEnemyState : NewEnemyState
         enemyContext.AttackStrategies[0].StopAllCoroutines();
     }
 }
+
 public class CooldownEnemyState : NewEnemyState
 {
     public override void Enter(Enemy enemyContext)
@@ -172,5 +171,24 @@ public class DeathEnemyState : NewEnemyState
         Debug.Log("Death");
         enemyContext.DropsStrategy.Execute(enemyContext.transform);
         enemyContext.HandleDeath();
+    }
+}
+public class RoamEnemyState : NewEnemyState
+{
+    public override void Enter(Enemy enemyContext)
+    {
+        Debug.Log("Roaming");
+        SetEnemyTarget(enemyContext);
+        enemyContext.NPCAnimator.PlayAnimation(HashCodes.MoveHashCode);
+    }
+    public override void Update(Enemy enemyContext)
+    {
+        enemyContext.NPCAnimator
+            .UpdateSpriteDirection((PlayerRef.Transform.position - enemyContext.transform.position).normalized, true);
+    }
+    private void SetEnemyTarget(Enemy enemyContext)
+    {
+        if (enemyContext.NavMeshAgent == null || PlayerRef.Transform == null) return;
+        enemyContext.NavMeshAgent.SetDestination(enemyContext.TargetStrategy[0].Execute(PlayerRef.Transform));
     }
 }

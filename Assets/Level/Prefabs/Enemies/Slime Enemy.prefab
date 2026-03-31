@@ -208,7 +208,9 @@ MonoBehaviour:
     m_Bits: 1024
   _distance: 0.5
   _attackSound: {fileID: 11400000, guid: c8c975e393c92cc4f8f6aa88905bcc9e, type: 2}
-  duration: 0.4
+  _duration: 0
+  _rb: {fileID: 6827338249854996756}
+  _dashForce: 4
 --- !u!1 &6900823288402649937
 GameObject:
   m_ObjectHideFlags: 0
@@ -250,6 +252,7 @@ Transform:
   - {fileID: 86432653124173814}
   - {fileID: 6084545768438748889}
   - {fileID: 6908896725228821420}
+  - {fileID: 8522176645068000716}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!195 &1592182489320676592
@@ -299,7 +302,8 @@ MonoBehaviour:
   _data: {fileID: 11400000, guid: 34220bc6c9ce99c4bb49667ea5dacad9, type: 2}
   _attackStrats:
   - {fileID: 632827936303628858}
-  _targetStrats: []
+  _targetStrats:
+  - {fileID: 8985151737271417256}
   _movementStrats: []
   _drops: {fileID: 11400000, guid: 077ec2d97228a87489e08f93f3aec007, type: 2}
   _soundStrategy: {fileID: 11400000, guid: 5c5a55ebf2f337c4a80a8fcd0ffba53d, type: 2}
@@ -412,6 +416,82 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   enemyReference: {fileID: 8010943512667726129}
+--- !u!1 &7205119848489008575
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8522176645068000716}
+  m_Layer: 0
+  m_Name: Targets
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8522176645068000716
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7205119848489008575}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.07953, y: 0, z: 0.75471}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 4598736516477649875}
+  m_Father: {fileID: 2434889112220353080}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8064452507335443015
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4598736516477649875}
+  - component: {fileID: 8985151737271417256}
+  m_Layer: 0
+  m_Name: Default
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4598736516477649875
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8064452507335443015}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8522176645068000716}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8985151737271417256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8064452507335443015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aae77e3b297f93449873f90f7ee87917, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Echos Cry Core::DefaultTargetStrategy
 --- !u!1001 &5983545831009502376
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -7,10 +7,13 @@ public class RangedAttack : AttackMethod
     [SerializeField] private GameObject _projectilePrefab;
     [SerializeField] private soundEffect _projectileSound;
     [SerializeField] private int _projectileCount;
+    [SerializeField] private Rigidbody _rb;
+    [SerializeField] private float _blowbackForce = 2f;
 
     public override void Execute(float damage, Vector3 direction, Transform origin)
     {
         _attackEnded = false;
+        if(_rb != null) _rb.isKinematic = false;
         StartCoroutine(WaitUntilBeat(damage, direction, origin));
     }
     private void ShootProjectile(Transform origin, Vector3 direction, float damage)
@@ -31,7 +34,9 @@ public class RangedAttack : AttackMethod
         int count = 0;
         while(count < _projectileCount)
         {
-            ShootProjectile(origin, direction, damage);
+            Vector3 attackDirection = (PlayerRef.Transform.position - origin.position).normalized;
+            _rb.AddForce(-attackDirection * _blowbackForce, ForceMode.Impulse);
+            ShootProjectile(origin, attackDirection, damage);
             count++;
             yield return new WaitForSeconds(TempoConductor.Instance.TimeBetweenBeats);
         }

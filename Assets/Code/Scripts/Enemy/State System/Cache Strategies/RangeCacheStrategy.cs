@@ -12,10 +12,10 @@ public class RangeCacheStrategy : EnemyCacheStrategy
         EnemyStateTransition ready_to_attack = new(EnemyStates.Attack, enemy => enemy.StateData.ReadyToAttack);
         EnemyStateTransition attack_ended = new(EnemyStates.Cooldown, enemy => enemy.AttackStrategies[0].AttackEnded);
         EnemyStateTransition is_staggered = new(EnemyStates.Stagger, enemy => enemy.StateData.IsStaggered);
-        EnemyStateTransition stagger_ended = new(EnemyStates.Pursue, enemy => !enemy.StateData.IsStaggered);
-        EnemyStateTransition cooldown_ended = new(EnemyStates.Pursue, enemy => !enemy.StateData.OnCooldown);
+        EnemyStateTransition stagger_ended = new(EnemyStates.Roam, enemy => !enemy.StateData.IsStaggered);
+        EnemyStateTransition cooldown_ended = new(EnemyStates.Roam, enemy => !enemy.StateData.OnCooldown);
         EnemyStateTransition player_distance_check =
-            new(EnemyStates.Pursue,
+            new(EnemyStates.Roam,
             enemy =>
             {
                 if (PlayerRef.Transform == null) return false;
@@ -48,7 +48,7 @@ public class RangeCacheStrategy : EnemyCacheStrategy
         handler.AddStateNode
             (
                 enemyContext.NewStateCache,
-                EnemyStates.Pursue,
+                EnemyStates.Roam,
                 new EnemyStateTransition[] { death_check, is_staggered },
                 new EnemyStateTransition[] { in_range_check }
             );

@@ -76,14 +76,15 @@ public class NewEnemyStateCache
         _stateCache = new()
         {
             //Init all states
-            { EnemyStates.Death, new DeathEnemyState() },
-            { EnemyStates.Spawn, new SpawnEnemyState() },
-            { EnemyStates.Idle, new IdleEnemyState() },
-            { EnemyStates.Stagger, new StaggerEnemyState() },
-            { EnemyStates.Pursue, new PursueEnemyState() },
-            {EnemyStates.Attack, new AttackEnemyState() },
-            {EnemyStates.Charge, new ChargeEnemyState() },
-            {EnemyStates.Cooldown, new CooldownEnemyState() },
+            { EnemyStates.Death   , new DeathEnemyState()    },
+            { EnemyStates.Spawn   , new SpawnEnemyState()    },
+            { EnemyStates.Idle    , new IdleEnemyState()     },
+            { EnemyStates.Stagger , new StaggerEnemyState()  },
+            { EnemyStates.Pursue  , new PursueEnemyState()   },
+            { EnemyStates.Attack  , new AttackEnemyState()   },
+            { EnemyStates.Charge  , new ChargeEnemyState()   },
+            { EnemyStates.Cooldown, new CooldownEnemyState() },
+            { EnemyStates.Roam    , new RoamEnemyState()     },
         };
     }
     
