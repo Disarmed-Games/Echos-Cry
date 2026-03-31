@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.InputSystem;
 
-public class slotScript : MonoBehaviour
+public class SlotScript : MonoBehaviour
 {
     [SerializeField] private Image m_icon;
     [SerializeField] private GameObject m_stackObj;

@@ -142,7 +142,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   ToolTipPrefab: {fileID: 5435326603873152583, guid: 2368d443f59e53f4dbdf1ce2d1423114, type: 3}
-  shopOpenSFX: {fileID: 11400000, guid: 51089fb434350ba41a45aded6bc7aac2, type: 2}
+  shopOpenSFX: {fileID: 11400000, guid: 6ee3957e3bb25a14da2561101a397fb9, type: 2}
   translator: {fileID: 11400000, guid: da8057efcf3a45a47bb320ce196e8d61, type: 2}
 --- !u!65 &6725668836243760440
 BoxCollider:

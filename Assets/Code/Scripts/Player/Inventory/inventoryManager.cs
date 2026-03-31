@@ -4,6 +4,7 @@ using AudioSystem;
 /// Original Author: Abby
 /// All Contributors Since Creation: Abby
 /// Last Modified By:
+
 public class InventoryManager : MonoBehaviour
 {
     private static InventoryManager _instance;
@@ -15,29 +16,15 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private InventoryDisplay _inventoryDisplay;
     [SerializeField] private InputTranslator _inputTranslator;
     [SerializeField] private soundEffect _useItemSound;
-
     private void Awake()
     {
-        if(_instance != null)
+        if (_instance != null)
         {
-            Destroy(this);
+            Destroy(gameObject);
             return;
         }
         _instance = this;
     }
-
-    public void AddInventorySlot(slotScript _slotScript)
-    {
-        for (int i = 0; i < _inventoryDisplay.slotScriptArray.Length; i++)
-        {
-            if (_inventoryDisplay.slotScriptArray[i] == null)
-            {
-                _inventoryDisplay.slotScriptArray[i] = _slotScript;
-                return;
-            }
-        }
-    }
-
     void Start()
     {
         inventory = new List<InventoryItem>();
@@ -48,6 +35,14 @@ public class InventoryManager : MonoBehaviour
         _inputTranslator.OnItem3Event += UseItem;
         _inputTranslator.OnItem4Event += UseItem;
     }
+    void OnDestroy()
+    {
+        _inputTranslator.OnItem1Event -= UseItem;
+        _inputTranslator.OnItem2Event -= UseItem;
+        _inputTranslator.OnItem3Event -= UseItem;
+        _inputTranslator.OnItem4Event -= UseItem;
+    }
+
     private void UseHealthPotion()
     {
         GameObject playerRef = GameObject.FindWithTag("Player");
@@ -65,6 +60,17 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
+    public void AddInventorySlot(SlotScript _slotScript)
+    {
+        for (int i = 0; i < _inventoryDisplay.slotScriptArray.Length; i++)
+        {
+            if (_inventoryDisplay.slotScriptArray[i] == null)
+            {
+                _inventoryDisplay.slotScriptArray[i] = _slotScript;
+                return;
+            }
+        }
+    }
     private void UseItem(int index)
     {
         if (inventory.Count <= 0 || inventory.Count <= index) return;
@@ -88,13 +94,6 @@ public class InventoryManager : MonoBehaviour
         Remove(usedItem.data);
     }
 
-    void OnDestroy()
-    {
-        _inputTranslator.OnItem1Event -= UseItem;
-        _inputTranslator.OnItem2Event -= UseItem;
-        _inputTranslator.OnItem3Event -= UseItem;
-        _inputTranslator.OnItem4Event -= UseItem;
-    }
     public InventoryItem Get(InventoryItemData referenceData)
     {
         if (m_itemDictionary.TryGetValue(referenceData, out InventoryItem value))
@@ -103,7 +102,8 @@ public class InventoryManager : MonoBehaviour
         }
         return null;
     }
-    public void Add(InventoryItemData referenceData){
+    public void Add(InventoryItemData referenceData)
+    {
         if (m_itemDictionary.TryGetValue(referenceData, out InventoryItem value))
         {
             value.AddToStack();
@@ -114,8 +114,10 @@ public class InventoryManager : MonoBehaviour
             inventory.Add(newItem);
             m_itemDictionary.Add(referenceData, newItem);
         }
+        _inventoryDisplay.UpdateInventory();
     }
-    public void Remove(InventoryItemData referenceData){
+    public void Remove(InventoryItemData referenceData)
+    {
         if (m_itemDictionary.TryGetValue(referenceData, out InventoryItem value))
         {
             value.RemoveFromStack();
@@ -124,6 +126,7 @@ public class InventoryManager : MonoBehaviour
                 inventory.Remove(value);
                 m_itemDictionary.Remove(referenceData);
             }
+            _inventoryDisplay.UpdateInventory();
         }
     }
 }

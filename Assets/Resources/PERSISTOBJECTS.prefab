@@ -89,6 +89,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6449127947943001861, guid: 6b19c5ead35d86943b3d3a62222f9f80, type: 3}
+      propertyPath: 'slotScriptArray.Array.data[0]'
+      value: 
+      objectReference: {fileID: 6733238100567804109}
+    - target: {fileID: 6449127947943001861, guid: 6b19c5ead35d86943b3d3a62222f9f80, type: 3}
+      propertyPath: 'slotScriptArray.Array.data[1]'
+      value: 
+      objectReference: {fileID: 7798652477013770507}
+    - target: {fileID: 6449127947943001861, guid: 6b19c5ead35d86943b3d3a62222f9f80, type: 3}
+      propertyPath: 'slotScriptArray.Array.data[2]'
+      value: 
+      objectReference: {fileID: 5613670762333886600}
+    - target: {fileID: 6449127947943001861, guid: 6b19c5ead35d86943b3d3a62222f9f80, type: 3}
+      propertyPath: 'slotScriptArray.Array.data[3]'
+      value: 
+      objectReference: {fileID: 2605129990491209331}
     - target: {fileID: 8130095611241135652, guid: 6b19c5ead35d86943b3d3a62222f9f80, type: 3}
       propertyPath: typingSpeed
       value: 0.04
@@ -624,6 +640,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5008986179013375808, guid: 42f411ff78ea6ef4f9d4785b36fbf7c0, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5603128249434295007, guid: 42f411ff78ea6ef4f9d4785b36fbf7c0, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
@@ -721,6 +741,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 42f411ff78ea6ef4f9d4785b36fbf7c0, type: 3}
+--- !u!114 &2605129990491209331 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6795277213461973238, guid: 42f411ff78ea6ef4f9d4785b36fbf7c0, type: 3}
+  m_PrefabInstance: {fileID: 8821121699685922437}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da676bf8c4e990d4782492866aa5e440, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::slotScript
 --- !u!1 &2850719963039448429 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6765851127088958440, guid: 42f411ff78ea6ef4f9d4785b36fbf7c0, type: 3}
@@ -752,11 +783,44 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3957771069655852118, guid: 42f411ff78ea6ef4f9d4785b36fbf7c0, type: 3}
   m_PrefabInstance: {fileID: 8821121699685922437}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5613670762333886600 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4002900327780888077, guid: 42f411ff78ea6ef4f9d4785b36fbf7c0, type: 3}
+  m_PrefabInstance: {fileID: 8821121699685922437}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da676bf8c4e990d4782492866aa5e440, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::slotScript
 --- !u!1 &6550132045909971508 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2345343064603174065, guid: 42f411ff78ea6ef4f9d4785b36fbf7c0, type: 3}
   m_PrefabInstance: {fileID: 8821121699685922437}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6733238100567804109 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2818038491248377416, guid: 42f411ff78ea6ef4f9d4785b36fbf7c0, type: 3}
+  m_PrefabInstance: {fileID: 8821121699685922437}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da676bf8c4e990d4782492866aa5e440, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::slotScript
+--- !u!114 &7798652477013770507 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1607937249698428814, guid: 42f411ff78ea6ef4f9d4785b36fbf7c0, type: 3}
+  m_PrefabInstance: {fileID: 8821121699685922437}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da676bf8c4e990d4782492866aa5e440, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::slotScript
 --- !u!1 &7851695007358505782 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1629239224258209203, guid: 42f411ff78ea6ef4f9d4785b36fbf7c0, type: 3}
