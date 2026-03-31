@@ -1773,7 +1773,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d7f303928a3d4c4eb978e845ff6b3fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Echos Cry Core::DecalManager
-  _bloodPrefab: {fileID: 4539410768166873776, guid: f92667749e9344b499cb8a9b37ff1d92, type: 3}
+  _bloodPrefab: {fileID: 4539410768166873776, guid: 10bfd6888d9388b45b80b04b1208012a, type: 3}
   _timeBeforeFade: 10
   _fadeMultiplier: 3
 --- !u!1001 &495543370

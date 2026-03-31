@@ -73,7 +73,7 @@ public class MenuManager : Singleton<MenuManager>
         Time.timeScale = 0f;
     }
 
-    private void EnableUpgradeMenu()
+    public void EnableUpgradeMenu()
     {
         _inputTranslator.PlayerInputs.PauseMenu.Enable();
         _inputTranslator.PlayerInputs.Gameplay.Disable();

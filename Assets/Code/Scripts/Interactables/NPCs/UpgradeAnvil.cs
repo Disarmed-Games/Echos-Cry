@@ -2,9 +2,8 @@ using AudioSystem;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class ShopKeeper : MonoBehaviour
+public class UpgradeAnvil : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     private bool playerInRange = false;
     [SerializeField] private GameObject ToolTipPrefab;
     [SerializeField] private soundEffect shopOpenSFX;
@@ -12,27 +11,18 @@ public class ShopKeeper : MonoBehaviour
 
     private void OpenShop()
     {
-        translator.PlayerInputs.ShopMenu.Enable();
-        translator.PlayerInputs.Gameplay.Disable();
-
-        VolumeManager.Instance.SetDepthOfField(true);
         SoundEffectManager.Instance.Builder
             .SetSound(shopOpenSFX)
             .SetSoundPosition(this.transform.position)
             .ValidateAndPlaySound();
 
-        MenuManager.Instance.SetMenu("Shop");
-    }
-    private void CloseShop()
-    {
-        MenuManager.Instance.SetMenu("HUD");
-        VolumeManager.Instance.SetDepthOfField(false);
+        MenuManager.Instance.EnableUpgradeMenu();
     }
 
     void OnTriggerEnter(Collider other)
     {
         ToolTipPrefab.GetComponent<ToolTip>().text =
-            $"Press '{translator.PlayerInputs.Gameplay.Interact.GetBindingDisplayString(InputBinding.MaskByGroup("KeyboardMouse"))}' to Shop";
+            $"Press '{translator.PlayerInputs.Gameplay.Interact.GetBindingDisplayString(InputBinding.MaskByGroup("KeyboardMouse"))}' to Upgrade";
         Instantiate(ToolTipPrefab, this.transform.position + new Vector3(0, 1, -1), Quaternion.identity);
         playerInRange = true;
     }
@@ -52,12 +42,10 @@ public class ShopKeeper : MonoBehaviour
 
     void Start()
     {
-        translator.OnCloseShopEvent += CloseShop;
         translator.OnInteractEvent += RequestOpenShop;
     }
     void OnDestroy()
     {
-        translator.OnCloseShopEvent -= CloseShop;
         translator.OnInteractEvent -= RequestOpenShop;
     }
 }
