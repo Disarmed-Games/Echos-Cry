@@ -2,8 +2,6 @@ using AudioSystem;
 using System.Collections;
 using UnityEngine;
 using static UnityEngine.Rendering.STP;
-
-[CreateAssetMenu(menuName = "Echo's Cry/Strategies/Attack/Ranged")]
 public class RangedAttack : AttackMethod
 {
     [SerializeField] private GameObject _projectilePrefab;

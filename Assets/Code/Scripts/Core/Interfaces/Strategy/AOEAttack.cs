@@ -1,7 +1,5 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Echo's Cry/Strategies/Attack/AOE")]
-
 public class AOEAttack : AttackMethod
 {
     [SerializeField] GameObject _aoeObject;

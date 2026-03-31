@@ -3,7 +3,6 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Echo's Cry/Strategies/Attack/Melee")]
 public class MeleeAttack : AttackMethod
 {
     [SerializeField] private Vector3 _boxExtents;

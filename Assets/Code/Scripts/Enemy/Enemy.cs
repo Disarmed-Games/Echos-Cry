@@ -81,27 +81,22 @@ public class Enemy : MonoBehaviour
 
    private void Awake()
     {   
-        //_stateMachine = new();
-        //_stateCache = new();
-
         _newStateMachine ??= new();
         _newStateCache ??= new();
 
         _stateData = new();
 
         _enemyCacheStrategy.Execute(_stateCache, this);
-        //_stateMachine.Init(_stateCache.StartState); 
+
     }
     private void OnEnable()
     {
-        //_stateCache?.Enable();
         TickManager.Instance.GetTimer(0.2f).Tick += TickCheck;
         _playerAttackEndChannel.Channel += ResetCollider;
         ResetCollider();
     }
     private void OnDisable()
     {
-        //_stateCache?.Disable();
         if(TickManager.Instance != null) TickManager.Instance.GetTimer(0.2f).Tick -= TickCheck;
         _playerAttackEndChannel.Channel -= ResetCollider; 
     }
@@ -113,15 +108,12 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-        //_stateMachine.UpdateState();
-
         if (_stateHandler == null || _stateData == null) return;
         _newStateMachine.CheckSwitchStates(this);
         _newStateMachine.UpdateStates(this);
     }
     private void FixedUpdate()
     {
-        //_stateMachine.FixedUpdateState();
 
         if (_stateHandler == null || _stateData == null) return;
         _newStateMachine.FixedUpdateStates(this);

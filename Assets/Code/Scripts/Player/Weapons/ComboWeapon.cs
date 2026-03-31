@@ -6,6 +6,7 @@ public class ComboWeapon : Weapon
     private ComboTree _comboTree;
 
     [SerializeField] private ComboWeaponData _comboWeaponData;
+    private string _clipName;
 
     protected override void Attack()
     {
@@ -14,7 +15,9 @@ public class ComboWeapon : Weapon
         //Update the damage the weapon collider will use based on attack data
         _weaponCollider.UpdateAttack(_currentAttackData.BaseDamage, TempoConductor.Instance.CurrentHitQuality);
         //Setup and play animations associated with the attack data
-        _attackAnimator.runtimeAnimatorController = _currentAttackData.OverrideController;
+        AnimatorOverrideController controller = new AnimatorOverrideController(_attackAnimator.runtimeAnimatorController);
+        controller[_clipName] = _currentAttackData.AnimationClip;
+        _attackAnimator.runtimeAnimatorController = controller;
         _attackAnimator.Play("Attack");
         //Begin coroutine that will measure the animation length and then reset weapon
 
@@ -25,6 +28,8 @@ public class ComboWeapon : Weapon
     {
         _comboTree = new();
         _comboTree.InitTreeAttackData(_comboWeaponData.AttackData);
+
+        _clipName = _attackAnimator.runtimeAnimatorController.animationClips[0].name;
     }
 
     protected override void OnPrimaryAction()
