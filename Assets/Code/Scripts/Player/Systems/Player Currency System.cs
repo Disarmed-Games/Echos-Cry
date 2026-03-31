@@ -35,6 +35,7 @@ public class PlayerCurrencySystem : Singleton<PlayerCurrencySystem>
             return;
         }
         _goldCurrency = _playerCurrencyConfig.StartingGoldCurrency;
+        OnCurrencyChangeEvent?.Invoke(_goldCurrency);
     }
 
     [Header("Configuration Object")]

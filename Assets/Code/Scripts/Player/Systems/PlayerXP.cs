@@ -22,17 +22,23 @@ public class PlayerXP : MonoBehaviour
     public void IncreaseXP(float xp)
     {
         _currentXPAmount += xp;
-        if(_currentXPAmount >= _goalXPAmount)
+
+        while (_currentXPAmount >= _goalXPAmount)
         {
             _currentLevel++;
-            if (_levelUpChannel != null) _levelUpChannel.Invoke(_currentLevel);
-            float leftOverXP = _currentXPAmount - _goalXPAmount;
+
+            if (_levelUpChannel != null)
+                _levelUpChannel.Invoke(_currentLevel);
+
+            _currentXPAmount -= _goalXPAmount;
+
             if (_newXPGoalCalculation != null)
                 _goalXPAmount = _newXPGoalCalculation.Execute(this);
-            else _goalXPAmount = _goalXPAmount + _currentLevel * 1.5f;
-            
-            _currentXPAmount = leftOverXP;
+            else
+                _goalXPAmount = _goalXPAmount + _currentLevel * 1.5f;
         }
-        if(_updateXPChannel != null) _updateXPChannel.Invoke(_currentXPAmount, _goalXPAmount, _currentLevel);
+
+        if (_updateXPChannel != null)
+            _updateXPChannel.Invoke(_currentXPAmount, _goalXPAmount, _currentLevel);
     }
 }

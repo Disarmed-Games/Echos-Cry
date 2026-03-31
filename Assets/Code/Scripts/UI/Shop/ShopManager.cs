@@ -14,11 +14,6 @@ public class ShopManager : MonoBehaviour
     private int currentItemIndex = 0;
     private float totalCost = 0f;
 
-    void Start()
-    {
-        ShopItemArray[currentItemIndex].GetComponent<ShopItem>().ToggleHighlight(true);
-    }
-
     private void Update()
     {
         float tempCost = 0f;

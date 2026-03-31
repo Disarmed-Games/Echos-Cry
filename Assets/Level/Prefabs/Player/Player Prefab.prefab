@@ -5486,6 +5486,7 @@ MonoBehaviour:
   _healthChannel: {fileID: 11400000, guid: 500d6e615a856a844a407ce00b7f4ff7, type: 2}
   _armorChannel: {fileID: 11400000, guid: ed980f021be41e944b80a689b2fca290, type: 2}
   _regenHealthChannel: {fileID: 11400000, guid: 58f244f8770115148acb4868ba17b6b8, type: 2}
+  _regenArmorChannel: {fileID: 11400000, guid: 32e8668cebf73d74994810528e57ffd2, type: 2}
   _dashCountChannel: {fileID: 11400000, guid: 525432ab9a8309644a0c3e1894f626e4, type: 2}
   _dashCooldownChannel: {fileID: 11400000, guid: 01cfb1c9714eab745b95991f9c7b59f8, type: 2}
   _dashAttackChannel: {fileID: 11400000, guid: 0827540fa0d61a848adf46dd6bfb67db, type: 2}

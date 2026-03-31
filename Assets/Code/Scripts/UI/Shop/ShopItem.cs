@@ -1,8 +1,9 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ShopItem : MonoBehaviour
+public class ShopItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] TextMeshProUGUI amountText;
     [SerializeField] TextMeshProUGUI costText;
@@ -45,14 +46,14 @@ public class ShopItem : MonoBehaviour
     public void IncreaseAmount()
     {
         buyAmount++;
-        if (buyAmount >= 99) { buyAmount = 99; }
+        if (buyAmount > 99) { buyAmount = 0; }
         amountText.text = buyAmount.ToString();
         UpdateCost();
     }
     public void DecreaseAmount()
     {
         buyAmount--;
-        if (buyAmount <= 0 ) { buyAmount = 0; }
+        if (buyAmount < 0 ) { buyAmount = 99; }
         amountText.text = buyAmount.ToString();
         UpdateCost();
     }
@@ -68,5 +69,15 @@ public class ShopItem : MonoBehaviour
         {
             costText.text = $"${actualCost.ToString()}";
         }
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        ToggleHighlight(true);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        ToggleHighlight(false);
     }
 }
