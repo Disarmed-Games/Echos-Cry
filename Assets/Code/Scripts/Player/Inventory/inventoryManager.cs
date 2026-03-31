@@ -1,6 +1,7 @@
-using UnityEngine;
-using System.Collections.Generic;
 using AudioSystem;
+using System.Collections.Generic;
+using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 /// Original Author: Abby
 /// All Contributors Since Creation: Abby
 /// Last Modified By:
@@ -16,6 +17,9 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private InventoryDisplay _inventoryDisplay;
     [SerializeField] private InputTranslator _inputTranslator;
     [SerializeField] private soundEffect _useItemSound;
+
+    private Player _player;
+
     private void Awake()
     {
         if (_instance != null)
@@ -29,6 +33,7 @@ public class InventoryManager : MonoBehaviour
     {
         inventory = new List<InventoryItem>();
         m_itemDictionary = new Dictionary<InventoryItemData, InventoryItem>();
+        _player = GameObject.FindWithTag("Player")?.GetComponent<Player>();
 
         _inputTranslator.OnItem1Event += UseItem;
         _inputTranslator.OnItem2Event += UseItem;
@@ -43,23 +48,6 @@ public class InventoryManager : MonoBehaviour
         _inputTranslator.OnItem4Event -= UseItem;
     }
 
-    private void UseHealthPotion()
-    {
-        GameObject playerRef = GameObject.FindWithTag("Player");
-        if (playerRef != null)
-        {
-            playerRef.GetComponent<Player>().Health.HealHealth(15f);
-        }
-    }
-    private void UseShieldPotion()
-    {
-        GameObject playerRef = GameObject.FindWithTag("Player");
-        if (playerRef != null)
-        {
-            playerRef.GetComponent<Player>().Health.HealArmor(5f);
-        }
-    }
-
     public void AddInventorySlot(SlotScript _slotScript)
     {
         for (int i = 0; i < _inventoryDisplay.slotScriptArray.Length; i++)
@@ -71,6 +59,7 @@ public class InventoryManager : MonoBehaviour
             }
         }
     }
+
     private void UseItem(int index)
     {
         if (inventory.Count <= 0 || inventory.Count <= index) return;
@@ -81,16 +70,7 @@ public class InventoryManager : MonoBehaviour
                 .ValidateAndPlaySound();
 
         InventoryItem usedItem = inventory[index];
-        if (usedItem == null || usedItem.data == null) return;
-
-        if (usedItem.data.id == "health")
-        {
-            UseHealthPotion();
-        }
-        else if (usedItem.data.id == "shield")
-        {
-            UseShieldPotion();
-        }
+        usedItem.data.Use(_player);
         Remove(usedItem.data);
     }
 

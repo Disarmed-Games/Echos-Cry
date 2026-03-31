@@ -7,7 +7,7 @@ public class ShopItem : MonoBehaviour
     [SerializeField] TextMeshProUGUI amountText;
     [SerializeField] TextMeshProUGUI costText;
     [SerializeField] GameObject highlightImage;
-    [SerializeField] GameObject purchasePrefab;
+    [SerializeField] InventoryItemData itemData;
     [SerializeField] private float initCost = 0f;
     private int buyAmount;
     private float actualCost = 0f;
@@ -26,9 +26,9 @@ public class ShopItem : MonoBehaviour
     {
         return buyAmount;
     }
-    public GameObject GetPrefab()
+    public InventoryItemData GetItemData()
     {
-        return purchasePrefab;
+        return itemData;
     }
     public void ResetAmount()
     {

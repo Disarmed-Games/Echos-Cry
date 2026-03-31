@@ -769,7 +769,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &7045177062669959262
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1006,6 +1006,10 @@ PrefabInstance:
       value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 8208847457240172794, guid: 29c69ff9515bac04586efe059ceb69bb, type: 3}
+      propertyPath: itemData
+      value: 
+      objectReference: {fileID: 11400000, guid: c3c979b482c284f4e9e0ce4fdc954fce, type: 2}
+    - target: {fileID: 8208847457240172794, guid: 29c69ff9515bac04586efe059ceb69bb, type: 3}
       propertyPath: purchasePrefab
       value: 
       objectReference: {fileID: 7294540673738386061, guid: 6d66325f67882834db42bf1581f30771, type: 3}
@@ -1228,6 +1232,10 @@ PrefabInstance:
       propertyPath: initCost
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 8208847457240172794, guid: 29c69ff9515bac04586efe059ceb69bb, type: 3}
+      propertyPath: itemData
+      value: 
+      objectReference: {fileID: 11400000, guid: 166439e51b65d0240b78a7630b966dcc, type: 2}
     - target: {fileID: 8208847457240172794, guid: 29c69ff9515bac04586efe059ceb69bb, type: 3}
       propertyPath: purchasePrefab
       value: 

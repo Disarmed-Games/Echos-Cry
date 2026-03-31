@@ -29,7 +29,6 @@ public class InventoryTests
         inputField.SetValue(inventoryInstance, inputTranslator);
 
         testItemData = ScriptableObject.CreateInstance<InventoryItemData>();
-        testItemData.id = "testItem";
 
         yield break;
     }

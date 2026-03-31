@@ -85,7 +85,7 @@ public class UpgradeManager : MonoBehaviour
 
     private void UpdateInfo(float xp, float goalXP, int currentLevel)
     {
-        _xpRequiredText.text = $"[{xp} / {goalXP}] XP till Level {currentLevel + 1}";
+        _xpRequiredText.text = $"[{xp} / {goalXP}] XP Till Level {currentLevel + 1}";
         _currentLevelText.text = $"Current Level: {currentLevel}";
         UpdateSelectors();
     }
