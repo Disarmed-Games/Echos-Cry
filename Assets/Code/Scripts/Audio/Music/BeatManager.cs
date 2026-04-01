@@ -4,8 +4,15 @@ using UnityEngine.Events;
 public class BeatManager : MonoBehaviour
 {
     public static BeatManager Instance { get; private set; }
+
+    [SerializeField] private float _bpm;
+    [SerializeField] private AudioSource _audioSource;
+    [SerializeField] private Intervals[] _intervals;
+    private float beatProgress;
+
     public int BeatInMeasure = 0;
-    public float BeatProgress = 0;
+    public float BeatProgress => beatProgress;
+    public float BPM => _bpm;
 
     private void Awake()
     {
@@ -17,20 +24,21 @@ public class BeatManager : MonoBehaviour
         Instance = this;
     }
 
-    [SerializeField] private float _bpm;
-    [SerializeField] private AudioSource _audioSource;
-    [SerializeField] private Intervals[] _intervals;
-
     private void Update()
     {
         foreach (var interval in _intervals)
         {
             float sampledTime = (_audioSource.timeSamples / (_audioSource.clip.frequency * interval.GetIntervalLength(_bpm)));
 
-            Debug.Log(sampledTime - Mathf.Floor(sampledTime));
+            beatProgress = sampledTime - Mathf.Floor(sampledTime);
 
             interval.CheckForNewInterval(sampledTime);
         }
+    }
+
+    public float GetTimeBetweenBeats()
+    {
+        return _intervals[0].GetIntervalLength(_bpm);
     }
 }
 

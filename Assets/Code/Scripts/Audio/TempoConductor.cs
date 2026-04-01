@@ -17,9 +17,6 @@ public class TempoConductor : Singleton<TempoConductor>
 
     //Beat Timing Values
     private float _currentBeatProgress = 0;
-    private float _timeBetweenBeats;
-
-    public float TimeBetweenBeats { get { return _timeBetweenBeats; } }
 
     //Hit Time Window --> Higher values are easier to hit within!
     private float _excellentPercent;
@@ -42,12 +39,6 @@ public class TempoConductor : Singleton<TempoConductor>
         UpdateHitQuality();
     }
 
-    private void UpdateTempo()
-    {
-        //The time between each beat: 60 seconds / BPM
-        _timeBetweenBeats = 60f / (float)MusicManager.Instance.GetTempo();
-    }
-
     private HitQuality GetHitQuality(float progress)
     {
         if (progress <= _excellentPercent || progress >= (1f - _excellentPercent))
@@ -65,7 +56,7 @@ public class TempoConductor : Singleton<TempoConductor>
         // On Beat Check
         //--------------------
         //Closer to 0 or 1 is perfectly on beat. Close to 0.5 is offbeat.
-        _currentBeatProgress = MusicManager.Instance.GetSampleProgress();
+        _currentBeatProgress = BeatManager.Instance.BeatProgress;
         _currentHitQuality = GetHitQuality(_currentBeatProgress);
 
         //--------------------
@@ -103,15 +94,5 @@ public class TempoConductor : Singleton<TempoConductor>
         _goodPercent = Mathf.Clamp(_goodPercent, 0f, 1f);
 
         Debug.Log($"Excellent:{_excellentPercent} Good:{_goodPercent}");
-    }
-
-    private void OnEnable()
-    {
-        MusicManager.Instance.SongPlayEvent += UpdateTempo;
-        UpdateTempo();
-    }
-    private void OnDisable()
-    {
-        MusicManager.Instance.SongPlayEvent -= UpdateTempo;
     }
 }
