@@ -1,14 +1,16 @@
-using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
+using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
-public class SlotScript : MonoBehaviour
+public class SlotScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    [SerializeField] private Image m_icon;
-    [SerializeField] private TextMeshProUGUI m_num;
+    [SerializeField] private Image slotIcon;
+    [SerializeField] private TextMeshProUGUI stackAmountText;
     [SerializeField] private TextMeshProUGUI keyTooltipText;
     [SerializeField] private InputActionReference useItemInput;
+    private string description;
 
     private void Start()
     {
@@ -20,14 +22,29 @@ public class SlotScript : MonoBehaviour
     {
         if (item == null || item.stackSize < 1)
         {
-            m_icon.enabled = false;
-            m_icon.sprite = null;
-            m_num.text = "";
+            slotIcon.enabled = false;
+            slotIcon.sprite = null;
+            stackAmountText.text = "";
+            description = "";
             return;
         }
 
-        m_icon.enabled = true;
-        m_icon.sprite = item.data.icon;
-        m_num.text = item.stackSize.ToString();
+        slotIcon.enabled = true;
+        slotIcon.sprite = item.data.icon;
+        stackAmountText.text = item.stackSize.ToString();
+        description = item.data.description;
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (description != "")
+        {
+            UITip.Instance.StartMessage(description);
+        }
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        UITip.Instance.StopMessage();
     }
 }

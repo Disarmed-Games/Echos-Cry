@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Armor Potion
   m_EditorClassIdentifier: Echos Cry Core::ArmorItemData
   displayName: Armor Potion
+  description: Once consumed, heals the player's armor by +5.
   icon: {fileID: 21300000, guid: f0624d51aea120549b4ba1f6b3f47d35, type: 3}
   armorAmount: 5

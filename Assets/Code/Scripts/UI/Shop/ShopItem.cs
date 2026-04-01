@@ -73,11 +73,16 @@ public class ShopItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        ToggleHighlight(true);
+        if (eventData.pointerEnter != null && eventData.pointerEnter.GetComponent<Image>() != null)
+        {
+            ToggleHighlight(true);
+            UITip.Instance.StartMessage(itemData.description);
+        }
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         ToggleHighlight(false);
+        UITip.Instance.StopMessage();
     }
 }

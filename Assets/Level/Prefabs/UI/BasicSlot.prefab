@@ -91,8 +91,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da676bf8c4e990d4782492866aa5e440, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::slotScript
-  m_icon: {fileID: 3472372444038375302}
-  m_num: {fileID: 3344086735980019746}
+  slotIcon: {fileID: 3472372444038375302}
+  stackAmountText: {fileID: 3344086735980019746}
   keyTooltipText: {fileID: 9177517864750544605}
   useItemInput: {fileID: 0}
 --- !u!1 &743269340325950548
