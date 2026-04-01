@@ -9,7 +9,7 @@ namespace SoundSystem
     public class MusicEvent : ScriptableObject
     {
         [Range(0f, 1f), SerializeField] private float musicVolume = .1f;
-        [Range(80f, 140f), SerializeField] private float bpm = 85f;
+        [Range(0, 200f), SerializeField] private float bpm = 100f;
         [SerializeField] private AudioClip[] musicLayers;
         [SerializeField] private AudioMixerGroup musicMixerGroup;
         [SerializeField] private bool keepTrackOfBeat;
