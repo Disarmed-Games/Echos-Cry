@@ -39,14 +39,14 @@ public class GameManager : Singleton<GameManager>
 
 public class EnemyManager
 {
-    private readonly NewEnemyStateMachine _stateMachine;
-    private readonly NewEnemyStateCache _stateCache;
-    public NewEnemyStateMachine StateMachine { get => _stateMachine; }
-    public NewEnemyStateCache StateCache { get => _stateCache; }
+    private readonly EnemyStateMachine _stateMachine;
+    private readonly EnemyStateCache _stateCache;
+    public EnemyStateMachine StateMachine { get => _stateMachine; }
+    public EnemyStateCache StateCache { get => _stateCache; }
 
     public EnemyManager()
     {
         _stateCache = new();
-        _stateMachine = new NewEnemyStateMachine();
+        _stateMachine = new EnemyStateMachine();
     }
 }

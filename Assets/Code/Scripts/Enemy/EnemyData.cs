@@ -1,8 +1,7 @@
-using AudioSystem;
 using UnityEngine;
 
-[CreateAssetMenu(menuName ="Echo's Cry/Enemy/Enemy Data/Slime")]
-public class SlimeData : ScriptableObject
+[CreateAssetMenu(menuName = "Echo's Cry/Enemy/Enemy Data/General")]
+public class EnemyData : ScriptableObject
 {
     [SerializeField] private float _distanceCheck;
     [SerializeField] private float _attackChargeTime;
@@ -12,9 +11,7 @@ public class SlimeData : ScriptableObject
     [SerializeField] private float _staggerDuration;
     [SerializeField] private float _knockbackForce;
     [SerializeField] private float _baseDamage;
-
-    public readonly int FlyHashCode = Animator.StringToHash("Bounce");
-    public readonly int AttackHashCode = Animator.StringToHash("Attack");
+    [SerializeField] private float _stoppingDistance;
 
     public float DistanceCheck { get { return _distanceCheck; } }
     public float AttackChargeTime { get { return _attackChargeTime; } }
@@ -24,4 +21,5 @@ public class SlimeData : ScriptableObject
     public float StaggerDuration { get => _staggerDuration; }
     public float KnockbackForce { get => _knockbackForce; }
     public float BaseDamage { get => _baseDamage; }
+    public float StoppingDistance { get => _stoppingDistance; }
 }

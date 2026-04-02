@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using EchosCry.Enemy.Animation;
 
-public abstract class NewEnemyState
+public abstract class EnemyState
 {
     public virtual void Update(Enemy enemyContext) { }
     public virtual void FixedUpdate(Enemy enemyContext) { }
@@ -15,25 +15,25 @@ public abstract class NewEnemyState
     public virtual void Exit(Enemy enemyContext) { }
 }
 
-public class SpawnEnemyState : NewEnemyState
+public class SpawnEnemyState : EnemyState
 {
 
 }
 
-public class IdleEnemyState : NewEnemyState
+public class IdleEnemyState : EnemyState
 {
     public override void Enter(Enemy enemyContext)
     {
-        Debug.Log("Idle");
+        //Debug.Log("Idle");
         enemyContext.NPCAnimator.PlayAnimation(HashCodes.IdleHashCode);
     }
 }
 
-public class PursueEnemyState : NewEnemyState
+public class PursueEnemyState : EnemyState
 {
     public override void Enter(Enemy enemyContext)
     {
-        Debug.Log("Pursue");
+        //Debug.Log("Pursue");
         
         SetEnemyTarget(enemyContext);
         enemyContext.StartCoroutine(UpdateTarget(enemyContext));
@@ -46,7 +46,7 @@ public class PursueEnemyState : NewEnemyState
     public override void Update(Enemy enemyContext)
     {
         enemyContext.NPCAnimator
-            .UpdateSpriteDirection((PlayerRef.Transform.position - enemyContext.transform.position).normalized, true);
+            .UpdateSpriteDirection((PlayerRef.Transform.position - enemyContext.transform.position).normalized);
     }
     private void SetEnemyTarget(Enemy enemyContext)
     {
@@ -61,11 +61,11 @@ public class PursueEnemyState : NewEnemyState
     }
 }
 
-public class StaggerEnemyState : NewEnemyState
+public class StaggerEnemyState : EnemyState
 {
     public override void Enter(Enemy enemyContext)
     {
-        Debug.Log("Stagger");
+        //Debug.Log("Stagger");
         enemyContext.Rigidbody.isKinematic = false;
         Vector3 direction = (PlayerRef.Transform.position - enemyContext.transform.position).normalized;
         enemyContext.Rigidbody.AddForce(-(enemyContext.Data.KnockbackForce * direction), ForceMode.Impulse);
@@ -88,11 +88,11 @@ public class StaggerEnemyState : NewEnemyState
     }
 }
 
-public class ChargeEnemyState : NewEnemyState
+public class ChargeEnemyState : EnemyState
 {
     public override void Enter(Enemy enemyContext)
     {
-        Debug.Log("Charge");
+        //Debug.Log("Charge");
         
         enemyContext.StateData.ReadyToAttack = false;
         enemyContext.StartCoroutine(ChargeAttackCoroutine(enemyContext));
@@ -104,7 +104,7 @@ public class ChargeEnemyState : NewEnemyState
     public override void Update(Enemy enemyContext)
     {
         enemyContext.NPCAnimator
-            .UpdateSpriteDirection((PlayerRef.Transform.position - enemyContext.transform.position).normalized, true);
+            .UpdateSpriteDirection((PlayerRef.Transform.position - enemyContext.transform.position).normalized);
     }
     private IEnumerator ChargeAttackCoroutine(Enemy enemyContext)
     {
@@ -127,28 +127,29 @@ public class ChargeEnemyState : NewEnemyState
     }
 }
 
-public class AttackEnemyState : NewEnemyState
+public class AttackEnemyState : EnemyState
 {
     public override void Enter(Enemy enemyContext)
     {
-        Debug.Log("Attack");
+        //Debug.Log("Attack");
 
         Vector3 attackDirection = (PlayerRef.Transform.position - enemyContext.transform.position).normalized;
         enemyContext.NPCAnimator.PlayAnimation(HashCodes.AttackHashCode);
+        enemyContext.SoundStrategy.Execute(enemyContext.SoundConfig.AttackSFX, enemyContext.transform, 0f);
         enemyContext.AttackStrategies[0].Execute(enemyContext.Data.BaseDamage, attackDirection, enemyContext.transform);
     }
     public override void Exit(Enemy enemyContext)
     {
-        enemyContext.Rigidbody.isKinematic = true;
+        enemyContext.Rigidbody.linearVelocity = Vector3.zero;
         enemyContext.AttackStrategies[0].StopAllCoroutines();
     }
 }
 
-public class CooldownEnemyState : NewEnemyState
+public class CooldownEnemyState : EnemyState
 {
     public override void Enter(Enemy enemyContext)
     {
-        Debug.Log("Cooldown");
+        //Debug.Log("Cooldown");
 
         enemyContext.StateData.OnCooldown = true;
         enemyContext.StartCoroutine(Cooldown(enemyContext));
@@ -164,27 +165,27 @@ public class CooldownEnemyState : NewEnemyState
     }
 }
 
-public class DeathEnemyState : NewEnemyState
+public class DeathEnemyState : EnemyState
 {
     public override void Enter(Enemy enemyContext)
     {
-        Debug.Log("Death");
+        //Debug.Log("Death");
         enemyContext.DropsStrategy.Execute(enemyContext.transform);
         enemyContext.HandleDeath();
     }
 }
-public class RoamEnemyState : NewEnemyState
+public class RoamEnemyState : EnemyState
 {
     public override void Enter(Enemy enemyContext)
     {
-        Debug.Log("Roaming");
+        //Debug.Log("Roaming");
         SetEnemyTarget(enemyContext);
         enemyContext.NPCAnimator.PlayAnimation(HashCodes.MoveHashCode);
     }
     public override void Update(Enemy enemyContext)
     {
         enemyContext.NPCAnimator
-            .UpdateSpriteDirection((PlayerRef.Transform.position - enemyContext.transform.position).normalized, true);
+            .UpdateSpriteDirection((PlayerRef.Transform.position - enemyContext.transform.position).normalized);
     }
     private void SetEnemyTarget(Enemy enemyContext)
     {

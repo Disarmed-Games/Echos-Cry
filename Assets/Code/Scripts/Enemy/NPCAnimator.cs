@@ -21,13 +21,12 @@ public class NPCAnimator : MonoBehaviour
         StartCoroutine(TintFlashCoroutine(tintColor, flashDuration));
     }
 
-    public void UpdateSpriteDirection(Vector3 locomotion, bool isReversed)
+    public void UpdateSpriteDirection(Vector3 direction)
     {
-        if (locomotion.x == 0) return;
+        if (direction.x == 0) return;
 
         Vector3 currentScale = _spriteTransform.localScale;
-        currentScale.x = Mathf.Sign(locomotion.x) * Mathf.Abs(currentScale.x);
-        if (isReversed) currentScale.x = -currentScale.x;
+        currentScale.x = Mathf.Sign(direction.x) * Mathf.Abs(currentScale.x);
         _spriteTransform.localScale = currentScale;
     }
     public void PlayAnimation(int hashCode)

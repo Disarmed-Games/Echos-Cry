@@ -17,7 +17,7 @@ public class EnemyStateHandler
     public Dictionary<EnemyStates, StateNode> StateNodes { get => _states; }
     public EnemyStates CurrentState { get => _currentState; set => _currentState = value; }
 
-    public EnemyStateHandler(NewEnemyStateCache cache)
+    public EnemyStateHandler(EnemyStateCache cache)
     {
         _startState = EnemyStates.Spawn;
         _currentState = _startState;
@@ -25,7 +25,7 @@ public class EnemyStateHandler
         EnemyStateTransition transition = new(EnemyStates.Idle, x => true);
         AddStateNode(cache, _startState, new EnemyStateTransition[] {transition}, new EnemyStateTransition[] { });
     }
-    public EnemyStateHandler(NewEnemyStateCache cache, EnemyStates startState)
+    public EnemyStateHandler(EnemyStateCache cache, EnemyStates startState)
     {
         _startState = startState;
         _currentState = _startState;
@@ -40,11 +40,11 @@ public class EnemyStateHandler
         _states = states;
     }
 
-    public bool AddStateNode(NewEnemyStateCache cache, EnemyStates state, EnemyStateTransition[] defaultArray, EnemyStateTransition[] tickArray)
+    public bool AddStateNode(EnemyStateCache cache, EnemyStates state, EnemyStateTransition[] defaultArray, EnemyStateTransition[] tickArray)
     {
         if (_states.ContainsKey(state)) return true;
         if (cache == null) return false;
-        NewEnemyState newState = cache.RequestState(state);
+        EnemyState newState = cache.RequestState(state);
         if(newState == null) return false;
         StateNode node = new(newState, defaultArray, tickArray);
         _states.Add(state, node);

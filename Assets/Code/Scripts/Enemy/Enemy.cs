@@ -10,14 +10,11 @@ using UnityEngine.VFX;
 
 public class Enemy : MonoBehaviour
 {
-    private EnemyStateCache _stateCache;
-    private EnemyStateMachine _stateMachine;
     private EnemyPool _pool;
     
-    private static NewEnemyStateMachine _newStateMachine;
-    private static NewEnemyStateCache   _newStateCache;
+    private static EnemyStateMachine _stateMachine;
+    private static EnemyStateCache   _stateCache;
 
-    [SerializeField] private EnemyStateCache.EnemyStates _spawnState;
     private bool IsPooled => _pool != null;
 
     [Header("Damage")]
@@ -54,13 +51,10 @@ public class Enemy : MonoBehaviour
     [Header("Event Channel (Broadcaster)")]
     [SerializeField] private IntEventChannel _updateWaveCount;
 
-
-    public EnemyStateCache StateCache { get => _stateCache; }
-    public EnemyStateMachine StateMachine { get => _stateMachine; }
     public EnemyPool Pool { get => _pool; set => _pool = value; }
 
-    public NewEnemyStateMachine NewStateMachine { get => _newStateMachine; }
-    public NewEnemyStateCache NewStateCache { get => _newStateCache; }
+    public EnemyStateMachine StateMachine { get => _stateMachine; }
+    public EnemyStateCache StateCache { get => _stateCache; }
 
     public HealthSystem Health { get => _health; }
     public NavMeshAgent NavMeshAgent { get => _navMeshAgent; }
@@ -81,12 +75,12 @@ public class Enemy : MonoBehaviour
 
    private void Awake()
     {   
-        _newStateMachine ??= new();
-        _newStateCache ??= new();
+        _stateMachine ??= new();
+        _stateCache ??= new();
 
         _stateData = new();
 
-        _enemyCacheStrategy.Execute(_stateCache, this);
+        _enemyCacheStrategy.Execute(this);
 
     }
     private void OnEnable()
@@ -100,23 +94,18 @@ public class Enemy : MonoBehaviour
         if(TickManager.Instance != null) TickManager.Instance.GetTimer(0.2f).Tick -= TickCheck;
         _playerAttackEndChannel.Channel -= ResetCollider; 
     }
-    private void OnDestroy()
-    {
-        _stateMachine = null;
-        _stateCache = null;
-    }
 
     private void Update()
     {
         if (_stateHandler == null || _stateData == null) return;
-        _newStateMachine.CheckSwitchStates(this);
-        _newStateMachine.UpdateStates(this);
+        _stateMachine.CheckSwitchStates(this);
+        _stateMachine.UpdateStates(this);
     }
     private void FixedUpdate()
     {
 
         if (_stateHandler == null || _stateData == null) return;
-        _newStateMachine.FixedUpdateStates(this);
+        _stateMachine.FixedUpdateStates(this);
     }
 
     private void ResetCollider() => _collider.enabled = true;
@@ -132,10 +121,8 @@ public class Enemy : MonoBehaviour
         //Enemy Pooling
         if (IsPooled)
         {
-            _stateMachine.SwitchState(_stateCache.RequestState(_spawnState));
-
             if (_stateHandler != null && _stateData != null)
-                _newStateMachine.SwitchStates(_stateHandler.StartState, this);
+                _stateMachine.SwitchStates(_stateHandler.StartState, this);
 
             _health.ResetSystem();
             _pool.ReleaseEnemy(this);
@@ -145,7 +132,7 @@ public class Enemy : MonoBehaviour
 
     private void TickCheck()
     {
-        _newStateMachine.CheckTickSwitchStates(this);
+        _stateMachine.CheckTickSwitchStates(this);
     }
 
     public class Builder

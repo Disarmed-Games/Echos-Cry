@@ -4,9 +4,8 @@ using EchosCry.Enemy.StateSystem;
 [CreateAssetMenu(menuName = "Echo's Cry/Enemy/Cache Strategy/Range")]
 public class RangeCacheStrategy : EnemyCacheStrategy
 {
-    [SerializeField] private RangeData _data;
 
-    public override void Execute(EnemyStateCache stateCache, Enemy enemyContext)
+    public override void Execute(Enemy enemyContext)
     {
         EnemyStateTransition death_check = new(EnemyStates.Death, enemy => enemy.Health.CurrentHealth <= 0);
         EnemyStateTransition ready_to_attack = new(EnemyStates.Attack, enemy => enemy.StateData.ReadyToAttack);
@@ -36,53 +35,53 @@ public class RangeCacheStrategy : EnemyCacheStrategy
                 return false;
             });
 
-        EnemyStateHandler handler = new(enemyContext.NewStateCache);
+        EnemyStateHandler handler = new(enemyContext.StateCache);
 
         handler.AddStateNode
             (
-                enemyContext.NewStateCache,
+                enemyContext.StateCache,
                 EnemyStates.Idle,
                 new EnemyStateTransition[] { death_check, is_staggered },
                 new EnemyStateTransition[] { player_distance_check }
             );
         handler.AddStateNode
             (
-                enemyContext.NewStateCache,
+                enemyContext.StateCache,
                 EnemyStates.Roam,
                 new EnemyStateTransition[] { death_check, is_staggered },
                 new EnemyStateTransition[] { in_range_check }
             );
         handler.AddStateNode
             (
-                enemyContext.NewStateCache,
+                enemyContext.StateCache,
                 EnemyStates.Stagger,
                 new EnemyStateTransition[] { stagger_ended, death_check },
                 new EnemyStateTransition[0]
             );
         handler.AddStateNode
             (
-                enemyContext.NewStateCache,
+                enemyContext.StateCache,
                 EnemyStates.Death,
                 new EnemyStateTransition[0],
                 new EnemyStateTransition[0]
             );
         handler.AddStateNode
             (
-                enemyContext.NewStateCache,
+                enemyContext.StateCache,
                 EnemyStates.Charge,
                 new EnemyStateTransition[] { death_check, ready_to_attack, is_staggered },
                 new EnemyStateTransition[0]
             );
         handler.AddStateNode
             (
-                enemyContext.NewStateCache,
+                enemyContext.StateCache,
                 EnemyStates.Attack,
                 new EnemyStateTransition[] { death_check, attack_ended, is_staggered },
                 new EnemyStateTransition[0]
             );
         handler.AddStateNode
             (
-                enemyContext.NewStateCache,
+                enemyContext.StateCache,
                 EnemyStates.Cooldown,
                 new EnemyStateTransition[] { death_check, is_staggered, cooldown_ended },
                 new EnemyStateTransition[0]

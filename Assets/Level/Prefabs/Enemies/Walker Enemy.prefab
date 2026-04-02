@@ -137,7 +137,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.000000014901161, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 1.678, z: 0}
-  m_LocalScale: {x: -0.37464368, y: 0.37464374, z: 0.37464374}
+  m_LocalScale: {x: -0.3746437, y: 0.37464374, z: 0.37464374}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2434889112220353080}
@@ -322,9 +322,9 @@ MonoBehaviour:
   _collider: {fileID: 8838160874129828706}
   _passiveEffectHandler: {fileID: 3727599544175325857}
   _deathEffect: {fileID: 2836163184616676573, guid: c9677a51a5d061340a514220e825b583, type: 3}
-  _data: {fileID: 0}
+  _data: {fileID: 11400000, guid: 805c36080d6e68641a1d327dc6d9f451, type: 2}
   _attackStrats:
-  - {fileID: 2061792500508134373}
+  - {fileID: 5298147001227487547}
   _targetStrats:
   - {fileID: 2292350096531518148}
   _movementStrats: []
@@ -448,9 +448,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4004914322412057519}
-  - component: {fileID: 2061792500508134373}
+  - component: {fileID: 5298147001227487547}
   m_Layer: 0
-  m_Name: AOE
+  m_Name: Jump AOE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -471,7 +471,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7461383507432727278}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2061792500508134373
+--- !u!114 &5298147001227487547
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -480,15 +480,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 8093237397332565904}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e97edc87276cba4aa0e9f3f603da87c, type: 3}
+  m_Script: {fileID: 11500000, guid: cc6b83de1cfa1e74eb4182e40514b4c9, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Echos Cry Core::AOEAttack
-  _aoeObject: {fileID: 0}
-  _aoeRadius: 3
+  m_EditorClassIdentifier: Echos Cry Core::JumpAOEAttack
+  _aoeEffect: {fileID: 5464901287887852699, guid: b7edc944a1fc12648b567bed5d42f336, type: 3}
+  _aoeEffectTime: 1
+  _aoeRadius: 2
   _layerMask:
     serializedVersion: 2
     m_Bits: 1024
-  _maxHits: 5
+  _maxHits: 4
+  _jumpDuration: 0.5
+  _jumpDashForce: 5
+  rb: {fileID: 6827338249854996756}
 --- !u!1001 &5332649190230434966
 PrefabInstance:
   m_ObjectHideFlags: 0

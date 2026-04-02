@@ -8,11 +8,7 @@ using static UnityEngine.EventSystems.EventTrigger;
 using static UnityEngine.UI.Selectable;
 using EchosCry.Enemy.StateSystem;
 
-public class EnemyStateMachine : AbstractStateMachine<EnemyState> { }
-
-
-
-public class NewEnemyStateMachine
+public class EnemyStateMachine
 {
     public void UpdateStates(Enemy enemy)
     {
@@ -25,7 +21,7 @@ public class NewEnemyStateMachine
 
     public void SwitchStates(EnemyStates state, Enemy enemy)
     {
-        NewEnemyState currentState = enemy.StateHandler.StateNodes[enemy.StateHandler.CurrentState].State;
+        EnemyState currentState = enemy.StateHandler.StateNodes[enemy.StateHandler.CurrentState].State;
         if (currentState == null) return;
 
         currentState.Exit(enemy);

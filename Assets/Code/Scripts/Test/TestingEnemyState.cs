@@ -6,7 +6,7 @@ public class TestingEnemyState : MonoBehaviour
 {
     private void Start()
     {
-        NewEnemyStateCache cache = new();
+        EnemyStateCache cache = new();
         EnemyStateHandler handler = new(cache);
     }
 }

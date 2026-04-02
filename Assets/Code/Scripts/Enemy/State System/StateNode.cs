@@ -4,16 +4,16 @@
 //Tick array represents transitions of a state that can be checked based on a tick timer rather than every frame (ex. checking player distance)
 public readonly struct StateNode
 {
-    private readonly NewEnemyState _state;
+    private readonly EnemyState _state;
 
     private readonly EnemyStateTransition[] _defaultArray;
     private readonly EnemyStateTransition[] _tickArray;
 
-    public NewEnemyState State { get => _state; }
+    public EnemyState State { get => _state; }
     public EnemyStateTransition[] DefaultArray { get => _defaultArray; }
     public EnemyStateTransition[] TickArray { get => _tickArray; }
 
-    public StateNode(NewEnemyState state, EnemyStateTransition[] defaultList, EnemyStateTransition[] tickList)
+    public StateNode(EnemyState state, EnemyStateTransition[] defaultList, EnemyStateTransition[] tickList)
     {
         _state = state;
         _defaultArray = defaultList;

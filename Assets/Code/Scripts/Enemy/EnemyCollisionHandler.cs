@@ -1,6 +1,5 @@
 using UnityEngine;
 using static Enemy;
-using static EnemyStateCache;
 
 //This will be placed on every enemy to handle collision with an attack from player
 

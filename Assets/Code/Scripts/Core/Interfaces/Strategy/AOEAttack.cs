@@ -1,8 +1,10 @@
 using UnityEngine;
+using static UnityEngine.Rendering.STP;
 
 public class AOEAttack : AttackMethod
 {
-    [SerializeField] GameObject _aoeObject;
+    [SerializeField] GameObject _aoeEffect;
+    [SerializeField] float _aoeEffectTime;
     [SerializeField] float _aoeRadius;
     [SerializeField] LayerMask _layerMask;
     [SerializeField] int _maxHits;
@@ -19,5 +21,6 @@ public class AOEAttack : AttackMethod
                 damageable.Execute(damage);
             }
         }
+        _attackEnded = true;
     }
 }

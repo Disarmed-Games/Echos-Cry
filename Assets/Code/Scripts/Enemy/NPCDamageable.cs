@@ -3,7 +3,6 @@ using UnityEngine;
 public class NPCDamageable : MonoBehaviour, IDamageable
 {
     [SerializeField] private Enemy _npc;
-    [SerializeField] private EnemyStateCache.EnemyStates _staggerState;
     private bool _armorBreak = false;
 
     public virtual void Execute(float amount)
