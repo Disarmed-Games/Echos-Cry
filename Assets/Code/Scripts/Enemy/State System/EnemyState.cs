@@ -111,7 +111,7 @@ public class ChargeEnemyState : EnemyState
         yield return new WaitForSeconds(enemyContext.Data.AttackChargeTime);
         if (TempoConductor.Instance.IsOnBeat())
         {
-            Debug.Log("Ready for attack");
+            //Debug.Log("Ready for attack");
             enemyContext.StateData.ReadyToAttack = true;
         }
         else enemyContext.StartCoroutine(WaitUntilBeat(enemyContext));
@@ -122,7 +122,7 @@ public class ChargeEnemyState : EnemyState
         {
             yield return new WaitForEndOfFrame();
         }
-        Debug.Log("Ready for attack");
+        //Debug.Log("Ready for attack");
         enemyContext.StateData.ReadyToAttack = true;
     }
 }
@@ -140,7 +140,7 @@ public class AttackEnemyState : EnemyState
     }
     public override void Exit(Enemy enemyContext)
     {
-        enemyContext.Rigidbody.linearVelocity = Vector3.zero;
+        enemyContext.Rigidbody.isKinematic = true;
         enemyContext.AttackStrategies[0].StopAllCoroutines();
     }
 }

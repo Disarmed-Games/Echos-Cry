@@ -208,7 +208,7 @@ MonoBehaviour:
     m_Bits: 1024
   _distance: 0.5
   _attackSound: {fileID: 11400000, guid: c8c975e393c92cc4f8f6aa88905bcc9e, type: 2}
-  _duration: 0
+  _duration: 0.4
   _rb: {fileID: 6827338249854996756}
   _dashForce: 4
 --- !u!1 &6900823288402649937
@@ -289,7 +289,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a13bb9d731c3ce45a893640fcd98ebb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
-  _spawnState: 22
   _attackDamage: 0
   _health: {fileID: 854592342237272632}
   _navMeshAgent: {fileID: 1592182489320676592}
@@ -354,7 +353,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyDamageable
   _npc: {fileID: 8010943512667726129}
-  _staggerState: 23
 --- !u!65 &8838160874129828706
 BoxCollider:
   m_ObjectHideFlags: 0

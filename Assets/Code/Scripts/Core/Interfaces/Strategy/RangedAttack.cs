@@ -38,7 +38,7 @@ public class RangedAttack : AttackMethod
             _rb.AddForce(-attackDirection * _blowbackForce, ForceMode.Impulse);
             ShootProjectile(origin, attackDirection, damage);
             count++;
-            yield return new WaitForSeconds(TempoConductor.Instance.TimeBetweenBeats);
+            yield return new WaitForSeconds(BeatManager.Instance.GetTimeBetweenBeats());
         }
         _attackEnded = true;
     }

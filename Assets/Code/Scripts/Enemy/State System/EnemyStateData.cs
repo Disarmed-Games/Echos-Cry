@@ -9,4 +9,10 @@ public class EnemyStateData
         ReadyToAttack = false;
         OnCooldown = false;
     }
+    public void Reset()
+    {
+        IsStaggered=false;
+        ReadyToAttack=false;
+        OnCooldown=false;
+    }
 }

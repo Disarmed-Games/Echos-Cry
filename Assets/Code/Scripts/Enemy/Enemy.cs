@@ -121,9 +121,8 @@ public class Enemy : MonoBehaviour
         //Enemy Pooling
         if (IsPooled)
         {
-            if (_stateHandler != null && _stateData != null)
-                _stateMachine.SwitchStates(_stateHandler.StartState, this);
-
+            _stateMachine.SwitchStates(_stateHandler.StartState, this);
+            _stateData.Reset();
             _health.ResetSystem();
             _pool.ReleaseEnemy(this);
         }
