@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -14,6 +15,8 @@ public class BeatManager : MonoBehaviour
     public float BeatProgress => beatProgress;
     public float BPM => _bpm;
 
+    public event Action onWholeBeat;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -22,6 +25,13 @@ public class BeatManager : MonoBehaviour
             return;
         }
         Instance = this;
+    }
+
+    public void PlaySong(AudioClip clip, float bpm)
+    {
+        _audioSource.clip = clip;
+        _bpm = bpm;
+        _audioSource.Play();
     }
 
     private void Update()
@@ -40,6 +50,11 @@ public class BeatManager : MonoBehaviour
     {
         return _intervals[0].GetIntervalLength(_bpm);
     }
+
+    public void ActivateWholeBeatEvent()
+    {
+        onWholeBeat?.Invoke();
+    }
 }
 
 [System.Serializable]
@@ -47,7 +62,7 @@ public class Intervals
 {
     [SerializeField] private float _steps;
     [SerializeField] private UnityEvent _trigger;
-    public int LastInterval;
+    private int LastInterval;
 
     public float GetIntervalLength(float bpm)
     {
