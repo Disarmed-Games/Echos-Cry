@@ -1,10 +1,9 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "InventoryItemData", menuName = "Echo's Cry/Inventory System/InventoryItemData")]
-public class InventoryItemData : ScriptableObject
+public abstract class InventoryItemData : ScriptableObject
 {
-    public string id;
     public string displayName;
+    public string description;
     public Sprite icon;
-    public GameObject prefab;
+    public abstract void Use(Player player);
 }

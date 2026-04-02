@@ -10,7 +10,7 @@ public class AnimateMetronome : MonoBehaviour
 
     private void Update()
     {
-        float progress = MusicManager.Instance.GetSampleProgress();
+        float progress = BeatManager.Instance.BeatProgress;
 
         float angle = Mathf.Sin(progress * Mathf.PI) * 45f * swingDirection;
         pendulumObject.transform.localRotation = Quaternion.Euler(0f, 0f, angle);

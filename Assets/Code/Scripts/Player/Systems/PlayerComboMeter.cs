@@ -92,6 +92,8 @@ public class PlayerComboMeter : MonoBehaviour
     }
     private void UpdateComboMeterState()
     {
+        if (playerRef.WeaponHolder.CurrentlyEquippedWeapon._currentAttackData == null) return;
+
         ThreePassiveEffects currentPassives = playerRef.WeaponHolder.CurrentlyEquippedWeapon._currentAttackData.PassiveEffects;
 
         float progress = _comboMeterAmount / _comboMeterMax;

@@ -27,6 +27,7 @@ public class HUDMessage : MonoBehaviour
     public void UpdateMessage(string message, float messageDuration)
     {
         textMessage.text = message;
+        StopAllCoroutines();
         StartCoroutine(LerpMessageAlpha(0f, 1f));
         StartCoroutine(MessageDuration(messageDuration));
     }

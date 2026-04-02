@@ -12,6 +12,7 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] EventChannel _healthChannel;
     [SerializeField] EventChannel _armorChannel;
     [SerializeField] EventChannel _regenHealthChannel;
+    [SerializeField] EventChannel _regenArmorChannel;
     [SerializeField] EventChannel _dashCountChannel;
     [SerializeField] EventChannel _dashCooldownChannel;
     [SerializeField] EventChannel _dashAttackChannel;
@@ -24,6 +25,7 @@ public class PlayerStats : MonoBehaviour
         if (_healthChannel != null) _healthChannel.Channel += UpgradeMaxHealth;
         if (_armorChannel != null) _armorChannel.Channel += UpgradeMaxArmor;
         if (_regenHealthChannel != null) _regenHealthChannel.Channel += UpgradeHealthRegen;
+        if (_regenArmorChannel != null) _regenArmorChannel.Channel += UpgradeArmorRegen;
         if (_moveSpeedChannel != null) _moveSpeedChannel.Channel += UpgradeMoveSpeed;
         if (_dashSpeedChannel != null) _dashSpeedChannel.Channel += UpgradeDashSpeed;
         if(_dashCooldownChannel != null) _dashCooldownChannel.Channel += UpgradeDashCooldown;
@@ -35,6 +37,7 @@ public class PlayerStats : MonoBehaviour
         if (_healthChannel != null) _healthChannel.Channel -= UpgradeMaxHealth;
         if (_armorChannel != null) _armorChannel.Channel -= UpgradeMaxArmor;
         if (_regenHealthChannel != null) _regenHealthChannel.Channel -= UpgradeHealthRegen;
+        if (_regenArmorChannel != null) _regenArmorChannel.Channel -= UpgradeArmorRegen;
         if (_moveSpeedChannel != null) _moveSpeedChannel.Channel -= UpgradeMoveSpeed;
         if (_dashSpeedChannel != null) _dashSpeedChannel.Channel -= UpgradeDashSpeed;
         if (_dashCooldownChannel != null) _dashCooldownChannel.Channel -= UpgradeDashCooldown;
@@ -84,6 +87,14 @@ public class PlayerStats : MonoBehaviour
             _health.RegenHealthAmount++;
             _health.EnableHealthRegen();
         }    
+    }
+    void UpgradeArmorRegen()
+    {
+        if (_health != null)
+        {
+            _health.RegenArmorAmount++;
+            _health.EnableArmorRegen();
+        }
     }
     void UpgradeDashAttack()
     {

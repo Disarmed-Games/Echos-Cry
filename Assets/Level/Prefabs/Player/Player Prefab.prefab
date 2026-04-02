@@ -5109,9 +5109,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8466053061526937109}
-  - component: {fileID: 3769865792232201912}
   - component: {fileID: 8805946901820436520}
+  - component: {fileID: 2211662532032088973}
   - component: {fileID: 2431117810447779374}
+  - component: {fileID: 3769865792232201912}
   m_Layer: 0
   m_Name: SpriteOutline
   m_TagString: Untagged
@@ -5134,6 +5135,46 @@ Transform:
   m_Children: []
   m_Father: {fileID: 864604785593361342}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8805946901820436520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2010116007821540472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac600b6e0f3ab204c9bb832ef02cd591, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  _material: {fileID: 2100000, guid: ae41a1466203a3e48935a521f9206df8, type: 2}
+--- !u!114 &2211662532032088973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2010116007821540472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eddd63f48cf330a4fbfd12e2204f3f59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Echos Cry Core::BeatPulseHandler
+  pulseSize: 1.1
+  returnSpeed: 5
+--- !u!114 &2431117810447779374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2010116007821540472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 971a2c0256099cb4683bd85d1c810450, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Billboard
+  lockZRotation: 1
 --- !u!212 &3769865792232201912
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5192,32 +5233,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8805946901820436520
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2010116007821540472}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac600b6e0f3ab204c9bb832ef02cd591, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  _material: {fileID: 2100000, guid: ae41a1466203a3e48935a521f9206df8, type: 2}
---- !u!114 &2431117810447779374
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2010116007821540472}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 971a2c0256099cb4683bd85d1c810450, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Billboard
-  lockZRotation: 1
 --- !u!1 &2046968002336753017
 GameObject:
   m_ObjectHideFlags: 0
@@ -5486,6 +5501,7 @@ MonoBehaviour:
   _healthChannel: {fileID: 11400000, guid: 500d6e615a856a844a407ce00b7f4ff7, type: 2}
   _armorChannel: {fileID: 11400000, guid: ed980f021be41e944b80a689b2fca290, type: 2}
   _regenHealthChannel: {fileID: 11400000, guid: 58f244f8770115148acb4868ba17b6b8, type: 2}
+  _regenArmorChannel: {fileID: 11400000, guid: 32e8668cebf73d74994810528e57ffd2, type: 2}
   _dashCountChannel: {fileID: 11400000, guid: 525432ab9a8309644a0c3e1894f626e4, type: 2}
   _dashCooldownChannel: {fileID: 11400000, guid: 01cfb1c9714eab745b95991f9c7b59f8, type: 2}
   _dashAttackChannel: {fileID: 11400000, guid: 0827540fa0d61a848adf46dd6bfb67db, type: 2}
@@ -5546,6 +5562,7 @@ GameObject:
   m_Component:
   - component: {fileID: 738753259440279824}
   - component: {fileID: 9130599691073952778}
+  - component: {fileID: 3587854640854237718}
   - component: {fileID: 6708799519748724713}
   m_Layer: 0
   m_Name: Sprite
@@ -5582,6 +5599,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Billboard
   lockZRotation: 1
+--- !u!114 &3587854640854237718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4323622196322604754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eddd63f48cf330a4fbfd12e2204f3f59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  pulseSize: 1.1
+  returnSpeed: 5
 --- !u!212 &6708799519748724713
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -20,14 +20,13 @@ public class UILineRenderer : Graphic
     
     private void Update()
     {
-        if (MusicManager.Instance == null || MusicManager.Instance.GetMusicPlayer() == null) 
+        if (BeatManager.Instance == null) 
         {
-            //Debug.Log("Music Manager could not be found!");
-            return; 
+            Debug.Log("Beat Manager could not be found!");
+            return;
         }
-        if (!MusicManager.Instance.GetMusicPlayer().IsBeatTracked()) { return; }
 
-        float progress = 1 - MusicManager.Instance.GetSampleProgress();
+        float progress = 1 - BeatManager.Instance.BeatProgress;
         float offbeatProgress = progress - 0.5f;
         if (offbeatProgress < 0) offbeatProgress += 1f;
 

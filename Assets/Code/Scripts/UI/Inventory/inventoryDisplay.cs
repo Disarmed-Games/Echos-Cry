@@ -9,7 +9,7 @@ public class InventoryDisplay : MonoBehaviour
     public void UpdateInventory()
     {
         int i = 0;
-        foreach (InventoryItem item in InventoryManager.Instance.inventory)
+        foreach (InventoryItem item in InventoryManager.Instance.inventoryList)
         {
             if (i >= slotScriptArray.Length)
                 break;
