@@ -9,6 +9,7 @@ public class NPCAnimator : MonoBehaviour
     [SerializeField] private VisualEffect _visualEffect;
     [SerializeField] private Transform _spriteTransform;
     [SerializeField] private ParticleSystem _staggerParticles;
+    [SerializeField] private bool _isReversed;
 
     public SpriteRenderer NPCSprite { get { return _npcSprite; } }
 
@@ -27,6 +28,7 @@ public class NPCAnimator : MonoBehaviour
 
         Vector3 currentScale = _spriteTransform.localScale;
         currentScale.x = Mathf.Sign(direction.x) * Mathf.Abs(currentScale.x);
+        if (_isReversed) currentScale.x *= -1;
         _spriteTransform.localScale = currentScale;
     }
     public void PlayAnimation(int hashCode)

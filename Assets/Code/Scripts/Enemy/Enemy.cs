@@ -30,6 +30,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private PassiveEffectHandler _passiveEffectHandler;
     [SerializeField] private GameObject _deathEffect;
     [SerializeField] private EnemyData _data;
+    [SerializeField] private EnemyHealthUI _enemyHealthUI;
     
     private EnemyStateHandler _stateHandler;
     public EnemyStateHandler StateHandler { get => _stateHandler; set => _stateHandler = value; }
@@ -63,6 +64,7 @@ public class Enemy : MonoBehaviour
     public EnemySoundConfig SoundConfig { get => _soundConfig; }
     public Collider Collider { get => _collider; }
     public PassiveEffectHandler PassiveEffectHandler { get => _passiveEffectHandler; }
+    public EnemyHealthUI EnemyHealthUI { get => _enemyHealthUI; }
 
     public AttackMethod[] AttackStrategies { get => _attackStrats; }
     public TargetStrategy[] TargetStrategy { get => _targetStrats; }
@@ -83,11 +85,20 @@ public class Enemy : MonoBehaviour
         _enemyCacheStrategy.Execute(this);
 
     }
+    private void Start()
+    {
+        _enemyHealthUI.UpdateUI(_health.CurrentHealth, _health.MaxHealth, _health.CurrentArmor, _health.MaxArmor);
+    }
     private void OnEnable()
     {
         TickManager.Instance.GetTimer(0.2f).Tick += TickCheck;
         _playerAttackEndChannel.Channel += ResetCollider;
+        
         ResetCollider();
+        _health.ResetSystem();
+        _stateData.Reset();
+        _enemyHealthUI.ResetUI(_health.CurrentHealth, _health.MaxHealth, _health.CurrentArmor, _health.MaxArmor);
+        _stateMachine.SwitchStates(_stateHandler.StartState, this);
     }
     private void OnDisable()
     {
@@ -119,13 +130,8 @@ public class Enemy : MonoBehaviour
         deathEffectPrefab.SetSpriteShape(_npcAnimator.NPCSprite);
 
         //Enemy Pooling
-        if (IsPooled)
-        {
-            _stateMachine.SwitchStates(_stateHandler.StartState, this);
-            _stateData.Reset();
-            _health.ResetSystem();
-            _pool.ReleaseEnemy(this);
-        }
+        if (IsPooled) _pool.ReleaseEnemy(this);
+
         else Destroy(gameObject);
     }
 
