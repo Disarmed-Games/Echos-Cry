@@ -77,6 +77,6 @@ public class TickManager : Singleton<TickManager>
     }
     private void OnDisable()
     {
-        _timers.Clear();
+        if(_timers != null) _timers.Clear();
     }
 }

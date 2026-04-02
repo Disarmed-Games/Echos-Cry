@@ -3,13 +3,18 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.VFX;
 
+//ORDER:
+//- Create state transitions and then create StateNode
+//- Add StateNode to dictionary using enums
+//- Create a state container, setting the start state and placing dictionary 
+
 public class Enemy : MonoBehaviour
 {
-    private EnemyStateCache _stateCache;
-    private EnemyStateMachine _stateMachine;
     private EnemyPool _pool;
+    
+    private static EnemyStateMachine _stateMachine;
+    private static EnemyStateCache   _stateCache;
 
-    [SerializeField] private EnemyStateCache.EnemyStates _spawnState;
     private bool IsPooled => _pool != null;
 
     [Header("Damage")]
@@ -24,9 +29,16 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Collider _collider;
     [SerializeField] private PassiveEffectHandler _passiveEffectHandler;
     [SerializeField] private GameObject _deathEffect;
+    [SerializeField] private EnemyData _data;
+    
+    private EnemyStateHandler _stateHandler;
+    public EnemyStateHandler StateHandler { get => _stateHandler; set => _stateHandler = value; }
+    
+    private EnemyStateData _stateData;
+    public EnemyStateData StateData { get => _stateData; set => _stateData = value; }
 
     [Header("Strategies")]
-    [SerializeField] private AttackStrategy[] _attackStrats;
+    [SerializeField] private AttackMethod[] _attackStrats;
     [SerializeField] private TargetStrategy[]   _targetStrats;
     [SerializeField] private MovementStrategy[] _movementStrats;
     [SerializeField] private ItemDropStrategy _drops;
@@ -39,6 +51,65 @@ public class Enemy : MonoBehaviour
     [Header("Event Channel (Broadcaster)")]
     [SerializeField] private IntEventChannel _updateWaveCount;
 
+    public EnemyPool Pool { get => _pool; set => _pool = value; }
+
+    public EnemyStateMachine StateMachine { get => _stateMachine; }
+    public EnemyStateCache StateCache { get => _stateCache; }
+
+    public HealthSystem Health { get => _health; }
+    public NavMeshAgent NavMeshAgent { get => _navMeshAgent; }
+    public Rigidbody Rigidbody { get => _rigidbody; }
+    public NPCAnimator NPCAnimator { get => _npcAnimator; }
+    public EnemySoundConfig SoundConfig { get => _soundConfig; }
+    public Collider Collider { get => _collider; }
+    public PassiveEffectHandler PassiveEffectHandler { get => _passiveEffectHandler; }
+
+    public AttackMethod[] AttackStrategies { get => _attackStrats; }
+    public TargetStrategy[] TargetStrategy { get => _targetStrats; }
+    public MovementStrategy[] MovementStrategy { get => _movementStrats; }
+    public ItemDropStrategy DropsStrategy { get => _drops; }
+    public SoundStrategy SoundStrategy { get => _soundStrategy; }
+    public EnemyData Data { get => _data; }
+
+    public int EnemySpawnerID;
+
+   private void Awake()
+    {   
+        _stateMachine ??= new();
+        _stateCache ??= new();
+
+        _stateData = new();
+
+        _enemyCacheStrategy.Execute(this);
+
+    }
+    private void OnEnable()
+    {
+        TickManager.Instance.GetTimer(0.2f).Tick += TickCheck;
+        _playerAttackEndChannel.Channel += ResetCollider;
+        ResetCollider();
+    }
+    private void OnDisable()
+    {
+        if(TickManager.Instance != null) TickManager.Instance.GetTimer(0.2f).Tick -= TickCheck;
+        _playerAttackEndChannel.Channel -= ResetCollider; 
+    }
+
+    private void Update()
+    {
+        if (_stateHandler == null || _stateData == null) return;
+        _stateMachine.CheckSwitchStates(this);
+        _stateMachine.UpdateStates(this);
+    }
+    private void FixedUpdate()
+    {
+
+        if (_stateHandler == null || _stateData == null) return;
+        _stateMachine.FixedUpdateStates(this);
+    }
+
+    private void ResetCollider() => _collider.enabled = true;
+
     public void HandleDeath()
     {
         //Effects and Updates
@@ -50,67 +121,25 @@ public class Enemy : MonoBehaviour
         //Enemy Pooling
         if (IsPooled)
         {
-            _stateMachine.SwitchState(_stateCache.RequestState(_spawnState));
+            _stateMachine.SwitchStates(_stateHandler.StartState, this);
+            _stateData.Reset();
             _health.ResetSystem();
             _pool.ReleaseEnemy(this);
         }
         else Destroy(gameObject);
     }
 
-    public EnemyStateCache StateCache { get => _stateCache; }
-    public EnemyStateMachine StateMachine { get => _stateMachine; }
-    public EnemyPool Pool { get => _pool; set => _pool = value; }
-
-    public HealthSystem Health { get => _health; }
-    public NavMeshAgent NavMeshAgent { get => _navMeshAgent; }
-    public Rigidbody Rigidbody { get => _rigidbody; }
-    public NPCAnimator NPCAnimator { get => _npcAnimator; }
-    public EnemySoundConfig SoundConfig { get => _soundConfig; }
-    public Collider Collider { get => _collider; }
-    public PassiveEffectHandler PassiveEffectHandler { get => _passiveEffectHandler; }
-
-    public AttackStrategy[] AttackStrategies { get => _attackStrats; }
-    public TargetStrategy[] TargetStrategy { get => _targetStrats; }
-    public MovementStrategy[] MovementStrategy { get => _movementStrats; }
-    public ItemDropStrategy DropsStrategy { get => _drops; }
-    public SoundStrategy SoundStrategy { get => _soundStrategy; }
-
-    public int EnemySpawnerID;
-
-    protected virtual void Awake()
-    {   
-        _stateMachine = new();
-        _stateCache = new();
-
-        _enemyCacheStrategy.Execute(_stateCache, this);
-        _stateMachine.Init(_stateCache.StartState); 
-    }
-    private void OnEnable()
+    private void TickCheck()
     {
-        _stateCache?.Enable();
-        _playerAttackEndChannel.Channel += ResetCollider;
-        ResetCollider();
+        _stateMachine.CheckTickSwitchStates(this);
     }
-    private void OnDisable()
-    {
-        _stateCache?.Disable();
-        _playerAttackEndChannel.Channel -= ResetCollider; 
-    }
-    private void OnDestroy()
-    {
-        _stateMachine = null;
-        _stateCache = null;
-    }
-
-    protected virtual void Update()
-    {
-        _stateMachine.UpdateState();
-    }
-
-    private void ResetCollider() => _collider.enabled = true;
 
     public class Builder
     {
-        //TODO
+        public Enemy Build()
+        {
+            Enemy newEnemy = new GameObject("Enemy").AddComponent<Enemy>();
+            return newEnemy;
+        }
     }
 }

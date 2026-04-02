@@ -16,7 +16,7 @@ public class BeatPulseHandler : MonoBehaviour
     }
     private void OnDisable()
     {
-        BeatManager.Instance.onWholeBeat -= Pulse;
+        if(BeatManager.Instance != null) BeatManager.Instance.onWholeBeat -= Pulse;
     }
 
     private void Update()

@@ -3,7 +3,6 @@ using UnityEngine;
 public class NPCDamageable : MonoBehaviour, IDamageable
 {
     [SerializeField] private Enemy _npc;
-    [SerializeField] private EnemyStateCache.EnemyStates _staggerState;
     private bool _armorBreak = false;
 
     public virtual void Execute(float amount)
@@ -35,8 +34,7 @@ public class NPCDamageable : MonoBehaviour, IDamageable
         if(DamageLabelManager.Instance != null)
             DamageLabelManager.Instance.SpawnPopup(amount, _npc.transform.position, Color.white);
         
-        if(_npc.Health.CurrentArmor <= 0) 
-            _npc.StateMachine.SwitchState(_npc.StateCache.RequestState(_staggerState));
+        if(_npc.Health.CurrentArmor <= 0) _npc.StateData.IsStaggered = true;
     }
 }
 

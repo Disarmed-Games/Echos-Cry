@@ -21,17 +21,17 @@ public class NPCAnimator : MonoBehaviour
         StartCoroutine(TintFlashCoroutine(tintColor, flashDuration));
     }
 
-    public void UpdateSpriteDirection(Vector3 locomotion, bool isReversed)
+    public void UpdateSpriteDirection(Vector3 direction)
     {
-        if (locomotion.x == 0) return;
+        if (direction.x == 0) return;
 
         Vector3 currentScale = _spriteTransform.localScale;
-        currentScale.x = Mathf.Sign(locomotion.x) * Mathf.Abs(currentScale.x);
-        if (isReversed) currentScale.x = -currentScale.x;
+        currentScale.x = Mathf.Sign(direction.x) * Mathf.Abs(currentScale.x);
         _spriteTransform.localScale = currentScale;
     }
     public void PlayAnimation(int hashCode)
     {
+        if (!_animator.HasState(0, hashCode)) return; 
         _animator.Play(hashCode);
     }
 
@@ -66,4 +66,15 @@ public class NPCAnimator : MonoBehaviour
     {
         _npcSprite.material.SetColor(hashedTintColor, _defaultTintColor);
     }
+}
+
+namespace EchosCry.Enemy.Animation
+{
+    public class HashCodes
+    {
+        public static readonly int MoveHashCode = Animator.StringToHash("Move");
+        public static readonly int IdleHashCode = Animator.StringToHash("Idle");
+        public static readonly int AttackHashCode = Animator.StringToHash("Attack");
+    }
+
 }
