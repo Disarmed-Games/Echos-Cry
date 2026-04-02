@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Critical Hit
   m_EditorClassIdentifier: Assembly-CSharp::CriticalHitPassiveEffect
   effectName: Critical Strike
+  effectDescription: 40% chance of doubling your damage each attack.
   effectIcon: {fileID: 21300000, guid: 6879e49a661d7844eb8fe6ac95c88e4b, type: 3}
   isEffectOneTime: 1
   effectUseInterval: 0

@@ -76,38 +76,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aae77e3b297f93449873f90f7ee87917, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Echos Cry Core::DefaultTargetStrategy
---- !u!1 &1486095077488266679
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 887538312735190339}
-  m_Layer: 9
-  m_Name: Sprite Container
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &887538312735190339
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1486095077488266679}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.8, z: 0}
-  m_LocalScale: {x: -0.25, y: 0.25, z: 0.25}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 5725350970498192222}
-  m_Father: {fileID: 2434889112220353080}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1831394080825209204
 GameObject:
   m_ObjectHideFlags: 0
@@ -135,12 +103,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1831394080825209204}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: -1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.8, z: 0}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 887538312735190339}
+  m_Father: {fileID: 2434889112220353080}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5765285837838741193
 SpriteRenderer:
@@ -356,7 +324,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 887538312735190339}
+  - {fileID: 5725350970498192222}
   - {fileID: 86432653124173814}
   - {fileID: 6084545768438748889}
   - {fileID: 3702571202215447856}
@@ -397,7 +365,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a13bb9d731c3ce45a893640fcd98ebb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
-  _spawnState: 1
   _attackDamage: 0
   _health: {fileID: 854592342237272632}
   _navMeshAgent: {fileID: 1592182489320676592}
@@ -447,7 +414,7 @@ MonoBehaviour:
   _npcSprite: {fileID: 5765285837838741193}
   _animator: {fileID: 1879680284868728812}
   _visualEffect: {fileID: 6135991116511513266}
-  _spriteTransform: {fileID: 887538312735190339}
+  _spriteTransform: {fileID: 5725350970498192222}
   _staggerParticles: {fileID: 9195744456746233480}
 --- !u!114 &530485584549624666
 MonoBehaviour:
@@ -462,7 +429,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyDamageable
   _npc: {fileID: 8010943512667726129}
-  _staggerState: 2
 --- !u!65 &8838160874129828706
 BoxCollider:
   m_ObjectHideFlags: 0

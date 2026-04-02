@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Bleed Effect
   m_EditorClassIdentifier: Assembly-CSharp::BleedPassiveEffect
   effectName: Bleed
+  effectDescription: Enemies that are hit bleed 2hp every second for a duration of
+    5 seconds.
   effectIcon: {fileID: 21300000, guid: 7614c7064a94cc14b84af01090920b9a, type: 3}
   isEffectOneTime: 0
   effectUseInterval: 1

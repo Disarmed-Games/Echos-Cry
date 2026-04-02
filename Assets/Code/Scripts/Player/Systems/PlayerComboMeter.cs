@@ -21,7 +21,7 @@ public class PlayerComboMeter : MonoBehaviour
     private bool _isDraining = false;
 
     public static event Action<float, float> OnComboMeterChangeEvent;
-    public static event Action<string, Sprite> OnComboMeterPassiveUnlocked;
+    public static event Action<PassiveEffect> OnComboMeterPassiveUnlocked;
     public float ComboMeterAmount { get { return _comboMeterAmount; } }
 
     public enum MeterState
@@ -103,25 +103,22 @@ public class PlayerComboMeter : MonoBehaviour
         if (progress < oneThird)
         {
             _currentMeterState = MeterState.Starting;
-            OnComboMeterPassiveUnlocked?.Invoke("", null);
+            OnComboMeterPassiveUnlocked?.Invoke(null);
         }
         else if (progress >= oneThird && progress < twoThirds)
         {
             _currentMeterState = MeterState.OneThird;
-            OnComboMeterPassiveUnlocked?.Invoke(currentPassives.OneThirdEffect.effectName,
-                                                currentPassives.OneThirdEffect.effectIcon);
+            OnComboMeterPassiveUnlocked?.Invoke(currentPassives.OneThirdEffect);
         } 
         else if (progress >= twoThirds && progress < 1f)
         {
             _currentMeterState = MeterState.TwoThirds;
-            OnComboMeterPassiveUnlocked?.Invoke(currentPassives.TwoThirdsEffect.effectName,
-                                                currentPassives.TwoThirdsEffect.effectIcon);
+            OnComboMeterPassiveUnlocked?.Invoke(currentPassives.TwoThirdsEffect);
         }  
         else
         {
             _currentMeterState = MeterState.Full;
-            OnComboMeterPassiveUnlocked?.Invoke(currentPassives.FullEffect.effectName,
-                                                currentPassives.FullEffect.effectIcon);
+            OnComboMeterPassiveUnlocked?.Invoke(currentPassives.FullEffect);
         }  
     }
 

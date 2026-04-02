@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: _statsConfig
       value: 
       objectReference: {fileID: 11400000, guid: 7ae92e2d44d1d5345b00fb0a6b7ee675, type: 2}
+    - target: {fileID: 1431885463616028180, guid: 29058e1cb20b8264b8f94e98792051cd, type: 3}
+      propertyPath: _boxExtents.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1831394080825209204, guid: 29058e1cb20b8264b8f94e98792051cd, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -60,6 +64,22 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 3667ab4905f39a542b64e68e072a45c5, type: 2}
+    - target: {fileID: 5725350970498192222, guid: 29058e1cb20b8264b8f94e98792051cd, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5725350970498192222, guid: 29058e1cb20b8264b8f94e98792051cd, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5725350970498192222, guid: 29058e1cb20b8264b8f94e98792051cd, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5765285837838741193, guid: 29058e1cb20b8264b8f94e98792051cd, type: 3}
+      propertyPath: m_FlipX
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5765285837838741193, guid: 29058e1cb20b8264b8f94e98792051cd, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
