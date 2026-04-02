@@ -89,34 +89,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1790410491943683254, guid: 6b19c5ead35d86943b3d3a62222f9f80, type: 3}
-      propertyPath: _intervals.Array.data[0]._trigger.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1790410491943683254, guid: 6b19c5ead35d86943b3d3a62222f9f80, type: 3}
-      propertyPath: _intervals.Array.data[0]._trigger.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1790410491943683254, guid: 6b19c5ead35d86943b3d3a62222f9f80, type: 3}
-      propertyPath: _intervals.Array.data[0]._trigger.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1294958380716258031}
-    - target: {fileID: 1790410491943683254, guid: 6b19c5ead35d86943b3d3a62222f9f80, type: 3}
-      propertyPath: _intervals.Array.data[0]._trigger.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1790410491943683254, guid: 6b19c5ead35d86943b3d3a62222f9f80, type: 3}
-      propertyPath: _intervals.Array.data[0]._trigger.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ActivateWholeBeatEvent
-      objectReference: {fileID: 0}
-    - target: {fileID: 1790410491943683254, guid: 6b19c5ead35d86943b3d3a62222f9f80, type: 3}
-      propertyPath: _intervals.Array.data[0]._trigger.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: BeatManager, Echos Cry Core
-      objectReference: {fileID: 0}
-    - target: {fileID: 1790410491943683254, guid: 6b19c5ead35d86943b3d3a62222f9f80, type: 3}
-      propertyPath: _intervals.Array.data[0]._trigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 8130095611241135652, guid: 6b19c5ead35d86943b3d3a62222f9f80, type: 3}
       propertyPath: dialogueText
       value: 
@@ -138,17 +110,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6b19c5ead35d86943b3d3a62222f9f80, type: 3}
---- !u!114 &1294958380716258031 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1790410491943683254, guid: 6b19c5ead35d86943b3d3a62222f9f80, type: 3}
-  m_PrefabInstance: {fileID: 657610287312959065}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ad3e950cd3deca468c45f0639c6cf03, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
 --- !u!4 &2075662547047845065 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1580324783960160912, guid: 6b19c5ead35d86943b3d3a62222f9f80, type: 3}
