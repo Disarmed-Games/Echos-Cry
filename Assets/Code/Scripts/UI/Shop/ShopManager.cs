@@ -1,5 +1,6 @@
-using UnityEngine;
+using NUnit.Framework.Interfaces;
 using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 /// Original Author: Abby
 /// All Contributors Since Creation: Abby
@@ -12,11 +13,6 @@ public class ShopManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI currentGoldText;
     private int currentItemIndex = 0;
     private float totalCost = 0f;
-
-    void Start()
-    {
-        ShopItemArray[currentItemIndex].GetComponent<ShopItem>().ToggleHighlight(true);
-    }
 
     private void Update()
     {
@@ -50,7 +46,7 @@ public class ShopManager : MonoBehaviour
                 ShopItem shopItemScript = item.GetComponent<ShopItem>();
                 for (int i = 0; i < shopItemScript.GetAmount(); i++)
                 {
-                    Instantiate(shopItemScript.GetPrefab(), PlayerRef.Transform.position, Quaternion.identity);
+                    InventoryManager.Instance.Add(shopItemScript.GetItemData());
                 }
                 shopItemScript.ResetAmount();
             }

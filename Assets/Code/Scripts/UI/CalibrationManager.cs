@@ -61,7 +61,7 @@ public class CalibrationManager : MonoBehaviour
     }
     private void Update()
     {
-        _currentBeatProgress = MusicManager.Instance.GetSampleProgress();
+        _currentBeatProgress = BeatManager.Instance.BeatProgress;
     }
     public void ContinueButton()
     {

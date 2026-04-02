@@ -1,13 +1,14 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ShopItem : MonoBehaviour
+public class ShopItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] TextMeshProUGUI amountText;
     [SerializeField] TextMeshProUGUI costText;
     [SerializeField] GameObject highlightImage;
-    [SerializeField] GameObject purchasePrefab;
+    [SerializeField] InventoryItemData itemData;
     [SerializeField] private float initCost = 0f;
     private int buyAmount;
     private float actualCost = 0f;
@@ -26,9 +27,9 @@ public class ShopItem : MonoBehaviour
     {
         return buyAmount;
     }
-    public GameObject GetPrefab()
+    public InventoryItemData GetItemData()
     {
-        return purchasePrefab;
+        return itemData;
     }
     public void ResetAmount()
     {
@@ -45,14 +46,14 @@ public class ShopItem : MonoBehaviour
     public void IncreaseAmount()
     {
         buyAmount++;
-        if (buyAmount >= 99) { buyAmount = 99; }
+        if (buyAmount > 99) { buyAmount = 0; }
         amountText.text = buyAmount.ToString();
         UpdateCost();
     }
     public void DecreaseAmount()
     {
         buyAmount--;
-        if (buyAmount <= 0 ) { buyAmount = 0; }
+        if (buyAmount < 0 ) { buyAmount = 99; }
         amountText.text = buyAmount.ToString();
         UpdateCost();
     }
@@ -68,5 +69,20 @@ public class ShopItem : MonoBehaviour
         {
             costText.text = $"${actualCost.ToString()}";
         }
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (eventData.pointerEnter != null && eventData.pointerEnter.GetComponent<Image>() != null)
+        {
+            ToggleHighlight(true);
+            UITip.Instance.StartMessage(itemData.description);
+        }
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        ToggleHighlight(false);
+        UITip.Instance.StopMessage();
     }
 }

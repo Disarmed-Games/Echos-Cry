@@ -29,21 +29,20 @@ public class InventoryTests
         inputField.SetValue(inventoryInstance, inputTranslator);
 
         testItemData = ScriptableObject.CreateInstance<InventoryItemData>();
-        testItemData.id = "testItem";
 
         yield break;
     }
     [UnityTest]
     public IEnumerator Inventory_NullCheck()
     {
-        Assert.That(inventoryInstance.inventory, Is.Not.Null);
+        Assert.That(inventoryInstance.inventoryList, Is.Not.Null);
         yield break;
     }
 
     [UnityTest]
     public IEnumerator Inventory_AddItem_StoresCorrectly(){
         inventoryInstance.Add(testItemData);
-        Assert.That(inventoryInstance.inventory.Count, Is.EqualTo(1));
+        Assert.That(inventoryInstance.inventoryList.Count, Is.EqualTo(1));
         Assert.That(inventoryInstance.Get(testItemData), Is.Not.Null);
         Assert.That(inventoryInstance.Get(testItemData).stackSize, Is.EqualTo(1));
         yield break;
@@ -55,7 +54,7 @@ public class InventoryTests
         inventoryInstance.Add(testItemData);
         inventoryInstance.Add(testItemData);
         
-        Assert.That(inventoryInstance.inventory.Count, Is.EqualTo(1));
+        Assert.That(inventoryInstance.inventoryList.Count, Is.EqualTo(1));
         Assert.That(inventoryInstance.Get(testItemData).stackSize, Is.EqualTo(2));
         yield break;
     }
@@ -65,7 +64,7 @@ public class InventoryTests
     {
         inventoryInstance.Add(testItemData);
         inventoryInstance.Remove(testItemData);
-        Assert.That(inventoryInstance.inventory.Count, Is.EqualTo(0));
+        Assert.That(inventoryInstance.inventoryList.Count, Is.EqualTo(0));
         Assert.That(inventoryInstance.Get(testItemData), Is.Null);
         yield break;
     }

@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1390546611673445911}
-  - component: {fileID: 8688081431482428361}
   - component: {fileID: 3519232012989054956}
   - component: {fileID: 3633801408254281972}
   - component: {fileID: 5551235614260211571}
@@ -38,20 +37,6 @@ Transform:
   - {fileID: 8312911582805963498}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8688081431482428361
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2018058594230188048}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b312a25b6d4b77f4f9430e61bfa1d0fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Echos Cry Core::InventoryItems
-  particleEffect: {fileID: 6250198881956377069, guid: b1a9a4c2a7b1a54459fae4db05f8d4a9, type: 3}
-  itemData: {fileID: 11400000, guid: 6e1285be360464e49b6afb1bfb148613, type: 2}
 --- !u!54 &3519232012989054956
 Rigidbody:
   m_ObjectHideFlags: 0

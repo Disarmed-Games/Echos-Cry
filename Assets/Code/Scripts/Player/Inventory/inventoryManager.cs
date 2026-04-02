@@ -1,6 +1,7 @@
-using UnityEngine;
-using System.Collections.Generic;
 using AudioSystem;
+using System.Collections.Generic;
+using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 /// Original Author: Abby
 /// All Contributors Since Creation: Abby
 /// Last Modified By:
@@ -10,12 +11,15 @@ public class InventoryManager : MonoBehaviour
     private static InventoryManager _instance;
     public static InventoryManager Instance { get { return _instance; } }
 
-    private Dictionary<InventoryItemData, InventoryItem> m_itemDictionary;
-    public List<InventoryItem> inventory { get; private set; }  
+    private Dictionary<InventoryItemData, InventoryItem> itemDictionary;
+    public List<InventoryItem> inventoryList { get; private set; }  
 
     [SerializeField] private InventoryDisplay _inventoryDisplay;
     [SerializeField] private InputTranslator _inputTranslator;
     [SerializeField] private soundEffect _useItemSound;
+
+    private Player _player;
+
     private void Awake()
     {
         if (_instance != null)
@@ -27,8 +31,9 @@ public class InventoryManager : MonoBehaviour
     }
     void Start()
     {
-        inventory = new List<InventoryItem>();
-        m_itemDictionary = new Dictionary<InventoryItemData, InventoryItem>();
+        inventoryList = new List<InventoryItem>();
+        itemDictionary = new Dictionary<InventoryItemData, InventoryItem>();
+        _player = GameObject.FindWithTag("Player")?.GetComponent<Player>();
 
         _inputTranslator.OnItem1Event += UseItem;
         _inputTranslator.OnItem2Event += UseItem;
@@ -43,23 +48,6 @@ public class InventoryManager : MonoBehaviour
         _inputTranslator.OnItem4Event -= UseItem;
     }
 
-    private void UseHealthPotion()
-    {
-        GameObject playerRef = GameObject.FindWithTag("Player");
-        if (playerRef != null)
-        {
-            playerRef.GetComponent<Player>().Health.HealHealth(15f);
-        }
-    }
-    private void UseShieldPotion()
-    {
-        GameObject playerRef = GameObject.FindWithTag("Player");
-        if (playerRef != null)
-        {
-            playerRef.GetComponent<Player>().Health.HealArmor(5f);
-        }
-    }
-
     public void AddInventorySlot(SlotScript _slotScript)
     {
         for (int i = 0; i < _inventoryDisplay.slotScriptArray.Length; i++)
@@ -71,32 +59,28 @@ public class InventoryManager : MonoBehaviour
             }
         }
     }
+
     private void UseItem(int index)
     {
-        if (inventory.Count <= 0 || inventory.Count <= index) return;
+        if (inventoryList.Count <= 0 || inventoryList.Count <= index) return;
 
         SoundEffectManager.Instance.Builder
                 .SetSound(_useItemSound)
                 .SetSoundPosition(PlayerRef.Transform.position)
                 .ValidateAndPlaySound();
 
-        InventoryItem usedItem = inventory[index];
-        if (usedItem == null || usedItem.data == null) return;
-
-        if (usedItem.data.id == "health")
-        {
-            UseHealthPotion();
-        }
-        else if (usedItem.data.id == "shield")
-        {
-            UseShieldPotion();
-        }
+        InventoryItem usedItem = inventoryList[index];
+        usedItem.data.Use(_player);
         Remove(usedItem.data);
     }
 
+    public bool IsFull()
+    {
+        return inventoryList.Count >= _inventoryDisplay.slotScriptArray.Length;
+    }
     public InventoryItem Get(InventoryItemData referenceData)
     {
-        if (m_itemDictionary.TryGetValue(referenceData, out InventoryItem value))
+        if (itemDictionary.TryGetValue(referenceData, out InventoryItem value))
         {
             return value;
         }
@@ -104,27 +88,27 @@ public class InventoryManager : MonoBehaviour
     }
     public void Add(InventoryItemData referenceData)
     {
-        if (m_itemDictionary.TryGetValue(referenceData, out InventoryItem value))
+        if (itemDictionary.TryGetValue(referenceData, out InventoryItem value))
         {
             value.AddToStack();
         } 
         else 
         {
             InventoryItem newItem = new InventoryItem(referenceData);
-            inventory.Add(newItem);
-            m_itemDictionary.Add(referenceData, newItem);
+            inventoryList.Add(newItem);
+            itemDictionary.Add(referenceData, newItem);
         }
         _inventoryDisplay.UpdateInventory();
     }
     public void Remove(InventoryItemData referenceData)
     {
-        if (m_itemDictionary.TryGetValue(referenceData, out InventoryItem value))
+        if (itemDictionary.TryGetValue(referenceData, out InventoryItem value))
         {
             value.RemoveFromStack();
             if (value.stackSize == 0)
             {
-                inventory.Remove(value);
-                m_itemDictionary.Remove(referenceData);
+                inventoryList.Remove(value);
+                itemDictionary.Remove(referenceData);
             }
             _inventoryDisplay.UpdateInventory();
         }
@@ -148,6 +132,6 @@ public class InventoryItem
 
     public void RemoveFromStack()
     {
-        stackSize--;
+        stackSize = Mathf.Max(0, stackSize - 1);
     }
 }
