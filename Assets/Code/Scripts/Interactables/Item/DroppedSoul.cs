@@ -36,14 +36,11 @@ public class DroppedSoul : ItemDropHandler
 
     protected override void OnInteraction(Collider other)
     {
-        if (!InventoryManager.Instance.IsFull())
+        InventoryItemData dropItem = CalculateDroppedItem();
+        if (dropItem != null)
         {
-            InventoryItemData dropItem = CalculateDroppedItem();
-            if (dropItem != null)
-            {
-                InventoryManager.Instance.Add(dropItem);
+            InventoryManager.Instance.Add(dropItem);
 
-            }
         }
     }
 }

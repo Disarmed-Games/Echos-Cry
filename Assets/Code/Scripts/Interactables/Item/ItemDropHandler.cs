@@ -4,6 +4,7 @@ using UnityEngine;
 
 public abstract class ItemDropHandler : MonoBehaviour
 {
+    [SerializeField] protected bool isInventoryItem = false;
     [SerializeField] protected float itemSpeed = 4f;
     [SerializeField] protected float itemDragDistance = 4f;
     [SerializeField] protected Rigidbody itemBody;
@@ -13,11 +14,13 @@ public abstract class ItemDropHandler : MonoBehaviour
 
     private void OnEnable()
     {
-        TickManager.Instance.GetTimer(0.1f).Tick += MoveItemToPlayer; //0.1 felt more responsive than 0.2f
+        if (!isInventoryItem)
+            TickManager.Instance.GetTimer(0.1f).Tick += MoveItemToPlayer; //0.1 felt more responsive than 0.2f
     }
     private void OnDisable()
     {
-        if (TickManager.Instance != null) TickManager.Instance.GetTimer(0.1f).Tick -= MoveItemToPlayer;
+        if (!isInventoryItem)
+            if (TickManager.Instance != null) TickManager.Instance.GetTimer(0.1f).Tick -= MoveItemToPlayer;
     }
     private void MoveItemToPlayer()
     {
@@ -35,6 +38,11 @@ public abstract class ItemDropHandler : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
+        if (isInventoryItem)
+        {
+            if (InventoryManager.Instance.IsFull()) return;
+        }
+
         if(pickupSFX != null)
         {
             SoundEffectManager.Instance.Builder
