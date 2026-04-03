@@ -8,6 +8,7 @@ public abstract class Weapon : MonoBehaviour
 {
     [SerializeField] protected Animator _attackAnimator;
     [SerializeField] protected WeaponCollider _weaponCollider;
+    [SerializeField] protected PlayerAttackDamage _playerAttackDamage;
 
     protected RuntimeAnimatorController _defaultAnimatorController;
 
@@ -22,6 +23,8 @@ public abstract class Weapon : MonoBehaviour
     }
     private List<ColliderInfo> _hitColliders;
     public List<ColliderInfo> HitColliders { get => _hitColliders; }
+
+    protected float baseDamageMultiplier = 1f;
 
     public void AddColliderToList(Collider collider, TempoConductor.HitQuality hit)
     {

@@ -5,8 +5,10 @@ public class PlayerStats : MonoBehaviour
     [Header("Player Systems")]
     [SerializeField] PlayerMovement _movement;
     [SerializeField] PlayerHealth _health;
+    [SerializeField] PlayerAttackDamage _playerAttackDamage;
 
     [Header("Event Channels (Subscribers)")]
+    [SerializeField] EventChannel _upgradeDamageChannel;
     [SerializeField] EventChannel _moveSpeedChannel;
     [SerializeField] EventChannel _dashSpeedChannel;
     [SerializeField] EventChannel _healthChannel;
@@ -22,6 +24,7 @@ public class PlayerStats : MonoBehaviour
 
     private void OnEnable()
     {
+        if (_upgradeDamageChannel != null) _upgradeDamageChannel.Channel += UpgradeBaseDamageMultiplier;
         if (_healthChannel != null) _healthChannel.Channel += UpgradeMaxHealth;
         if (_armorChannel != null) _armorChannel.Channel += UpgradeMaxArmor;
         if (_regenHealthChannel != null) _regenHealthChannel.Channel += UpgradeHealthRegen;
@@ -34,6 +37,7 @@ public class PlayerStats : MonoBehaviour
     }
     private void OnDisable()
     {
+        if (_upgradeDamageChannel != null) _upgradeDamageChannel.Channel -= UpgradeBaseDamageMultiplier;
         if (_healthChannel != null) _healthChannel.Channel -= UpgradeMaxHealth;
         if (_armorChannel != null) _armorChannel.Channel -= UpgradeMaxArmor;
         if (_regenHealthChannel != null) _regenHealthChannel.Channel -= UpgradeHealthRegen;
@@ -46,9 +50,16 @@ public class PlayerStats : MonoBehaviour
     }
 
     //Currently using unmutable variables but will eventually change to handle configuration or scaling upgrades eventually
+    void UpgradeBaseDamageMultiplier()
+    {
+        if (_playerAttackDamage != null)
+        {
+            _playerAttackDamage.BaseDamageMultiplier *= 1.2f;
+        }
+    }
     void UpgradeDashSpeed()
     {
-        if (_movement != null) _movement.DashSpeed *= 1.1f;
+        if (_movement != null) _movement.DashSpeed *= 1.15f;
     }
     void UpgradeDashCount()
     {
@@ -60,7 +71,7 @@ public class PlayerStats : MonoBehaviour
     }
     void UpgradeDashCooldown()
     {
-        if (_movement != null) _movement.DashCooldown *= 0.9f;
+        if (_movement != null) _movement.DashCooldown *= 0.85f;
     }
     void UpgradeMoveSpeed()
     {

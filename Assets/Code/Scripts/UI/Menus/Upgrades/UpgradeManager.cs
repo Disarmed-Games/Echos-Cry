@@ -15,6 +15,7 @@ public class UpgradeManager : MonoBehaviour
     [SerializeField] private IntEventChannel _playerLevelUpChannel;
 
     [Header("Event Channels (Broadcasters)")]
+    [SerializeField] EventChannel _upgradeDamageChannel;
     [SerializeField] EventChannel _moveSpeedChannel;
     [SerializeField] EventChannel _dashSpeedChannel;
     [SerializeField] EventChannel _healthChannel;
@@ -31,17 +32,19 @@ public class UpgradeManager : MonoBehaviour
         Armor,
         DashCount,
         DashCooldown,
+        AttackMultiplier
     }
 
     private Dictionary<UpgradeType, string> _upgradeDescriptions = new Dictionary<UpgradeType, string>
     {
         //[UpgradeType.] = "",
         [UpgradeType.MoveSpeed] = "Increase your base movement speed by 10%.",
-        [UpgradeType.DashSpeed] = "Increase the speed of your dashing by 10%.",
+        [UpgradeType.DashSpeed] = "Increase the speed of your dashing by 15%.",
         [UpgradeType.Health] = "Increase your base health by +5 hp.",
         [UpgradeType.Armor] = "Increase your base armor by +5.",
         [UpgradeType.DashCount] = "Increase the total amount of dashes by +1.",
-        [UpgradeType.DashCooldown] = "Decrease the dash cooldown time by 10%.",
+        [UpgradeType.DashCooldown] = "Decrease the dash cooldown time by 15%.",
+        [UpgradeType.AttackMultiplier] = "Increase the base damage multiplier by 20%."
     };
 
     public static UpgradeManager Instance { get; private set; }
@@ -109,19 +112,20 @@ public class UpgradeManager : MonoBehaviour
     public void Roll()
     {
         Array upgradeValues = Enum.GetValues(typeof(UpgradeType));
-        UpgradeType[] currentUpgrades = new UpgradeType[_upgradeSelectors.Length];
+        List<UpgradeType> currentUpgrades = new List<UpgradeType>();
+
         for (int i = 0; i < _upgradeSelectors.Length; i++)
         {
-            int randIndex = UnityEngine.Random.Range(0, upgradeValues.Length);
-            UpgradeType randomUpgrade = (UpgradeType)upgradeValues.GetValue(randIndex);
+            UpgradeType randomUpgrade;
 
-            while (currentUpgrades.Contains(randomUpgrade)) //Must have less selectors then enums, otherwise this will become infinite loop!
+            do
             {
-                randIndex = UnityEngine.Random.Range(0, upgradeValues.Length);
+                int randIndex = UnityEngine.Random.Range(0, upgradeValues.Length);
                 randomUpgrade = (UpgradeType)upgradeValues.GetValue(randIndex);
             }
+            while (currentUpgrades.Contains(randomUpgrade));
 
-            currentUpgrades[i] = randomUpgrade;
+            currentUpgrades.Add(randomUpgrade);
         }
 
         int count = 0;
@@ -158,6 +162,9 @@ public class UpgradeManager : MonoBehaviour
                 break;
             case UpgradeType.DashCooldown:
                 if (_dashCooldownChannel != null) _dashCooldownChannel.Invoke();
+                break;
+            case UpgradeType.AttackMultiplier:
+                if (_upgradeDamageChannel != null) _upgradeDamageChannel.Invoke();
                 break;
             default:
                 Debug.LogWarning("Unknown upgrade type.");
