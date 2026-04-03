@@ -17,9 +17,6 @@ public class Enemy : MonoBehaviour
 
     private bool IsPooled => _pool != null;
 
-    [Header("Damage")]
-    [SerializeField] private float _attackDamage;
-
     [Header("Enemy-Related Components")]
     [SerializeField] private HealthSystem _health;
     [SerializeField] private NavMeshAgent _navMeshAgent;
