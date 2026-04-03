@@ -323,7 +323,7 @@ MonoBehaviour:
   _passiveEffectHandler: {fileID: 3727599544175325857}
   _deathEffect: {fileID: 2836163184616676573, guid: c9677a51a5d061340a514220e825b583, type: 3}
   _data: {fileID: 11400000, guid: 805c36080d6e68641a1d327dc6d9f451, type: 2}
-  _enemyHealthUI: {fileID: 3105895644068151138}
+  _enemyHealthUI: {fileID: 1768173714303068742}
   _attackStrats:
   - {fileID: 5298147001227487547}
   _targetStrats:
@@ -532,11 +532,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6876723821600328738, guid: ecdbe2f4f7389a545b4000ed534075a7, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 1920
+      value: 246
       objectReference: {fileID: 0}
     - target: {fileID: 6876723821600328738, guid: ecdbe2f4f7389a545b4000ed534075a7, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 1080
+      value: 33
       objectReference: {fileID: 0}
     - target: {fileID: 6876723821600328738, guid: ecdbe2f4f7389a545b4000ed534075a7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -548,7 +548,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6876723821600328738, guid: ecdbe2f4f7389a545b4000ed534075a7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.25731
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6876723821600328738, guid: ecdbe2f4f7389a545b4000ed534075a7, type: 3}
       propertyPath: m_LocalRotation.w
@@ -568,11 +568,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6876723821600328738, guid: ecdbe2f4f7389a545b4000ed534075a7, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -1.24
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6876723821600328738, guid: ecdbe2f4f7389a545b4000ed534075a7, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 3.15
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 6876723821600328738, guid: ecdbe2f4f7389a545b4000ed534075a7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -591,9 +591,9 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ecdbe2f4f7389a545b4000ed534075a7, type: 3}
---- !u!114 &3105895644068151138 stripped
+--- !u!114 &1768173714303068742 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3467447796549834354, guid: ecdbe2f4f7389a545b4000ed534075a7, type: 3}
+  m_CorrespondingSourceObject: {fileID: 255951293329867606, guid: ecdbe2f4f7389a545b4000ed534075a7, type: 3}
   m_PrefabInstance: {fileID: 1946824732834605328}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
