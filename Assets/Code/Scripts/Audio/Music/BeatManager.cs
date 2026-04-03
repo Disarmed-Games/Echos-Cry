@@ -8,8 +8,9 @@ public class BeatManager : NonSpawnableSingleton<BeatManager>
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private Intervals[] _intervals;
     private float beatProgress;
+    private int beatInMeasure;
 
-    public int BeatInMeasure = 0;
+    public int BeatInMeasure => beatInMeasure;
     public float BeatProgress => beatProgress;
     public float BPM => _bpm;
 
@@ -30,6 +31,8 @@ public class BeatManager : NonSpawnableSingleton<BeatManager>
             float sampledTime = (_audioSource.timeSamples / (_audioSource.clip.frequency * interval.GetIntervalLength(_bpm)));
 
             beatProgress = sampledTime - Mathf.Floor(sampledTime);
+            beatInMeasure = (int)Mathf.Floor(sampledTime) % 4;
+            Debug.Log(beatInMeasure);
 
             interval.CheckForNewInterval(sampledTime);
         }

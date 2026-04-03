@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class UILineRenderer : Graphic
 {
     private List<Vector2> onBeatPoints = new List<Vector2>();
-    private List<Vector2> offBeatPoints = new List<Vector2>();
     private float alpha = 0f;
+
     [SerializeField] private RectTransform mRectTransform;
     [SerializeField] private float thickness = 10f;
     [SerializeField] private float lineWidth = 10f;
@@ -27,27 +27,11 @@ public class UILineRenderer : Graphic
         }
 
         float progress = 1 - BeatManager.Instance.BeatProgress;
-        float offbeatProgress = progress - 0.5f;
-        if (offbeatProgress < 0) offbeatProgress += 1f;
-
         float rectWidth = mRectTransform.rect.width;
 
         onBeatPoints.Clear();
         onBeatPoints.Add(new Vector2((rectWidth * progress) - (rectWidth / 2) - (lineWidth / 2), 0));
         onBeatPoints.Add(new Vector2((rectWidth * progress) - (rectWidth / 2) + (lineWidth / 2), 0));
-
-        //The offbeat & between beats 1-2 in 4/4 signature.
-        offBeatPoints.Clear();
-        if (MusicManager.Instance.GetBeatInMeasure() == 0 && progress < .5f)
-        {
-            offBeatPoints.Add(new Vector2((rectWidth * offbeatProgress) - (rectWidth / 2) - (lineWidth / 2), 0));
-            offBeatPoints.Add(new Vector2((rectWidth * offbeatProgress) - (rectWidth / 2) + (lineWidth / 2), 0));
-        }
-        if (MusicManager.Instance.GetBeatInMeasure() == 1 && progress > .5f)
-        {
-            offBeatPoints.Add(new Vector2((rectWidth * offbeatProgress) - (rectWidth / 2) - (lineWidth / 2), 0));
-            offBeatPoints.Add(new Vector2((rectWidth * offbeatProgress) - (rectWidth / 2) + (lineWidth / 2), 0));
-        }
 
         alpha = 1 - progress;
 
@@ -101,45 +85,13 @@ public class UILineRenderer : Graphic
             int idx = vh.currentVertCount;
 
             vertex = UIVertex.simpleVert;
-            vertex.color = onBeatLineColor;
 
-            vertex.position = p1 + normal * (thickness / 2);
-            vh.AddVert(vertex);
+            if (BeatManager.Instance.BeatInMeasure <= 2)
+                vertex.color = onBeatLineColor;
+            else
+                vertex.color = offBeatLineColor;
 
-            vertex.position = p1 - normal * (thickness / 2);
-            vh.AddVert(vertex);
-
-            vertex.position = p2 - normal * (thickness / 2);
-            vh.AddVert(vertex);
-
-            vertex.position = p2 + normal * (thickness / 2);
-            vh.AddVert(vertex);
-
-            vh.AddTriangle(idx, idx + 1, idx + 2);
-            vh.AddTriangle(idx + 2, idx + 3, idx);
-        }
-
-        //Off Beat Line Renderer
-        for (int i = 0; i < offBeatPoints.Count - 1; i++)
-        {
-            Vector2 p1 = offBeatPoints[i];
-            Vector2 p2 = offBeatPoints[i + 1];
-
-            // Clamp inside rect
-            p1.x = Mathf.Clamp(p1.x, rect.xMin, rect.xMax);
-            p2.x = Mathf.Clamp(p2.x, rect.xMin, rect.xMax);
-            p1.y = Mathf.Clamp(p1.y, rect.yMin, rect.yMax);
-            p2.y = Mathf.Clamp(p2.y, rect.yMin, rect.yMax);
-
-            Vector2 direction = (p1 - p2).normalized;
-            Vector2 normal = new Vector2(-direction.y, direction.x);
-
-            int idx = vh.currentVertCount;
-
-            vertex = UIVertex.simpleVert;
-            vertex.color = offBeatLineColor;
-
-            vertex.position = p1 + normal * (thickness / 2);
+                vertex.position = p1 + normal * (thickness / 2);
             vh.AddVert(vertex);
 
             vertex.position = p1 - normal * (thickness / 2);
