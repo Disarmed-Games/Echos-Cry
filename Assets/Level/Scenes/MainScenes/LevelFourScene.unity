@@ -1035,6 +1035,10 @@ PrefabInstance:
       value: MusicPlayer
       objectReference: {fileID: 0}
     - target: {fileID: 8789275272379938032, guid: a3f10936ac1cbb44eaabfdc22b435d03, type: 3}
+      propertyPath: bpm
+      value: 98
+      objectReference: {fileID: 0}
+    - target: {fileID: 8789275272379938032, guid: a3f10936ac1cbb44eaabfdc22b435d03, type: 3}
       propertyPath: song
       value: 
       objectReference: {fileID: 8300000, guid: 718adaf45072e164e83cdabf69b6c662, type: 3}

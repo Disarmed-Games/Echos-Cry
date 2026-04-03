@@ -74,9 +74,16 @@ public class InventoryManager : MonoBehaviour
         Remove(usedItem.data);
     }
 
-    public bool IsFull()
+    public bool IsFull(InventoryItemData referenceData)
     {
-        return inventoryList.Count >= _inventoryDisplay.slotScriptArray.Length;
+        if (itemDictionary.TryGetValue(referenceData, out InventoryItem value))
+        {
+            return false;
+        }
+        else
+        {
+            return inventoryList.Count >= _inventoryDisplay.slotScriptArray.Length;
+        }   
     }
     public InventoryItem Get(InventoryItemData referenceData)
     {

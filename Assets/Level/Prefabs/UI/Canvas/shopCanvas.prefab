@@ -944,6 +944,7 @@ MonoBehaviour:
   - {fileID: 1104202052006125459}
   totalCostText: {fileID: 99573749480242437}
   currentGoldText: {fileID: 5603776442150616145}
+  droppedItem: {fileID: 7356604926645457459, guid: bef4d4765fc68164eaa4a1f98b3fc7a5, type: 3}
 --- !u!1001 &5683489254187159207
 PrefabInstance:
   m_ObjectHideFlags: 0

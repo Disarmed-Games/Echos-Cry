@@ -4894,6 +4894,50 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!1 &263462476172436372
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7012856040756696430}
+  - component: {fileID: 7808688742119790450}
+  m_Layer: 10
+  m_Name: Player Attack Damage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7012856040756696430
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 263462476172436372}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 415338203038042998}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7808688742119790450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 263462476172436372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c83c1bd2691f2940b6b8811001d6f62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
 --- !u!1 &343930898882040868
 GameObject:
   m_ObjectHideFlags: 0
@@ -5326,6 +5370,7 @@ Transform:
   - {fileID: 2709784187955174821}
   - {fileID: 2009047576672927120}
   - {fileID: 3502518302057154133}
+  - {fileID: 7012856040756696430}
   - {fileID: 1876697883255032612}
   - {fileID: 864604785593361342}
   m_Father: {fileID: 0}
@@ -5496,6 +5541,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStats
   _movement: {fileID: 5127503919009400606}
   _health: {fileID: 3652422203487027120}
+  _playerAttackDamage: {fileID: 7808688742119790450}
+  _upgradeDamageChannel: {fileID: 11400000, guid: 259cf655db4111946bf664a82d7bbd9c, type: 2}
   _moveSpeedChannel: {fileID: 11400000, guid: b9b7dd2a8f79bec4b9365537b310ce1e, type: 2}
   _dashSpeedChannel: {fileID: 11400000, guid: b49daf7febadf974d853b7c7efd88e9c, type: 2}
   _healthChannel: {fileID: 11400000, guid: 500d6e615a856a844a407ce00b7f4ff7, type: 2}
@@ -10943,6 +10990,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   _attackAnimator: {fileID: 5468960034267189601}
   _weaponCollider: {fileID: 8539451671512199922}
+  _playerAttackDamage: {fileID: 7808688742119790450}
   _currentAttackData: {fileID: 0}
   _dashAttackData: {fileID: 11400000, guid: 8137d17111472d0489abda28a4bc371f, type: 2}
   _dashAttackTime: 0.2
@@ -11177,6 +11225,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6557154924598691002, guid: e285dd95641fdc344a4f3e866609bf56, type: 3}
+      propertyPath: _playerAttackDamage
+      value: 
+      objectReference: {fileID: 7808688742119790450}
     - target: {fileID: 6698232584449221764, guid: e285dd95641fdc344a4f3e866609bf56, type: 3}
       propertyPath: m_Name
       value: Weapon (Clarinet)
@@ -11266,6 +11318,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1242409098282706864}
     m_Modifications:
+    - target: {fileID: 1423634244738665547, guid: e0d33cc1b61b8d743b9d71a0b5652b14, type: 3}
+      propertyPath: _playerAttackDamage
+      value: 
+      objectReference: {fileID: 7808688742119790450}
     - target: {fileID: 8474684134448079835, guid: e0d33cc1b61b8d743b9d71a0b5652b14, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
