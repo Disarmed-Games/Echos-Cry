@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3519232012989054956}
   - component: {fileID: 3633801408254281972}
   - component: {fileID: 5551235614260211571}
+  - component: {fileID: 4990667798995099788}
   m_Layer: 0
   m_Name: EnemySoulItem
   m_TagString: Untagged
@@ -106,6 +107,29 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.6, y: 0.6, z: 0.6}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4990667798995099788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2018058594230188048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02841dd39fcf134408f6f5093779b78b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  itemSpeed: 4
+  itemDragDistance: 4
+  itemBody: {fileID: 3519232012989054956}
+  pickupSFX: {fileID: 11400000, guid: f83534ee1030a2941a4bef753d73a245, type: 2}
+  particleEffect: {fileID: 6250198881956377069, guid: b1a9a4c2a7b1a54459fae4db05f8d4a9, type: 3}
+  _collider: {fileID: 5551235614260211571}
+  itemChances:
+  - item: {fileID: 11400000, guid: 4afaaff39d334064db9338724993ab13, type: 2}
+    frequency: 0.5
+  - item: {fileID: 11400000, guid: 7580e2afb386e87418e991b57bab117f, type: 2}
+    frequency: 0.5
 --- !u!1 &5565635186098021589
 GameObject:
   m_ObjectHideFlags: 0
