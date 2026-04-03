@@ -4,7 +4,6 @@ public class WeaponHolder : MonoBehaviour
 {
     [SerializeField] private GameObject[] _weaponInventory;
     [SerializeField] private GameObject _dashWeapon;
-    [SerializeField] private InputTranslator _inputTranslator;
 
     private Weapon _currentlyEquippedWeapon;
     private Weapon _previouslyEquippedWeapon;
@@ -24,16 +23,6 @@ public class WeaponHolder : MonoBehaviour
         }
     }
 
-    private void OnEnable()
-    {
-        _inputTranslator.OnWeaponNextEvent += NextWeapon;
-    }
-
-    private void OnDisable()
-    {
-        _inputTranslator.OnWeaponNextEvent -= NextWeapon;
-    }
-
     private void ActivateWeapon()
     {
         foreach (var weapon in _weaponInventory)
@@ -50,15 +39,16 @@ public class WeaponHolder : MonoBehaviour
         }
     }
 
-    private void NextWeapon()
+    public void SwitchWeapon(int weaponIndex)
     {
         if (_weaponInventory.Length == 0) return;
-
         if (!_currentlyEquippedWeapon.IsAttackEnded) return;
 
-        int currentIndex = System.Array.IndexOf(_weaponInventory, _currentlyEquippedWeapon.gameObject);
-        int nextIndex = (currentIndex + 1) % _weaponInventory.Length;
-        _currentlyEquippedWeapon = _weaponInventory[nextIndex].GetComponent<Weapon>();
+        //Logic for choosing next weapon in array
+        //int currentIndex = System.Array.IndexOf(_weaponInventory, _currentlyEquippedWeapon.gameObject);
+        //int nextIndex = (currentIndex + 1) % _weaponInventory.Length;
+
+        _currentlyEquippedWeapon = _weaponInventory[weaponIndex].GetComponent<Weapon>();
         ActivateWeapon();
     }
 

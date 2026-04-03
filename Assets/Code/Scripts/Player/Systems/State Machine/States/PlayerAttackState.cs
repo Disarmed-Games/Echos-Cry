@@ -7,15 +7,32 @@ public class PlayerAttackState : PlayerActionState
 
     public override void Enter()
     {
-
         //Initialize whatever attack is happening
         if (_playerStateMachine.UsingPrimaryAction)
         {
-            _playerContext.WeaponHolder.PrimaryAction();
+            if (BeatManager.Instance.BeatInMeasure <= 2)
+            {
+                _playerContext.WeaponHolder.SwitchWeapon(0); //Clarinet
+                _playerContext.WeaponHolder.PrimaryAction();
+            }
+            else
+            {
+                _playerContext.WeaponHolder.SwitchWeapon(1); //Drum
+                _playerContext.WeaponHolder.PrimaryAction();
+            }
         }
         else if (_playerStateMachine.UsingSecondaryAction)
         {
-            _playerContext.WeaponHolder.SecondaryAction();
+            if (BeatManager.Instance.BeatInMeasure <= 2)
+            {
+                _playerContext.WeaponHolder.SwitchWeapon(0); //Clarinet
+                _playerContext.WeaponHolder.SecondaryAction();
+            }
+            else
+            {
+                _playerContext.WeaponHolder.SwitchWeapon(1); //Drum
+                _playerContext.WeaponHolder.SecondaryAction();
+            }
         }
 
         if (_playerContext.WeaponHolder.HasWeapon)
