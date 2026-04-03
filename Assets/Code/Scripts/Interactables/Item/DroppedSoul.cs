@@ -11,6 +11,7 @@ struct ItemChance
 public class DroppedSoul : ItemDropHandler
 {
     [SerializeField] private ItemChance[] itemChances;
+    private InventoryItemData dropItem;
 
     private InventoryItemData CalculateDroppedItem()
     {
@@ -34,13 +35,21 @@ public class DroppedSoul : ItemDropHandler
         return null;
     }
 
+    protected override void OnTriggerEnter(Collider other)
+    {
+        if (dropItem == null)
+            dropItem = CalculateDroppedItem();
+        
+        if (InventoryManager.Instance.IsFull(dropItem)) return;
+
+        base.OnTriggerEnter(other);
+    }
+
     protected override void OnInteraction(Collider other)
     {
-        InventoryItemData dropItem = CalculateDroppedItem();
         if (dropItem != null)
         {
             InventoryManager.Instance.Add(dropItem);
-
         }
     }
 }

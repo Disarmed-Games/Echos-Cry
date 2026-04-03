@@ -119,7 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02841dd39fcf134408f6f5093779b78b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  isInventoryItem: 1
+  moveToPlayer: 0
   itemSpeed: 4
   itemDragDistance: 4
   itemBody: {fileID: 3519232012989054956}

@@ -11,6 +11,7 @@ public class ShopManager : MonoBehaviour
     [SerializeField] private GameObject[] ShopItemArray;
     [SerializeField] private TextMeshProUGUI totalCostText;
     [SerializeField] private TextMeshProUGUI currentGoldText;
+    [SerializeField] private GameObject droppedItem;
     private int currentItemIndex = 0;
     private float totalCost = 0f;
 
@@ -46,7 +47,13 @@ public class ShopManager : MonoBehaviour
                 ShopItem shopItemScript = item.GetComponent<ShopItem>();
                 for (int i = 0; i < shopItemScript.GetAmount(); i++)
                 {
-                    InventoryManager.Instance.Add(shopItemScript.GetItemData());
+                    if (InventoryManager.Instance.IsFull(shopItemScript.GetItemData()))
+                    {
+                        droppedItem.GetComponent<DroppedItem>().item = shopItemScript.GetItemData();
+                        Instantiate(droppedItem, PlayerRef.Transform.position, Quaternion.identity);
+                    }
+                    else
+                        InventoryManager.Instance.Add(shopItemScript.GetItemData());
                 }
                 shopItemScript.ResetAmount();
             }
