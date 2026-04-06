@@ -873,7 +873,7 @@ MonoBehaviour:
   amountText: {fileID: 5580203083829468812}
   costText: {fileID: 7345498659110905195}
   highlightImage: {fileID: 7297995031649192295}
-  purchasePrefab: {fileID: 0}
+  itemData: {fileID: 0}
   initCost: 10
 --- !u!1 &5542651252234910845
 GameObject:

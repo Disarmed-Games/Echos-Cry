@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: Level1Wave4
   m_EditorClassIdentifier: Assembly-CSharp::WaveData
   EnemySpawns:
+  - enemySpawnType: {fileID: 6900823288402649937, guid: 921ea598b7611794dbcb535f728318d1, type: 3}
+    enemySpawnCount: 2
   - enemySpawnType: {fileID: 6900823288402649937, guid: 29058e1cb20b8264b8f94e98792051cd, type: 3}
     enemySpawnCount: 2
-  - enemySpawnType: {fileID: 6900823288402649937, guid: 921ea598b7611794dbcb535f728318d1, type: 3}
+  - enemySpawnType: {fileID: 5404336137336009058, guid: 128fb26a87e63b6488058dafa47b63dd, type: 3}
     enemySpawnCount: 1
   spawnRadius: 5
   spawnInterval: 8
