@@ -54,7 +54,7 @@ public class PlayerStats : MonoBehaviour
     {
         if (_playerAttackDamage != null)
         {
-            _playerAttackDamage.BaseDamageMultiplier *= 1.2f;
+            _playerAttackDamage.BaseDamageMultiplier *= 1.1f;
         }
     }
     void UpgradeDashSpeed()

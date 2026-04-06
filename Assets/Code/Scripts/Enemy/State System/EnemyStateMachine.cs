@@ -1,11 +1,4 @@
 
-using Ink.Parsed;
-using PlasticGui.Gluon.Help.Conditions;
-using UnityEditorInternal;
-using UnityEngine;
-using UnityEngine.InputSystem.LowLevel;
-using static UnityEngine.EventSystems.EventTrigger;
-using static UnityEngine.UI.Selectable;
 using EchosCry.Enemy.StateSystem;
 
 public class EnemyStateMachine

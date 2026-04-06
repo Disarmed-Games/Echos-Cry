@@ -32,7 +32,7 @@ public class BeatManager : NonSpawnableSingleton<BeatManager>
 
             beatProgress = sampledTime - Mathf.Floor(sampledTime);
             beatInMeasure = (int)Mathf.Floor(sampledTime) % 4;
-            Debug.Log(beatInMeasure);
+            //Debug.Log(beatInMeasure);
 
             interval.CheckForNewInterval(sampledTime);
         }

@@ -14,8 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WaveData
   EnemySpawns:
   - enemySpawnType: {fileID: 6730894656085681688, guid: 18676ec0132be884cb685389feb03828, type: 3}
-    enemySpawnCount: 1
+    enemySpawnCount: 2
+  - enemySpawnType: {fileID: 6900823288402649937, guid: 921ea598b7611794dbcb535f728318d1, type: 3}
+    enemySpawnCount: 6
   - enemySpawnType: {fileID: 6900823288402649937, guid: b6393c099ff99e547b82c84b1a483987, type: 3}
+    enemySpawnCount: 2
+  - enemySpawnType: {fileID: 9145729383849834323, guid: d3ddc9f8e3a13e141817a6baffb95bfb, type: 3}
     enemySpawnCount: 2
   spawnRadius: 6
   spawnInterval: 8

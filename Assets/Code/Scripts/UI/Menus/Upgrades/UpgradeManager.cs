@@ -44,7 +44,7 @@ public class UpgradeManager : MonoBehaviour
         [UpgradeType.Armor] = "Increase your base armor by +5.",
         [UpgradeType.DashCount] = "Increase the total amount of dashes by +1.",
         [UpgradeType.DashCooldown] = "Decrease the dash cooldown time by 15%.",
-        [UpgradeType.AttackMultiplier] = "Increase the base damage multiplier by 20%."
+        [UpgradeType.AttackMultiplier] = "Increase the base damage multiplier by 10%."
     };
 
     public static UpgradeManager Instance { get; private set; }

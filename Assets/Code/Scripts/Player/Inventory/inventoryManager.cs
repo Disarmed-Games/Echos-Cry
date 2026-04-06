@@ -1,10 +1,9 @@
 using AudioSystem;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
+
 /// Original Author: Abby
-/// All Contributors Since Creation: Abby
-/// Last Modified By:
+/// All Contributors Since Creation: Abby, Andrew
 
 public class InventoryManager : MonoBehaviour
 {

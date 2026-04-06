@@ -1,8 +1,7 @@
-using Codice.CM.Client.Differences.Graphic;
 using EchosCry.Enemy.StateSystem;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Rendering;
+
 
 [CreateAssetMenu(menuName = "Echo's Cry/Enemy/Cache Strategy/Bat")]
 public class BatCacheStrategy : EnemyCacheStrategy

@@ -1,10 +1,8 @@
 
 //Systems acting on enemies
 //States are simply the behaviors acting on enemy data
-using Codice.CM.Client.Differences.Graphic;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.AI;
 using EchosCry.Enemy.Animation;
 
 public abstract class EnemyState

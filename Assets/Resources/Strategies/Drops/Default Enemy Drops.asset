@@ -16,8 +16,5 @@ MonoBehaviour:
   - prefab: {fileID: 651722200087660623, guid: 97046ff4e4a41054f9df101045151fb5, type: 3}
     minDropAmount: 3
     maxDropAmount: 6
-  ItemChanceDrops:
-  - prefab: {fileID: 7294540673738386061, guid: 6d66325f67882834db42bf1581f30771, type: 3}
-    dropAmount: 1
-    dropChancePercent: 0.05
+  ItemChanceDrops: []
   itemExplosionSpeed: 3

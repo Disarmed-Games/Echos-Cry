@@ -105,7 +105,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.8, z: 0}
-  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
+  m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2434889112220353080}
@@ -135,7 +135,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5c25122c6645cfd4eae3e14489de0e44, type: 2}
+  - {fileID: 2100000, guid: aa205275eb50f62439fad6eea645419d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -157,7 +157,7 @@ SpriteRenderer:
   m_SortingLayerID: 1903394121
   m_SortingLayer: -1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: a411a3b9c0ac7d84abf6032c98cbffbc, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ff93e658b0ca0df41b066c81f9581846, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -178,7 +178,7 @@ Animator:
   m_GameObject: {fileID: 1831394080825209204}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: dee4c54133900da45b7993269a3e0b0d, type: 2}
+  m_Controller: {fileID: 9100000, guid: add1ace28e20d9a47b2c54731a87f689, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -364,7 +364,7 @@ MonoBehaviour:
   _visualEffect: {fileID: 6135991116511513266}
   _spriteTransform: {fileID: 5725350970498192222}
   _staggerParticles: {fileID: 9195744456746233480}
-  _isReversed: 1
+  _isReversed: 0
 --- !u!114 &530485584549624666
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -483,7 +483,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e97edc87276cba4aa0e9f3f603da87c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Echos Cry Core::AOEAttack
-  _aoeEffect: {fileID: 5464901287887852699, guid: b7edc944a1fc12648b567bed5d42f336, type: 3}
+  _aoeEffect: {fileID: 5464901287887852699, guid: d99ecb25eea317a43ada646ffd46000c, type: 3}
   _aoeEffectTime: 0.25
   _aoeRadius: 2
   _layerMask:
@@ -569,7 +569,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6876723821600328738, guid: ecdbe2f4f7389a545b4000ed534075a7, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 1.5
+      value: 1.7
       objectReference: {fileID: 0}
     - target: {fileID: 6876723821600328738, guid: ecdbe2f4f7389a545b4000ed534075a7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -582,6 +582,10 @@ PrefabInstance:
     - target: {fileID: 6876723821600328738, guid: ecdbe2f4f7389a545b4000ed534075a7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8863240739651012704, guid: ecdbe2f4f7389a545b4000ed534075a7, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -618,7 +622,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 538590379372614257, guid: 8a183f7b0cc198c4ea2b06e6a99bb07f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.2
+      value: 1.4
       objectReference: {fileID: 0}
     - target: {fileID: 538590379372614257, guid: 8a183f7b0cc198c4ea2b06e6a99bb07f, type: 3}
       propertyPath: m_LocalPosition.z
