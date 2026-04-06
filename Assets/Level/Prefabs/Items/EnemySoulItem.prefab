@@ -130,15 +130,15 @@ MonoBehaviour:
   - item: {fileID: 11400000, guid: f5ae73f94fc8b224ca7a8c016dfdb731, type: 2}
     frequency: 0.1
   - item: {fileID: 11400000, guid: cf1d01e8f5b731748950d23556069ca4, type: 2}
-    frequency: 0.1
+    frequency: 0.05
   - item: {fileID: 11400000, guid: 4afaaff39d334064db9338724993ab13, type: 2}
-    frequency: 0.1
+    frequency: 0.05
   - item: {fileID: 11400000, guid: 7580e2afb386e87418e991b57bab117f, type: 2}
     frequency: 0.1
   - item: {fileID: 11400000, guid: c3c979b482c284f4e9e0ce4fdc954fce, type: 2}
     frequency: 0.1
   - item: {fileID: 11400000, guid: 71cbea43ccad0ae4aaa66411275126ff, type: 2}
-    frequency: 0.1
+    frequency: 0.05
 --- !u!1 &5565635186098021589
 GameObject:
   m_ObjectHideFlags: 0
