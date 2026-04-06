@@ -13,6 +13,7 @@ public abstract class EnemyState
     public virtual void FixedUpdate(Enemy enemyContext) { }
     public virtual void Enter(Enemy enemyContext) { }
     public virtual void Exit(Enemy enemyContext) { }
+    public virtual void Tick(Enemy enemyContext) { }
 }
 
 public class SpawnEnemyState : EnemyState
@@ -191,5 +192,57 @@ public class RoamEnemyState : EnemyState
     {
         if (enemyContext.NavMeshAgent == null || PlayerRef.Transform == null) return;
         enemyContext.NavMeshAgent.SetDestination(enemyContext.TargetStrategy[0].Execute(PlayerRef.Transform));
+    }
+}
+
+public class FuseEnemyState : EnemyState
+{
+    public override void Enter(Enemy enemyContext)
+    {
+        enemyContext.StateData.ReadyToAttack = false;
+        enemyContext.StartCoroutine(ChargeAttackCoroutine(enemyContext));
+        enemyContext.NavMeshAgent.speed /= 1.25f;
+        SetEnemyTarget(enemyContext);
+        enemyContext.StartCoroutine(UpdateTarget(enemyContext));
+    }
+    public override void Exit(Enemy enemyContext)
+    {
+        enemyContext.StopAllCoroutines();
+    }
+    public override void Update(Enemy enemyContext)
+    {
+        enemyContext.NPCAnimator
+            .UpdateSpriteDirection((PlayerRef.Transform.position - enemyContext.transform.position).normalized);
+
+    }
+    private IEnumerator ChargeAttackCoroutine(Enemy enemyContext)
+    {
+        yield return new WaitForSeconds(enemyContext.Data.AttackChargeTime);
+        if (TempoConductor.Instance.IsOnBeat())
+        {
+            //Debug.Log("Ready for attack");
+            enemyContext.StateData.ReadyToAttack = true;
+        }
+        else enemyContext.StartCoroutine(WaitUntilBeat(enemyContext));
+    }
+    private IEnumerator WaitUntilBeat(Enemy enemyContext)
+    {
+        while (!TempoConductor.Instance.IsOnBeat())
+        {
+            yield return new WaitForEndOfFrame();
+        }
+        //Debug.Log("Ready for attack");
+        enemyContext.StateData.ReadyToAttack = true;
+    }
+    private void SetEnemyTarget(Enemy enemyContext)
+    {
+        if (enemyContext.NavMeshAgent == null || PlayerRef.Transform == null) return;
+        enemyContext.NavMeshAgent.SetDestination(PlayerRef.Transform.position);
+    }
+    private IEnumerator UpdateTarget(Enemy enemyContext)
+    {
+        yield return new WaitForSeconds(0.2f);
+        SetEnemyTarget(enemyContext);
+        enemyContext.StartCoroutine(UpdateTarget(enemyContext));
     }
 }

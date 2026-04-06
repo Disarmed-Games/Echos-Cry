@@ -24,16 +24,16 @@ public class EnemyHealthUI : MonoBehaviour
         {
             _healthBarFront.fillAmount = hFraction;
             _healthBarFront.DOKill();
-            DOTween.To(() => _healthBarFront.color, x => { _frontFlashColor = x; }, _frontFlashColor, 0.10f).SetEase(Ease.OutQuad);
+            DOTween.To(() => _healthBarFront.color, x => { _frontFlashColor = x; }, _frontFlashColor, 0.10f).SetEase(Ease.OutQuad).SetLink(this.gameObject);
             _healthBarBack.DOKill();
-            DOTween.To(() => _healthBarBack.fillAmount, x => _healthBarBack.fillAmount = x, hFraction, chipSpeed).SetEase(Ease.OutQuad);
+            DOTween.To(() => _healthBarBack.fillAmount, x => _healthBarBack.fillAmount = x, hFraction, chipSpeed).SetEase(Ease.OutQuad).SetLink(this.gameObject);
         }
         if (fillF < hFraction)
         {
             _healthBarBack.fillAmount = hFraction;
             _healthBarBack.color = Color.green;
             _healthBarFront.DOKill();
-            DOTween.To(() => _healthBarFront.fillAmount, x => _healthBarFront.fillAmount = x, hFraction, chipSpeed).SetEase(Ease.OutQuad);
+            DOTween.To(() => _healthBarFront.fillAmount, x => _healthBarFront.fillAmount = x, hFraction, chipSpeed).SetEase(Ease.OutQuad).SetLink(this.gameObject);
         }
     }
 
@@ -50,6 +50,6 @@ public class EnemyHealthUI : MonoBehaviour
     }
     private void OnDisable()
     {
-        DOTween.KillAll();
+
     }
 }

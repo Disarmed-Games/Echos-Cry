@@ -20,6 +20,7 @@ public class EnemyStateCache
             { EnemyStates.Charge  , new ChargeEnemyState()   },
             { EnemyStates.Cooldown, new CooldownEnemyState() },
             { EnemyStates.Roam    , new RoamEnemyState()     },
+            { EnemyStates.Fuse    , new FuseEnemyState() },
         };
     }
     
