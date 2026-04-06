@@ -5,7 +5,7 @@ public class CriticalHitPassiveEffect : PassiveEffect
 {
     [Range(0f, 1f)]
     public float criticalChance = .2f;
-    public float criticalMultiplier = 2f;
+    public float criticalMultiplier = 1.5f;
 
     public bool RollCriticalHit()
     {

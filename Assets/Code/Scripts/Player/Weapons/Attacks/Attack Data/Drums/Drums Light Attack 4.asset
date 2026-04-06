@@ -12,10 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddabb830e7b914f4fb031b6d809d92f9, type: 3}
   m_Name: Drums Light Attack 4
   m_EditorClassIdentifier: Assembly-CSharp::AttackData
-  OverrideController: {fileID: 22100000, guid: 978a690c3a0c2bc40af54db591f86656, type: 2}
   AnimationClip: {fileID: 7400000, guid: f11c627a05c8ddb459a72f5408d31671, type: 2}
   AttackSound: {fileID: 11400000, guid: 2ce3495bf5b28064cab692996fd3e896, type: 2}
-  BaseDamage: 6
+  BaseDamage: 10
   PassiveEffects:
     OneThirdEffect: {fileID: 11400000, guid: 3664655054d7d144f873f217fd3e71cc, type: 2}
     TwoThirdsEffect: {fileID: 11400000, guid: 25e9fd5d2ef64b447905e84d09e57e47, type: 2}
