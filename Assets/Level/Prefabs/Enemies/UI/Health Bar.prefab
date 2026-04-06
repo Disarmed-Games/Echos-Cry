@@ -209,7 +209,7 @@ MonoBehaviour:
   _healthBarBack: {fileID: 7584463743511099896}
   _shieldBar: {fileID: 2615863455059630342}
   _frontFlashColor: {r: 0.6392157, g: 0, b: 0, a: 0}
-  chipSpeed: 3
+  chipSpeed: 1
 --- !u!1 &5114303350334437476
 GameObject:
   m_ObjectHideFlags: 0

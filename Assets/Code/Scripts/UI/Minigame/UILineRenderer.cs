@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Splines.Interpolators;
 using UnityEngine.UI;
 
 public class UILineRenderer : Graphic
@@ -20,11 +19,7 @@ public class UILineRenderer : Graphic
     
     private void Update()
     {
-        if (BeatManager.Instance == null) 
-        {
-            Debug.Log("Beat Manager could not be found!");
-            return;
-        }
+        if (!BeatManager.Instance) return;
 
         float progress = 1 - BeatManager.Instance.BeatProgress;
         float rectWidth = mRectTransform.rect.width;
@@ -86,10 +81,13 @@ public class UILineRenderer : Graphic
 
             vertex = UIVertex.simpleVert;
 
-            if (BeatManager.Instance.BeatInMeasure <= 2)
-                vertex.color = onBeatLineColor;
-            else
-                vertex.color = offBeatLineColor;
+            if (BeatManager.Instance)
+            {
+                if (BeatManager.Instance.BeatInMeasure <= 2)
+                    vertex.color = onBeatLineColor;
+                else
+                    vertex.color = offBeatLineColor;
+            }
 
                 vertex.position = p1 + normal * (thickness / 2);
             vh.AddVert(vertex);

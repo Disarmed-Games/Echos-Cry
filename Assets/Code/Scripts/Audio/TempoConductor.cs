@@ -63,7 +63,7 @@ public class TempoConductor : Singleton<TempoConductor>
         // Off Beat Check
         //--------------------
         //Off Beats are inbetween regular beats. Denoted by &: 1 & 2 & 3 & 4 (4/4 signature)
-        int currentBeat = MusicManager.Instance.GetBeatInMeasure(); //Beats are held as 0 - 3
+        int currentBeat = BeatManager.Instance.BeatInMeasure; //Beats are held as 0 - 3
         float offbeatProgress = _currentBeatProgress - 0.5f;
         if (offbeatProgress < 0) offbeatProgress += 1f;
 

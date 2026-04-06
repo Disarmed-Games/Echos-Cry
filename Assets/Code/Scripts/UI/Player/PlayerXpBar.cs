@@ -6,13 +6,15 @@ public class PlayerXpBar : MonoBehaviour
     [SerializeField] private TMPro.TextMeshProUGUI xpText;
 
     // Variables Provided from here: https://youtu.be/CFASjEuhyf4?si=ri_WpIV1OxgtQdgp at 5:00
-    private float lerpTimer;
-    public float chipSpeed = 3f;
-    private float hFraction = 0f;
     [SerializeField] private UnityEngine.UI.Image frontXpBar;
     [SerializeField] private UnityEngine.UI.Image backXpBar;
     [SerializeField] private TextMeshProUGUI levelText;
     [SerializeField] private FloatFloatIntEventChannel eventChannel;
+    [SerializeField] private GameObject upgradeReminder;
+
+    public float chipSpeed = 2f;
+    private float lerpTimer;
+    private float hFraction = 0f;
 
     private void OnEnable()
     {
@@ -54,5 +56,7 @@ public class PlayerXpBar : MonoBehaviour
             percentComplete = percentComplete * percentComplete;
             frontXpBar.fillAmount = Mathf.Lerp(fillF, backXpBar.fillAmount, percentComplete);
         }
+
+        upgradeReminder.SetActive(UpgradeManager.Instance.GetAvailablePoints() > 0);
     }
 }

@@ -80,6 +80,11 @@ public class UpgradeManager : MonoBehaviour
         return _upgradeDescriptions.GetValueOrDefault(upgrade);
     }
 
+    public int GetAvailablePoints()
+    {
+        return availablePoints;
+    }
+
     private void UpdateInfo(float xp, float goalXP, int currentLevel)
     {
         _xpRequiredText.text = $"[{xp} / {goalXP}] XP Till Level {currentLevel + 1}";

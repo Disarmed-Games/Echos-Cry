@@ -47,10 +47,8 @@ public class PlayerHealth : MonoBehaviour
     public void ResetHealth()
     {
         _healthSystem.ResetSystem();
-        if (_healthChannel != null)
-            _healthChannel.Invoke(_healthSystem.CurrentHealth, _healthSystem.MaxHealth);
-        if (_armorChannel != null)
-            _armorChannel.Invoke(_healthSystem.CurrentArmor, _healthSystem.MaxArmor);
+        _healthChannel.Invoke(_healthSystem.CurrentHealth, _healthSystem.MaxHealth);
+        _armorChannel.Invoke(_healthSystem.CurrentArmor, _healthSystem.MaxArmor);
     }
 
     /// <summary>
@@ -60,15 +58,13 @@ public class PlayerHealth : MonoBehaviour
     {
         _healthSystem.MaxHealth += amount;
         _healthSystem.HealHealth(amount);
-        if (_healthChannel != null)
-            _healthChannel.Invoke(_healthSystem.CurrentHealth, _healthSystem.MaxHealth);
+        _healthChannel.Invoke(_healthSystem.CurrentHealth, _healthSystem.MaxHealth);
     }
     public void IncreaseMaxArmor(float amount)
     {
         _healthSystem.MaxArmor += amount;
         _healthSystem.HealArmor(amount);
-        if (_armorChannel != null)
-            _armorChannel.Invoke(_healthSystem.CurrentArmor, _healthSystem.MaxArmor);
+        _armorChannel.Invoke(_healthSystem.CurrentArmor, _healthSystem.MaxArmor);
     }
 
     /// <summary>
@@ -78,22 +74,19 @@ public class PlayerHealth : MonoBehaviour
     {
         _healthSystem.Damage(damage);
         PauseHealthRegen();
-        if (_armorChannel != null) 
-            _armorChannel.Invoke(_healthSystem.CurrentArmor, _healthSystem.MaxArmor);
-        if (_healthChannel != null) 
-            _healthChannel.Invoke(_healthSystem.CurrentHealth, _healthSystem.MaxHealth);
+
+        _armorChannel.Invoke(_healthSystem.CurrentArmor, _healthSystem.MaxArmor); 
+        _healthChannel.Invoke(_healthSystem.CurrentHealth, _healthSystem.MaxHealth);
     }
     public void HealHealth(float amount)
     {
         _healthSystem.HealHealth(amount);
-        if (_healthChannel != null)
-            _healthChannel.Invoke(_healthSystem.CurrentHealth, _healthSystem.MaxHealth);
+        _healthChannel.Invoke(_healthSystem.CurrentHealth, _healthSystem.MaxHealth);
     }
     public void HealArmor(float amount)
     {
         _healthSystem.HealArmor(amount);
-        if (_armorChannel != null)
-            _armorChannel.Invoke(_healthSystem.CurrentArmor, _healthSystem.MaxArmor);
+        _armorChannel.Invoke(_healthSystem.CurrentArmor, _healthSystem.MaxArmor);
     }
 
     /// <summary>
@@ -127,8 +120,7 @@ public class PlayerHealth : MonoBehaviour
             if (_canRegenHealth)
             {
                 _healthSystem.HealHealth(_regenHealthAmount);
-                if (_healthChannel != null) 
-                    _healthChannel.Invoke(_healthSystem.CurrentHealth, _healthSystem.MaxHealth);
+                _healthChannel.Invoke(_healthSystem.CurrentHealth, _healthSystem.MaxHealth);
             }   
         }
     }
@@ -164,8 +156,7 @@ public class PlayerHealth : MonoBehaviour
             if (_canRegenArmor)
             {
                 _healthSystem.HealArmor(_regenArmorAmount);
-                if (_armorChannel != null)
-                    _armorChannel.Invoke(_healthSystem.CurrentArmor, _healthSystem.MaxArmor);
+                _armorChannel.Invoke(_healthSystem.CurrentArmor, _healthSystem.MaxArmor);
             }
         }
     }
