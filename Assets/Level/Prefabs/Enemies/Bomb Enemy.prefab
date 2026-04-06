@@ -104,7 +104,7 @@ Transform:
   m_GameObject: {fileID: 1831394080825209204}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.698, z: 0}
+  m_LocalPosition: {x: 0, y: 0.6, z: 0}
   m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -430,7 +430,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0.65, z: 0}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!54 &6827338249854996756
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -601,7 +601,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6876723821600328738, guid: ecdbe2f4f7389a545b4000ed534075a7, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 1.7
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 6876723821600328738, guid: ecdbe2f4f7389a545b4000ed534075a7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -654,7 +654,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 538590379372614257, guid: 8a183f7b0cc198c4ea2b06e6a99bb07f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.4
+      value: 1.3000001
       objectReference: {fileID: 0}
     - target: {fileID: 538590379372614257, guid: 8a183f7b0cc198c4ea2b06e6a99bb07f, type: 3}
       propertyPath: m_LocalPosition.z
