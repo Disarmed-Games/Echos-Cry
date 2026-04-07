@@ -54,9 +54,9 @@ public class PlayerDashState : PlayerActionState
         _playerStateMachine.CanDash = true;
     }
 
-    //IEnumerator DashCooldown()
+    //IEnumerator Dash_Cooldown()
     //{
-    //    yield return new WaitForSeconds(_playerContext.Movement.PlayerMovementConfig.DashCooldown);
+    //    yield return new WaitForSeconds(_playerContext.Movement.PlayerMovementConfig.Dash_Cooldown);
     //    _playerStateMachine.CanDash = true;
     //}
 }

@@ -37,7 +37,7 @@ public class UpgradeSelector : MonoBehaviour, IPointerEnterHandler, IPointerExit
         }
         else
         {
-            _upgradeNameText.text = currentUpgrade.ToString();
+            _upgradeNameText.text = currentUpgrade.ToString().Replace("_", " ");
         }
     }
     public void OnPointerEnter(PointerEventData eventData)

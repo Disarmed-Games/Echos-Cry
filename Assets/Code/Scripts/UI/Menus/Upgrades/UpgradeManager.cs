@@ -26,25 +26,25 @@ public class UpgradeManager : MonoBehaviour
     private int availablePoints = 0;
     public enum UpgradeType
     { //TODO: Add damage muiltiplier upgrades!
-        MoveSpeed,
-        DashSpeed,
+        Move_Speed,
+        Dash_Speed,
         Health,
         Armor,
-        DashCount,
-        DashCooldown,
-        AttackMultiplier
+        Dash_Count,
+        Dash_Cooldown,
+        Attack_Multiplier
     }
 
     private Dictionary<UpgradeType, string> _upgradeDescriptions = new Dictionary<UpgradeType, string>
     {
         //[UpgradeType.] = "",
-        [UpgradeType.MoveSpeed] = "Increase your base movement speed by 10%.",
-        [UpgradeType.DashSpeed] = "Increase the speed of your dashing by 15%.",
+        [UpgradeType.Move_Speed] = "Increase your base movement speed by 10%.",
+        [UpgradeType.Dash_Speed] = "Increase the speed of your dashing by 15%.",
         [UpgradeType.Health] = "Increase your base health by +5 hp.",
         [UpgradeType.Armor] = "Increase your base armor by +5.",
-        [UpgradeType.DashCount] = "Increase the total amount of dashes by +1.",
-        [UpgradeType.DashCooldown] = "Decrease the dash cooldown time by 15%.",
-        [UpgradeType.AttackMultiplier] = "Increase the base damage multiplier by 10%."
+        [UpgradeType.Dash_Count] = "Increase the total amount of dashes by +1.",
+        [UpgradeType.Dash_Cooldown] = "Decrease the dash cooldown time by 15%.",
+        [UpgradeType.Attack_Multiplier] = "Increase the base damage multiplier by 10%."
     };
 
     public static UpgradeManager Instance { get; private set; }
@@ -150,10 +150,10 @@ public class UpgradeManager : MonoBehaviour
 
         switch (upgradeType)
         {
-            case UpgradeType.MoveSpeed:
+            case UpgradeType.Move_Speed:
                 if (_moveSpeedChannel != null) _moveSpeedChannel.Invoke();
                 break;
-            case UpgradeType.DashSpeed:
+            case UpgradeType.Dash_Speed:
                 if (_dashSpeedChannel != null) _dashSpeedChannel.Invoke();
                 break;
             case UpgradeType.Health:
@@ -162,13 +162,13 @@ public class UpgradeManager : MonoBehaviour
             case UpgradeType.Armor:
                 if(_armorChannel != null) _armorChannel.Invoke();
                 break;
-            case UpgradeType.DashCount:
+            case UpgradeType.Dash_Count:
                 if (_dashCountChannel != null) _dashCountChannel.Invoke();
                 break;
-            case UpgradeType.DashCooldown:
+            case UpgradeType.Dash_Cooldown:
                 if (_dashCooldownChannel != null) _dashCooldownChannel.Invoke();
                 break;
-            case UpgradeType.AttackMultiplier:
+            case UpgradeType.Attack_Multiplier:
                 if (_upgradeDamageChannel != null) _upgradeDamageChannel.Invoke();
                 break;
             default:
