@@ -110,8 +110,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85c2cd325ed7a6e4cabe1745ec4db91b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  itemSpeed: 2
-  itemDragDistance: 2.2
+  moveToPlayer: 1
+  itemSpeed: 3
+  itemDragDistance: 2.5
   itemBody: {fileID: 4594376071606678493}
   pickupSFX: {fileID: 11400000, guid: f83534ee1030a2941a4bef753d73a245, type: 2}
   particleEffect: {fileID: 6250198881956377069, guid: b1a9a4c2a7b1a54459fae4db05f8d4a9, type: 3}
