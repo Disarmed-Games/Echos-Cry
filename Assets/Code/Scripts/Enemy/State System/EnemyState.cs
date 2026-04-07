@@ -245,3 +245,18 @@ public class FuseEnemyState : EnemyState
         enemyContext.StartCoroutine(UpdateTarget(enemyContext));
     }
 }
+
+public class Attack2EnemyState : EnemyState
+{
+    public override void Enter(Enemy enemyContext)
+    {
+        enemyContext.NPCAnimator.PlayAnimation(HashCodes.AttackHashCode);
+        enemyContext.SoundStrategy.Execute(enemyContext.SoundConfig.AttackSFX, enemyContext.transform, 0f);
+        enemyContext.AttackStrategies[1].Execute(enemyContext.Data.BaseDamage, Vector3.zero, enemyContext.transform);
+    }
+    public override void Exit(Enemy enemyContext)
+    {
+        enemyContext.Rigidbody.isKinematic = true;
+        enemyContext.AttackStrategies[1].StopAllCoroutines();
+    }
+}
