@@ -5143,7 +5143,6 @@ MonoBehaviour:
   - {fileID: 6625103690610810554}
   - {fileID: 624493834288233041}
   _dashWeapon: {fileID: 8121748436301553700}
-  _inputTranslator: {fileID: 11400000, guid: da8057efcf3a45a47bb320ce196e8d61, type: 2}
 --- !u!1 &2010116007821540472
 GameObject:
   m_ObjectHideFlags: 0
