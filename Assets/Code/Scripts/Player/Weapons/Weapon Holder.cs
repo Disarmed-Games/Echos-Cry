@@ -14,6 +14,8 @@ public class WeaponHolder : MonoBehaviour
     }
     public bool HasWeapon => _currentlyEquippedWeapon != null;
 
+    public bool DidWeaponHit => _currentlyEquippedWeapon.HitColliders.Count > 0;
+
     private void Awake()
     {
         if (_weaponInventory.Length > 0)
@@ -79,5 +81,16 @@ public class WeaponHolder : MonoBehaviour
     public bool IsActionEnded()
     {
         return _currentlyEquippedWeapon.IsAttackEnded;
+    }
+
+    public void ProcessWeaponHits(PlayerComboMeter comboMeter)
+    {
+        int hitCount = _currentlyEquippedWeapon.HitColliders.Count;
+
+        for (int i = 0; i < hitCount; i++)
+        {
+            TempoConductor.HitQuality hitQuality = _currentlyEquippedWeapon.HitColliders[i].hit;
+            comboMeter.AddToComboMeter(hitQuality);
+        }
     }
 }

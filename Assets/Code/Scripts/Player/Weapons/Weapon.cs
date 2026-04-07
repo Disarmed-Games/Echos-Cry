@@ -13,7 +13,7 @@ public abstract class Weapon : MonoBehaviour
     protected RuntimeAnimatorController _defaultAnimatorController;
 
     [HideInInspector]
-    public AttackData _currentAttackData;
+    public AttackData CurrentAttackData;
     public bool IsAttackEnded { get; private set; }
 
     public struct ColliderInfo

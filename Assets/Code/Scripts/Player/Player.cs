@@ -20,6 +20,7 @@ public class Player : MonoBehaviour
     [SerializeField] private DashWeapon _dashAttack;
     [SerializeField] private PlayerStats _stats;
     [SerializeField] private SpamPrevention _spamPrevention;
+    [SerializeField] private HeatGauge _heatGauge;
 
     [Header("Event Channel (Broadcaster)")]
     [SerializeField] EventChannel _attackEndedChannel;
@@ -42,6 +43,7 @@ public class Player : MonoBehaviour
     public DashWeapon DashAttack { get => _dashAttack; }
     public PlayerStats Stats { get => _stats; }
     public SpamPrevention SpamPrevention { get => _spamPrevention; }
+    public HeatGauge HeatGauge { get => _heatGauge; }
 
     private void InitStateCache()
     {
@@ -55,11 +57,6 @@ public class Player : MonoBehaviour
             (this, _playerStateMachine, _playerStateCache)
         );
         _playerStateCache.AddState(
-            PlayerStateCache.PlayerState.Attack,
-            new PlayerAttackState
-            (this, _playerStateMachine, _playerStateCache)
-        );
-        _playerStateCache.AddState(
             PlayerStateCache.PlayerState.Dash,
             new PlayerDashState
             (this, _playerStateMachine, _playerStateCache)
@@ -67,6 +64,16 @@ public class Player : MonoBehaviour
         _playerStateCache.AddState(
             PlayerStateCache.PlayerState.Death,
             new PlayerDeathState
+            (this, _playerStateMachine, _playerStateCache)
+        );
+        _playerStateCache.AddState(
+            PlayerStateCache.PlayerState.LightAttack,
+            new PlayerLightAttackState
+            (this, _playerStateMachine, _playerStateCache)
+        );
+        _playerStateCache.AddState(
+            PlayerStateCache.PlayerState.HeavyAttack,
+            new PlayerHeavyAttackState
             (this, _playerStateMachine, _playerStateCache)
         );
     }

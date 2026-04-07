@@ -6,7 +6,7 @@ public class PlayerStateCache
     public enum PlayerState
     {
         None = 0,
-        Idle, Move, Attack, Dash, Death
+        Idle, Move, Dash, Death, LightAttack, HeavyAttack
     }
 
     private readonly Dictionary<PlayerState, PlayerActionState> _stateCache;

@@ -16,9 +16,13 @@ public class PlayerMoveState : PlayerActionState
         {
             _playerStateMachine.SwitchState(_playerStateCache.RequestState(PlayerStateCache.PlayerState.Idle));
         }
-        else if (_playerStateMachine.IsAttacking)
+        else if (_playerStateMachine.UsingPrimaryAction)
         {
-            _playerStateMachine.SwitchState(_playerStateCache.RequestState(PlayerStateCache.PlayerState.Attack));
+            _playerStateMachine.SwitchState(_playerStateCache.RequestState(PlayerStateCache.PlayerState.LightAttack));
+        }
+        else if (_playerStateMachine.UsingSecondaryAction && _playerContext.HeatGauge.CurrentCharge >= 2)
+        {
+            _playerStateMachine.SwitchState(_playerStateCache.RequestState(PlayerStateCache.PlayerState.HeavyAttack));
         }
         else if (_playerStateMachine.CanDash && _playerContext.Movement.HasDash && _playerStateMachine.IsDashing)
         {

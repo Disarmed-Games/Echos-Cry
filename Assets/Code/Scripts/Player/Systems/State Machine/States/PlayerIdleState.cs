@@ -12,9 +12,14 @@ public class PlayerIdleState : PlayerActionState
         {
             _playerStateMachine.SwitchState(_playerStateCache.RequestState(PlayerStateCache.PlayerState.Move));
         }
-        else if (_playerStateMachine.IsAttacking)
+        else if (_playerStateMachine.UsingPrimaryAction)
         {
-            _playerStateMachine.SwitchState(_playerStateCache.RequestState(PlayerStateCache.PlayerState.Attack));
+            _playerStateMachine.SwitchState(_playerStateCache.RequestState(PlayerStateCache.PlayerState.LightAttack));
+        }
+        //ISSUE: fix the heat cost so it is not hard coded
+        else if (_playerStateMachine.UsingSecondaryAction && _playerContext.HeatGauge.CurrentCharge >= 2)
+        {
+            _playerStateMachine.SwitchState(_playerStateCache.RequestState(PlayerStateCache.PlayerState.HeavyAttack));
         }
     }
 
