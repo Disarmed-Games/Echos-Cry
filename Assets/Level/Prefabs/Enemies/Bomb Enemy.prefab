@@ -378,7 +378,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49243be4183b1dc40b9e1d2b4602606c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyStats
-  _statsConfig: {fileID: 11400000, guid: 756e2aac9ef16dd4f8b3d83060c174db, type: 2}
+  _statsConfig: {fileID: 11400000, guid: 7090789a37ac14d4f878edd3fdfd924e, type: 2}
 --- !u!114 &4267862705877107826
 MonoBehaviour:
   m_ObjectHideFlags: 0

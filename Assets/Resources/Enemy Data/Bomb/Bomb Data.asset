@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Bomb Data
   m_EditorClassIdentifier: Echos Cry Core::EnemyData
   _distanceCheck: 10
-  _attackChargeTime: 2.5
+  _attackChargeTime: 2
   _attackDashForce: 0
   _attackDuration: 0
   _attackCooldown: 0
