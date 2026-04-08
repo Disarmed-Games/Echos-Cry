@@ -54,25 +54,22 @@ public class PlayerStateMachine : AbstractStateMachine<PlayerActionState>
         if (TempoConductor.Instance.IsOnBeat() && buttonPressed && !SpamPrevention.InputLocked)
         {
             _usingPrimaryAction = true;
-            _isAttacking = true;
         }
         else
         {
             _usingPrimaryAction = false;
-            if (!_usingSecondaryAction) _isAttacking = false;
         }
     }
     public void HandleSecondaryAction(bool buttonPressed)
     {
+        Debug.Log("Second attack");
         if (TempoConductor.Instance.IsOnBeat() && buttonPressed && !SpamPrevention.InputLocked)
         {
             _usingSecondaryAction = true;
-            _isAttacking = true;
         }
         else
         {
             _usingSecondaryAction = false;
-            if (!_usingPrimaryAction) _isAttacking = false;
         }
     }
     public void HandleDash(bool buttonPressed)

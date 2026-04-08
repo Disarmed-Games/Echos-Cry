@@ -5,19 +5,21 @@ public class PlayerLightAttackState : PlayerActionState
 
     public override void Enter()
     {
-        if (BeatManager.Instance.BeatInMeasure <= 2)
-        {
-            _playerContext.WeaponHolder.SwitchWeapon(0); //Clarinet
-            _playerContext.WeaponHolder.PrimaryAction();
-        }
-        else
-        {
-            _playerContext.WeaponHolder.SwitchWeapon(1); //Drum
-            _playerContext.WeaponHolder.PrimaryAction();
-        }
+        //if (BeatManager.Instance.BeatInMeasure <= 2)
+        //{
+        //    _playerContext.WeaponHolder.SwitchWeapon(0); //Clarinet
+        //    _playerContext.WeaponHolder.PrimaryAction();
+        //}
+        //else
+        //{
+        //    _playerContext.WeaponHolder.SwitchWeapon(1); //Drum
+        //    _playerContext.WeaponHolder.PrimaryAction();
+        //}
+
+        _playerContext.WeaponHolder.PrimaryAction();
 
         _playerContext.Animator.SpriteAnimator.Play("Attack");
-        _playerContext.Movement.MomentumPush();
+        //_playerContext.Movement.MomentumPush();
         _playerContext.Orientation.IsRotating = false;
     }
     public override void Exit()

@@ -19,9 +19,4 @@ public class HeatGauge : MonoBehaviour
         m_currentCharge -= amount;
         return true;
     }
-
-    private void Update()
-    {
-        Debug.Log(m_currentCharge + " / " + m_maxCharge);
-    }
 }

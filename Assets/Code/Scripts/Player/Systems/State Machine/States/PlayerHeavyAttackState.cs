@@ -7,16 +7,22 @@ public class PlayerHeavyAttackState : PlayerActionState
     {
         _playerContext.HeatGauge.UseCharge(2);
 
-        if (BeatManager.Instance.BeatInMeasure <= 2)
-        {
-            _playerContext.WeaponHolder.SwitchWeapon(0); //Clarinet
-            _playerContext.WeaponHolder.SecondaryAction();
-        }
-        else
-        {
-            _playerContext.WeaponHolder.SwitchWeapon(1); //Drum
-            _playerContext.WeaponHolder.SecondaryAction();
-        }
+        //if (BeatManager.Instance.BeatInMeasure <= 2)
+        //{
+        //    _playerContext.WeaponHolder.SwitchWeapon(0); //Clarinet
+        //    _playerContext.WeaponHolder.SecondaryAction();
+        //}
+        //else
+        //{
+        //    _playerContext.WeaponHolder.SwitchWeapon(1); //Drum
+        //    _playerContext.WeaponHolder.SecondaryAction();
+        //}
+
+        _playerContext.WeaponHolder.SecondaryAction();
+
+        _playerContext.Animator.SpriteAnimator.Play("Attack");
+        //_playerContext.Movement.MomentumPush();
+        _playerContext.Orientation.IsRotating = false;
     }
     public override void Exit()
     {
