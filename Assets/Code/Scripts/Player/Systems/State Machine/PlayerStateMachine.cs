@@ -62,7 +62,6 @@ public class PlayerStateMachine : AbstractStateMachine<PlayerActionState>
     }
     public void HandleSecondaryAction(bool buttonPressed)
     {
-        Debug.Log("Second attack");
         if (TempoConductor.Instance.IsOnBeat() && buttonPressed && !SpamPrevention.InputLocked)
         {
             _usingSecondaryAction = true;
