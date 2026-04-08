@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddabb830e7b914f4fb031b6d809d92f9, type: 3}
   m_Name: Clarinet Light Attack 5
   m_EditorClassIdentifier: Assembly-CSharp::Attack
-  OverrideController: {fileID: 22100000, guid: 1545563e241d1b7479fe40b97bf7a830, type: 2}
-  AnimationClip: {fileID: 7400000, guid: 4d075efcf54560449bbb250cd991caca, type: 2}
+  AnimationClip: {fileID: 7400000, guid: 27dff9fd8056a3541bcb692ab3abf12b, type: 2}
   AttackSound: {fileID: 11400000, guid: 39e12e82cb30de44c8403249851de156, type: 2}
   BaseDamage: 4
   PassiveEffects:
     OneThirdEffect: {fileID: 11400000, guid: 3664655054d7d144f873f217fd3e71cc, type: 2}
     TwoThirdsEffect: {fileID: 11400000, guid: 25e9fd5d2ef64b447905e84d09e57e47, type: 2}
     FullEffect: {fileID: 11400000, guid: 5d93e2ffc070cf648871667b95c1e5a9, type: 2}
+  HeatCost: 0

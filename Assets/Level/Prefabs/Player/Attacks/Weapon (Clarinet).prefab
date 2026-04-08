@@ -206,7 +206,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ComboWeapon
   _attackAnimator: {fileID: 3611273676873636004}
   _weaponCollider: {fileID: 1971523843926539588}
-  _currentAttackData: {fileID: 0}
+  _playerAttackDamage: {fileID: 0}
+  CurrentAttackData: {fileID: 0}
   _comboWeaponData: {fileID: 11400000, guid: 8e8fe5fe3bb62fd40abebcb91d6c6eb6, type: 2}
 --- !u!95 &3611273676873636004
 Animator:
