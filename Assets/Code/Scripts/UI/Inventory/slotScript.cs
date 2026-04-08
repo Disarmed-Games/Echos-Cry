@@ -57,7 +57,12 @@ public class SlotScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
         slotIcon.enabled = true;
         slotIcon.sprite = item.data.icon;
-        stackAmountText.text = item.stackSize.ToString();
+
+        if (item.data.isStackable)
+            stackAmountText.text = item.stackSize.ToString();
+        else
+            stackAmountText.text = "";
+        
         description = item.data.description;
     }
 
