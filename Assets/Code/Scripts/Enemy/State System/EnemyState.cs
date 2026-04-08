@@ -65,9 +65,9 @@ public class StaggerEnemyState : EnemyState
     public override void Enter(Enemy enemyContext)
     {
         //Debug.Log("Stagger");
-        //enemyContext.Rigidbody.isKinematic = false;
+        enemyContext.Rigidbody.isKinematic = false;
         Vector3 direction = (PlayerRef.Transform.position - enemyContext.transform.position).normalized;
-        //enemyContext.Rigidbody.AddForce(-(enemyContext.Data.KnockbackForce * direction), ForceMode.Impulse);
+        enemyContext.Rigidbody.AddForce(-(enemyContext.Data.KnockbackForce * direction), ForceMode.Impulse);
         enemyContext.NPCAnimator.StaggerParticleStart();
         enemyContext.StartCoroutine(StaggerDuration(enemyContext));
     }
