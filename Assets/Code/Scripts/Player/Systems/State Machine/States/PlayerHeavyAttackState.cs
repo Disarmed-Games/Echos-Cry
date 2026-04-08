@@ -21,7 +21,7 @@ public class PlayerHeavyAttackState : PlayerActionState
         _playerContext.WeaponHolder.SecondaryAction();
 
         _playerContext.Animator.SpriteAnimator.Play("Attack");
-        _playerContext.Movement.MomentumPush();
+        //_playerContext.Movement.MomentumPush();
         _playerContext.Orientation.IsRotating = false;
     }
     public override void Exit()
