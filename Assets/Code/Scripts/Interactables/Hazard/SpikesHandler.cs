@@ -10,6 +10,6 @@ public class SpikesHandler : MonoBehaviour
         {
             _spikesAnimator.SetTrigger("Activate");
             damageable.Execute(_spikeDamage);
-        }   
+        }
     }
 }
