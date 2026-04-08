@@ -127,9 +127,9 @@ public class InputTranslator : ScriptableObject,
     {
         if (context.started) OnTeleportEvent?.Invoke();
     }
-    public void OnWeaponNext(InputAction.CallbackContext context)
+    public void OnDrop(InputAction.CallbackContext context)
     {
-        if (context.started) OnWeaponNextEvent?.Invoke();
+        if (context.started) OnDropEvent?.Invoke();
     }
 
     private PlayerInputs _playerInputs;
@@ -138,7 +138,6 @@ public class InputTranslator : ScriptableObject,
     public event Action<Vector2>    OnMovementEvent;
     public event Action<bool>       OnDashEvent;
     public event Action             OnTeleportEvent;
-    public event Action             OnWeaponNextEvent;
     public event Action<bool>       OnPrimaryActionEvent;
     public event Action<bool>       OnSecondaryActionEvent;
     public event Action             OnInteractEvent;
@@ -147,5 +146,6 @@ public class InputTranslator : ScriptableObject,
     public event Action             OnUpgradeEvent;
     public event Action             OnResumeEvent;
     public event Action             OnCloseShopEvent;
+    public event Action             OnDropEvent;
     public event Action<int>        OnItem1Event, OnItem2Event, OnItem3Event, OnItem4Event;
 }

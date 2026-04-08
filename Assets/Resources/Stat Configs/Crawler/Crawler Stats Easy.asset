@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a896efee18ca34d499e4b48ef78861a9, type: 3}
   m_Name: Crawler Stats Easy
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStatsConfig
-  currentHealth: 40
-  maxHealth: 40
-  maxArmor: 10
-  currentArmor: 10
+  currentHealth: 30
+  maxHealth: 30
+  maxArmor: 20
+  currentArmor: 20

@@ -115,9 +115,9 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Weapon Next",
+                    "name": "Drop",
                     "type": "Button",
-                    "id": "3bb2a1a9-c380-44d8-9924-35d95cf21401",
+                    "id": "967a3989-88a7-4f3d-9a00-86d52fae1aee",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -194,7 +194,7 @@
                 {
                     "name": "",
                     "id": "090af2f6-6f02-43b8-8132-f2c8da747d40",
-                    "path": "<Mouse>/rightButton",
+                    "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
                     "groups": ";KeyboardMouse",
@@ -303,12 +303,12 @@
                 },
                 {
                     "name": "",
-                    "id": "5ee3cf1a-ff71-41ac-860d-7badcfc0977a",
-                    "path": "<Keyboard>/f",
+                    "id": "26e30141-f912-448a-8b72-ccca140c9897",
+                    "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
                     "groups": ";KeyboardMouse",
-                    "action": "Weapon Next",
+                    "action": "Drop",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

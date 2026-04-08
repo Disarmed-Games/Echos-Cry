@@ -223,7 +223,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &7712247364644070685
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -254,7 +254,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   textMeshPro: {fileID: 2449679018934426242}
-  text: Press 'E' to Open
+  text: Press 'E' to talk.
   displayTime: 2
 --- !u!114 &2537680531963021833
 MonoBehaviour:

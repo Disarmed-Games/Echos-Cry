@@ -111,6 +111,18 @@ public class DialogueManager : MonoBehaviour
         ContinueStory();
     }
 
+    private string ProcessLineVariables(string line)
+    {
+        if (currentStory.variablesState.GlobalVariableExistsWithName("actionName"))
+        {
+            string actionName = (string)currentStory.variablesState["actionName"];
+            var action = _inputTranslator.PlayerInputs.asset.FindAction(actionName);
+            string buttonName = action.GetBindingDisplayString(InputBinding.MaskByGroup("KeyboardMouse"));
+            line = line.Replace("REPLACE_BUTTON", buttonName);
+        }
+        return line;
+    }
+
     private void ContinueStory()
     {
         if (currentStory.canContinue) 
@@ -120,6 +132,7 @@ public class DialogueManager : MonoBehaviour
                 StopCoroutine(displayLineCoroutine);
             }
             string nextLine = currentStory.Continue();
+            nextLine = ProcessLineVariables(nextLine);
 
             if (nextLine.Equals("") && !currentStory.canContinue)
             {

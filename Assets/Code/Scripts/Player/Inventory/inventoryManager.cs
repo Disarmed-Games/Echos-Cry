@@ -75,7 +75,7 @@ public class InventoryManager : MonoBehaviour
 
     public bool IsFull(InventoryItemData referenceData)
     {
-        if (itemDictionary.TryGetValue(referenceData, out InventoryItem value))
+        if (referenceData.isStackable && itemDictionary.ContainsKey(referenceData))
         {
             return false;
         }
@@ -94,30 +94,49 @@ public class InventoryManager : MonoBehaviour
     }
     public void Add(InventoryItemData referenceData)
     {
-        if (itemDictionary.TryGetValue(referenceData, out InventoryItem value))
+        if (referenceData.isStackable)
         {
-            value.AddToStack();
-        } 
-        else 
+            if (itemDictionary.TryGetValue(referenceData, out InventoryItem value))
+            {
+                value.AddToStack();
+            }
+            else
+            {
+                InventoryItem newItem = new InventoryItem(referenceData);
+                inventoryList.Add(newItem);
+                itemDictionary.Add(referenceData, newItem);
+            }
+        }
+        else
         {
             InventoryItem newItem = new InventoryItem(referenceData);
             inventoryList.Add(newItem);
-            itemDictionary.Add(referenceData, newItem);
         }
         _inventoryDisplay.UpdateInventory();
     }
     public void Remove(InventoryItemData referenceData)
     {
-        if (itemDictionary.TryGetValue(referenceData, out InventoryItem value))
+        if (referenceData.isStackable)
         {
-            value.RemoveFromStack();
-            if (value.stackSize == 0)
+            if (itemDictionary.TryGetValue(referenceData, out InventoryItem value))
             {
-                inventoryList.Remove(value);
-                itemDictionary.Remove(referenceData);
+                value.RemoveFromStack();
+                if (value.stackSize == 0)
+                {
+                    inventoryList.Remove(value);
+                    itemDictionary.Remove(referenceData);
+                }
             }
-            _inventoryDisplay.UpdateInventory();
         }
+        else
+        {
+            InventoryItem itemToRemove = inventoryList.Find(item => item.data == referenceData);
+            if (itemToRemove != null)
+            {
+                inventoryList.Remove(itemToRemove);
+            }
+        }
+        _inventoryDisplay.UpdateInventory();
     }
 }
 public class InventoryItem

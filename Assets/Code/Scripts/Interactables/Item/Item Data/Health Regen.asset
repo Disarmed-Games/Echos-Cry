@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Echos Cry Core::HealthRegenItemData
   displayName: Health Regen Potion
   description: Consume this to gain health regeneration.
-  icon: {fileID: 21300000, guid: fed6dd84509e96747897f82c287018ea, type: 3}
+  icon: {fileID: 21300000, guid: 5da319e65dc05534e8516e33f821bdb6, type: 3}
+  isStackable: 0
   _regenHealthChannel: {fileID: 11400000, guid: 58f244f8770115148acb4868ba17b6b8, type: 2}

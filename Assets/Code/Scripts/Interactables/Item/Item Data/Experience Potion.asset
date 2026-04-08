@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Echos Cry Core::ExperienceItemData
   displayName: Experience Bottle
   description: Consume this potion to get an extra +50 XP.
-  icon: {fileID: 21300000, guid: fed6dd84509e96747897f82c287018ea, type: 3}
+  icon: {fileID: 21300000, guid: 4f1a7d9376ec1194aa989082d113ab5d, type: 3}
+  isStackable: 1
   experienceAmount: 50

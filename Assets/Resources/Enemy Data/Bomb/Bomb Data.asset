@@ -20,4 +20,4 @@ MonoBehaviour:
   _staggerDuration: 1
   _knockbackForce: 3
   _baseDamage: 7.5
-  _stoppingDistance: 3
+  _stoppingDistance: 3.5

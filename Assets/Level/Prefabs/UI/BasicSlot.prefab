@@ -95,6 +95,8 @@ MonoBehaviour:
   stackAmountText: {fileID: 3344086735980019746}
   keyTooltipText: {fileID: 9177517864750544605}
   useItemInput: {fileID: 0}
+  inputTranslator: {fileID: 11400000, guid: da8057efcf3a45a47bb320ce196e8d61, type: 2}
+  droppedItem: {fileID: 7356604926645457459, guid: bef4d4765fc68164eaa4a1f98b3fc7a5, type: 3}
 --- !u!1 &743269340325950548
 GameObject:
   m_ObjectHideFlags: 0
