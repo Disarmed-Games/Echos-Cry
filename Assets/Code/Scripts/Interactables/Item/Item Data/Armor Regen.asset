@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Echos Cry Core::ArmorRegenItemData
   displayName: Armor Regen Potion
   description: Consume this to gain armor regeneration.
-  icon: {fileID: 21300000, guid: fed6dd84509e96747897f82c287018ea, type: 3}
+  icon: {fileID: 21300000, guid: f72e7709ca46d654ea956cfc5b8a30a6, type: 3}
+  isStackable: 0
   _regenArmorChannel: {fileID: 11400000, guid: 32e8668cebf73d74994810528e57ffd2, type: 2}

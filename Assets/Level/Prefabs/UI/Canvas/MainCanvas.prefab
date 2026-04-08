@@ -1347,6 +1347,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3497b21a514e4a147aec92b4af4f4cb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Echos Cry Core::PlayerHealthBar
+  barType: 1
   healthChannel: {fileID: 11400000, guid: cec94596b92da1b4a92dd5b3272c8302, type: 2}
   amountText: {fileID: 2469055423472427283}
   livesRemainingText: {fileID: 0}
@@ -4163,6 +4164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3497b21a514e4a147aec92b4af4f4cb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealthBar
+  barType: 0
   healthChannel: {fileID: 11400000, guid: c585d041cc469f04b887f8eeb82703dc, type: 2}
   amountText: {fileID: 8583406580470477534}
   livesRemainingText: {fileID: 760447168988916775}

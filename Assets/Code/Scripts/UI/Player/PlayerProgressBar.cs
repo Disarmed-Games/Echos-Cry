@@ -1,22 +1,47 @@
 using TMPro;
 using UnityEngine;
 using DG.Tweening;
+using System;
 
 public class PlayerProgressBar : MonoBehaviour
 {
+    private enum Bar
+    {
+        HEALTH,
+        ARMOR,
+    }
+    [SerializeField] private Bar barType;
+
     [SerializeField] private DoubleFloatEventChannel healthChannel;
     [SerializeField] private TextMeshProUGUI amountText;
     [SerializeField] private TextMeshProUGUI livesRemainingText;
     [SerializeField] private UnityEngine.UI.Image frontBar;
     [SerializeField] private UnityEngine.UI.Image backBar;
     public float chipSpeed = 2f;
-    private float hFraction = 0f;
+    private float targetFraction;
+
+    private void Start()
+    {
+        UpdateLives();
+    }
 
     void OnEnable()
     {
         if (healthChannel != null) healthChannel.Channel += UpdateBar;
         GameManager.OnPlayerDeathEvent += UpdateLives;
-        UpdateLives();
+
+        if (barType == Bar.HEALTH)
+        {
+            var playerHealth = FindAnyObjectByType<HealthSystem>();
+            if (playerHealth != null)
+                UpdateBar(playerHealth.CurrentHealth, playerHealth.MaxHealth);
+        }
+        else if (barType == Bar.ARMOR)
+        {
+            var playerHealth = FindAnyObjectByType<HealthSystem>();
+            if (playerHealth != null)
+                UpdateBar(playerHealth.CurrentArmor, playerHealth.MaxArmor);
+        }
     }
 
     void OnDisable()
@@ -27,37 +52,40 @@ public class PlayerProgressBar : MonoBehaviour
 
     private void UpdateLives()
     {
-        if (livesRemainingText != null)
+        if (barType == Bar.HEALTH)
             livesRemainingText.text = $"Lives Remaining: {GameManager.PlayerLives}";
 
-        hFraction = 1f;
+        targetFraction = 1f;
         frontBar.fillAmount = 1f;
         backBar.fillAmount = 1f;
     }
 
     private void UpdateBar(float currentValue, float maxValue)
     {
-        amountText.text = currentValue.ToString() + "/" + maxValue.ToString();
-        hFraction = currentValue / maxValue;
-        float fillF = frontBar.fillAmount;
-        float fillB = backBar.fillAmount;
-    
-        if (fillB > hFraction)
+        amountText.text = $"{currentValue}/{maxValue}";
+
+        targetFraction = currentValue / maxValue;
+
+        backBar.DOKill();
+        frontBar.DOKill();
+
+        float frontFill = frontBar.fillAmount;
+        float backFill = backBar.fillAmount;
+
+        if (backFill > targetFraction)
         {
-            frontBar.fillAmount = hFraction;
-            backBar.DOKill();
-            DOTween.To(() => backBar.fillAmount, x => backBar.fillAmount = x, hFraction, chipSpeed).SetEase(Ease.OutQuad);
+            frontBar.fillAmount = targetFraction;
+            DOTween.To(() => backBar.fillAmount, x => backBar.fillAmount = x, targetFraction, chipSpeed).SetEase(Ease.OutQuad);
         }
-        else if (fillF < hFraction)
+        else if (frontFill < targetFraction)
         {
-            backBar.fillAmount = hFraction;
-            frontBar.DOKill();
-            DOTween.To(() => frontBar.fillAmount, x => frontBar.fillAmount = x, hFraction, chipSpeed).SetEase(Ease.OutQuad);
+            backBar.fillAmount = targetFraction;
+            DOTween.To(() => frontBar.fillAmount, x => frontBar.fillAmount = x, targetFraction, chipSpeed).SetEase(Ease.OutQuad);
         }
         else
         {
-            frontBar.fillAmount = hFraction;
-            backBar.fillAmount = hFraction;
+            frontBar.fillAmount = targetFraction;
+            backBar.fillAmount = targetFraction;
         }
     }
 }
