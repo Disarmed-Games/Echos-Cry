@@ -2,6 +2,8 @@ using TMPro;
 using UnityEngine;
 using DG.Tweening;
 using System;
+using UnityEngine.Assertions;
+using Ink.Parsed;
 
 public class PlayerProgressBar : MonoBehaviour
 {
@@ -19,10 +21,12 @@ public class PlayerProgressBar : MonoBehaviour
     [SerializeField] private UnityEngine.UI.Image backBar;
     public float chipSpeed = 2f;
     private float targetFraction;
+    private HealthSystem playerHealth = null;
 
     private void Start()
     {
         UpdateLives();
+        
     }
 
     void OnEnable()
@@ -32,15 +36,32 @@ public class PlayerProgressBar : MonoBehaviour
 
         if (barType == Bar.HEALTH)
         {
-            var playerHealth = FindAnyObjectByType<HealthSystem>();
-            if (playerHealth != null)
+            //use stored reference rather than finding the object every time on death reset 
+            if (playerHealth == null)
+            {
+                playerHealth = FindAnyObjectByType<HealthSystem>();
+            }
+            
+            if (playerHealth != null) {
+                
+                //Debug.Log($"in progress bar curr health: {playerHealth.CurrentHealth}, max plyr health: {playerHealth.MaxHealth}");
                 UpdateBar(playerHealth.CurrentHealth, playerHealth.MaxHealth);
+            }
         }
         else if (barType == Bar.ARMOR)
         {
-            var playerHealth = FindAnyObjectByType<HealthSystem>();
+            if (playerHealth == null)
+            {
+                playerHealth = FindAnyObjectByType<HealthSystem>();
+            }
+
             if (playerHealth != null)
+            {
+                
+                //Debug.Log($"in progress bar curr armor: {playerHealth.CurrentArmor}, max plyr armor: {playerHealth.MaxArmor}");
                 UpdateBar(playerHealth.CurrentArmor, playerHealth.MaxArmor);
+            }
+                
         }
     }
 
@@ -62,6 +83,7 @@ public class PlayerProgressBar : MonoBehaviour
 
     private void UpdateBar(float currentValue, float maxValue)
     {
+        //Debug.Log($"Current value: {currentValue}, maxValue: {maxValue}");
         amountText.text = $"{currentValue}/{maxValue}";
 
         targetFraction = currentValue / maxValue;

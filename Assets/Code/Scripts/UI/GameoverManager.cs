@@ -27,6 +27,7 @@ public class GameoverManager : MonoBehaviour
 
     public void Respawn()
     {
+        Debug.Log("========Respawning player");
         sceneTriggerManager.StartTransition();
         DisableGameoverMenu();
     }
