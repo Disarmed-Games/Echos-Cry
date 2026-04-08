@@ -65,9 +65,9 @@ public class StaggerEnemyState : EnemyState
     public override void Enter(Enemy enemyContext)
     {
         //Debug.Log("Stagger");
-        enemyContext.Rigidbody.isKinematic = false;
+        //enemyContext.Rigidbody.isKinematic = false;
         Vector3 direction = (PlayerRef.Transform.position - enemyContext.transform.position).normalized;
-        enemyContext.Rigidbody.AddForce(-(enemyContext.Data.KnockbackForce * direction), ForceMode.Impulse);
+        //enemyContext.Rigidbody.AddForce(-(enemyContext.Data.KnockbackForce * direction), ForceMode.Impulse);
         enemyContext.NPCAnimator.StaggerParticleStart();
         enemyContext.StartCoroutine(StaggerDuration(enemyContext));
     }
@@ -243,5 +243,20 @@ public class FuseEnemyState : EnemyState
         yield return new WaitForSeconds(0.2f);
         SetEnemyTarget(enemyContext);
         enemyContext.StartCoroutine(UpdateTarget(enemyContext));
+    }
+}
+
+public class Attack2EnemyState : EnemyState
+{
+    public override void Enter(Enemy enemyContext)
+    {
+        enemyContext.NPCAnimator.PlayAnimation(HashCodes.AttackHashCode);
+        enemyContext.SoundStrategy.Execute(enemyContext.SoundConfig.AttackSFX, enemyContext.transform, 0f);
+        enemyContext.AttackStrategies[1].Execute(enemyContext.Data.BaseDamage, Vector3.zero, enemyContext.transform);
+    }
+    public override void Exit(Enemy enemyContext)
+    {
+        enemyContext.Rigidbody.isKinematic = true;
+        enemyContext.AttackStrategies[1].StopAllCoroutines();
     }
 }
