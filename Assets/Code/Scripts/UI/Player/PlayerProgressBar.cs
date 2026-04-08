@@ -2,6 +2,8 @@ using TMPro;
 using UnityEngine;
 using DG.Tweening;
 using System;
+using UnityEngine.Assertions;
+using Ink.Parsed;
 
 public class PlayerProgressBar : MonoBehaviour
 {
@@ -19,10 +21,12 @@ public class PlayerProgressBar : MonoBehaviour
     [SerializeField] private UnityEngine.UI.Image backBar;
     public float chipSpeed = 2f;
     private float targetFraction;
+    private HealthSystem playerHealth = null;
 
     private void Start()
     {
         UpdateLives();
+        
     }
 
     void OnEnable()
@@ -32,15 +36,66 @@ public class PlayerProgressBar : MonoBehaviour
 
         if (barType == Bar.HEALTH)
         {
-            var playerHealth = FindAnyObjectByType<HealthSystem>();
-            if (playerHealth != null)
+            //use stored reference rather than finding the object every time on death reset 
+            if (playerHealth == null)
+            {
+                playerHealth = FindAnyObjectByType<HealthSystem>();
+            }
+            
+            Debug.Log($"Player Health grabbed, current health is: {playerHealth.CurrentHealth} and max health is {playerHealth.MaxHealth}");
+            if (playerHealth != null) {
+                // == 0 checks required so that it doesn't interfere with loading into any scene level 
+                // rather than by playing from beginning -> level you want to test ie hot reload
+                //unaffected via loading into levels from town with value differences as it's not checked
+                if (playerHealth.CurrentHealth == 0)
+                {
+                    
+                } else
+                {
+                    Assert.IsTrue(playerHealth.CurrentHealth >= 50);
+                }
+
+                if (playerHealth.MaxHealth == 0)
+                {
+                    
+                } else
+                {
+                    Assert.IsTrue(playerHealth.MaxHealth >= 50);
+                }
+                
+                Debug.Log($"in progress bar curr health: {playerHealth.CurrentHealth}, max plyr health: {playerHealth.MaxHealth}");
                 UpdateBar(playerHealth.CurrentHealth, playerHealth.MaxHealth);
+            }
         }
         else if (barType == Bar.ARMOR)
         {
-            var playerHealth = FindAnyObjectByType<HealthSystem>();
+            if (playerHealth == null)
+            {
+                playerHealth = FindAnyObjectByType<HealthSystem>();
+            }
+
             if (playerHealth != null)
+            {
+                //same logic as above
+                if (playerHealth.CurrentArmor == 0)
+                {
+                    
+                } else
+                {
+                    Assert.IsTrue(playerHealth.CurrentArmor >= 5);
+                }
+
+                if (playerHealth.MaxArmor == 0)
+                {
+                    
+                } else
+                {
+                    Assert.IsTrue(playerHealth.MaxArmor >= 5);
+                }
+
                 UpdateBar(playerHealth.CurrentArmor, playerHealth.MaxArmor);
+            }
+                
         }
     }
 
@@ -52,6 +107,7 @@ public class PlayerProgressBar : MonoBehaviour
 
     private void UpdateLives()
     {
+        Debug.Log("Updating player lives");
         if (barType == Bar.HEALTH)
             livesRemainingText.text = $"Lives Remaining: {GameManager.PlayerLives}";
 
@@ -62,6 +118,7 @@ public class PlayerProgressBar : MonoBehaviour
 
     private void UpdateBar(float currentValue, float maxValue)
     {
+        Debug.Log($"Current value: {currentValue}, maxValue: {maxValue}");
         amountText.text = $"{currentValue}/{maxValue}";
 
         targetFraction = currentValue / maxValue;
