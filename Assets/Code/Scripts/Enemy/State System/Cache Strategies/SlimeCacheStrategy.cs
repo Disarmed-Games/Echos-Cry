@@ -86,6 +86,20 @@ public class SlimeCacheStrategy : EnemyCacheStrategy
                 new EnemyStateTransition[] { death_check, is_staggered, cooldown_ended },
                 new EnemyStateTransition[0]
             );
+        handler.AddStateNode
+            (
+                enemyContext.StateCache,
+                EnemyStates.Fuse,
+                new EnemyStateTransition[0],
+                new EnemyStateTransition[0]
+            );
+        handler.AddStateNode
+            (
+                enemyContext.StateCache,
+                EnemyStates.Attack2,
+                new EnemyStateTransition[0],
+                new EnemyStateTransition[0]
+            );
 
         enemyContext.StateHandler = handler;
     }

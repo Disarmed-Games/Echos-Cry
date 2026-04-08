@@ -13,15 +13,15 @@ public class ComboWeapon : Weapon
         //Stop Coroutines, specifically ComboResetTimer
         StopAllCoroutines();
         //Update the damage the weapon collider will use based on attack data
-        _weaponCollider.UpdateAttack(_currentAttackData.BaseDamage * _playerAttackDamage.BaseDamageMultiplier, TempoConductor.Instance.CurrentHitQuality);
+        _weaponCollider.UpdateAttack(CurrentAttackData.BaseDamage * _playerAttackDamage.BaseDamageMultiplier, TempoConductor.Instance.CurrentHitQuality);
         //Setup and play animations associated with the attack data
         AnimatorOverrideController controller = new AnimatorOverrideController(_attackAnimator.runtimeAnimatorController);
-        controller[_clipName] = _currentAttackData.AnimationClip;
+        controller[_clipName] = CurrentAttackData.AnimationClip;
         _attackAnimator.runtimeAnimatorController = controller;
         _attackAnimator.Play("Attack");
         //Begin coroutine that will measure the animation length and then reset weapon
 
-        StartCoroutine(AttackLengthCoroutine(_currentAttackData.AnimationClip.length));
+        StartCoroutine(AttackLengthCoroutine(CurrentAttackData.AnimationClip.length));
     }
 
     protected override void OnAwake()
@@ -34,22 +34,22 @@ public class ComboWeapon : Weapon
 
     protected override void OnPrimaryAction()
     {
-        _currentAttackData = _comboTree.ProcessPrimaryAction().AttackData;
+        CurrentAttackData = _comboTree.ProcessPrimaryAction().AttackData;
         
         //Use SFX manager to setup attack sound
         SoundEffectManager.Instance.Builder
-            .SetSound(_currentAttackData.AttackSound)
+            .SetSound(CurrentAttackData.AttackSound)
             .SetSoundPosition(transform.position)
             .ValidateAndPlaySound();
     }
 
     protected override void OnSecondaryAction()
     {
-        _currentAttackData = _comboTree.ProcessSecondaryAction().AttackData;
+        CurrentAttackData = _comboTree.ProcessSecondaryAction().AttackData;
 
         //Use SFX manager to setup attack sound
         SoundEffectManager.Instance.Builder
-            .SetSound(_currentAttackData.AttackSound)
+            .SetSound(CurrentAttackData.AttackSound)
             .SetSoundPosition(transform.position)
             .SetDelay(_comboWeaponData.SecondarySoundDelay)
             .ValidateAndPlaySound();
