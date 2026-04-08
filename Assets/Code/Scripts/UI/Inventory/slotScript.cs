@@ -65,7 +65,7 @@ public class SlotScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     {
         canDrop = true;
 
-        if (description != "")
+        if (slotItem != null)
         {
             string dropText = $"\nPress '{inputTranslator.PlayerInputs.Gameplay.Drop.GetBindingDisplayString(InputBinding.MaskByGroup("KeyboardMouse"))}' to drop.";
             UITip.Instance.StartMessage(description + dropText);
