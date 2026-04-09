@@ -10,4 +10,9 @@ public class ManageBeatShaderMaterials : MonoBehaviour
         float pulse = 1 - Mathf.Sin(t * Mathf.PI);
         _material.SetFloat("_BeatTime", pulse);
     }
+
+    private void OnDisable()
+    {
+        _material.SetFloat("_BeatTime", 0f);
+    }
 }
