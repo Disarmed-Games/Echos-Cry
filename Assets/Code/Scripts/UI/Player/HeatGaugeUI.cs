@@ -1,11 +1,10 @@
-using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HeatGaugeUI : MonoBehaviour
 {
     [SerializeField] DoubleIntEventChannel _updateHeatGauge;
-    [SerializeField] TextMeshProUGUI text;
-
+    [SerializeField] Image[] heatImagesArray = new Image[6];
     private void OnEnable()
     {
         if (_updateHeatGauge != null) _updateHeatGauge.Channel += UpdateHeatGauge;
@@ -18,6 +17,9 @@ public class HeatGaugeUI : MonoBehaviour
 
     private void UpdateHeatGauge(int current, int max)
     {
-        text.text = current.ToString() + " / " + max.ToString();
+        for (int i = 0; i < max; i++)
+        {
+            heatImagesArray[i].enabled = (i < current);
+        }
     }
 }
