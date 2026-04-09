@@ -109,7 +109,7 @@ public class Player : MonoBehaviour
     public void Reset()
     {
         _playerStateMachine.SwitchState(_playerStateCache.RequestState(PlayerStateCache.PlayerState.Idle));
-        _health.HealFullHealthAndArmor();
+        _health.ResetHealth();
     }
 
     public void FullReset()

@@ -80,11 +80,16 @@ public class PlayerHealth : MonoBehaviour
     }
     public void HealHealth(float amount)
     {
+        Debug.Log($"Healing health by amount: ${amount}");
+        Debug.Log($"invoking current health as: {_healthSystem.CurrentHealth} and max health as: {_healthSystem.MaxHealth}");
+        
         _healthSystem.HealHealth(amount);
         _healthChannel.Invoke(_healthSystem.CurrentHealth, _healthSystem.MaxHealth);
     }
     public void HealArmor(float amount)
     {
+        Debug.Log($"Healing armor by amount: ${amount}");
+        Debug.Log($"invoking current armor as: {_healthSystem.CurrentArmor} and max armor as: {_healthSystem.MaxArmor}");
         _healthSystem.HealArmor(amount);
         _armorChannel.Invoke(_healthSystem.CurrentArmor, _healthSystem.MaxArmor);
     }
@@ -159,5 +164,10 @@ public class PlayerHealth : MonoBehaviour
                 _armorChannel.Invoke(_healthSystem.CurrentArmor, _healthSystem.MaxArmor);
             }
         }
+    }
+
+    public HealthSystem GetPlayerHealthSystemRef()
+    {
+        return _healthSystem;
     }
 }
