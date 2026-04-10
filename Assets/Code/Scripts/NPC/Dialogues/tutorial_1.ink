@@ -8,5 +8,5 @@ Ever since these demons came around nothin' has been the same.
 -
 Well nevermind me, if you want to survive here, you'll need to learn a few things.
 That stump ahead has been blocking the path.
-Press 'REPLACE_BUTTON' to unleash your primary attack.
+Press 'REPLACE_BUTTON' to unleash your light attack.
 - ->END
