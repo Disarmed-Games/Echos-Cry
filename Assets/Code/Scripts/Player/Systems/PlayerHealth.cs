@@ -84,16 +84,22 @@ public class PlayerHealth : MonoBehaviour
     }
     public void HealHealth(float amount)
     {
-        Debug.Log($"Healing health by amount: ${amount}");
-        Debug.Log($"invoking current health as: {_healthSystem.CurrentHealth} and max health as: {_healthSystem.MaxHealth}");
-        
+        //Debug.Log($"Healing health by amount: ${amount}");
+        //Debug.Log($"invoking current health as: {_healthSystem.CurrentHealth} and max health as: {_healthSystem.MaxHealth}");
+
+        if (DamageLabelManager.Instance != null)
+            DamageLabelManager.Instance.SpawnPopup(amount, PlayerRef.Transform.position, Color.green);
+
         _healthSystem.HealHealth(amount);
         _healthChannel.Invoke(_healthSystem.CurrentHealth, _healthSystem.MaxHealth);
     }
     public void HealArmor(float amount)
     {
-        Debug.Log($"Healing armor by amount: ${amount}");
-        Debug.Log($"invoking current armor as: {_healthSystem.CurrentArmor} and max armor as: {_healthSystem.MaxArmor}");
+        //Debug.Log($"Healing armor by amount: ${amount}");
+        //Debug.Log($"invoking current armor as: {_healthSystem.CurrentArmor} and max armor as: {_healthSystem.MaxArmor}");
+        if (DamageLabelManager.Instance != null)
+            DamageLabelManager.Instance.SpawnPopup(amount, PlayerRef.Transform.position, Color.blue);
+
         _healthSystem.HealArmor(amount);
         _armorChannel.Invoke(_healthSystem.CurrentArmor, _healthSystem.MaxArmor);
     }
@@ -128,7 +134,7 @@ public class PlayerHealth : MonoBehaviour
 
             if (_canRegenHealth)
             {
-                _healthSystem.HealHealth(_regenHealthAmount);
+                HealHealth(_regenHealthAmount);
                 _healthChannel.Invoke(_healthSystem.CurrentHealth, _healthSystem.MaxHealth);
             }   
         }
@@ -164,7 +170,7 @@ public class PlayerHealth : MonoBehaviour
 
             if (_canRegenArmor)
             {
-                _healthSystem.HealArmor(_regenArmorAmount);
+                HealArmor(_regenArmorAmount);
                 _armorChannel.Invoke(_healthSystem.CurrentArmor, _healthSystem.MaxArmor);
             }
         }
