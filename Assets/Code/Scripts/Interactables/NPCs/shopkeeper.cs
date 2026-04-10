@@ -50,12 +50,12 @@ public class ShopKeeper : MonoBehaviour
         }
     }
 
-    void Start()
+    void OnEnable()
     {
         translator.OnCloseShopEvent += CloseShop;
         translator.OnInteractEvent += RequestOpenShop;
     }
-    void OnDestroy()
+    void OnDisable()
     {
         translator.OnCloseShopEvent -= CloseShop;
         translator.OnInteractEvent -= RequestOpenShop;

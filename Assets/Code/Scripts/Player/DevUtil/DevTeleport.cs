@@ -8,13 +8,13 @@ public class DevTeleport : MonoBehaviour
     [SerializeField] private LayerMask ground;
     [SerializeField] private Rigidbody _playerRigidbody;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void OnEnable()
     {
         translator.OnTeleportEvent += TeleportPlayer;
     }
-    private void OnDestroy()
+    private void OnDisable()
     {
-        translator.OnTeleportEvent += TeleportPlayer;
+        translator.OnTeleportEvent -= TeleportPlayer;
     }
 
     private void TeleportPlayer()

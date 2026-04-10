@@ -6,25 +6,25 @@ using Unity.Cinemachine;
 
 public class DialogueTrigger : MonoBehaviour
 {
-    private bool playerInRange = false;
     public static event Action onInteractWithDialogue;
 
     [SerializeField] private TextAsset inkJSON;
     [SerializeField] private GameObject ToolTipPrefab;
     [SerializeField] private InputTranslator _inputTranslator;
+    private Collider currentPlayer;
 
-    void Start()
+    void OnEnable()
     {
         _inputTranslator.OnInteractEvent += InteractCheck;
     }
-    void OnDestroy()
+    void OnDisable()
     {
-        _inputTranslator.OnInteractEvent += InteractCheck;
+        _inputTranslator.OnInteractEvent -= InteractCheck;
     }
 
     private void InteractCheck()
     {
-        if (playerInRange && !DialogueManager.Instance.isDialoguePlaying)
+        if (currentPlayer != null && !DialogueManager.Instance.isDialoguePlaying)
         {
             DialogueManager.Instance.EnterDialogueMode(inkJSON);
             onInteractWithDialogue?.Invoke();
@@ -38,7 +38,8 @@ public class DialogueTrigger : MonoBehaviour
             ToolTipPrefab.GetComponent<ToolTip>().text =
                 $"Press '{_inputTranslator.PlayerInputs.Gameplay.Interact.GetBindingDisplayString(InputBinding.MaskByGroup("KeyboardMouse"))}' to talk.";
             Instantiate(ToolTipPrefab, this.transform.position + new Vector3(0, 1, -1), Quaternion.identity);
-            playerInRange = true;
+            
+            currentPlayer = other;
         }
     }
 
@@ -46,7 +47,7 @@ public class DialogueTrigger : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            playerInRange = false;
+            currentPlayer = null;
 
             if (DialogueManager.Instance.isDialoguePlaying)
             {

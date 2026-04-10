@@ -17,7 +17,7 @@ public static class PersistenceInitializer
     {
         var currentScene = SceneManager.GetActiveScene();
 
-        if (currentScene.name == "EndCreditsMenu")
+        if (currentScene.name == "EndCreditsMenu" || currentScene.name == "MainMenu")
         {
             if (_persistenceRef != null)
             {

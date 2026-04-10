@@ -2,8 +2,10 @@ using System;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class BeatManager : NonSpawnableSingleton<BeatManager>
+public class BeatManager : MonoBehaviour
 {
+    public static BeatManager Instance;
+
     [SerializeField] private float _bpm;
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private Intervals[] _intervals;
@@ -16,12 +18,23 @@ public class BeatManager : NonSpawnableSingleton<BeatManager>
 
     public event Action onWholeBeat;
 
-
     public void PlaySong(AudioClip clip, float bpm)
     {
         _audioSource.clip = clip;
         _bpm = bpm;
         _audioSource.Play();
+    }
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else if (Instance != this)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void Update()

@@ -6,9 +6,8 @@ public class DoorEntrance : DoorManager
     [SerializeField] private LevelManager.LevelName levelReferenceName;
     [SerializeField] private GameObject _lockObject;
 
-    protected override void Start()
+    protected void Start()
     {
-        base.Start();
         isLocked = LevelManager.Instance.GetLevelLockedStatus(levelReferenceName);
     }
 

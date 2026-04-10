@@ -32,27 +32,31 @@ public class MenuManager : Singleton<MenuManager>
         SetMenu("HUD");
     }
 
-    private void Start()
+    private void OnEnable()
     {
         GameManager.OnPlayerDeathEvent += EnableGameoverMenu;
-        DialogueManager.onDialogueStarted += () => SetMenu("Dialogue");
-        DialogueManager.onDialogueEnded += () => SetMenu("HUD");
-        _settingsManager.OnMenuBackButton += () => SetMenu("Pause");
+        DialogueManager.onDialogueStarted += HandleDialogueStarted;
+        DialogueManager.onDialogueEnded += HandleDialogueEnded;
+        _settingsManager.OnMenuBackButton += HandleMenuBack;
         _translator.OnUpgradeEvent += EnableUpgradeMenu;
         _translator.OnPauseEvent += EnablePauseMenu;
         _translator.OnResumeEvent += DisablePauseMenu;
     }
 
-    void OnDestroy()
+    private void OnDisable()
     {
         GameManager.OnPlayerDeathEvent -= EnableGameoverMenu;
-        DialogueManager.onDialogueStarted -= () => SetMenu("Dialogue");
-        DialogueManager.onDialogueEnded -= () => SetMenu("HUD");
-        _settingsManager.OnMenuBackButton -= () => SetMenu("Pause");
+        DialogueManager.onDialogueStarted -= HandleDialogueStarted;
+        DialogueManager.onDialogueEnded -= HandleDialogueEnded;
+        _settingsManager.OnMenuBackButton -= HandleMenuBack;
         _translator.OnUpgradeEvent -= EnableUpgradeMenu;
         _translator.OnPauseEvent -= EnablePauseMenu;
         _translator.OnResumeEvent -= DisablePauseMenu;
     }
+
+    void HandleDialogueStarted() => SetMenu("Dialogue");
+    void HandleDialogueEnded() => SetMenu("HUD");
+    void HandleMenuBack() => SetMenu("Pause");
 
     public void EnableGameoverMenu()
     {

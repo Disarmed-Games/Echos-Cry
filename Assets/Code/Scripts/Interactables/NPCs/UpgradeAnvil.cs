@@ -40,11 +40,11 @@ public class UpgradeAnvil : MonoBehaviour
         }
     }
 
-    void Start()
+    void OnEnable()
     {
         translator.OnInteractEvent += RequestOpenShop;
     }
-    void OnDestroy()
+    void OnDisable()
     {
         translator.OnInteractEvent -= RequestOpenShop;
     }

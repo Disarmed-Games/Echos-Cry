@@ -40,10 +40,14 @@ public class PlayerComboMeter : MonoBehaviour
     private void Start()
     {
         playerRef = GetComponentInParent<Player>();
+    }
+
+    private void OnEnable()
+    {
         _inputTranslator.OnPrimaryActionEvent += CheckForMiss;
         _inputTranslator.OnSecondaryActionEvent += CheckForMiss;
     }
-    private void OnDestroy()
+    private void OnDisable()
     {
         _inputTranslator.OnPrimaryActionEvent -= CheckForMiss;
         _inputTranslator.OnSecondaryActionEvent -= CheckForMiss;

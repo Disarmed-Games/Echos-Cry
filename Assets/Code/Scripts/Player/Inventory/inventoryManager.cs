@@ -33,13 +33,16 @@ public class InventoryManager : MonoBehaviour
         inventoryList = new List<InventoryItem>();
         itemDictionary = new Dictionary<InventoryItemData, InventoryItem>();
         _player = GameObject.FindWithTag("Player")?.GetComponent<Player>();
+    }
 
+    private void OnEnable()
+    {
         _inputTranslator.OnItem1Event += UseItem;
         _inputTranslator.OnItem2Event += UseItem;
         _inputTranslator.OnItem3Event += UseItem;
         _inputTranslator.OnItem4Event += UseItem;
     }
-    void OnDestroy()
+    private void OnDisable()
     {
         _inputTranslator.OnItem1Event -= UseItem;
         _inputTranslator.OnItem2Event -= UseItem;
