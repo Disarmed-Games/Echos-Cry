@@ -76,7 +76,7 @@ public class PassiveEffectHandler : MonoBehaviour
                 enemyReference.NPCAnimator.PlayVisualEffect();
 
                 if (DamageLabelManager.Instance != null)
-                    DamageLabelManager.Instance.SpawnPopup(bleed.bleedDamage, enemyReference.transform.position, Color.red);
+                    DamageLabelManager.Instance.SpawnPopup(bleed.bleedDamage, enemyReference.transform.position, Color.purple);
                 break;
             case MarkedForDeathPassive marked:
                 enemyReference.Health.SetDamageMultiplier(marked.damageMultiplier);

@@ -73,6 +73,10 @@ public class PlayerHealth : MonoBehaviour
     public void Damage(float damage)
     {
         _healthSystem.Damage(damage);
+
+        if (DamageLabelManager.Instance != null)
+            DamageLabelManager.Instance.SpawnPopup(damage, PlayerRef.Transform.position, Color.red);
+
         PauseHealthRegen();
 
         _armorChannel.Invoke(_healthSystem.CurrentArmor, _healthSystem.MaxArmor); 
