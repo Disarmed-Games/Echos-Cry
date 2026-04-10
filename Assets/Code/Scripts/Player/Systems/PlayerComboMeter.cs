@@ -13,7 +13,7 @@ public class PlayerComboMeter : MonoBehaviour
     private float _comboMeterDrainRate = 10f;
     private float _comboDrainDelay = 5f;
     private float _comboMeterAmount = 0;
-    private float _comboBaseIncrease = 5f;
+    private float _comboBaseIncrease = 2f;
     private float _comboBaseDecrease = 15f;
     private float _comboGoodRate = 0.8f;
     private float _comboExcellentRate = 1.5f;
