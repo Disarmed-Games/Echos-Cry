@@ -302,7 +302,8 @@ MonoBehaviour:
   thickness: 64
   lineWidth: 6
   onBeatLineColor: {r: 0.9568628, g: 0.7803922, b: 0.09411766, a: 1}
-  offBeatLineColor: {r: 0, g: 0.6039216, b: 0.7647059, a: 1}
+  secondBeatLineColor: {r: 0, g: 0.9582815, b: 1, a: 1}
+  fourthBeatLineColor: {r: 0.57642025, g: 0.19339621, b: 1, a: 1}
   leftColor: {r: 0.95686275, g: 0.78039217, b: 0.09411765, a: 0.39215687}
   rightColor: {r: 0.95686275, g: 0.78039217, b: 0.09411765, a: 0}
 --- !u!114 &9200451268641822078
@@ -384,7 +385,8 @@ MonoBehaviour:
   thickness: 64
   lineWidth: 6
   onBeatLineColor: {r: 0.9568628, g: 0.7803922, b: 0.09411766, a: 1}
-  offBeatLineColor: {r: 0, g: 0.6039216, b: 0.7647059, a: 1}
+  secondBeatLineColor: {r: 0, g: 0.9582815, b: 1, a: 1}
+  fourthBeatLineColor: {r: 0.57642025, g: 0.19339621, b: 1, a: 1}
   leftColor: {r: 0.95686275, g: 0.78039217, b: 0.09411765, a: 0.39215687}
   rightColor: {r: 0.95686275, g: 0.78039217, b: 0.09411765, a: 0}
 --- !u!114 &6869331631065568593
