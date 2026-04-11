@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AttackData
   AnimationClip: {fileID: 7400000, guid: d42f04eedcd9c7948a0ac19ac423e10f, type: 2}
   AttackSound: {fileID: 11400000, guid: 8d82bfdd90e1ccc4d9fe7376a83b2717, type: 2}
-  BaseDamage: 15
+  BaseDamage: 14
   PassiveEffects:
     OneThirdEffect: {fileID: 11400000, guid: 3664655054d7d144f873f217fd3e71cc, type: 2}
     TwoThirdsEffect: {fileID: 11400000, guid: 25e9fd5d2ef64b447905e84d09e57e47, type: 2}

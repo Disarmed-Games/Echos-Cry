@@ -1,3 +1,4 @@
+using Mono.Cecil.Cil;
 using System.Collections;
 using TMPro;
 using Unity.VisualScripting;
@@ -10,10 +11,11 @@ public class BeatUIHandler : MonoBehaviour
 {
     [SerializeField] private InputTranslator _translator;
     [SerializeField] private TextMeshProUGUI hitQualityText;
-    [SerializeField] private TextMeshProUGUI beatNumberText;
     [SerializeField] private Animator _textAnimator;
     [SerializeField] private Animator _hitEffectAnimator1;
     [SerializeField] private Animator _hitEffectAnimator2;
+    [SerializeField] private Image heavyAttackImage;
+    [SerializeField] private Sprite[] heavyAttackSprites = new Sprite[3];
     [SerializeField] private bool showHitText = true;
 
     void OnEnable()
@@ -32,7 +34,18 @@ public class BeatUIHandler : MonoBehaviour
 
     private void Update()
     {
-        beatNumberText.text = (BeatManager.Instance.BeatInMeasure + 1).ToString();
+        if (showHitText)
+        {
+            if (BeatManager.Instance.BeatInMeasure == 0)
+                heavyAttackImage.sprite = heavyAttackSprites[0];
+            else if (BeatManager.Instance.BeatInMeasure == 1)
+                heavyAttackImage.sprite = heavyAttackSprites[1];
+            else if (BeatManager.Instance.BeatInMeasure == 2)
+                heavyAttackImage.sprite = heavyAttackSprites[0];
+            else
+                heavyAttackImage.sprite = heavyAttackSprites[2];
+        }
+        else heavyAttackImage.sprite = null;
     }
 
     private void UpdateHitQualityText(bool isPressed)

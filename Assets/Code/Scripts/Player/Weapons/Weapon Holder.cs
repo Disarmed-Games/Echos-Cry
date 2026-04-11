@@ -67,12 +67,12 @@ public class WeaponHolder : MonoBehaviour
     {
         if (_currentlyEquippedWeapon == null) return;
 
-        if (BeatManager.Instance.BeatInMeasure == 3)
+        if (BeatManager.Instance.BeatInMeasure == 1)
         {
             SwitchWeapon(1);
             _currentlyEquippedWeapon.PrimaryAction();
         }
-        else if (BeatManager.Instance.BeatInMeasure == 1)
+        else if (BeatManager.Instance.BeatInMeasure == 3)
         {
             SwitchWeapon(1);
             _currentlyEquippedWeapon.SecondaryAction();
