@@ -36,16 +36,29 @@ public class BeatUIHandler : MonoBehaviour
     {
         if (showHitText)
         {
+            heavyAttackImage.enabled = true;
             if (BeatManager.Instance.BeatInMeasure == 0)
+            {
                 heavyAttackImage.sprite = heavyAttackSprites[0];
+                heavyAttackImage.material.SetTexture("_Texture2D", heavyAttackSprites[0].texture);
+            }
             else if (BeatManager.Instance.BeatInMeasure == 1)
+            {
                 heavyAttackImage.sprite = heavyAttackSprites[1];
+                heavyAttackImage.material.SetTexture("_Texture2D", heavyAttackSprites[1].texture);
+            }
             else if (BeatManager.Instance.BeatInMeasure == 2)
+            {
                 heavyAttackImage.sprite = heavyAttackSprites[0];
+                heavyAttackImage.material.SetTexture("_Texture2D", heavyAttackSprites[0].texture);
+            }
             else
+            {
                 heavyAttackImage.sprite = heavyAttackSprites[2];
+                heavyAttackImage.material.SetTexture("_Texture2D", heavyAttackSprites[2].texture);
+            }
         }
-        else heavyAttackImage.sprite = null;
+        else heavyAttackImage.enabled = false;
     }
 
     private void UpdateHitQualityText(bool isPressed)
