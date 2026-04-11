@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63ed4e8df567ba24b8d0ae195dcc14dd, type: 3}
-  m_Name: Default Bat Data
-  m_EditorClassIdentifier: Assembly-CSharp::BatEnemyConfigFile
+  m_Script: {fileID: 11500000, guid: 94b2c210b3406954c9bb07cfe657c510, type: 3}
+  m_Name: Bat Data
+  m_EditorClassIdentifier: Echos Cry Core::EnemyData
   _distanceCheck: 10
   _attackChargeTime: 0.4
   _attackDashForce: 3
@@ -20,3 +20,4 @@ MonoBehaviour:
   _staggerDuration: 1.2
   _knockbackForce: 4
   _baseDamage: 6
+  _stoppingDistance: 2

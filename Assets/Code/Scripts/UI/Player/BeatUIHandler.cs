@@ -16,14 +16,14 @@ public class BeatUIHandler : MonoBehaviour
     [SerializeField] private Animator _hitEffectAnimator2;
     [SerializeField] private bool showHitText = true;
 
-    void Start()
+    void OnEnable()
     {
         //_translator.OnDashEvent += UpdateHitQualityText;
         _translator.OnPrimaryActionEvent += UpdateHitQualityText;
         _translator.OnSecondaryActionEvent += UpdateHitQualityText;
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         //_translator.OnDashEvent -= UpdateHitQualityText;
         _translator.OnPrimaryActionEvent -= UpdateHitQualityText;

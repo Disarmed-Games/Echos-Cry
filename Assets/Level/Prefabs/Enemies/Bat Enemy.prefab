@@ -374,7 +374,7 @@ MonoBehaviour:
   _collider: {fileID: 8838160874129828706}
   _passiveEffectHandler: {fileID: 8005077659622388430}
   _deathEffect: {fileID: 2836163184616676573, guid: c9677a51a5d061340a514220e825b583, type: 3}
-  _data: {fileID: 11400000, guid: 34220bc6c9ce99c4bb49667ea5dacad9, type: 2}
+  _data: {fileID: 11400000, guid: 8ba84a5f97a49024783483e648498d5f, type: 2}
   _enemyHealthUI: {fileID: 1385049851521198975}
   _attackStrats:
   - {fileID: 1431885463616028180}

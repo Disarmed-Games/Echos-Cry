@@ -96,6 +96,15 @@ public class DialogueManager : MonoBehaviour
         _inputTranslator.PlayerInputs.Gameplay.Enable();
     }
 
+    public void ExitDialogueModeInstant()
+    {
+        isDialoguePlaying = false;
+        dialogueText.text = "";
+        CameraManager.Instance.ZoomOutCamera(.8f);
+        _inputTranslator.PlayerInputs.Dialogue.Disable();
+        _inputTranslator.PlayerInputs.Gameplay.Enable();
+    }
+
     public void ContinueIfPossible(bool isPressed)
     {
         if (!isPressed) return;
@@ -132,6 +141,19 @@ public class DialogueManager : MonoBehaviour
                 StopCoroutine(displayLineCoroutine);
             }
             string nextLine = currentStory.Continue();
+
+            //Check for shop tag
+            foreach (string tag in currentStory.currentTags)
+            {
+                if (tag == "OPEN_SHOP")
+                {
+                    ExitDialogueModeInstant();
+                    MenuManager.Instance.EnableShopMenu();
+                    return;
+                }
+            }
+
+            //Add in key binding names
             nextLine = ProcessLineVariables(nextLine);
 
             if (nextLine.Equals("") && !currentStory.canContinue)

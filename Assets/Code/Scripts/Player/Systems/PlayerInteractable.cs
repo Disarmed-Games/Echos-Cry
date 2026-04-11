@@ -25,12 +25,10 @@ public class PlayerInteractable : MonoBehaviour
 
     private void OnEnable()
     {
-        if (translator == null) return;
         translator.OnInteractEvent += Interact;
     }
     private void OnDisable()
     {
-        if (translator == null) return;
         translator.OnInteractEvent -= Interact;
     }
 

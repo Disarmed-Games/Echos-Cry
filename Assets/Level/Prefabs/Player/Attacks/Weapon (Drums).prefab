@@ -1323,7 +1323,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8474684134448079835
 Transform:
   m_ObjectHideFlags: 0
@@ -1357,7 +1357,7 @@ MonoBehaviour:
   _attackAnimator: {fileID: 2358810359375941040}
   _weaponCollider: {fileID: 7182362231579992798}
   _playerAttackDamage: {fileID: 0}
-  _currentAttackData: {fileID: 0}
+  CurrentAttackData: {fileID: 0}
   _comboWeaponData: {fileID: 11400000, guid: 4aa5959af4f42e44382577bd6d90a5c8, type: 2}
 --- !u!95 &2358810359375941040
 Animator:

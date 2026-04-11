@@ -37,27 +37,12 @@ public class NpcDialogueHandler : MonoBehaviour
         }
     }
 
-    private void RequestSubmit()
-    {
-        if (_playerInRange && DialogueEvents.Instance.InDialogue)
-        {
-            DialogueEvents.Instance.SubmitPressed();
-
-            SoundEffectManager.Instance.Builder
-                .SetSound(_submitSound)
-                .SetSoundPosition(PlayerRef.Transform.position)
-                .ValidateAndPlaySound();
-        }
-    }
-
-    void Start()
+    void OnEnable()
     {
         _translator.OnInteractEvent += RequestDialogue;
-        //_translator.OnSubmitEvent += RequestSubmit;
     }
-    void OnDestroy()
+    void OnDisable()
     {
-        _translator.OnInteractEvent += RequestDialogue;
-        //_translator.OnSubmitEvent -= RequestSubmit;
+        _translator.OnInteractEvent -= RequestDialogue;
     }
 }

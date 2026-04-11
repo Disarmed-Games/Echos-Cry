@@ -9,14 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85577680f6882364ea1322aa89dfdf8f, type: 3}
+  m_Script: {fileID: 11500000, guid: 94b2c210b3406954c9bb07cfe657c510, type: 3}
   m_Name: Slime Data
-  m_EditorClassIdentifier: Assembly-CSharp::SlimeData
+  m_EditorClassIdentifier: Echos Cry Core::EnemyData
   _distanceCheck: 10
-  _attackChargeTime: 0.6
-  _attackDashForce: 2
+  _attackChargeTime: 0.4
+  _attackDashForce: 3
   _attackDuration: 0.25
-  _attackCooldown: 1.6
-  _staggerDuration: 1.8
-  _knockbackForce: 2
-  _baseDamage: 3
+  _attackCooldown: 1.2
+  _staggerDuration: 1.2
+  _knockbackForce: 4
+  _baseDamage: 4
+  _stoppingDistance: 2

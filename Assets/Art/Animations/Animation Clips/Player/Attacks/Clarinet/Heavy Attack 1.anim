@@ -81,7 +81,7 @@ AnimationClip:
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
-        time: 0.4375
+        time: 0.5
         value: {x: 0, y: 0, z: 34.24}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
@@ -131,21 +131,21 @@ AnimationClip:
     curve:
     - time: 0
       value: {fileID: 0}
-    - time: 0.28125
-      value: {fileID: 0}
-    - time: 0.28125
+    - time: 0.25
       value: {fileID: 21300000, guid: 5500a105112bc6c4087b524239fb21da, type: 3}
     - time: 0.28125
       value: {fileID: 21300000, guid: 8343e5318988f7b4494ac2d8c228fcb7, type: 3}
-    - time: 0.34375
+    - time: 0.3125
       value: {fileID: 21300000, guid: d028ef441fde1df47b666fae9f507d5b, type: 3}
     - time: 0.34375
       value: {fileID: 21300000, guid: 3fdf65b963a9f9c4288c6757d6602449, type: 3}
-    - time: 0.40625
+    - time: 0.375
       value: {fileID: 21300000, guid: de7190936c612bc4ba203da15e7f9efa, type: 3}
     - time: 0.40625
       value: {fileID: 21300000, guid: bd70994eb5c62ea4182107ba2f1f5de3, type: 3}
     - time: 0.4375
+      value: {fileID: 0}
+    - time: 0.5
       value: {fileID: 0}
     attribute: m_Sprite
     path: SlashSprite
@@ -188,7 +188,6 @@ AnimationClip:
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
     - {fileID: 0}
-    - {fileID: 0}
     - {fileID: 21300000, guid: 5500a105112bc6c4087b524239fb21da, type: 3}
     - {fileID: 21300000, guid: 8343e5318988f7b4494ac2d8c228fcb7, type: 3}
     - {fileID: 21300000, guid: d028ef441fde1df47b666fae9f507d5b, type: 3}
@@ -196,12 +195,13 @@ AnimationClip:
     - {fileID: 21300000, guid: de7190936c612bc4ba203da15e7f9efa, type: 3}
     - {fileID: 21300000, guid: bd70994eb5c62ea4182107ba2f1f5de3, type: 3}
     - {fileID: 0}
+    - {fileID: 0}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.46875
+    m_StopTime: 0.53125
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -285,7 +285,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.4375
+        time: 0.5
         value: 0
         inSlope: 0
         outSlope: 0
@@ -369,7 +369,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.4375
+        time: 0.5
         value: 0
         inSlope: 0
         outSlope: 0
@@ -453,7 +453,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.4375
+        time: 0.5
         value: 34.24
         inSlope: 0
         outSlope: 0
