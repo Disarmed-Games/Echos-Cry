@@ -6,8 +6,6 @@ using Unity.Cinemachine;
 
 public class DialogueTrigger : MonoBehaviour
 {
-    public static event Action onInteractWithDialogue;
-
     [SerializeField] private TextAsset inkJSON;
     [SerializeField] private GameObject ToolTipPrefab;
     [SerializeField] private InputTranslator _inputTranslator;
@@ -27,7 +25,6 @@ public class DialogueTrigger : MonoBehaviour
         if (currentPlayer != null && !DialogueManager.Instance.isDialoguePlaying)
         {
             DialogueManager.Instance.EnterDialogueMode(inkJSON);
-            onInteractWithDialogue?.Invoke();
         }
     }
 

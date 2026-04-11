@@ -11883,6 +11883,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2912883627511616977, guid: e1df6ecf5f146cd4ea241f3171b8ae54, type: 3}
+      propertyPath: inkJSON
+      value: 
+      objectReference: {fileID: 4900000, guid: 18610cf9d44bb6448a2ad04af23f6292, type: 3}
+    - target: {fileID: 2912883627511616977, guid: e1df6ecf5f146cd4ea241f3171b8ae54, type: 3}
       propertyPath: translator
       value: 
       objectReference: {fileID: 11400000, guid: da8057efcf3a45a47bb320ce196e8d61, type: 2}

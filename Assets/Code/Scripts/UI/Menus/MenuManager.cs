@@ -5,6 +5,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 [System.Serializable]
 public class StringGameobjectPair
@@ -86,6 +87,14 @@ public class MenuManager : Singleton<MenuManager>
         PauseStarted?.Invoke();
         VolumeManager.Instance.SetDepthOfField(true);
         Time.timeScale = 0f;
+    }
+    public void EnableShopMenu()
+    {
+        _inputTranslator.PlayerInputs.ShopMenu.Enable();
+        _inputTranslator.PlayerInputs.Gameplay.Disable();
+
+        VolumeManager.Instance.SetDepthOfField(true);
+        SetMenu("Shop");
     }
 
     public void DisablePauseMenu()
