@@ -2,14 +2,14 @@ using UnityEngine;
 using EchosCry.Enemy.StateSystem;
 using UnityEngine.AI;
 
-[CreateAssetMenu(menuName = "Echo's Cry/Enemy/Cache Strategy/Bomb")]
-public class BombCacheStrategy : EnemyCacheStrategy
+[CreateAssetMenu(menuName = "Echo's Cry/Enemy/Cache Strategy/Turtle")]
+public class TurtleCacheStrategy : EnemyCacheStrategy
 {
     public override void Execute(Enemy enemyContext)
     {
         EnemyStateTransition death_check = new(EnemyStates.Death, enemy => enemy.Health.CurrentHealth <= 0);
         EnemyStateTransition ready_to_attack = new(EnemyStates.Attack, enemy => enemy.StateData.ReadyToAttack);
-        EnemyStateTransition attack_ended = new(EnemyStates.Death, enemy => enemy.AttackStrategies[0].AttackEnded);
+        EnemyStateTransition attack_ended = new(EnemyStates.Cooldown, enemy => enemy.AttackStrategies[0].AttackEnded);
         EnemyStateTransition is_staggered = new(EnemyStates.Stagger, enemy => enemy.StateData.IsStaggered);
         EnemyStateTransition stagger_ended = new(EnemyStates.Pursue, enemy => !enemy.StateData.IsStaggered);
         EnemyStateTransition cooldown_ended = new(EnemyStates.Pursue, enemy => !enemy.StateData.OnCooldown);
@@ -23,7 +23,7 @@ public class BombCacheStrategy : EnemyCacheStrategy
                 return false;
             });
         EnemyStateTransition in_range_check =
-            new(EnemyStates.Fuse,
+            new(EnemyStates.Attack,
             enemy =>
             {
                 NavMeshAgent agent = enemy.NavMeshAgent;
@@ -65,13 +65,13 @@ public class BombCacheStrategy : EnemyCacheStrategy
                 new EnemyStateTransition[0],
                 new EnemyStateTransition[0]
             );
-        handler.AddStateNode
-            (
-                enemyContext.StateCache,
-                EnemyStates.Fuse,
-                new EnemyStateTransition[] { death_check, ready_to_attack },
-                new EnemyStateTransition[0]
-            );
+        //handler.AddStateNode
+        //    (
+        //        enemyContext.NewStateCache,
+        //        EnemyStates.Charge,
+        //        new EnemyStateTransition[] { death_check, ready_to_attack, is_staggered },
+        //        new EnemyStateTransition[0]
+        //    );
         handler.AddStateNode
             (
                 enemyContext.StateCache,
@@ -79,7 +79,16 @@ public class BombCacheStrategy : EnemyCacheStrategy
                 new EnemyStateTransition[] { death_check, attack_ended, is_staggered },
                 new EnemyStateTransition[0]
             );
+        handler.AddStateNode
+            (
+                enemyContext.StateCache,
+                EnemyStates.Cooldown,
+                new EnemyStateTransition[] { death_check, is_staggered, cooldown_ended },
+                new EnemyStateTransition[0]
+            );
 
         enemyContext.StateHandler = handler;
+
+        enemyContext.NavMeshAgent.stoppingDistance = enemyContext.Data.StoppingDistance;
     }
 }
