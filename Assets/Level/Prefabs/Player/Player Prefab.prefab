@@ -11543,6 +11543,7 @@ MonoBehaviour:
   - {fileID: 8516695751941572236}
   - {fileID: 5921633416881181974}
   - {fileID: 5548473834941663165}
+  useGaugeSFX: {fileID: 11400000, guid: f0adf39a6b91d0f48a25fa607db8a514, type: 2}
 --- !u!114 &7621241787758732498
 MonoBehaviour:
   m_ObjectHideFlags: 0
