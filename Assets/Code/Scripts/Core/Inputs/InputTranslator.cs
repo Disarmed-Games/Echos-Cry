@@ -131,6 +131,11 @@ public class InputTranslator : ScriptableObject,
     {
         if (context.started) OnDropEvent?.Invoke();
     }
+    public void OnSpecialAttack(InputAction.CallbackContext context)
+    {
+        if (context.started) OnSpecialAttackEvent?.Invoke(true);
+        else if(context.canceled) OnSpecialAttackEvent?.Invoke(false);
+    }
 
     private PlayerInputs _playerInputs;
     public PlayerInputs PlayerInputs { get { return _playerInputs; } }  
@@ -140,6 +145,7 @@ public class InputTranslator : ScriptableObject,
     public event Action             OnTeleportEvent;
     public event Action<bool>       OnPrimaryActionEvent;
     public event Action<bool>       OnSecondaryActionEvent;
+    public event Action<bool>       OnSpecialAttackEvent;
     public event Action             OnInteractEvent;
     public event Action<bool>       OnSubmitEvent;
     public event Action             OnPauseEvent;

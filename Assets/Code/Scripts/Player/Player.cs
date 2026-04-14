@@ -76,6 +76,16 @@ public class Player : MonoBehaviour
             new PlayerHeavyAttackState
             (this, _playerStateMachine, _playerStateCache)
         );
+        _playerStateCache.AddState(
+            PlayerStateCache.PlayerState.SpecialAttack1,
+            new PlayerSpecialAttack1State
+            (this, _playerStateMachine, _playerStateCache)
+        );
+        _playerStateCache.AddState(
+            PlayerStateCache.PlayerState.SpecialAttack2,
+            new PlayerSpecialAttack2State
+            (this, _playerStateMachine, _playerStateCache)
+        );
     }
 
     private void Awake()
