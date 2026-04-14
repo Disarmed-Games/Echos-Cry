@@ -17,7 +17,7 @@ public class RangedAttack : AttackMethod
         if(_rb != null) _rb.isKinematic = false;
         StartCoroutine(WaitUntilBeat(damage, direction, origin));
     }
-    protected void ShootProjectile(Transform origin, Vector3 direction, float damage)
+    protected virtual void ShootProjectile(Transform origin, Vector3 direction, float damage)
     {
         RBProjectilePool pool = RBProjectileManager.Instance.RequestPool(_projectilePrefab);
         pool.UseProjectile(origin.position + spawnOffset, direction, damage);

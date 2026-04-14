@@ -4,7 +4,19 @@ using UnityEngine;
 public class SpikeAttack : RangedAttack
 {
     [SerializeField] private Enemy _enemy;
-    [SerializeField] private float attackCooldown;
+    [SerializeField] private float projectileSpawnDistance = 1f;
+    [SerializeField] private float invincibleCooldown;
+
+    protected override void ShootProjectile(Transform origin, Vector3 direction, float damage)
+    {
+        RBProjectilePool pool = RBProjectileManager.Instance.RequestPool(_projectilePrefab);
+        pool.UseProjectile(origin.position + direction * projectileSpawnDistance, direction, damage);
+
+        SoundEffectManager.Instance.Builder
+            .SetSound(_projectileSound)
+            .SetSoundPosition(origin.position + direction * 1f)
+            .ValidateAndPlaySound();
+    }
 
     protected override IEnumerator ProjectileAttack(float damage, Vector3 direction, Transform origin)
     {
@@ -16,14 +28,14 @@ public class SpikeAttack : RangedAttack
         while (count < _projectileCount)
         {
             float angle = count * angleStep;
-            Vector3 attackDirection = new Vector3(Mathf.Cos(angle), 0f, Mathf.Sin(angle));
+            Vector3 attackDirection = new Vector3(Mathf.Cos(angle), 0f, Mathf.Sin(angle)).normalized;
 
             _rb.AddForce(-attackDirection * _blowbackForce, ForceMode.Impulse);
             ShootProjectile(origin, attackDirection, damage);
             count++;
         }
 
-        yield return new WaitForSeconds(attackCooldown);
+        yield return new WaitForSeconds(invincibleCooldown);
         _enemy.Invulnerable = false;
         _attackEnded = true;
     }
