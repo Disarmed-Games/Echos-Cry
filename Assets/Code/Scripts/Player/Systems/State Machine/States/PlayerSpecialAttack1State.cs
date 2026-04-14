@@ -1,16 +1,17 @@
-public class PlayerHeavyAttackState : PlayerActionState
+public class PlayerSpecialAttack1State : PlayerActionState
 {
-    public PlayerHeavyAttackState(Player playerContext, PlayerStateMachine playerStateMachine, PlayerStateCache playerStateCache) 
+    public PlayerSpecialAttack1State(Player playerContext, PlayerStateMachine playerStateMachine, PlayerStateCache playerStateCache)
         : base(playerContext, playerStateMachine, playerStateCache) { }
 
     public override void Enter()
     {
-        _playerContext.HeatGauge.UseCharge(2);
-        _playerContext.WeaponHolder.SwitchWeapon(0);
-        _playerContext.WeaponHolder.SecondaryAction();
+        _playerContext.HeatGauge.UseCharge(6);
+
+        _playerContext.WeaponHolder.SwitchWeapon(1);
+        _playerContext.WeaponHolder.PrimaryAction();
 
         _playerContext.Animator.SpriteAnimator.Play("Attack");
-        //_playerContext.Movement.MomentumPush();
+        _playerContext.Movement.MomentumPush();
         _playerContext.Orientation.IsRotating = false;
     }
     public override void Exit()
@@ -21,6 +22,7 @@ public class PlayerHeavyAttackState : PlayerActionState
         _playerStateMachine.IsAttacking = false;
 
         _playerContext.WeaponHolder.ProcessWeaponHits(_playerContext.ComboMeter);
+        _playerContext.WeaponHolder.SwitchWeapon(0);
     }
     protected override void OnCheckSwitch()
     {
