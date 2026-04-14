@@ -9,6 +9,7 @@ public class RangedAttack : AttackMethod
     [SerializeField] private int _projectileCount;
     [SerializeField] private Rigidbody _rb;
     [SerializeField] private float _blowbackForce = 2f;
+    [SerializeField] private Vector3 spawnOffset;
 
     public override void Execute(float damage, Vector3 direction, Transform origin)
     {
@@ -19,12 +20,12 @@ public class RangedAttack : AttackMethod
     private void ShootProjectile(Transform origin, Vector3 direction, float damage)
     {
         RBProjectilePool pool = RBProjectileManager.Instance.RequestPool(_projectilePrefab);
-        pool.UseProjectile(origin.position, direction, damage);
+        pool.UseProjectile(origin.position + spawnOffset, direction, damage);
         if (!SoundEffectManager.Instance.Builder.GetSoundPlayer().IsSoundPlaying())
         {
             SoundEffectManager.Instance.Builder
                 .SetSound(_projectileSound)
-                .SetSoundPosition(origin.position)
+                .SetSoundPosition(origin.position + spawnOffset)
                 .ValidateAndPlaySound();
         }
     }

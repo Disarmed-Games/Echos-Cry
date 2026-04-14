@@ -7,7 +7,7 @@ public class ManageBeatShaderMaterials : MonoBehaviour
     void Update()
     {
         float t = BeatManager.Instance.BeatProgress;
-        float pulse = 1 - Mathf.Sin(t * Mathf.PI);
+        float pulse = Mathf.Sin(t * Mathf.PI);
         _material.SetFloat("_BeatTime", pulse);
     }
 

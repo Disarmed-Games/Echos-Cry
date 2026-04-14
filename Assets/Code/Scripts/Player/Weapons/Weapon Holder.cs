@@ -1,3 +1,4 @@
+using Mono.Cecil.Cil;
 using UnityEngine;
 
 public class WeaponHolder : MonoBehaviour
@@ -57,12 +58,30 @@ public class WeaponHolder : MonoBehaviour
     public void PrimaryAction()
     {
         if (_currentlyEquippedWeapon == null) return;
+
+        SwitchWeapon(0);
+
         _currentlyEquippedWeapon.PrimaryAction();
     }
     public void SecondaryAction() 
     {
         if (_currentlyEquippedWeapon == null) return;
-        _currentlyEquippedWeapon.SecondaryAction();
+
+        if (BeatManager.Instance.BeatInMeasure == 1)
+        {
+            SwitchWeapon(1);
+            _currentlyEquippedWeapon.PrimaryAction();
+        }
+        else if (BeatManager.Instance.BeatInMeasure == 3)
+        {
+            SwitchWeapon(1);
+            _currentlyEquippedWeapon.SecondaryAction();
+        }
+        else
+        {
+            SwitchWeapon(0);
+            _currentlyEquippedWeapon.SecondaryAction();
+        }
     }
     public void DashAction()
     {

@@ -1,10 +1,13 @@
-using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
+using AudioSystem;
 
 public class HeatGaugeUI : MonoBehaviour
 {
     [SerializeField] DoubleIntEventChannel _updateHeatGauge;
-    [SerializeField] TextMeshProUGUI text;
+    [SerializeField] Image[] heatImagesArray = new Image[6];
+    [SerializeField] private soundEffect useGaugeSFX;
+    private int pastGuageValue;
 
     private void OnEnable()
     {
@@ -18,6 +21,19 @@ public class HeatGaugeUI : MonoBehaviour
 
     private void UpdateHeatGauge(int current, int max)
     {
-        text.text = current.ToString() + " / " + max.ToString();
+        for (int i = 0; i < max; i++)
+        {
+            heatImagesArray[i].enabled = (i < current);
+        }
+
+        if (current < pastGuageValue)
+        {
+            SoundEffectManager.Instance.Builder
+            .SetSound(useGaugeSFX)
+            .SetSoundPosition(transform.position)
+            .ValidateAndPlaySound();
+        }
+
+        if (current != pastGuageValue) pastGuageValue = current;
     }
 }

@@ -65,12 +65,12 @@ public abstract class DoorManager : MonoBehaviour
         }
     }
 
-    protected virtual void Start()
+    protected void OnEnable()
     {
         translator.OnInteractEvent += OpenDoor;
     }
 
-    protected virtual void OnDestroy()
+    protected void OnDisable()
     {
         translator.OnInteractEvent -= OpenDoor;
     }

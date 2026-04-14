@@ -8,9 +8,8 @@ public class DoorWaveEntrance : DoorManager
     [SerializeField] private bool isExit = false;
     [SerializeField] private LevelManager.LevelName levelName;
 
-    protected override void Start()
+    protected void Start()
     {
-        base.Start();
         if (waveManager != null)
         {
             waveManager.OnAllWavesCompleted += HandleWaveComplete;
@@ -18,9 +17,8 @@ public class DoorWaveEntrance : DoorManager
         }
     }
 
-    protected override void OnDestroy()
+    protected void OnDestroy()
     {
-        base.OnDestroy();
         if (waveManager != null)
         {
             waveManager.OnAllWavesCompleted -= HandleWaveComplete;

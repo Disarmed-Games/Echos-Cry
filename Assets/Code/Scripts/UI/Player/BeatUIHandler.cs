@@ -1,3 +1,4 @@
+using Mono.Cecil.Cil;
 using System.Collections;
 using TMPro;
 using Unity.VisualScripting;
@@ -10,20 +11,21 @@ public class BeatUIHandler : MonoBehaviour
 {
     [SerializeField] private InputTranslator _translator;
     [SerializeField] private TextMeshProUGUI hitQualityText;
-    [SerializeField] private TextMeshProUGUI beatNumberText;
     [SerializeField] private Animator _textAnimator;
     [SerializeField] private Animator _hitEffectAnimator1;
     [SerializeField] private Animator _hitEffectAnimator2;
+    [SerializeField] private Image heavyAttackImage;
+    [SerializeField] private Sprite[] heavyAttackSprites = new Sprite[3];
     [SerializeField] private bool showHitText = true;
 
-    void Start()
+    void OnEnable()
     {
         //_translator.OnDashEvent += UpdateHitQualityText;
         _translator.OnPrimaryActionEvent += UpdateHitQualityText;
         _translator.OnSecondaryActionEvent += UpdateHitQualityText;
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         //_translator.OnDashEvent -= UpdateHitQualityText;
         _translator.OnPrimaryActionEvent -= UpdateHitQualityText;
@@ -32,7 +34,31 @@ public class BeatUIHandler : MonoBehaviour
 
     private void Update()
     {
-        beatNumberText.text = (BeatManager.Instance.BeatInMeasure + 1).ToString();
+        if (showHitText)
+        {
+            heavyAttackImage.enabled = true;
+            if (BeatManager.Instance.BeatInMeasure == 0)
+            {
+                heavyAttackImage.sprite = heavyAttackSprites[0];
+                heavyAttackImage.material.SetTexture("_Texture2D", heavyAttackSprites[0].texture);
+            }
+            else if (BeatManager.Instance.BeatInMeasure == 1)
+            {
+                heavyAttackImage.sprite = heavyAttackSprites[1];
+                heavyAttackImage.material.SetTexture("_Texture2D", heavyAttackSprites[1].texture);
+            }
+            else if (BeatManager.Instance.BeatInMeasure == 2)
+            {
+                heavyAttackImage.sprite = heavyAttackSprites[0];
+                heavyAttackImage.material.SetTexture("_Texture2D", heavyAttackSprites[0].texture);
+            }
+            else
+            {
+                heavyAttackImage.sprite = heavyAttackSprites[2];
+                heavyAttackImage.material.SetTexture("_Texture2D", heavyAttackSprites[2].texture);
+            }
+        }
+        else heavyAttackImage.enabled = false;
     }
 
     private void UpdateHitQualityText(bool isPressed)

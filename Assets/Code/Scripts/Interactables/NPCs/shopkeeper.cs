@@ -4,25 +4,13 @@ using UnityEngine.InputSystem;
 
 public class ShopKeeper : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    private bool playerInRange = false;
+    [SerializeField] private TextAsset inkJSON;
     [SerializeField] private GameObject ToolTipPrefab;
     [SerializeField] private soundEffect shopOpenSFX;
     [SerializeField] private InputTranslator translator;
 
-    private void OpenShop()
-    {
-        translator.PlayerInputs.ShopMenu.Enable();
-        translator.PlayerInputs.Gameplay.Disable();
-
-        VolumeManager.Instance.SetDepthOfField(true);
-        SoundEffectManager.Instance.Builder
-            .SetSound(shopOpenSFX)
-            .SetSoundPosition(this.transform.position)
-            .ValidateAndPlaySound();
-
-        MenuManager.Instance.SetMenu("Shop");
-    }
+    private Collider currentPlayer;
+    
     private void CloseShop()
     {
         MenuManager.Instance.SetMenu("HUD");
@@ -31,31 +19,43 @@ public class ShopKeeper : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        ToolTipPrefab.GetComponent<ToolTip>().text =
-            $"Press '{translator.PlayerInputs.Gameplay.Interact.GetBindingDisplayString(InputBinding.MaskByGroup("KeyboardMouse"))}' to Shop";
-        Instantiate(ToolTipPrefab, this.transform.position + new Vector3(0, 1, -1), Quaternion.identity);
-        playerInRange = true;
+        if (other.gameObject.CompareTag("Player"))
+        {
+            ToolTipPrefab.GetComponent<ToolTip>().text =
+                $"Press '{translator.PlayerInputs.Gameplay.Interact.GetBindingDisplayString(InputBinding.MaskByGroup("KeyboardMouse"))}' to Shop";
+            Instantiate(ToolTipPrefab, this.transform.position + new Vector3(0, 1, -1), Quaternion.identity);
+
+            currentPlayer = other;
+        }
     }
 
     void OnTriggerExit(Collider other)
     {
-        playerInRange = false;
-    }
-
-    void RequestOpenShop()
-    {
-        if (playerInRange)
+        if (other.gameObject.CompareTag("Player"))
         {
-            OpenShop();
+            currentPlayer = null;
         }
     }
 
-    void Start()
+    private void RequestOpenShop()
+    {
+        if (currentPlayer != null)
+        {
+            DialogueManager.Instance.EnterDialogueMode(inkJSON);
+
+            SoundEffectManager.Instance.Builder
+                .SetSound(shopOpenSFX)
+                .SetSoundPosition(this.transform.position)
+                .ValidateAndPlaySound();
+        }
+    }
+
+    void OnEnable()
     {
         translator.OnCloseShopEvent += CloseShop;
         translator.OnInteractEvent += RequestOpenShop;
     }
-    void OnDestroy()
+    void OnDisable()
     {
         translator.OnCloseShopEvent -= CloseShop;
         translator.OnInteractEvent -= RequestOpenShop;
