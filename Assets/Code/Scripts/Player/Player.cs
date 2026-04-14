@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : NonSpawnableSingleton<Player>
 {
     [Header("Relevant Player Components")]
     [SerializeField] private PlayerHealth _health;
