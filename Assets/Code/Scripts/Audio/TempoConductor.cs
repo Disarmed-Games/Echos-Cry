@@ -22,6 +22,9 @@ public class TempoConductor : Singleton<TempoConductor>
     private float _excellentPercent;
     private float _goodPercent;
 
+    public float ExcellentPercent { get => _excellentPercent; }
+    public float GoodPercent { get => _goodPercent; }
+
     //            Tempo Threshold
     //  End                           Start
     //   |--|-|-|---------------|-|-|---|

@@ -1,3 +1,4 @@
+using Codice.Client.Common;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
@@ -36,11 +37,24 @@ struct SpriteNode
 
     void Update()
     {
-        if (BeatManager.Instance.BeatInMeasure == 0 && Player.Instance.HeatGauge.CurrentCharge >= 6)
+        float currentProgress = BeatManager.Instance.BeatInMeasure + BeatManager.Instance.BeatProgress;
+
+        float goodPercent = TempoConductor.Instance.GoodPercent;
+        float targetProgressLow1 = 1 - goodPercent;
+        float targetProgressHigh1 = goodPercent + 1;
+
+        float targetProgressLow2 = 3 - goodPercent;
+        float targetProgressHigh2 = goodPercent + 3;
+
+        if (currentProgress >= targetProgressLow1 
+            && currentProgress <= targetProgressHigh1
+            && Player.Instance.HeatGauge.CurrentCharge >= 6)
         {
             SetAttackIndicator(1);
         }
-        else if (BeatManager.Instance.BeatInMeasure == 2 && Player.Instance.HeatGauge.CurrentCharge >= 6)
+        else if (currentProgress >= targetProgressLow2
+            && currentProgress <= targetProgressHigh2
+            && Player.Instance.HeatGauge.CurrentCharge >= 6)
         {
             SetAttackIndicator(2);
         }
