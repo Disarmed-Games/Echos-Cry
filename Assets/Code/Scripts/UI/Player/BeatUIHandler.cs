@@ -23,6 +23,7 @@ public class BeatUIHandler : MonoBehaviour
         //_translator.OnDashEvent += UpdateHitQualityText;
         _translator.OnPrimaryActionEvent += UpdateHitQualityText;
         _translator.OnSecondaryActionEvent += UpdateHitQualityText;
+        _translator.OnSpecialAttackEvent += UpdateHitQualityText;
     }
 
     private void OnDisable()
@@ -30,6 +31,7 @@ public class BeatUIHandler : MonoBehaviour
         //_translator.OnDashEvent -= UpdateHitQualityText;
         _translator.OnPrimaryActionEvent -= UpdateHitQualityText;
         _translator.OnSecondaryActionEvent -= UpdateHitQualityText;
+        _translator.OnSpecialAttackEvent += UpdateHitQualityText;
     }
 
     private void Update()

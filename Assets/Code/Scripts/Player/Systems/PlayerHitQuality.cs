@@ -13,6 +13,7 @@ public class PlayerHitQuality : MonoBehaviour
         if (_translator == null) return;
         _translator.OnPrimaryActionEvent += DetermineHitQualitySound;
         _translator.OnSecondaryActionEvent += DetermineHitQualitySound;
+        _translator.OnSpecialAttackEvent += DetermineHitQualitySound;
         //_translator.OnDashEvent += DetermineHitQualitySound;
     }
     private void OnDisable()
@@ -20,6 +21,7 @@ public class PlayerHitQuality : MonoBehaviour
         if (_translator == null) return;
         _translator.OnPrimaryActionEvent -= DetermineHitQualitySound;
         _translator.OnSecondaryActionEvent -= DetermineHitQualitySound;
+        _translator.OnSpecialAttackEvent -= DetermineHitQualitySound;
         //_translator.OnDashEvent -= DetermineHitQualitySound;
     }
     private void PlayHitQualitySound(soundEffect sfx)
