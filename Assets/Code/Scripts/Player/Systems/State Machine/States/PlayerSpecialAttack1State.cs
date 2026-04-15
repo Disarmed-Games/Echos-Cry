@@ -11,7 +11,7 @@ public class PlayerSpecialAttack1State : PlayerActionState
         _playerContext.WeaponHolder.PrimaryAction();
 
         _playerContext.Animator.SpriteAnimator.Play("Attack");
-        _playerContext.Movement.MomentumPush();
+        //_playerContext.Movement.MomentumPush();
         _playerContext.Orientation.IsRotating = false;
     }
     public override void Exit()
