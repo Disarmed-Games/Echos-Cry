@@ -5,6 +5,9 @@ using AudioSystem;
 public class HeatGaugeUI : MonoBehaviour
 {
     [SerializeField] DoubleIntEventChannel _updateHeatGauge;
+    [SerializeField] Sprite defaultHeatImage;
+    [SerializeField] Sprite maxHeatImage;
+    [SerializeField] Sprite disabledHeatImage;
     [SerializeField] Image[] heatImagesArray = new Image[6];
     [SerializeField] private soundEffect useGaugeSFX;
     private int pastGuageValue;
@@ -23,7 +26,12 @@ public class HeatGaugeUI : MonoBehaviour
     {
         for (int i = 0; i < max; i++)
         {
-            heatImagesArray[i].enabled = (i < current);
+            if (current == max)
+                heatImagesArray[i].sprite = maxHeatImage;
+            else if (i < current)
+                heatImagesArray[i].sprite = defaultHeatImage;
+            else
+                heatImagesArray[i].sprite = disabledHeatImage;
         }
 
         if (current < pastGuageValue)
