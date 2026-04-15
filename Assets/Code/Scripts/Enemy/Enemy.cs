@@ -16,6 +16,7 @@ public class Enemy : MonoBehaviour
     private static EnemyStateCache   _stateCache;
 
     private bool IsPooled => _pool != null;
+    public bool Invulnerable { get; set; } = false;
 
     [Header("Enemy-Related Components")]
     [SerializeField] private HealthSystem _health;

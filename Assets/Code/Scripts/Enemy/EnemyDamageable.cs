@@ -7,6 +7,8 @@ public class EnemyDamageable : MonoBehaviour, IDamageable
 
     public virtual void Execute(float amount)
     {
+        if (_enemy.Invulnerable) return;
+
         _enemy.Collider.enabled = false;
 
         amount *= _enemy.Health.DamageMultiplier;

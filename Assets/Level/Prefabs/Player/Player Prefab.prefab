@@ -11626,6 +11626,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Echos Cry Core::HeatGaugeUI
   _updateHeatGauge: {fileID: 11400000, guid: 085f1c900c31c5c4cb91fc8ffd4095d8, type: 2}
+  defaultHeatImage: {fileID: 21300000, guid: e92032cf0a2cea34aad58183609296ab, type: 3}
+  maxHeatImage: {fileID: 21300000, guid: 53b8fafceba012d47a9ea1de62a8b858, type: 3}
+  disabledHeatImage: {fileID: 21300000, guid: 38f3c8506b0fc914e9ac0c0519002ecb, type: 3}
   heatImagesArray:
   - {fileID: 8146987623750290943}
   - {fileID: 5599271234041133231}
