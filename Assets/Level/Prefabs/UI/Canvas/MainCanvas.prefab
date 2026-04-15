@@ -10409,6 +10409,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4464101143110549772, guid: 2ba960b8c1b9d3a4997206480d622fc9, type: 3}
+      propertyPath: heavyAttackImage
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 7037231287620920825, guid: 2ba960b8c1b9d3a4997206480d622fc9, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -10490,7 +10494,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 5516168813223658416, guid: 2ba960b8c1b9d3a4997206480d622fc9, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ba960b8c1b9d3a4997206480d622fc9, type: 3}

@@ -12,6 +12,7 @@ public class UILineRenderer : Graphic
     [SerializeField] private float lineWidth = 10f;
     [SerializeField] private Color onBeatLineColor;
     [SerializeField] private Color secondBeatLineColor;
+    [SerializeField] private Color fourthBeatLineColor;
 
     [Header("Gradient")]
     [SerializeField] private Color leftColor = Color.white;
@@ -83,10 +84,10 @@ public class UILineRenderer : Graphic
 
             if (BeatManager.Instance)
             {
-                if ((BeatManager.Instance.BeatInMeasure == 1 
-                    || BeatManager.Instance.BeatInMeasure == 3) 
-                    && Player.Instance.HeatGauge.CurrentCharge >= 6)
+                if(BeatManager.Instance.BeatInMeasure == 0 && Player.Instance.HeatGauge.CurrentCharge >= 6)
                     vertex.color = secondBeatLineColor;
+                else if (BeatManager.Instance.BeatInMeasure == 2 && Player.Instance.HeatGauge.CurrentCharge >= 6)
+                    vertex.color = fourthBeatLineColor;
                 else
                     vertex.color = onBeatLineColor;
             }

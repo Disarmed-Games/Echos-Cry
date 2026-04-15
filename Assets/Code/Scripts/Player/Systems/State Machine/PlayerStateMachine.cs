@@ -3,7 +3,6 @@ using UnityEngine;
 public class PlayerStateMachine : AbstractStateMachine<PlayerActionState>
 {
     private bool _isMoving;
-    private bool _isAttacking;
     private bool _usingPrimaryAction, _usingSecondaryAction, _usingSpecialAction;
     private bool _isDashing;
     private bool _canDash = true;
@@ -11,10 +10,9 @@ public class PlayerStateMachine : AbstractStateMachine<PlayerActionState>
     private Vector2 _locomotion;
 
     public bool IsMoving { get => _isMoving; }
-    public bool IsAttacking { get => _isAttacking; set => _isAttacking = value; }
-    public bool UsingPrimaryAction { get => _usingPrimaryAction; }
-    public bool UsingSecondaryAction { get => _usingSecondaryAction; }
-    public bool UsingSpecialAction { get => _usingSpecialAction; }
+    public bool UsingPrimaryAction { get => _usingPrimaryAction; set => _usingPrimaryAction = value; }
+    public bool UsingSecondaryAction { get => _usingSecondaryAction; set => _usingSecondaryAction = value; }
+    public bool UsingSpecialAction { get => _usingSpecialAction; set => _usingSpecialAction = value; }
     public bool IsDashing { get => _isDashing; set => _isDashing = value; }
     public bool CanDash { get => _canDash; set => _canDash = value; }
     public bool CanPush { get => _canPush; set => _canPush = value; }

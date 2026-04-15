@@ -11,7 +11,7 @@ public class PlayerSpecialAttack2State : PlayerActionState
         _playerContext.WeaponHolder.SecondaryAction();
 
         _playerContext.Animator.SpriteAnimator.Play("Attack");
-        _playerContext.Movement.MomentumPush();
+        //_playerContext.Movement.MomentumPush();
         _playerContext.Orientation.IsRotating = false;
     }
     public override void Exit()
@@ -19,7 +19,7 @@ public class PlayerSpecialAttack2State : PlayerActionState
         _playerContext.InvokeAttackEnded();
 
         _playerContext.Orientation.IsRotating = true;
-        _playerStateMachine.IsAttacking = false;
+        _playerStateMachine.UsingSpecialAction = false;
 
         _playerContext.WeaponHolder.ProcessWeaponHits(_playerContext.ComboMeter);
         _playerContext.WeaponHolder.SwitchWeapon(0);
