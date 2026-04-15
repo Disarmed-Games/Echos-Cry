@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : NonSpawnableSingleton<Player>
 {
     [Header("Relevant Player Components")]
     [SerializeField] private PlayerHealth _health;
@@ -74,6 +74,16 @@ public class Player : MonoBehaviour
         _playerStateCache.AddState(
             PlayerStateCache.PlayerState.HeavyAttack,
             new PlayerHeavyAttackState
+            (this, _playerStateMachine, _playerStateCache)
+        );
+        _playerStateCache.AddState(
+            PlayerStateCache.PlayerState.SpecialAttack1,
+            new PlayerSpecialAttack1State
+            (this, _playerStateMachine, _playerStateCache)
+        );
+        _playerStateCache.AddState(
+            PlayerStateCache.PlayerState.SpecialAttack2,
+            new PlayerSpecialAttack2State
             (this, _playerStateMachine, _playerStateCache)
         );
     }

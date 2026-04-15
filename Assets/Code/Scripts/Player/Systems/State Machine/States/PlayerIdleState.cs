@@ -21,6 +21,17 @@ public class PlayerIdleState : PlayerActionState
         {
             _playerStateMachine.SwitchState(_playerStateCache.RequestState(PlayerStateCache.PlayerState.HeavyAttack));
         }
+        else if (_playerStateMachine.UsingSpecialAction && _playerContext.HeatGauge.CurrentCharge >= 6)
+        {
+            if (BeatManager.Instance.BeatInMeasure == 1)
+            {
+                _playerStateMachine.SwitchState(_playerStateCache.RequestState(PlayerStateCache.PlayerState.SpecialAttack1));
+            }
+            else if (BeatManager.Instance.BeatInMeasure == 3)
+            {
+                _playerStateMachine.SwitchState(_playerStateCache.RequestState(PlayerStateCache.PlayerState.SpecialAttack2));
+            }
+        }
     }
 
     public override void Enter()
