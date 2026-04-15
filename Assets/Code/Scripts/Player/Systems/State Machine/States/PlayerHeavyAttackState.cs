@@ -18,7 +18,7 @@ public class PlayerHeavyAttackState : PlayerActionState
         _playerContext.InvokeAttackEnded();
 
         _playerContext.Orientation.IsRotating = true;
-        _playerStateMachine.IsAttacking = false;
+        _playerStateMachine.UsingSecondaryAction = false;
 
         _playerContext.WeaponHolder.ProcessWeaponHits(_playerContext.ComboMeter);
     }

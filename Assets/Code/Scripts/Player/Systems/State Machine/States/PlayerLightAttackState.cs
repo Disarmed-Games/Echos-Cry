@@ -17,7 +17,7 @@ public class PlayerLightAttackState : PlayerActionState
         _playerContext.InvokeAttackEnded();
 
         _playerContext.Orientation.IsRotating = true;
-        _playerStateMachine.IsAttacking = false;
+        _playerStateMachine.UsingPrimaryAction = false;
 
         _playerContext.WeaponHolder.ProcessWeaponHits(_playerContext.ComboMeter);
 

@@ -84,9 +84,9 @@ public class UILineRenderer : Graphic
 
             if (BeatManager.Instance)
             {
-                if(BeatManager.Instance.BeatInMeasure == 1 && Player.Instance.HeatGauge.CurrentCharge >= 6)
+                if(BeatManager.Instance.BeatInMeasure == 0 && Player.Instance.HeatGauge.CurrentCharge >= 6)
                     vertex.color = secondBeatLineColor;
-                else if (BeatManager.Instance.BeatInMeasure == 3 && Player.Instance.HeatGauge.CurrentCharge >= 6)
+                else if (BeatManager.Instance.BeatInMeasure == 2 && Player.Instance.HeatGauge.CurrentCharge >= 6)
                     vertex.color = fourthBeatLineColor;
                 else
                     vertex.color = onBeatLineColor;

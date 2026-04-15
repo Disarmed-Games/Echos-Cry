@@ -14,8 +14,6 @@ public class BeatUIHandler : MonoBehaviour
     [SerializeField] private Animator _textAnimator;
     [SerializeField] private Animator _hitEffectAnimator1;
     [SerializeField] private Animator _hitEffectAnimator2;
-    [SerializeField] private Image heavyAttackImage;
-    [SerializeField] private Sprite[] heavyAttackSprites = new Sprite[3];
     [SerializeField] private bool showHitText = true;
 
     void OnEnable()
@@ -23,6 +21,7 @@ public class BeatUIHandler : MonoBehaviour
         //_translator.OnDashEvent += UpdateHitQualityText;
         _translator.OnPrimaryActionEvent += UpdateHitQualityText;
         _translator.OnSecondaryActionEvent += UpdateHitQualityText;
+        _translator.OnSpecialAttackEvent += UpdateHitQualityText;
     }
 
     private void OnDisable()
@@ -30,31 +29,7 @@ public class BeatUIHandler : MonoBehaviour
         //_translator.OnDashEvent -= UpdateHitQualityText;
         _translator.OnPrimaryActionEvent -= UpdateHitQualityText;
         _translator.OnSecondaryActionEvent -= UpdateHitQualityText;
-    }
-
-    private void Update()
-    {
-        if (showHitText)
-        {
-            heavyAttackImage.enabled = true;
-
-            if (BeatManager.Instance.BeatInMeasure == 1 && Player.Instance.HeatGauge.CurrentCharge >= 6)
-            {
-                heavyAttackImage.sprite = heavyAttackSprites[1];
-                heavyAttackImage.material.SetTexture("_Texture2D", heavyAttackSprites[1].texture);
-            }
-            else if (BeatManager.Instance.BeatInMeasure == 3 && Player.Instance.HeatGauge.CurrentCharge >= 6)
-            {
-                heavyAttackImage.sprite = heavyAttackSprites[2];
-                heavyAttackImage.material.SetTexture("_Texture2D", heavyAttackSprites[2].texture);
-            }
-            else
-            {
-                heavyAttackImage.sprite = heavyAttackSprites[0];
-                heavyAttackImage.material.SetTexture("_Texture2D", heavyAttackSprites[0].texture);
-            }
-        }
-        else heavyAttackImage.enabled = false;
+        _translator.OnSpecialAttackEvent -= UpdateHitQualityText;
     }
 
     private void UpdateHitQualityText(bool isPressed)
