@@ -61,11 +61,6 @@ MonoBehaviour:
   _textAnimator: {fileID: 3548291461337984681}
   _hitEffectAnimator1: {fileID: 1600509396250293528}
   _hitEffectAnimator2: {fileID: 9152819120111161284}
-  heavyAttackImage: {fileID: 5811339743584844878}
-  heavyAttackSprites:
-  - {fileID: 21300000, guid: 200560c6c2a998344ab5e66585e0b592, type: 3}
-  - {fileID: 21300000, guid: 52a4997c445ecf44bab58bd052409bd9, type: 3}
-  - {fileID: 21300000, guid: 4997da1a33640254a8b8c87a1ac7f1ea, type: 3}
   showHitText: 1
 --- !u!1 &1474931822065792554
 GameObject:
@@ -126,7 +121,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.7411765, g: 0.6156863, b: 0.23137257, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -465,7 +460,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.7411765, g: 0.6156863, b: 0.23137257, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

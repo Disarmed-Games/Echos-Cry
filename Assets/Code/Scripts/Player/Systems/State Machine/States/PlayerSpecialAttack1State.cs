@@ -11,6 +11,7 @@ public class PlayerSpecialAttack1State : PlayerActionState
         _playerContext.WeaponHolder.PrimaryAction();
 
         _playerContext.Animator.SpriteAnimator.Play("Attack");
+        CameraManager.Instance.ScreenShake(0.5f, 0.5f);
         //_playerContext.Movement.MomentumPush();
         _playerContext.Orientation.IsRotating = false;
     }
