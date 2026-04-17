@@ -14,7 +14,6 @@ public class Player : NonSpawnableSingleton<Player>
     [SerializeField] private PlayerCurrencySystem _currencySystem;
     [SerializeField] private PlayerXP _xp;
     [SerializeField] private InputTranslator _inputTranslator;
-    [SerializeField] private SoundStrategy _sfx;
     [SerializeField] private SFXConfig _sfxConfig;
     [SerializeField] private Rigidbody _rb;
     [SerializeField] private DashWeapon _dashAttack;
@@ -32,7 +31,6 @@ public class Player : NonSpawnableSingleton<Player>
     public PlayerHealth Health { get => _health; }
     public PlayerComboMeter ComboMeter { get => _comboMeter; }
     public PlayerAnimator Animator { get => _animator; }
-    public SoundStrategy SFX { get => _sfx; }
     public SFXConfig SFXConfig { get => _sfxConfig; }
     public PlayerMovement Movement { get => _movement; }
     public WeaponHolder WeaponHolder { get => _weaponHolder; }

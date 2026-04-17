@@ -12,7 +12,8 @@ public class PlayerDamagable : MonoBehaviour, IDamageable
         {
             player.Animator.TintFlash(Color.blue);
             if (GlobalSFXManager.Instance != null && GlobalSFXManager.Instance.ArmorHitSFX != null)
-                player.SFX.Execute(GlobalSFXManager.Instance.ArmorHitSFX, player.transform, 0);
+                EchosCry.Sound.Execute(GlobalSFXManager.Instance.ArmorHitSFX, player.transform, 0);
+            
 
         }
         else
@@ -21,11 +22,11 @@ public class PlayerDamagable : MonoBehaviour, IDamageable
             {
                 _armorBreak = true;
                 if (GlobalSFXManager.Instance != null && GlobalSFXManager.Instance.ArmorBreakSFX != null)
-                    player.SFX.Execute(GlobalSFXManager.Instance.ArmorBreakSFX, player.transform, 0);
+                    EchosCry.Sound.Execute(GlobalSFXManager.Instance.ArmorBreakSFX, player.transform, 0);
             }
             player.Animator.TintFlash(Color.red);
         }
         CameraManager.Instance.ScreenShake(0.4f, 0.4f);
-        player.SFX.Execute(player.SFXConfig.HurtEffect, player.transform, 0);
+        EchosCry.Sound.Execute(player.SFXConfig.HurtEffect, player.transform, 0);
     }
 }
