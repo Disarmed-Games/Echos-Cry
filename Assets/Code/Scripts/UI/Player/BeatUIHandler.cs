@@ -1,17 +1,10 @@
-using Mono.Cecil.Cil;
-using System.Collections;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem.LowLevel;
-using UnityEngine.Rendering;
-using UnityEngine.UI;
 
 public class BeatUIHandler : MonoBehaviour
 {
     [SerializeField] private InputTranslator _translator;
-    [SerializeField] private TextMeshProUGUI hitQualityText;
-    [SerializeField] private Animator _textAnimator;
+    [SerializeField] private GameObject _hitQualityObject;
     [SerializeField] private Animator _hitEffectAnimator1;
     [SerializeField] private Animator _hitEffectAnimator2;
     [SerializeField] private bool showHitText = true;
@@ -37,23 +30,24 @@ public class BeatUIHandler : MonoBehaviour
         if (!isPressed) return;
 
         //On Beat Text
-        switch (TempoConductor.Instance.CurrentHitQuality)
-        {
-            case TempoConductor.HitQuality.Excellent:
-                hitQualityText.color = new Color(110f / 255f, 44f / 255f, 222f / 255f, 1f); //purple
-                break;
-            case TempoConductor.HitQuality.Good:
-                hitQualityText.color = new Color(47f / 255f, 235f / 255f, 81f / 255f, 1.0f);
-                break;
-            case TempoConductor.HitQuality.Miss:
-                hitQualityText.color = Color.red;
-                break;
-        }
-
         if (showHitText)
         {
-            hitQualityText.text = TempoConductor.Instance.CurrentHitQuality.ToString();
-            _textAnimator.SetTrigger("Bounce");
+            GameObject hitTextObject = Instantiate(_hitQualityObject, transform);
+            hitTextObject.GetComponent<TextMeshProUGUI>().text = TempoConductor.Instance.CurrentHitQuality.ToString();
+            hitTextObject.GetComponent<Animator>().SetTrigger("Bounce");
+
+            switch (TempoConductor.Instance.CurrentHitQuality)
+            {
+                case TempoConductor.HitQuality.Excellent:
+                    hitTextObject.GetComponent<TextMeshProUGUI>().color = new Color(110f / 255f, 44f / 255f, 222f / 255f, 1f); //purple
+                    break;
+                case TempoConductor.HitQuality.Good:
+                    hitTextObject.GetComponent<TextMeshProUGUI>().color = new Color(47f / 255f, 235f / 255f, 81f / 255f, 1.0f);
+                    break;
+                case TempoConductor.HitQuality.Miss:
+                    hitTextObject.GetComponent<TextMeshProUGUI>().color = Color.red;
+                    break;
+            }
         }
 
         _hitEffectAnimator1.SetTrigger("Effect");
