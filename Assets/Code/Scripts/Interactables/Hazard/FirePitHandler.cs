@@ -14,7 +14,8 @@ public class FirePitHandler : MonoBehaviour
     {
         if (other.TryGetComponent<IDamageable>(out var damageable))
         {
-            damageable.Execute(_damage);
+            AttackInfo attack = new AttackInfo.Builder().SetDamage(_damage).Build();
+            damageable.Execute(attack);
         }
     }
 

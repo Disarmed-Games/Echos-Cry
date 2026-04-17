@@ -5,15 +5,15 @@ public class EnemyDamageable : MonoBehaviour, IDamageable
     [SerializeField] private Enemy _enemy;
     private bool _armorBreak = false;
 
-    public virtual void Execute(float amount)
+    public virtual void Execute(AttackInfo attackData)
     {
         if (_enemy.Invulnerable) return;
 
         _enemy.Collider.enabled = false;
 
-        amount *= _enemy.Health.DamageMultiplier;
+        float damage = attackData.Damage * _enemy.Health.DamageMultiplier;
 
-        _enemy.Health.Damage(amount);
+        _enemy.Health.Damage(damage);
         if(_enemy.Health.CurrentArmor > 0)
         {
             if(GlobalSFXManager.Instance != null && GlobalSFXManager.Instance.ArmorHitSFX) 
@@ -35,7 +35,7 @@ public class EnemyDamageable : MonoBehaviour, IDamageable
         }
             
         if(DamageLabelManager.Instance != null)
-            DamageLabelManager.Instance.SpawnPopup(amount, _enemy.transform.position, Color.white);
+            DamageLabelManager.Instance.SpawnPopup(damage, _enemy.transform.position, Color.white);
         
         if(_enemy.Health.CurrentArmor <= 0) _enemy.StateData.IsStaggered = true;
         
@@ -44,13 +44,4 @@ public class EnemyDamageable : MonoBehaviour, IDamageable
             _enemy.Health.CurrentArmor, 
             _enemy.Health.MaxArmor);
     }
-}
-
-public struct AttackInfo
-{
-    public float damage;
-    public float force;
-    public ForceMode forceMode;
-    public TempoConductor.HitQuality hitQuality;
-    public Vector3 direction;
 }
