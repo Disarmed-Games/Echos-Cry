@@ -9,7 +9,8 @@ public class SpikesHandler : MonoBehaviour
         if (other.TryGetComponent<IDamageable>(out var damageable))
         {
             _spikesAnimator.SetTrigger("Activate");
-            damageable.Execute(_spikeDamage);
+            AttackInfo attack = new AttackInfo.Builder().SetDamage(_spikeDamage).Build();
+            damageable.Execute(attack);
         }
     }
 }

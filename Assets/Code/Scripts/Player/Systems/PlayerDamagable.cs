@@ -5,9 +5,9 @@ public class PlayerDamagable : MonoBehaviour, IDamageable
     [SerializeField] Player player;
     private bool _armorBreak = false;
 
-    public void Execute(float amount)
+    public void Execute(AttackInfo attackData)
     {
-        player.Health.Damage(amount);
+        player.Health.Damage(attackData.Damage);
         if (player.Health.HasArmor)
         {
             player.Animator.TintFlash(Color.blue);
