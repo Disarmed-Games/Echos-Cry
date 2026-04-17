@@ -369,7 +369,7 @@ MonoBehaviour:
   _health: {fileID: 854592342237272632}
   _navMeshAgent: {fileID: 1592182489320676592}
   _rigidbody: {fileID: 6827338249854996756}
-  _npcAnimator: {fileID: 4267862705877107826}
+  _enemyAnimator: {fileID: 4267862705877107826}
   _soundConfig: {fileID: 11400000, guid: 61a08e0075f1f394ba85aefac97da91e, type: 2}
   _collider: {fileID: 8838160874129828706}
   _passiveEffectHandler: {fileID: 8005077659622388430}
@@ -382,7 +382,6 @@ MonoBehaviour:
   - {fileID: 833673933763242198}
   _movementStrats: []
   _drops: {fileID: 11400000, guid: 077ec2d97228a87489e08f93f3aec007, type: 2}
-  _soundStrategy: {fileID: 11400000, guid: 5c5a55ebf2f337c4a80a8fcd0ffba53d, type: 2}
   _enemyCacheStrategy: {fileID: 11400000, guid: c87f18d3f1a7e8e4da228329182fc1dd, type: 2}
   _playerAttackEndChannel: {fileID: 11400000, guid: 32c2647349869554ca690720dab27258, type: 2}
   _updateWaveCount: {fileID: 11400000, guid: 7cab49118f492584f9f027f6ec0fa05a, type: 2}
@@ -409,15 +408,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 6900823288402649937}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d0eb3ab663eafd4f853f4be8ca4c96d, type: 3}
+  m_Script: {fileID: 11500000, guid: dfb6ec55a76b45641942a7cba479e5b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAnimator
-  _npcSprite: {fileID: 5765285837838741193}
+  _enemySprite: {fileID: 5765285837838741193}
   _animator: {fileID: 1879680284868728812}
   _visualEffect: {fileID: 6135991116511513266}
   _spriteTransform: {fileID: 5725350970498192222}
   _staggerParticles: {fileID: 9195744456746233480}
-  _isReversed: 1
+  _isReversed: 0
 --- !u!114 &530485584549624666
 MonoBehaviour:
   m_ObjectHideFlags: 0

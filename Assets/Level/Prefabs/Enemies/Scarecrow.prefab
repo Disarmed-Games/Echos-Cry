@@ -48,13 +48,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 3809796366610336885}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d0eb3ab663eafd4f853f4be8ca4c96d, type: 3}
+  m_Script: {fileID: 11500000, guid: dfb6ec55a76b45641942a7cba479e5b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPCAnimator
-  _npcSprite: {fileID: 1843331403473088481}
-  _animator: {fileID: 0}
+  _enemySprite: {fileID: 1843331403473088481}
+  _animator: {fileID: 2641568866622479991}
   _visualEffect: {fileID: 0}
-  _spriteTransform: {fileID: 0}
+  _spriteTransform: {fileID: 1766548610647288419}
   _staggerParticles: {fileID: 0}
   _isReversed: 0
 --- !u!114 &5413064353834974067
@@ -70,8 +70,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   _collider: {fileID: 5399515055327974506}
-  _soundStrategy: {fileID: 11400000, guid: 5c5a55ebf2f337c4a80a8fcd0ffba53d, type: 2}
-  _npcAnimator: {fileID: 4626249444706746508}
+  _enemyAnimator: {fileID: 4626249444706746508}
   _soundConfig: {fileID: 11400000, guid: 691276c4a36beec4db035cacfdae9741, type: 2}
   _playerAttackEndedChannel: {fileID: 11400000, guid: 32c2647349869554ca690720dab27258, type: 2}
 --- !u!95 &2641568866622479991
