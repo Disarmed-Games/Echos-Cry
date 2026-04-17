@@ -21,6 +21,7 @@ public class PlayerDashState : PlayerActionState
         //_playerContext.ComboMeter.ResetComboMultiplier();
         _playerContext.Animator.SetIsTrailEmit(true);
         _playerContext.Animator.SpriteAnimator.Play("Dash");
+        _playerContext.PlayerParticles.StartDashParticles();
         _playerContext.SFX.Execute(_playerContext.SFXConfig.DashSFX, _playerContext.transform, 0);
         _playerContext.Movement.Dash();
         _playerStateMachine.CanDash = false;
