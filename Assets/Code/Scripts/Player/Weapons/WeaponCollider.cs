@@ -25,7 +25,12 @@ public class WeaponCollider : MonoBehaviour
 
         if (other.TryGetComponent<IDamageable>(out IDamageable damagable))
         {
-            AttackInfo attack = new AttackInfo.Builder().SetDamage(AttackDamage).Build();
+            AttackInfo attack = new AttackInfo.Builder()
+                .SetDamage(AttackDamage)
+                .SetDirection((other.transform.position - Player.Instance.transform.position).normalized)
+                .SetForce(7.5f)
+                .SetForceMode(ForceMode.Impulse)
+                .Build();
             damagable.Execute(attack);
             if (_weaponContext != null) _weaponContext.AddColliderToList(other, AttackHitQuality);
         }

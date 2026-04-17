@@ -68,16 +68,13 @@ public class NPCAnimator : MonoBehaviour
     {
         _npcSprite.material.SetColor(hashedTintColor, _defaultTintColor);
     }
-}
 
-namespace EchosCry.Enemy.Animation
-{
     public class HashCodes
     {
         public static readonly int MoveHashCode = Animator.StringToHash("Move");
         public static readonly int IdleHashCode = Animator.StringToHash("Idle");
         public static readonly int AttackHashCode = Animator.StringToHash("Attack");
         public static readonly int FuseHashCode = Animator.StringToHash("Fuse");
+        public static readonly int StaggerHashCode = Animator.StringToHash("Stagger");
     }
-
 }

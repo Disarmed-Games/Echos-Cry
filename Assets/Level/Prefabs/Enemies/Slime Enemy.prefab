@@ -290,7 +290,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a13bb9d731c3ce45a893640fcd98ebb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
-  _attackDamage: 0
   _health: {fileID: 854592342237272632}
   _navMeshAgent: {fileID: 1592182489320676592}
   _rigidbody: {fileID: 6827338249854996756}
@@ -356,6 +355,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyDamageable
   _enemy: {fileID: 8010943512667726129}
+  _tintFlashDuraction: 0.5
+  _knockbackDuration: 0.15
+  _tintHealthFlash: {r: 1, g: 0.25943398, b: 0.25943398, a: 1}
+  _tintShieldFlash: {r: 0.3915094, g: 0.3915094, b: 1, a: 1}
 --- !u!65 &8838160874129828706
 BoxCollider:
   m_ObjectHideFlags: 0
