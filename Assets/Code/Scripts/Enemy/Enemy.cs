@@ -41,7 +41,6 @@ public class Enemy : MonoBehaviour
     [SerializeField] private TargetStrategy[]   _targetStrats;
     [SerializeField] private MovementStrategy[] _movementStrats;
     [SerializeField] private ItemDropStrategy _drops;
-    [SerializeField] private SoundStrategy _soundStrategy;
     [SerializeField] private EnemyCacheStrategy _enemyCacheStrategy;
 
     [Header("Event Channel (Subscriber)")]
@@ -68,7 +67,6 @@ public class Enemy : MonoBehaviour
     public TargetStrategy[] TargetStrategy { get => _targetStrats; }
     public MovementStrategy[] MovementStrategy { get => _movementStrats; }
     public ItemDropStrategy DropsStrategy { get => _drops; }
-    public SoundStrategy SoundStrategy { get => _soundStrategy; }
     public EnemyData Data { get => _data; }
 
     public int EnemySpawnerID;

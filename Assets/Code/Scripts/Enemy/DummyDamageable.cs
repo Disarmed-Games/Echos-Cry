@@ -4,7 +4,6 @@ public class DummyDamageable : MonoBehaviour, IDamageable
 {
     [Header("Relevant Components")]
     [SerializeField] private Collider _collider;
-    [SerializeField] private SoundStrategy _soundStrategy;
     [SerializeField] private NPCAnimator _npcAnimator;
     [SerializeField] private EnemySoundConfig _soundConfig;
     [Header("Event Channel (Subscriber)")]
@@ -14,7 +13,7 @@ public class DummyDamageable : MonoBehaviour, IDamageable
     public virtual void Execute(AttackInfo attackData)
     {
         _collider.enabled = false;
-        _soundStrategy.Execute(_soundConfig.HitSFX, gameObject.transform, 0);
+        EchosCry.Sound.Execute(_soundConfig.HitSFX, gameObject.transform, 0);
         _npcAnimator.TintFlash(Color.red, 0.15f);
 
         if (DamageLabelManager.Instance != null)
