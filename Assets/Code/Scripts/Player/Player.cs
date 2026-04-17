@@ -21,6 +21,7 @@ public class Player : NonSpawnableSingleton<Player>
     [SerializeField] private PlayerStats _stats;
     [SerializeField] private SpamPrevention _spamPrevention;
     [SerializeField] private HeatGauge _heatGauge;
+    [SerializeField] private PlayerParticles _particles;
 
     [Header("Event Channel (Broadcaster)")]
     [SerializeField] EventChannel _attackEndedChannel;
@@ -44,6 +45,7 @@ public class Player : NonSpawnableSingleton<Player>
     public PlayerStats Stats { get => _stats; }
     public SpamPrevention SpamPrevention { get => _spamPrevention; }
     public HeatGauge HeatGauge { get => _heatGauge; }
+    public PlayerParticles PlayerParticles { get => _particles; }
 
     private void InitStateCache()
     {
