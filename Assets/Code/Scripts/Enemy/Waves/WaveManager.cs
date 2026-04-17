@@ -85,7 +85,7 @@ public class WaveManager : MonoBehaviour
         _totalEnemiesKilled = 0;
         
         HUDMessage.Instance.UpdateMessage("Wave " + (_currentWave + 1).ToString() + " Has Begun.", 2f);
-        CameraManager.Instance.ScreenShake(0.4f, 2.5f);
+        CameraManager.Instance.ScreenShake(0.5f, 2.5f);
 
         StartCoroutine(SpawnWave(_allWaves[_currentWave]));
     }

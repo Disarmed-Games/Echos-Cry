@@ -26,7 +26,6 @@ public class PlayerDamagable : MonoBehaviour, IDamageable
             }
             player.Animator.TintFlash(Color.red);
         }
-        CameraManager.Instance.ScreenShake(0.4f, 0.4f);
         EchosCry.Sound.Execute(player.SFXConfig.HurtEffect, player.transform, 0);
     }
 }

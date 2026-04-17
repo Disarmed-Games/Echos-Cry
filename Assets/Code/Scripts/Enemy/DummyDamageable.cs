@@ -5,6 +5,7 @@ public class DummyDamageable : MonoBehaviour, IDamageable
     [Header("Relevant Components")]
     [SerializeField] private Collider _collider;
     [SerializeField] private EnemyAnimator _enemyAnimator;
+    [SerializeField] private ParticleSystem _particleSystem;
     [SerializeField] private EnemySoundConfig _soundConfig;
     [Header("Event Channel (Subscriber)")]
     [Tooltip("Invoked when player's attack ends")]
@@ -15,6 +16,7 @@ public class DummyDamageable : MonoBehaviour, IDamageable
         _collider.enabled = false;
         EchosCry.Sound.Execute(_soundConfig.HitSFX, gameObject.transform, 0);
         _enemyAnimator.TintFlash(Color.red, 0.15f);
+        _particleSystem.Play();
 
         if (DamageLabelManager.Instance != null)
             DamageLabelManager.Instance.SpawnPopup(attackData.Damage, transform.position, Color.white);
