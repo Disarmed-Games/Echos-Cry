@@ -22,7 +22,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private HealthSystem _health;
     [SerializeField] private NavMeshAgent _navMeshAgent;
     [SerializeField] private Rigidbody _rigidbody;
-    [SerializeField] private NPCAnimator _npcAnimator;
+    [SerializeField] private EnemyAnimator _npcAnimator;
     [SerializeField] private EnemySoundConfig _soundConfig;
     [SerializeField] private Collider _collider;
     [SerializeField] private PassiveEffectHandler _passiveEffectHandler;
@@ -57,7 +57,7 @@ public class Enemy : MonoBehaviour
     public HealthSystem Health { get => _health; }
     public NavMeshAgent NavMeshAgent { get => _navMeshAgent; }
     public Rigidbody Rigidbody { get => _rigidbody; }
-    public NPCAnimator NPCAnimator { get => _npcAnimator; }
+    public EnemyAnimator NPCAnimator { get => _npcAnimator; }
     public EnemySoundConfig SoundConfig { get => _soundConfig; }
     public Collider Collider { get => _collider; }
     public PassiveEffectHandler PassiveEffectHandler { get => _passiveEffectHandler; }
@@ -122,7 +122,7 @@ public class Enemy : MonoBehaviour
         _updateWaveCount.Invoke(EnemySpawnerID);
 
         DeathEffectHandler deathEffectPrefab = Instantiate(_deathEffect, transform.position, Quaternion.identity).GetComponent<DeathEffectHandler>();
-        deathEffectPrefab.SetSpriteShape(_npcAnimator.NPCSprite);
+        deathEffectPrefab.SetSpriteShape(_npcAnimator.EnemySprite);
 
         if (IsPooled) _pool.ReleaseEnemy(this);
         else Destroy(gameObject);

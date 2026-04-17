@@ -2,16 +2,16 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.VFX;
 
-public class NPCAnimator : MonoBehaviour
+public class EnemyAnimator : MonoBehaviour
 {
-    [SerializeField] private SpriteRenderer _npcSprite;
+    [SerializeField] private SpriteRenderer _enemySprite;
     [SerializeField] Animator _animator;
     [SerializeField] private VisualEffect _visualEffect;
     [SerializeField] private Transform _spriteTransform;
     [SerializeField] private ParticleSystem _staggerParticles;
     [SerializeField] private bool _isReversed;
 
-    public SpriteRenderer NPCSprite { get { return _npcSprite; } }
+    public SpriteRenderer EnemySprite { get { return _enemySprite; } }
 
     private Color _defaultTintColor;
     private readonly int hashedTintColor = Shader.PropertyToID("_TintColor");
@@ -53,20 +53,20 @@ public class NPCAnimator : MonoBehaviour
 
     private IEnumerator TintFlashCoroutine(Color tintColor, float flashDuration)
     {
-        _npcSprite.material.SetColor(hashedTintColor, tintColor);
+        _enemySprite.material.SetColor(hashedTintColor, tintColor);
         yield return new WaitForSeconds(flashDuration);
-        _npcSprite.material.SetColor(hashedTintColor, _defaultTintColor);
+        _enemySprite.material.SetColor(hashedTintColor, _defaultTintColor);
     }
 
     private void Awake()
     {
-        if (_npcSprite != null)
-            _defaultTintColor = _npcSprite.material.GetColor(hashedTintColor);        
+        if (_enemySprite != null)
+            _defaultTintColor = _enemySprite.material.GetColor(hashedTintColor);        
     }
 
     private void OnEnable()
     {
-        _npcSprite.material.SetColor(hashedTintColor, _defaultTintColor);
+        _enemySprite.material.SetColor(hashedTintColor, _defaultTintColor);
     }
 
     public class HashCodes
