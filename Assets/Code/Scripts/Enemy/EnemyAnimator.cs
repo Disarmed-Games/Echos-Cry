@@ -9,6 +9,7 @@ public class EnemyAnimator : MonoBehaviour
     [SerializeField] private VisualEffect _visualEffect;
     [SerializeField] private Transform _spriteTransform;
     [SerializeField] private ParticleSystem _staggerParticles;
+    [SerializeField] private ParticleSystem _armorBreakingParticles;
     [SerializeField] private bool _isReversed;
 
     public SpriteRenderer EnemySprite { get { return _enemySprite; } }
@@ -37,7 +38,12 @@ public class EnemyAnimator : MonoBehaviour
         _animator.Play(hashCode);
     }
 
-    public void PlayVisualEffect()
+    public void PlayArmorVisualEffect()
+    {
+        _armorBreakingParticles.Play();
+    }
+
+    public void PlayBloodVisualEffect()
     {
         _visualEffect.Play();
     }

@@ -20,6 +20,7 @@ public class EnemyDamageable : MonoBehaviour, IDamageable
             if(GlobalSFXManager.Instance != null && GlobalSFXManager.Instance.ArmorHitSFX) 
             EchosCry.Sound.Execute(GlobalSFXManager.Instance.ArmorHitSFX, _enemy.transform, 0);
             _enemy.EnemyAnimator.TintFlash(_enemy.Data.TintShieldFlash, _enemy.Data.TintFlashDuration);
+            _enemy.EnemyAnimator.PlayArmorVisualEffect();
         }
         else
         {
@@ -33,7 +34,7 @@ public class EnemyDamageable : MonoBehaviour, IDamageable
             DecalManager.Instance.GetBloodDecal().transform.position = _enemy.transform.position;
             EchosCry.Sound.Execute(_enemy.SoundConfig.HitSFX, _enemy.transform, 0);
             _enemy.EnemyAnimator.TintFlash(_enemy.Data.TintHealthFlash, _enemy.Data.TintFlashDuration);
-            _enemy.EnemyAnimator.PlayVisualEffect();
+            _enemy.EnemyAnimator.PlayBloodVisualEffect();
 
             _enemy.Rigidbody.isKinematic = false;
             _enemy.Rigidbody.AddForce(attackData.Force * attackData.Direction, attackData.ForceMode);
