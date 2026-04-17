@@ -60,6 +60,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Walker Enemy Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 6918668920100905328, guid: b6393c099ff99e547b82c84b1a483987, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
