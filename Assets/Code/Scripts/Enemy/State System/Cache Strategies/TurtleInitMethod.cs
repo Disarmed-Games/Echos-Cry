@@ -2,8 +2,7 @@ using UnityEngine;
 using EchosCry.Enemy.StateSystem;
 using UnityEngine.AI;
 
-[CreateAssetMenu(menuName = "Echo's Cry/Enemy/Cache Strategy/Walker")]
-public class WalkerCacheStrategy : EnemyCacheStrategy
+public class TurtleInitMethod : EnemyInitMethod
 {
     public override void Execute(Enemy enemyContext)
     {

@@ -1,20 +1,20 @@
-using UnityEngine;
 using EchosCry.Enemy.StateSystem;
+using UnityEngine;
 using UnityEngine.AI;
 
-[CreateAssetMenu(menuName = "Echo's Cry/Enemy/Cache Strategy/Bomb")]
-public class BombCacheStrategy : EnemyCacheStrategy
+
+public class BatInitMethod : EnemyInitMethod
 {
     public override void Execute(Enemy enemyContext)
     {
-        EnemyStateTransition death_check = new(EnemyStates.Death, enemy => enemy.Health.CurrentHealth <= 0);
+        EnemyStateTransition death_check     = new(EnemyStates.Death, enemy => enemy.Health.CurrentHealth <= 0);
         EnemyStateTransition ready_to_attack = new(EnemyStates.Attack, enemy => enemy.StateData.ReadyToAttack);
-        EnemyStateTransition attack_ended = new(EnemyStates.Death, enemy => enemy.AttackStrategies[0].AttackEnded);
-        EnemyStateTransition is_staggered = new(EnemyStates.Stagger, enemy => enemy.StateData.IsStaggered);
-        EnemyStateTransition stagger_ended = new(EnemyStates.Pursue, enemy => !enemy.StateData.IsStaggered);
-        EnemyStateTransition cooldown_ended = new(EnemyStates.Pursue, enemy => !enemy.StateData.OnCooldown);
-        EnemyStateTransition player_distance_check =
-            new(EnemyStates.Pursue,
+        EnemyStateTransition attack_ended    = new(EnemyStates.Cooldown, enemy => enemy.AttackStrategies[0].AttackEnded);
+        EnemyStateTransition is_staggered    = new(EnemyStates.Stagger, enemy => enemy.StateData.IsStaggered);
+        EnemyStateTransition stagger_ended   = new(EnemyStates.Pursue, enemy => !enemy.StateData.IsStaggered);
+        EnemyStateTransition cooldown_ended  = new(EnemyStates.Pursue, enemy => !enemy.StateData.OnCooldown);
+        EnemyStateTransition player_distance_check = 
+            new (EnemyStates.Pursue, 
             enemy =>
             {
                 if (PlayerRef.Transform == null) return false;
@@ -23,7 +23,7 @@ public class BombCacheStrategy : EnemyCacheStrategy
                 return false;
             });
         EnemyStateTransition in_range_check =
-            new(EnemyStates.Fuse,
+            new(EnemyStates.Charge,
             enemy =>
             {
                 NavMeshAgent agent = enemy.NavMeshAgent;
@@ -39,16 +39,16 @@ public class BombCacheStrategy : EnemyCacheStrategy
 
         handler.AddStateNode
             (
-                enemyContext.StateCache,
-                EnemyStates.Idle,
-                new EnemyStateTransition[] { death_check, is_staggered },
+                enemyContext.StateCache, 
+                EnemyStates.Idle, 
+                new EnemyStateTransition[] {death_check, is_staggered}, 
                 new EnemyStateTransition[] { player_distance_check }
             );
         handler.AddStateNode
             (
                 enemyContext.StateCache,
                 EnemyStates.Pursue,
-                new EnemyStateTransition[] { death_check, is_staggered },
+                new EnemyStateTransition[] {death_check, is_staggered},
                 new EnemyStateTransition[] { in_range_check }
             );
         handler.AddStateNode
@@ -68,15 +68,22 @@ public class BombCacheStrategy : EnemyCacheStrategy
         handler.AddStateNode
             (
                 enemyContext.StateCache,
-                EnemyStates.Fuse,
-                new EnemyStateTransition[] { death_check, ready_to_attack },
+                EnemyStates.Charge,
+                new EnemyStateTransition[] {death_check, ready_to_attack , is_staggered },
                 new EnemyStateTransition[0]
             );
         handler.AddStateNode
             (
                 enemyContext.StateCache,
                 EnemyStates.Attack,
-                new EnemyStateTransition[] { death_check, attack_ended, is_staggered },
+                new EnemyStateTransition[] {death_check, attack_ended, is_staggered },
+                new EnemyStateTransition[0]
+            );
+        handler.AddStateNode
+            (
+                enemyContext.StateCache,
+                EnemyStates.Cooldown,
+                new EnemyStateTransition[] { death_check, is_staggered, cooldown_ended },
                 new EnemyStateTransition[0]
             );
 

@@ -1,9 +1,7 @@
 using UnityEngine;
 using EchosCry.Enemy.StateSystem;
 using UnityEngine.AI;
-
-[CreateAssetMenu(menuName = "Echo's Cry/Enemy/Cache Strategy/Turtle")]
-public class TurtleCacheStrategy : EnemyCacheStrategy
+public class SlimeInitMethod : EnemyInitMethod
 {
     public override void Execute(Enemy enemyContext)
     {
@@ -23,7 +21,7 @@ public class TurtleCacheStrategy : EnemyCacheStrategy
                 return false;
             });
         EnemyStateTransition in_range_check =
-            new(EnemyStates.Attack,
+            new(EnemyStates.Charge,
             enemy =>
             {
                 NavMeshAgent agent = enemy.NavMeshAgent;
@@ -65,13 +63,13 @@ public class TurtleCacheStrategy : EnemyCacheStrategy
                 new EnemyStateTransition[0],
                 new EnemyStateTransition[0]
             );
-        //handler.AddStateNode
-        //    (
-        //        enemyContext.NewStateCache,
-        //        EnemyStates.Charge,
-        //        new EnemyStateTransition[] { death_check, ready_to_attack, is_staggered },
-        //        new EnemyStateTransition[0]
-        //    );
+        handler.AddStateNode
+            (
+                enemyContext.StateCache,
+                EnemyStates.Charge,
+                new EnemyStateTransition[] { death_check, ready_to_attack, is_staggered },
+                new EnemyStateTransition[0]
+            );
         handler.AddStateNode
             (
                 enemyContext.StateCache,
@@ -86,9 +84,21 @@ public class TurtleCacheStrategy : EnemyCacheStrategy
                 new EnemyStateTransition[] { death_check, is_staggered, cooldown_ended },
                 new EnemyStateTransition[0]
             );
+        handler.AddStateNode
+            (
+                enemyContext.StateCache,
+                EnemyStates.Fuse,
+                new EnemyStateTransition[0],
+                new EnemyStateTransition[0]
+            );
+        handler.AddStateNode
+            (
+                enemyContext.StateCache,
+                EnemyStates.Attack2,
+                new EnemyStateTransition[0],
+                new EnemyStateTransition[0]
+            );
 
         enemyContext.StateHandler = handler;
-
-        enemyContext.NavMeshAgent.stoppingDistance = enemyContext.Data.StoppingDistance;
     }
 }
