@@ -71,7 +71,7 @@ public class PassiveEffectHandler : MonoBehaviour
             case BleedPassiveEffect bleed:
                 enemyReference.Health.Damage(bleed.bleedDamage);
 
-                EchosCry.Sound.Execute(enemyReference.SoundConfig.HitSFX, enemyReference.transform, 0);
+                EchosCry.Sound.PlaySFX(enemyReference.SoundConfig.HitSFX, enemyReference.transform, 0);
                 enemyReference.EnemyAnimator.TintFlash(Color.red, 0.2f);
                 enemyReference.EnemyAnimator.PlayBloodVisualEffect();
 

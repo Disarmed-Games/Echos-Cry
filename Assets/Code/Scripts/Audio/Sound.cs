@@ -5,7 +5,7 @@ namespace EchosCry
 {
     public class Sound 
     {
-        public static void Execute(soundEffect sfx, Transform origin, float time)
+        public static void PlaySFX(soundEffect sfx, Transform origin, float time)
         {
             SoundEffectManager.Instance.Builder
             .SetSound(sfx)

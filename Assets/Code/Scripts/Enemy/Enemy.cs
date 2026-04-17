@@ -96,6 +96,7 @@ public class Enemy : MonoBehaviour
         _health.ResetSystem();
         _stateData.Reset();
         _enemyHealthUI.UpdateUI(_health.CurrentHealth, _health.MaxHealth, _health.CurrentArmor, _health.MaxArmor);
+        _rigidbody.isKinematic = true;
         _stateMachine.SwitchStates(_stateHandler.StartState, this);
     }
     private void OnDisable()

@@ -14,7 +14,7 @@ public class DummyDamageable : MonoBehaviour, IDamageable
     public virtual void Execute(AttackInfo attackData)
     {
         _collider.enabled = false;
-        EchosCry.Sound.Execute(_soundConfig.HitSFX, gameObject.transform, 0);
+        EchosCry.Sound.PlaySFX(_soundConfig.HitSFX, gameObject.transform, 0);
         _enemyAnimator.TintFlash(Color.red, 0.15f);
         _particleSystem.Play();
 

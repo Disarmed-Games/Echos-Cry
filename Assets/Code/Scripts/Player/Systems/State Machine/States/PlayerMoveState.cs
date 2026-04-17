@@ -49,7 +49,7 @@ public class PlayerMoveState : PlayerActionState
     {
         _playerContext.Animator.SpriteAnimator.Play("Run");
         _playerContext.Animator.StartMovementParticles();
-        EchosCry.Sound.Execute(_playerContext.SFXConfig.FootstepSFX, _playerContext.transform, 0);
+        EchosCry.Sound.PlaySFX(_playerContext.SFXConfig.FootstepSFX, _playerContext.transform, 0);
         currentCoroutine = _playerContext.StartCoroutine(RepeatSoundFootstep(_playerContext.SFXConfig.FootstepSFX.soundClips[0].length));
     }
     public override void Exit()
@@ -68,7 +68,7 @@ public class PlayerMoveState : PlayerActionState
     private IEnumerator RepeatSoundFootstep(float clipLength)
     {
         yield return new WaitForSeconds(clipLength);
-        EchosCry.Sound.Execute(_playerContext.SFXConfig.FootstepSFX, _playerContext.transform, 0);
+        EchosCry.Sound.PlaySFX(_playerContext.SFXConfig.FootstepSFX, _playerContext.transform, 0);
         currentCoroutine = _playerContext.StartCoroutine(RepeatSoundFootstep(_playerContext.SFXConfig.FootstepSFX.soundClips[0].length));
     }
 }

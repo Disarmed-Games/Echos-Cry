@@ -18,7 +18,7 @@ public class EnemyDamageable : MonoBehaviour, IDamageable
         if(_enemy.Health.CurrentArmor > 0)
         {
             if(GlobalSFXManager.Instance != null && GlobalSFXManager.Instance.ArmorHitSFX) 
-            EchosCry.Sound.Execute(GlobalSFXManager.Instance.ArmorHitSFX, _enemy.transform, 0);
+            EchosCry.Sound.PlaySFX(GlobalSFXManager.Instance.ArmorHitSFX, _enemy.transform, 0);
             _enemy.EnemyAnimator.TintFlash(_enemy.Data.TintShieldFlash, _enemy.Data.TintFlashDuration);
             _enemy.EnemyAnimator.PlayArmorVisualEffect();
         }
@@ -28,11 +28,11 @@ public class EnemyDamageable : MonoBehaviour, IDamageable
             {
                 _armorBreak = true;
                 if (GlobalSFXManager.Instance != null && GlobalSFXManager.Instance.ArmorBreakSFX)
-                    EchosCry.Sound.Execute(GlobalSFXManager.Instance.ArmorBreakSFX, _enemy.transform, 0);
+                    EchosCry.Sound.PlaySFX(GlobalSFXManager.Instance.ArmorBreakSFX, _enemy.transform, 0);
             }
             _enemy.StateData.IsStaggered = true;
             DecalManager.Instance.GetBloodDecal().transform.position = _enemy.transform.position;
-            EchosCry.Sound.Execute(_enemy.SoundConfig.HitSFX, _enemy.transform, 0);
+            EchosCry.Sound.PlaySFX(_enemy.SoundConfig.HitSFX, _enemy.transform, 0);
             _enemy.EnemyAnimator.TintFlash(_enemy.Data.TintHealthFlash, _enemy.Data.TintFlashDuration);
             _enemy.EnemyAnimator.PlayBloodVisualEffect();
 

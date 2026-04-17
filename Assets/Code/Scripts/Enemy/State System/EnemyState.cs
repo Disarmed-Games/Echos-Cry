@@ -65,7 +65,6 @@ public class StaggerEnemyState : EnemyState
     {
         //Debug.Log("Stagger");
         enemyContext.EnemyAnimator.PlayAnimation(EnemyAnimator.HashCodes.StaggerHashCode);
-        enemyContext.Rigidbody.linearVelocity = Vector3.zero;
         enemyContext.EnemyAnimator.StaggerParticleStart();
         enemyContext.StartCoroutine(StaggerDuration(enemyContext));
     }
@@ -131,7 +130,7 @@ public class AttackEnemyState : EnemyState
 
         Vector3 attackDirection = (PlayerRef.Transform.position - enemyContext.transform.position).normalized;
         enemyContext.EnemyAnimator.PlayAnimation(EnemyAnimator.HashCodes.AttackHashCode);
-        EchosCry.Sound.Execute(enemyContext.SoundConfig.AttackSFX, enemyContext.transform, 0f);
+        EchosCry.Sound.PlaySFX(enemyContext.SoundConfig.AttackSFX, enemyContext.transform, 0f);
         enemyContext.AttackStrategies[0].Execute(enemyContext.Data.BaseDamage, attackDirection, enemyContext.transform);
     }
     public override void Exit(Enemy enemyContext)
@@ -248,7 +247,7 @@ public class Attack2EnemyState : EnemyState
     public override void Enter(Enemy enemyContext)
     {
         enemyContext.EnemyAnimator.PlayAnimation(EnemyAnimator.HashCodes.AttackHashCode);
-        EchosCry.Sound.Execute(enemyContext.SoundConfig.AttackSFX, enemyContext.transform, 0f);
+        EchosCry.Sound.PlaySFX(enemyContext.SoundConfig.AttackSFX, enemyContext.transform, 0f);
         enemyContext.AttackStrategies[1].Execute(enemyContext.Data.BaseDamage, Vector3.zero, enemyContext.transform);
     }
     public override void Exit(Enemy enemyContext)
