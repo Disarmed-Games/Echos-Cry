@@ -6,4 +6,6 @@ public class EnemySoundConfig : ScriptableObject
 {
     public soundEffect HitSFX;
     public soundEffect AttackSFX;
+    public soundEffect ArmorHitSFX;
+    public soundEffect ArmorBreakSFX;
 }
