@@ -10,11 +10,11 @@ public class SpikeAttack : RangedAttack
     protected override void ShootProjectile(Transform origin, Vector3 direction, float damage)
     {
         RBProjectilePool pool = RBProjectileManager.Instance.RequestPool(_projectilePrefab);
-        pool.UseProjectile(origin.position + direction * projectileSpawnDistance, direction, damage);
+        pool.UseProjectile(origin.position + spawnOffset + direction * projectileSpawnDistance, direction, damage);
 
         SoundEffectManager.Instance.Builder
             .SetSound(_projectileSound)
-            .SetSoundPosition(origin.position + direction * 1f)
+            .SetSoundPosition(origin.position + spawnOffset + direction * 1f)
             .ValidateAndPlaySound();
     }
 
@@ -22,15 +22,14 @@ public class SpikeAttack : RangedAttack
     {
         _enemy.Invulnerable = true;
 
-        float angleStep = Mathf.PI * 2f / _projectileCount;
-
         int count = 0;
         while (count < _projectileCount)
         {
+            float angleStep = (Mathf.PI * 2f / _projectileCount) + Random.Range(-15.0f, 15.0f);
             float angle = count * angleStep;
             Vector3 attackDirection = new Vector3(Mathf.Cos(angle), 0f, Mathf.Sin(angle)).normalized;
 
-            _rb.AddForce(-attackDirection * _blowbackForce, ForceMode.Impulse);
+            //_rb.AddForce(-attackDirection * _blowbackForce, ForceMode.Impulse);
             ShootProjectile(origin, attackDirection, damage);
             count++;
         }

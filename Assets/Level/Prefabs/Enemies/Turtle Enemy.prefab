@@ -450,7 +450,7 @@ Rigidbody:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 32768
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
@@ -515,12 +515,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23793f597dd2bc440b69f812538f8749, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  _projectilePrefab: {fileID: 4017702522014423927, guid: 15beb2462e90afd4fbfd54c340142c59, type: 3}
+  _projectilePrefab: {fileID: 4017702522014423927, guid: 2ef898920f8dd0541a736a2ca1196641, type: 3}
   _projectileSound: {fileID: 11400000, guid: b3053e6ade645fb49b3e24c600501329, type: 2}
   _projectileCount: 6
   _rb: {fileID: 6827338249854996756}
   _blowbackForce: 2
-  spawnOffset: {x: 0, y: 0.5, z: 0}
+  spawnOffset: {x: 0, y: 1, z: 0}
   _enemy: {fileID: 8010943512667726129}
   projectileSpawnDistance: 0.6
   invincibleCooldown: 2.6
