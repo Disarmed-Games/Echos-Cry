@@ -21,3 +21,7 @@ MonoBehaviour:
   _knockbackForce: 4
   _baseDamage: 4
   _stoppingDistance: 2
+  _tintFlashDuration: 0.15
+  _knockbackDuration: 0.15
+  _tintHealthFlash: {r: 1, g: 0, b: 0, a: 1}
+  _tintShieldFlash: {r: 0, g: 0, b: 1, a: 1}
