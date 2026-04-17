@@ -4994,6 +4994,7 @@ GameObject:
   - component: {fileID: 470508784331389945}
   - component: {fileID: 2482215524656455717}
   - component: {fileID: 8146987623750290943}
+  - component: {fileID: 4085926975581986429}
   m_Layer: 10
   m_Name: HeatIcon
   m_TagString: Untagged
@@ -5058,6 +5059,28 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!95 &4085926975581986429
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 353529764707331352}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7f3cb7ec1bdc0724db4cd07a136e5413, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &475222138870821773
 GameObject:
   m_ObjectHideFlags: 0
@@ -10477,6 +10500,7 @@ GameObject:
   - component: {fileID: 8942662448182126828}
   - component: {fileID: 6599522886541531921}
   - component: {fileID: 5921633416881181974}
+  - component: {fileID: 2206729129624635101}
   m_Layer: 10
   m_Name: HeatIcon (4)
   m_TagString: Untagged
@@ -10541,6 +10565,28 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!95 &2206729129624635101
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2388622942831589221}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7f3cb7ec1bdc0724db4cd07a136e5413, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &2428720641269041060
 GameObject:
   m_ObjectHideFlags: 0
@@ -10861,6 +10907,7 @@ GameObject:
   - component: {fileID: 144722051650649797}
   - component: {fileID: 2056963689804636684}
   - component: {fileID: 5548473834941663165}
+  - component: {fileID: 7904345911315742931}
   m_Layer: 10
   m_Name: HeatIcon (5)
   m_TagString: Untagged
@@ -10925,6 +10972,28 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!95 &7904345911315742931
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3668229883089105685}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7f3cb7ec1bdc0724db4cd07a136e5413, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &4021053464598582777
 GameObject:
   m_ObjectHideFlags: 0
@@ -16335,6 +16404,7 @@ GameObject:
   - component: {fileID: 4090405904242708568}
   - component: {fileID: 6990268685204494821}
   - component: {fileID: 5920532757959291361}
+  - component: {fileID: 797997734602070623}
   m_Layer: 10
   m_Name: HeatIcon (2)
   m_TagString: Untagged
@@ -16399,6 +16469,28 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!95 &797997734602070623
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6690107544938792550}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7f3cb7ec1bdc0724db4cd07a136e5413, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &6867121682095116782
 GameObject:
   m_ObjectHideFlags: 0
@@ -16460,6 +16552,7 @@ GameObject:
   - component: {fileID: 5214726144684932256}
   - component: {fileID: 6935057967980980355}
   - component: {fileID: 5599271234041133231}
+  - component: {fileID: 5743830230359471958}
   m_Layer: 10
   m_Name: HeatIcon (1)
   m_TagString: Untagged
@@ -16524,6 +16617,28 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!95 &5743830230359471958
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6877047659157237003}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7f3cb7ec1bdc0724db4cd07a136e5413, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &7955681990416039623
 GameObject:
   m_ObjectHideFlags: 0
@@ -16583,13 +16698,13 @@ MonoBehaviour:
   defaultHeatImage: {fileID: 21300000, guid: e92032cf0a2cea34aad58183609296ab, type: 3}
   maxHeatImage: {fileID: 21300000, guid: 53b8fafceba012d47a9ea1de62a8b858, type: 3}
   disabledHeatImage: {fileID: 21300000, guid: 38f3c8506b0fc914e9ac0c0519002ecb, type: 3}
-  heatImagesArray:
-  - {fileID: 8146987623750290943}
-  - {fileID: 5599271234041133231}
-  - {fileID: 5920532757959291361}
-  - {fileID: 8516695751941572236}
-  - {fileID: 5921633416881181974}
-  - {fileID: 5548473834941663165}
+  heatGuages:
+  - {fileID: 353529764707331352}
+  - {fileID: 6877047659157237003}
+  - {fileID: 6690107544938792550}
+  - {fileID: 8741049996988351387}
+  - {fileID: 2388622942831589221}
+  - {fileID: 3668229883089105685}
   useGaugeSFX: {fileID: 11400000, guid: f0adf39a6b91d0f48a25fa607db8a514, type: 2}
 --- !u!114 &7621241787758732498
 MonoBehaviour:
@@ -16853,6 +16968,7 @@ GameObject:
   - component: {fileID: 607519711011439145}
   - component: {fileID: 5959221796474084912}
   - component: {fileID: 8516695751941572236}
+  - component: {fileID: 5815404692035480006}
   m_Layer: 10
   m_Name: HeatIcon (3)
   m_TagString: Untagged
@@ -16917,6 +17033,28 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!95 &5815404692035480006
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8741049996988351387}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7f3cb7ec1bdc0724db4cd07a136e5413, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &8829023610547448522
 GameObject:
   m_ObjectHideFlags: 0
