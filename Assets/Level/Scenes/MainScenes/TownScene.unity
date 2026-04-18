@@ -12188,10 +12188,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2912883627511616977, guid: e1df6ecf5f146cd4ea241f3171b8ae54, type: 3}
-      propertyPath: _distanceCheck
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 8624400538190268421, guid: e1df6ecf5f146cd4ea241f3171b8ae54, type: 3}
       propertyPath: m_Name
       value: ShopKeeper
