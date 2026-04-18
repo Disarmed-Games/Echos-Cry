@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5416422502315992500}
   - component: {fileID: 1347945645131644804}
   - component: {fileID: 8699355270988487260}
+  - component: {fileID: 7132579426693208940}
   m_Layer: 5
   m_Name: HitQualityText
   m_TagString: Untagged
@@ -163,7 +164,7 @@ Animator:
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 52918637296e50e4eb2ccace02bb884c, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 0
+  m_UpdateMode: 2
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
@@ -187,3 +188,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: Echos Cry Core::timedDestroy
   destroyTime: 5
   destroyOnStart: 0
+--- !u!114 &7132579426693208940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1854601228085438648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f5392d4fd91ff740967e1ecd1439954, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
