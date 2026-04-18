@@ -15,6 +15,8 @@ public class PlayerLightAttackState : PlayerActionState
         _playerContext.Animator.SpriteAnimator.Play("Attack");
         _playerContext.Movement.MomentumPush();
         _playerContext.Orientation.IsRotating = false;
+
+        CameraManager.Instance.ScreenShake(0.3f, 0.15f);
     }
     public override void Exit()
     {
