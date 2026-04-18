@@ -7,4 +7,9 @@ public class LuckyCloverItemData: InventoryItemData
     {
             //make it so that player has 10% increased xp drops from enemies or 10% soul drops from enemies
     }
+    public override bool CanUse(Player player)
+    {
+        return true;
+    }
+
 }
