@@ -15,8 +15,6 @@ public class PlayerLightAttackState : PlayerActionState
         _playerContext.Animator.SpriteAnimator.Play("Attack");
         _playerContext.Movement.MomentumPush();
         _playerContext.Orientation.IsRotating = false;
-        Sound.PlayHitSound(_playerContext.SFXConfig, TempoConductor.Instance.CurrentHitQuality, _playerContext.transform);
-        _playerContext.UI.HitQualityText.UpdateText();
     }
     public override void Exit()
     {
