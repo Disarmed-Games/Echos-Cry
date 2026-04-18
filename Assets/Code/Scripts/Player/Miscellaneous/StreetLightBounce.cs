@@ -15,6 +15,6 @@ public class StreetLightBounce : MonoBehaviour
     {
         float t = BeatManager.Instance.BeatProgress;
         float pulse = 1 - Mathf.Sin(t * Mathf.PI);
-        _light.intensity = Mathf.Lerp(_Startingintensity * 0.6f, _Startingintensity, pulse);
+        _light.intensity = Mathf.Lerp(_Startingintensity * 0.5f, _Startingintensity, pulse);
     }
 }

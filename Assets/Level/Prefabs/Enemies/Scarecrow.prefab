@@ -4951,6 +4951,7 @@ MonoBehaviour:
   _visualEffect: {fileID: 0}
   _spriteTransform: {fileID: 1766548610647288419}
   _staggerParticles: {fileID: 0}
+  _armorBreakingParticles: {fileID: 0}
   _isReversed: 0
 --- !u!114 &5413064353834974067
 MonoBehaviour:
@@ -5006,6 +5007,7 @@ MonoBehaviour:
   inkJSON: {fileID: 4900000, guid: 6e429ba239ca9e44b8ae49bb9c4d0169, type: 3}
   ToolTipPrefab: {fileID: 5435326603873152583, guid: 2368d443f59e53f4dbdf1ce2d1423114, type: 3}
   _inputTranslator: {fileID: 11400000, guid: da8057efcf3a45a47bb320ce196e8d61, type: 2}
+  _distanceCheck: 2
 --- !u!54 &4596205580689175202
 Rigidbody:
   m_ObjectHideFlags: 0

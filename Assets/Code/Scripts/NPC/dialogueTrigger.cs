@@ -9,7 +9,8 @@ public class DialogueTrigger : MonoBehaviour
     [SerializeField] private TextAsset inkJSON;
     [SerializeField] private GameObject ToolTipPrefab;
     [SerializeField] private InputTranslator _inputTranslator;
-    private Collider currentPlayer;
+    [SerializeField] private float _distanceCheck;
+    private bool _playerInRange;
 
     void OnEnable()
     {
@@ -22,10 +23,15 @@ public class DialogueTrigger : MonoBehaviour
 
     private void InteractCheck()
     {
-        if (currentPlayer != null && !DialogueManager.Instance.isDialoguePlaying)
+        if (_playerInRange && !DialogueManager.Instance.isDialoguePlaying)
         {
             DialogueManager.Instance.EnterDialogueMode(inkJSON);
         }
+    }
+
+    private void Update()
+    {
+        _playerInRange = (Vector3.Distance(PlayerRef.Transform.position, transform.position) <= _distanceCheck);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -35,21 +41,6 @@ public class DialogueTrigger : MonoBehaviour
             ToolTipPrefab.GetComponent<ToolTip>().text =
                 $"Press '{_inputTranslator.PlayerInputs.Gameplay.Interact.GetBindingDisplayString(InputBinding.MaskByGroup("KeyboardMouse"))}' to talk.";
             Instantiate(ToolTipPrefab, this.transform.position + new Vector3(0, 1, -1), Quaternion.identity);
-            
-            currentPlayer = other;
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            currentPlayer = null;
-
-            if (DialogueManager.Instance.isDialoguePlaying)
-            {
-                StartCoroutine(DialogueManager.Instance.ExitDialogueMode());
-            }
         }
     }
 }
