@@ -255,7 +255,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   textMeshPro: {fileID: 2449679018934426242}
   text: Press 'E' to talk.
-  displayTime: 2
+  displayTime: 1
 --- !u!114 &2537680531963021833
 MonoBehaviour:
   m_ObjectHideFlags: 0
