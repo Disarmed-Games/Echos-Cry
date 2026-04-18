@@ -1,7 +1,12 @@
 using UnityEngine;
 
+public enum PlayerState
+{
+    Unassigned = 0, Dash, Death, Heavy, Light, Special1, Special2, Move, Idle
+}
 public class PlayerStateMachine : AbstractStateMachine<PlayerActionState>
 {
+    private PlayerState _currentStateEnum = PlayerState.Idle;
     private bool _isMoving;
     private bool _usingPrimaryAction, _usingSecondaryAction, _usingSpecialAction;
     private bool _isDashing;
@@ -17,6 +22,7 @@ public class PlayerStateMachine : AbstractStateMachine<PlayerActionState>
     public bool CanDash { get => _canDash; set => _canDash = value; }
     public bool CanPush { get => _canPush; set => _canPush = value; }
     public Vector2 Locomotion { get => _locomotion; }
+    public PlayerState CurrentStateEnum { get => _currentStateEnum; set => _currentStateEnum = value; }
 
     public void BindInputs(InputTranslator translator)
     {

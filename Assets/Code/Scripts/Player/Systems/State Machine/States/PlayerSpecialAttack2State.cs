@@ -1,3 +1,5 @@
+using EchosCry;
+
 public class PlayerSpecialAttack2State : PlayerActionState
 {
     public PlayerSpecialAttack2State(Player playerContext, PlayerStateMachine playerStateMachine, PlayerStateCache playerStateCache)
@@ -5,6 +7,7 @@ public class PlayerSpecialAttack2State : PlayerActionState
 
     public override void Enter()
     {
+        _playerStateMachine.CurrentStateEnum = PlayerState.Special2;
         _playerContext.HeatGauge.UseCharge(6);
 
         _playerContext.WeaponHolder.SwitchWeapon(1);
@@ -14,6 +17,8 @@ public class PlayerSpecialAttack2State : PlayerActionState
         CameraManager.Instance.ScreenShake(0.8f, 0.5f);
         //_playerContext.Movement.MomentumPush();
         _playerContext.Orientation.IsRotating = false;
+        Sound.PlayHitSound(_playerContext.SFXConfig, TempoConductor.Instance.CurrentHitQuality, _playerContext.transform);
+        _playerContext.UI.HitQualityText.UpdateText();
     }
     public override void Exit()
     {

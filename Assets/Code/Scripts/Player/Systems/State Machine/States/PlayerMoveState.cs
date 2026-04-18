@@ -47,6 +47,7 @@ public class PlayerMoveState : PlayerActionState
 
     public override void Enter()
     {
+        _playerStateMachine.CurrentStateEnum = PlayerState.Move;
         _playerContext.Animator.SpriteAnimator.Play("Run");
         _playerContext.Animator.StartMovementParticles();
         EchosCry.Sound.PlaySFX(_playerContext.SFXConfig.FootstepSFX, _playerContext.transform, 0);

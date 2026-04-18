@@ -1,3 +1,4 @@
+using EchosCry;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -22,6 +23,9 @@ public class Player : NonSpawnableSingleton<Player>
     [SerializeField] private HeatGauge _heatGauge;
     [SerializeField] private PlayerParticles _particles;
 
+    [SerializeField] private GameObject _mainCanvas;
+    private PlayerUI _ui;
+
     [Header("Event Channel (Broadcaster)")]
     [SerializeField] EventChannel _attackEndedChannel;
 
@@ -44,6 +48,7 @@ public class Player : NonSpawnableSingleton<Player>
     public SpamPrevention SpamPrevention { get => _spamPrevention; }
     public HeatGauge HeatGauge { get => _heatGauge; }
     public PlayerParticles PlayerParticles { get => _particles; }
+    public PlayerUI UI { get => _ui; }
 
     private void InitStateCache()
     {
@@ -92,6 +97,8 @@ public class Player : NonSpawnableSingleton<Player>
     {
         _playerStateMachine = new();
         _playerStateCache = new();
+
+        _ui = Instantiate(_mainCanvas, transform).GetComponent<PlayerUI>();
     }
     private void Start()
     {
@@ -102,6 +109,7 @@ public class Player : NonSpawnableSingleton<Player>
     private void OnEnable()
     {
         _playerStateMachine.BindInputs(_inputTranslator);
+        _heatGauge.UseCharge(99);
     }
     private void OnDisable()
     {
@@ -114,6 +122,11 @@ public class Player : NonSpawnableSingleton<Player>
     private void FixedUpdate()
     {
         _playerStateMachine.FixedUpdateState();
+        if (!Physics.Raycast(transform.position + new Vector3(0,1,0), Vector3.down, 1.25f))
+        {
+            RB.AddForce(Vector3.down * 100, ForceMode.Impulse);
+        }
+
     }
 
     public void Reset()
@@ -127,6 +140,8 @@ public class Player : NonSpawnableSingleton<Player>
         //Reset is already called on player death, so only reset other values.
         //ISSUE: Should all upgrades and levels be reset on game over?
         _health.ResetHealth();
+        _xp.ResetXP();
+        _heatGauge.UseCharge(99);
         _currencySystem.SetGoldCurrency(0);
     }
 
