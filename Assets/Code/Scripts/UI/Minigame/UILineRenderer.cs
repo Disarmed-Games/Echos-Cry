@@ -82,9 +82,9 @@ public class UILineRenderer : Graphic
 
             vertex = UIVertex.simpleVert;
 
-            if (BeatManager.Instance)
+            if (Player.Instance != null && BeatManager.Instance)
             {
-                if(BeatManager.Instance.BeatInMeasure == 0 && Player.Instance.HeatGauge.CurrentCharge >= 6)
+                if (BeatManager.Instance.BeatInMeasure == 0 && Player.Instance.HeatGauge.CurrentCharge >= 6)
                     vertex.color = secondBeatLineColor;
                 else if (BeatManager.Instance.BeatInMeasure == 2 && Player.Instance.HeatGauge.CurrentCharge >= 6)
                     vertex.color = fourthBeatLineColor;
@@ -92,7 +92,7 @@ public class UILineRenderer : Graphic
                     vertex.color = onBeatLineColor;
             }
 
-                vertex.position = p1 + normal * (thickness / 2);
+            vertex.position = p1 + normal * (thickness / 2);
             vh.AddVert(vertex);
 
             vertex.position = p1 - normal * (thickness / 2);
