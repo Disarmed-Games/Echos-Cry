@@ -16622,7 +16622,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d93c33d58ebd6dc4a9ce56b8d64caaa3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Echos Cry Core::PlayerHitQuality
-  player: {fileID: 0}
+  player: {fileID: 1520755955600332291}
 --- !u!1 &7955681990416039623
 GameObject:
   m_ObjectHideFlags: 0
