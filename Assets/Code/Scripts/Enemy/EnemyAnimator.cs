@@ -19,7 +19,6 @@ public class EnemyAnimator : MonoBehaviour
  
     public void TintFlash(Color tintColor, float flashDuration)
     {
-        StopCoroutine(TintFlashCoroutine(tintColor, flashDuration));
         StartCoroutine(TintFlashCoroutine(tintColor, flashDuration));
     }
 
