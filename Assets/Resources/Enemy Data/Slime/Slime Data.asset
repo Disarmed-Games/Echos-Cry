@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Echos Cry Core::EnemyData
   _distanceCheck: 10
   _attackChargeTime: 0.4
-  _attackDashForce: 3
+  _attackDashForce: 5
   _attackDuration: 0.25
   _attackCooldown: 1.2
   _staggerDuration: 1.2
