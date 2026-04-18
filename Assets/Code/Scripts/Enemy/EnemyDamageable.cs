@@ -20,6 +20,7 @@ public class EnemyDamageable : MonoBehaviour, IDamageable
         float damage = attackData.Damage * _enemy.Health.DamageMultiplier;
 
         _enemy.Health.Damage(damage);
+
         if(_enemy.Health.CurrentArmor > 0)
         {
             EchosCry.Sound.PlaySFX(_enemy.SoundConfig.ArmorHitSFX, _enemy.transform, 0);
@@ -52,6 +53,8 @@ public class EnemyDamageable : MonoBehaviour, IDamageable
             _enemy.Health.MaxHealth, 
             _enemy.Health.CurrentArmor, 
             _enemy.Health.MaxArmor);
+        
+        HitStop.Instance.Execute(0.05f);
     }
 
     private IEnumerator KnockBackDuration(float duration)
