@@ -7,6 +7,7 @@ public class PlayerDeathState : PlayerActionState
 
     public override void Enter()
     {
+        _playerStateMachine.CurrentStateEnum = PlayerState.Death;
         _playerContext.Reset();
         GameManager.HandlePlayerDeath(_playerContext);
     }

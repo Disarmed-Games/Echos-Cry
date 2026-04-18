@@ -22,7 +22,7 @@ public class WalkerInitMethod : EnemyInitMethod
                 return false;
             });
         EnemyStateTransition in_range_check =
-            new(EnemyStates.Attack,
+            new(EnemyStates.Charge,
             enemy =>
             {
                 NavMeshAgent agent = enemy.NavMeshAgent;
@@ -64,13 +64,13 @@ public class WalkerInitMethod : EnemyInitMethod
                 new EnemyStateTransition[0],
                 new EnemyStateTransition[0]
             );
-        //handler.AddStateNode
-        //    (
-        //        enemyContext.NewStateCache,
-        //        EnemyStates.Charge,
-        //        new EnemyStateTransition[] { death_check, ready_to_attack, is_staggered },
-        //        new EnemyStateTransition[0]
-        //    );
+        handler.AddStateNode
+            (
+                enemyContext.StateCache,
+                EnemyStates.Charge,
+                new EnemyStateTransition[] { death_check, ready_to_attack, is_staggered },
+                new EnemyStateTransition[0]
+            );
         handler.AddStateNode
             (
                 enemyContext.StateCache,

@@ -12,6 +12,7 @@ public class PlayerDashState : PlayerActionState
 
     public override void Enter()
     {
+        _playerStateMachine.CurrentStateEnum = PlayerState.Dash;
         // Handle Dash Attack
         //--------------------
         if (_playerContext.Stats.DashAttackEnabled)

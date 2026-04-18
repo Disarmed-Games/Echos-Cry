@@ -1,3 +1,6 @@
+using EchosCry;
+using UnityEngine;
+
 public class PlayerLightAttackState : PlayerActionState
 {
     public PlayerLightAttackState(Player playerContext, PlayerStateMachine playerStateMachine, PlayerStateCache playerStateCache) 
@@ -5,12 +8,15 @@ public class PlayerLightAttackState : PlayerActionState
 
     public override void Enter()
     {
+        _playerStateMachine.CurrentStateEnum = PlayerState.Light;
         _playerContext.WeaponHolder.SwitchWeapon(0);
         _playerContext.WeaponHolder.PrimaryAction();
 
         _playerContext.Animator.SpriteAnimator.Play("Attack");
         _playerContext.Movement.MomentumPush();
         _playerContext.Orientation.IsRotating = false;
+        Sound.PlayHitSound(_playerContext.SFXConfig, TempoConductor.Instance.CurrentHitQuality, _playerContext.transform);
+        _playerContext.UI.HitQualityText.UpdateText();
     }
     public override void Exit()
     {

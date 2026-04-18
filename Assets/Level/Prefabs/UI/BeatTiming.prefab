@@ -54,7 +54,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5aea4dc729f4e95438b52c1d682eefad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MetronomeCanvas
-  _translator: {fileID: 11400000, guid: da8057efcf3a45a47bb320ce196e8d61, type: 2}
   _hitQualityObject: {fileID: 1854601228085438648, guid: 122643eea4d6d2e4bbf94e742093c9fd, type: 3}
   _hitEffectAnimator1: {fileID: 1600509396250293528}
   _hitEffectAnimator2: {fileID: 9152819120111161284}

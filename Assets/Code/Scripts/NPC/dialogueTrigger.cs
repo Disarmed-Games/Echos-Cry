@@ -23,6 +23,7 @@ public class DialogueTrigger : MonoBehaviour
 
     private void InteractCheck()
     {
+        if (DialogueManager.Instance == null) Debug.Log("Whered you go");
         if (_playerInRange && !DialogueManager.Instance.isDialoguePlaying)
         {
             DialogueManager.Instance.EnterDialogueMode(inkJSON);

@@ -10628,7 +10628,6 @@ Transform:
   - {fileID: 8203918266017756090}
   - {fileID: 2091355728142018776}
   - {fileID: 6736455730916581110}
-  - {fileID: 1953760113744696512}
   - {fileID: 2677096560231605505}
   - {fileID: 2709784187955174821}
   - {fileID: 2009047576672927120}
@@ -10668,6 +10667,7 @@ MonoBehaviour:
   _spamPrevention: {fileID: 8377683321204229973}
   _heatGauge: {fileID: 4873508211248062902}
   _particles: {fileID: 2948394587096347692}
+  _mainCanvas: {fileID: 7943711229740518397, guid: 42f411ff78ea6ef4f9d4785b36fbf7c0, type: 3}
   _attackEndedChannel: {fileID: 11400000, guid: 32c2647349869554ca690720dab27258, type: 2}
 --- !u!114 &3818315168867680251
 MonoBehaviour:
@@ -11248,54 +11248,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerComboMeter
   _inputTranslator: {fileID: 11400000, guid: da8057efcf3a45a47bb320ce196e8d61, type: 2}
---- !u!1 &5023412517127650446
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1953760113744696512}
-  - component: {fileID: 4778236664137958228}
-  m_Layer: 10
-  m_Name: Player Hit Quality System
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1953760113744696512
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5023412517127650446}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 415338203038042998}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4778236664137958228
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5023412517127650446}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36f3a41d20967dc4a88cfec0cf12026b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerHitQuality
-  _excellentSFX: {fileID: 11400000, guid: 1bc36dd1aff413744ab35704623169a5, type: 2}
-  _goodSFX: {fileID: 11400000, guid: 0c04344d140505046a375088c946717e, type: 2}
-  _missSFX: {fileID: 11400000, guid: 244cc789554b807419aa853b0793edb3, type: 2}
-  _translator: {fileID: 11400000, guid: da8057efcf3a45a47bb320ce196e8d61, type: 2}
 --- !u!1 &5030643454881288535
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,3 +1,5 @@
+using EchosCry;
+
 public class PlayerHeavyAttackState : PlayerActionState
 {
     public PlayerHeavyAttackState(Player playerContext, PlayerStateMachine playerStateMachine, PlayerStateCache playerStateCache) 
@@ -5,6 +7,7 @@ public class PlayerHeavyAttackState : PlayerActionState
 
     public override void Enter()
     {
+        _playerStateMachine.CurrentStateEnum = PlayerState.Heavy;
         _playerContext.HeatGauge.UseCharge(2);
         _playerContext.WeaponHolder.SwitchWeapon(0);
         _playerContext.WeaponHolder.SecondaryAction();
@@ -13,6 +16,8 @@ public class PlayerHeavyAttackState : PlayerActionState
         CameraManager.Instance.ScreenShake(0.8f, 0.5f);
         _playerContext.Movement.MomentumPush();
         _playerContext.Orientation.IsRotating = false;
+        Sound.PlayHitSound(_playerContext.SFXConfig, TempoConductor.Instance.CurrentHitQuality, _playerContext.transform);
+        _playerContext.UI.HitQualityText.UpdateText();
     }
     public override void Exit()
     {
