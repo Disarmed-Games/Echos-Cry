@@ -6,6 +6,11 @@ public class EnemyDamageable : MonoBehaviour, IDamageable
     [SerializeField] private Enemy _enemy;
     private bool _armorBreak = false;
 
+    private void OnEnable()
+    {
+        _armorBreak = false;
+    }
+
     public virtual void Execute(AttackInfo attackData)
     {
         if (_enemy.Invulnerable) return;
