@@ -16893,7 +16893,7 @@ MonoBehaviour:
   heavyAttackImage: {fileID: 3221724242706400521}
   spriteNodes:
   - sprite: {fileID: 21300000, guid: 200560c6c2a998344ab5e66585e0b592, type: 3}
-    color: {r: 1, g: 0.78932005, b: 0.2216981, a: 0.6862745}
+    color: {r: 1, g: 1, b: 1, a: 0}
   - sprite: {fileID: 21300000, guid: 52a4997c445ecf44bab58bd052409bd9, type: 3}
     color: {r: 1, g: 0.2216981, b: 0.2216981, a: 0.6862745}
   - sprite: {fileID: 21300000, guid: 4997da1a33640254a8b8c87a1ac7f1ea, type: 3}
