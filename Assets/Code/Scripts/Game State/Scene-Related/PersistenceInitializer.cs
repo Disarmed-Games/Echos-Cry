@@ -17,7 +17,7 @@ public static class PersistenceInitializer
     {
         var currentScene = SceneManager.GetActiveScene();
 
-        if (currentScene.name == "EndCreditsMenu" || currentScene.name == "MainMenu")
+        if (currentScene.name == "EndCreditsMenu" || currentScene.name == "MainMenu" || currentScene.name == "BeginningCutscene")
         {
             if (_persistenceRef != null)
             {
@@ -28,7 +28,7 @@ public static class PersistenceInitializer
 
         if (loaded) return;
 
-        if (currentScene.name != "MainMenu" && currentScene.name != "EndCreditsMenu")
+        if (currentScene.name != "MainMenu" && currentScene.name != "EndCreditsMenu" && currentScene.name != "BeginningCutscene")
         {
             //Debug.Log("Loaded by the Persist Object from the PersistenceInitializer script");
             _persistenceRef = Object.Instantiate(Resources.Load("PERSISTOBJECTS"));
