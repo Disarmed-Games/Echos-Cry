@@ -11,7 +11,23 @@ public abstract class CutsceneEvent
     public virtual void Execute() {}
     public virtual void UpdateEvent(float currentTime){}
 }
+public class FlipEvent : CutsceneEvent{
+    private SpriteRenderer sprite;
+    private bool faceLeft;
+    public FlipEvent(float time, SpriteRenderer sprite, bool faceLeft) : base(time){
+        this.sprite = sprite;
+        this.faceLeft = faceLeft;
+    }
+    public override void Execute(){
+        if(sprite == null) return;
+        sprite.flipX = faceLeft;
+    }
+    public override void UpdateEvent(float currentTime){
+        
+        sprite.flipX = faceLeft;
+    }
 
+}
 public class MoveEvent : CutsceneEvent{
     private Transform target;
     private Vector3 startPos;
@@ -29,7 +45,9 @@ public class MoveEvent : CutsceneEvent{
         started = true;
     }
     public override void UpdateEvent(float currentTime){
-        if(!started) return;
+        if(!started){
+            return;
+        }
 
         float t = (currentTime - triggerTime) / duration;
         t = Mathf.Clamp01(t);

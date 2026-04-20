@@ -12,7 +12,7 @@ public class CutsceneController : MonoBehaviour{
         currentTime = 0f;
         playing = true;
     }
-    IEnumerator PlayCutscene(List<CutsceneEvent> events){
+    /*IEnumerator PlayCutscene(List<CutsceneEvent> events){
         float time = 0f;
 
         while (true){
@@ -26,6 +26,21 @@ public class CutsceneController : MonoBehaviour{
                 }
             }
             yield return null;
+        }
+    }*/
+    void Update(){
+        if(!playing || events == null){
+            return;
+        }
+        currentTime+= Time.deltaTime;
+        foreach(var e in events){
+            if(!e.triggered && currentTime >= e.triggerTime){
+                e.Execute();
+                e.triggered = true;
+            }
+            if(e.triggered){
+                e.UpdateEvent(currentTime);
+            }
         }
     }
 }
