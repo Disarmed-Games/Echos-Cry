@@ -1,8 +1,5 @@
-using Codice.Client.Common.GameUI;
-using DG.Tweening;
 using System.Collections;
 using UnityEngine;
-using static UnityEngine.UI.Image;
 
 public class RCLaserProjectile : AttackMethod
 {
