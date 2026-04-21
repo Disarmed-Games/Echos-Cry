@@ -8,9 +8,8 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
-public class DialogueManager : MonoBehaviour
+public class DialogueManager : NonSpawnableSingleton<DialogueManager>
 {
-    public static DialogueManager Instance { get; private set; }
     public static event Action onDialogueStarted;
     public static event Action onDialogueEnded;
 
@@ -33,16 +32,6 @@ public class DialogueManager : MonoBehaviour
     private Coroutine displayLineCoroutine;
     private EventSystem currentEventSystem;
 
-
-    void Awake()
-    {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        Instance = this;
-    }
 
     void Start()
     {

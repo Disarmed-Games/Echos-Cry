@@ -14,11 +14,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f005cc3be4a84cb48bf52a8f27fe2da4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.0000019073486
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f005cc3be4a84cb48bf52a8f27fe2da4, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f005cc3be4a84cb48bf52a8f27fe2da4, type: 3}
       propertyPath: m_LocalRotation.w
@@ -137,7 +137,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   _spikeDamage: 5
+  _spikeDamageWait: 0.35
   _spikesAnimator: {fileID: 6739970321313454027}
+  _clickSFX: {fileID: 11400000, guid: 8e174da995ebc374685628b2b0f5b3d7, type: 2}
+  _spikeSFX: {fileID: 11400000, guid: 741119f47791e5c419ab66407864b511, type: 2}
 --- !u!95 &6739970321313454027
 Animator:
   serializedVersion: 7

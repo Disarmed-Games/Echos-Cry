@@ -10,6 +10,8 @@ public class PlayerHealth : MonoBehaviour
 
     public float CurrentHealth => _healthSystem.CurrentHealth;
     public float CurrentArmor => _healthSystem.CurrentArmor;
+    public float MaxHealth => _healthSystem.MaxHealth;
+    public float MaxArmor => _healthSystem.MaxArmor;
 
     [Header("(Player Only) Event Channels")]
     [SerializeField] DoubleFloatEventChannel _healthChannel;

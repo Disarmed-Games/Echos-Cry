@@ -9,4 +9,9 @@ public class ExperienceItemData : InventoryItemData
     {
         player.XP.IncreaseXP(experienceAmount);
     }
+
+    public override bool CanUse(Player player)
+    {
+        return true;
+    }
 }

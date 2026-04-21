@@ -1,3 +1,6 @@
+using EchosCry;
+using UnityEngine;
+
 public class PlayerLightAttackState : PlayerActionState
 {
     public PlayerLightAttackState(Player playerContext, PlayerStateMachine playerStateMachine, PlayerStateCache playerStateCache) 
@@ -5,29 +8,22 @@ public class PlayerLightAttackState : PlayerActionState
 
     public override void Enter()
     {
-        //if (BeatManager.Instance.BeatInMeasure <= 2)
-        //{
-        //    _playerContext.WeaponHolder.SwitchWeapon(0); //Clarinet
-        //    _playerContext.WeaponHolder.PrimaryAction();
-        //}
-        //else
-        //{
-        //    _playerContext.WeaponHolder.SwitchWeapon(1); //Drum
-        //    _playerContext.WeaponHolder.PrimaryAction();
-        //}
-
+        _playerStateMachine.CurrentStateEnum = PlayerState.Light;
+        _playerContext.WeaponHolder.SwitchWeapon(0);
         _playerContext.WeaponHolder.PrimaryAction();
 
         _playerContext.Animator.SpriteAnimator.Play("Attack");
         _playerContext.Movement.MomentumPush();
         _playerContext.Orientation.IsRotating = false;
+
+        CameraManager.Instance.ScreenShake(0.3f, 0.15f);
     }
     public override void Exit()
     {
         _playerContext.InvokeAttackEnded();
 
         _playerContext.Orientation.IsRotating = true;
-        _playerStateMachine.IsAttacking = false;
+        _playerStateMachine.UsingPrimaryAction = false;
 
         _playerContext.WeaponHolder.ProcessWeaponHits(_playerContext.ComboMeter);
 

@@ -9,4 +9,8 @@ public class HealthRegenItemData : InventoryItemData
     {
         _regenHealthChannel.Invoke();
     }
+    public override bool CanUse(Player player)
+    {
+        return true;
+    }
 }

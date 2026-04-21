@@ -292,7 +292,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1801204536}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.7142857
+  m_Size: 0.7692307
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -478,7 +478,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5005882497062004792, guid: a3f10936ac1cbb44eaabfdc22b435d03, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.63684
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5005882497062004792, guid: a3f10936ac1cbb44eaabfdc22b435d03, type: 3}
       propertyPath: m_LocalPosition.y
@@ -486,7 +486,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5005882497062004792, guid: a3f10936ac1cbb44eaabfdc22b435d03, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 25.90916
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5005882497062004792, guid: a3f10936ac1cbb44eaabfdc22b435d03, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1300,12 +1300,13 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "A Group 8 project by Disarmed Games.\n\nDeveloped by Andrew Wittig, Abigail
+  m_text: "Brought to you by Disarmed Games.\n\nDeveloped by Andrew Wittig, Abigail
     Barnes, Colby Gramelspacher, and Victor Dang.\n\nThis game is made in accordance
     with the guidelines and policies of the  CS 426 Senior Project in Computer Science,
     Spring 2026, at the University of Nevada, Reno, CSE Department. \r\n\r\nInstructed
     by David Feil-Seifer, with advisement from Chris Forkner, a Senior Software Engineer
-    at Unity."
+    at Unity.\n\nSpecial thanks to Adam Mckown for producing the soundtrack to Echo's
+    Cry.\n\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: caafb0e39abac1f42bc58ea30b28ade9, type: 2}
   m_sharedMaterial: {fileID: 3582427398192158066, guid: caafb0e39abac1f42bc58ea30b28ade9, type: 2}
@@ -1332,8 +1333,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 48
-  m_fontSizeBase: 48
+  m_fontSize: 36
+  m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1635,7 +1636,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 256, y: 256}
+  m_SizeDelta: {x: 192, y: 192}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1617211218
 MonoBehaviour:

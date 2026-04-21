@@ -72,8 +72,12 @@ public class InventoryManager : MonoBehaviour
                 .ValidateAndPlaySound();
 
         InventoryItem usedItem = inventoryList[index];
-        usedItem.data.Use(_player);
-        Remove(usedItem.data);
+
+        if (usedItem.data.CanUse(_player))
+        {
+            usedItem.data.Use(_player);
+            Remove(usedItem.data);
+        }
     }
 
     public bool IsFull(InventoryItemData referenceData)

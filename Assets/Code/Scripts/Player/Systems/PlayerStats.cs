@@ -71,7 +71,7 @@ public class PlayerStats : MonoBehaviour
     }
     void UpgradeDashCooldown()
     {
-        if (_movement != null) _movement.DashCooldown *= 0.85f;
+        if (_movement != null) _movement.DashCooldown *= 0.75f;
     }
     void UpgradeMoveSpeed()
     {

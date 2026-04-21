@@ -8,6 +8,8 @@ public class ShopKeeper : MonoBehaviour
     [SerializeField] private GameObject ToolTipPrefab;
     [SerializeField] private soundEffect shopOpenSFX;
     [SerializeField] private InputTranslator translator;
+    [SerializeField] private float _distanceCheck;
+    private bool _playerInRange;
 
     private Collider currentPlayer;
     
@@ -24,22 +26,17 @@ public class ShopKeeper : MonoBehaviour
             ToolTipPrefab.GetComponent<ToolTip>().text =
                 $"Press '{translator.PlayerInputs.Gameplay.Interact.GetBindingDisplayString(InputBinding.MaskByGroup("KeyboardMouse"))}' to Shop";
             Instantiate(ToolTipPrefab, this.transform.position + new Vector3(0, 1, -1), Quaternion.identity);
-
-            currentPlayer = other;
         }
     }
 
-    void OnTriggerExit(Collider other)
+    private void Update()
     {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            currentPlayer = null;
-        }
+        _playerInRange = (Vector3.Distance(PlayerRef.Transform.position, transform.position) <= _distanceCheck);
     }
 
     private void RequestOpenShop()
     {
-        if (currentPlayer != null)
+        if (_playerInRange)
         {
             DialogueManager.Instance.EnterDialogueMode(inkJSON);
 

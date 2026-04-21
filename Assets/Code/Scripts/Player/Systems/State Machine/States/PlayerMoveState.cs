@@ -24,11 +24,22 @@ public class PlayerMoveState : PlayerActionState
         {
             _playerStateMachine.SwitchState(_playerStateCache.RequestState(PlayerStateCache.PlayerState.HeavyAttack));
         }
+        else if(_playerStateMachine.UsingSpecialAction && _playerContext.HeatGauge.CurrentCharge >= 6)
+        {
+            if(BeatManager.Instance.BeatInMeasure == 1)
+            {
+                _playerStateMachine.SwitchState(_playerStateCache.RequestState(PlayerStateCache.PlayerState.SpecialAttack1));
+            }
+            else if(BeatManager.Instance.BeatInMeasure == 3)
+            {
+                _playerStateMachine.SwitchState(_playerStateCache.RequestState(PlayerStateCache.PlayerState.SpecialAttack2));
+            }
+        }
         else if (_playerStateMachine.CanDash && _playerContext.Movement.HasDash && _playerStateMachine.IsDashing)
         {
             if (_playerContext.Movement.PlayerMovementConfig.IsDashToBeat)
             {
-                if(TempoConductor.Instance.IsOnBeat()) _playerStateMachine.SwitchState(_playerStateCache.RequestState(PlayerStateCache.PlayerState.Dash));
+                if (TempoConductor.Instance.IsOnBeat()) _playerStateMachine.SwitchState(_playerStateCache.RequestState(PlayerStateCache.PlayerState.Dash));
             }
             else _playerStateMachine.SwitchState(_playerStateCache.RequestState(PlayerStateCache.PlayerState.Dash));
         }
@@ -36,9 +47,10 @@ public class PlayerMoveState : PlayerActionState
 
     public override void Enter()
     {
+        _playerStateMachine.CurrentStateEnum = PlayerState.Move;
         _playerContext.Animator.SpriteAnimator.Play("Run");
         _playerContext.Animator.StartMovementParticles();
-        _playerContext.SFX.Execute(_playerContext.SFXConfig.FootstepSFX, _playerContext.transform, 0);
+        EchosCry.Sound.PlaySFX(_playerContext.SFXConfig.FootstepSFX, _playerContext.transform, 0);
         currentCoroutine = _playerContext.StartCoroutine(RepeatSoundFootstep(_playerContext.SFXConfig.FootstepSFX.soundClips[0].length));
     }
     public override void Exit()
@@ -57,7 +69,7 @@ public class PlayerMoveState : PlayerActionState
     private IEnumerator RepeatSoundFootstep(float clipLength)
     {
         yield return new WaitForSeconds(clipLength);
-        _playerContext.SFX.Execute(_playerContext.SFXConfig.FootstepSFX, _playerContext.transform, 0);
+        EchosCry.Sound.PlaySFX(_playerContext.SFXConfig.FootstepSFX, _playerContext.transform, 0);
         currentCoroutine = _playerContext.StartCoroutine(RepeatSoundFootstep(_playerContext.SFXConfig.FootstepSFX.soundClips[0].length));
     }
 }

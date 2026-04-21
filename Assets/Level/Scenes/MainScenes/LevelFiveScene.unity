@@ -3988,7 +3988,7 @@ PrefabInstance:
     - target: {fileID: 3645533978470768532, guid: e1ffdf3d89e980e48901136d6808dd91, type: 3}
       propertyPath: '_allWaves.Array.data[0]'
       value: 
-      objectReference: {fileID: 11400000, guid: a6e7e7de10bac044ab6fa233fbf5b60e, type: 2}
+      objectReference: {fileID: 11400000, guid: 102c82520b40ade4a96b49598b511d86, type: 2}
     - target: {fileID: 6460877931832319526, guid: e1ffdf3d89e980e48901136d6808dd91, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

@@ -1,4 +1,4 @@
 public interface IDamageable
 {
-    public void Execute(float amount);
+    public void Execute(AttackInfo attackData);
 }

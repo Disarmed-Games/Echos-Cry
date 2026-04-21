@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AudioSystem.soundEffect
   sfxVolume: 0.1
   sfxClips:
-  - {fileID: 8300000, guid: 2c6512392be562c44854b26fe98eb9c4, type: 3}
+  - {fileID: 8300000, guid: 55bba2e7a3f335941b67af26ea0d9a53, type: 3}
   sfxMixerGroup: {fileID: 57649532358978260, guid: ac2ef84a7ad88f74fb5e10f3c7be54d1, type: 2}
   frequentlyPlayed: 0
   clipsAreRandomized: 0

@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SFXConfig
   _footstepSFX: {fileID: 11400000, guid: 3028a632f21d41d4ebf89c457249cc0a, type: 2}
   _dashSFX: {fileID: 11400000, guid: 0573f952fd3decf45b7c8a2db8f03998, type: 2}
-  _excellentHitSFX: {fileID: 11400000, guid: 1bc36dd1aff413744ab35704623169a5, type: 2}
-  _goodHitSFX: {fileID: 11400000, guid: 0c04344d140505046a375088c946717e, type: 2}
-  _missHitSFX: {fileID: 11400000, guid: 244cc789554b807419aa853b0793edb3, type: 2}
   _hurtEffect: {fileID: 11400000, guid: f4c268f461124c4428f774ecb441f202, type: 2}
   _healEffect: {fileID: 11400000, guid: ba1bc45e723ddee40888315989e33fdb, type: 2}
+  _excellentSFX: {fileID: 11400000, guid: 1bc36dd1aff413744ab35704623169a5, type: 2}
+  _goodSFX: {fileID: 11400000, guid: 0c04344d140505046a375088c946717e, type: 2}
+  _missSFX: {fileID: 11400000, guid: 244cc789554b807419aa853b0793edb3, type: 2}

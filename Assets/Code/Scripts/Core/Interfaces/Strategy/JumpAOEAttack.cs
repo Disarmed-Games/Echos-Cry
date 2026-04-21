@@ -45,7 +45,8 @@ public class JumpAOEAttack : AttackMethod
             if (colliders[i] != null
                 && colliders[i].TryGetComponent<IDamageable>(out IDamageable damageable))
             {
-                damageable.Execute(damage);
+                AttackInfo attackInfo = new AttackInfo.Builder().SetDamage(damage).Build();
+                damageable.Execute(attackInfo);
             }
         }
         _attackEnded = true;

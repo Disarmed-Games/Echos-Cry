@@ -38,7 +38,8 @@ public class RBPRojectileCollisionHandler : MonoBehaviour
     }
     private void Damage(Collider collider)
     {
-        collider.GetComponent<IDamageable>().Execute(projectileDamage);
+        AttackInfo attack = new AttackInfo.Builder().SetDamage(projectileDamage).Build();
+        collider.GetComponent<IDamageable>().Execute(attack);
     }
 
     IEnumerator WaitForTime()

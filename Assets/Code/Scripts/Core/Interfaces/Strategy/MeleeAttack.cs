@@ -1,5 +1,4 @@
 using AudioSystem;
-using EchosCry.Enemy.Animation;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -38,7 +37,8 @@ public class MeleeAttack : AttackMethod
                         maxDistance: _distance,
                         layerMask: _playerMask))
             {
-                hitInfo.collider.gameObject.GetComponent<IDamageable>().Execute(damage);
+                AttackInfo attack = new AttackInfo.Builder().SetDamage(damage).Build();
+                hitInfo.collider.gameObject.GetComponent<IDamageable>().Execute(attack);
                 if (!SoundEffectManager.Instance.Builder.GetSoundPlayer().IsSoundPlaying())
                 {
                     SoundEffectManager.Instance.Builder

@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de3627f1a05e5e946830941c6060cb45, type: 3}
+  m_Name: Level5Wave1
+  m_EditorClassIdentifier: Assembly-CSharp::WaveData
+  EnemySpawns:
+  - enemySpawnType: {fileID: 6900823288402649937, guid: 921ea598b7611794dbcb535f728318d1, type: 3}
+    enemySpawnCount: 6
+  - enemySpawnType: {fileID: 6900823288402649937, guid: 29058e1cb20b8264b8f94e98792051cd, type: 3}
+    enemySpawnCount: 6
+  - enemySpawnType: {fileID: 6900823288402649937, guid: 4e6ad55f889d65e40b6ce9414d619049, type: 3}
+    enemySpawnCount: 6
+  - enemySpawnType: {fileID: 6900823288402649937, guid: cc2412d36d40d54469f1a824c37f02e4, type: 3}
+    enemySpawnCount: 6
+  - enemySpawnType: {fileID: 6900823288402649937, guid: b6393c099ff99e547b82c84b1a483987, type: 3}
+    enemySpawnCount: 6
+  - enemySpawnType: {fileID: 6900823288402649937, guid: 2a53b873969b1a94eb364081569ebdcf, type: 3}
+    enemySpawnCount: 6
+  spawnRadius: 6
+  spawnInterval: 8
