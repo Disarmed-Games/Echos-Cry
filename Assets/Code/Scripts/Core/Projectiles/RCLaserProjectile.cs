@@ -38,12 +38,12 @@ public class RCLaserProjectile : AttackMethod
 
             smoothedTarget = Vector3.Lerp(
                 smoothedTarget,
-                PlayerRef.Transform.position,
+                PlayerRef.Transform.position + new Vector3(0, 1.0f, 0),
                 targetLerpSpeed * Time.deltaTime
             );
 
             Vector3 direction = (smoothedTarget - transform.position).normalized;
-            direction.y = 0f;
+            //direction.y = 0f;
 
             transform.rotation = Quaternion.LookRotation(direction, Vector3.up);
             currentLaser.transform.localPosition = Vector3.forward * (rayLength * 0.5f);

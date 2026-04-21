@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1df8ebd376bf7f64f9d5c3d86eb5bf63, type: 3}
-  m_Name: Walker Enemy Sound
+  m_Name: Slime Enemy Sound
   m_EditorClassIdentifier: Assembly-CSharp::EnemySoundConfig
   HitSFX: {fileID: 11400000, guid: c8c975e393c92cc4f8f6aa88905bcc9e, type: 2}
-  AttackSFX: {fileID: 11400000, guid: 331b2e4095280464797ed62445135069, type: 2}
+  AttackSFX: {fileID: 11400000, guid: 8fe62742e253fa14987d99a9896ad16a, type: 2}
   ArmorHitSFX: {fileID: 11400000, guid: 51089fb434350ba41a45aded6bc7aac2, type: 2}
   ArmorBreakSFX: {fileID: 11400000, guid: 4bafeadefd63ae945a54618da55cb6fb, type: 2}
