@@ -74,7 +74,7 @@ public class SceneTriggerManager : MonoBehaviour
         HUDMessage.Instance.UpdateMessage("Loading...", 1f);
         SoundEffectManager.Instance.Builder
             .SetSound(portalSFX)
-            .SetSoundPosition(this.transform.position)
+            .SetSoundPosition(PlayerRef.Transform.position)
             .ValidateAndPlaySound();
     }
 }
