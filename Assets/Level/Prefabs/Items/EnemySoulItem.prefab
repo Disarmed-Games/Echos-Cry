@@ -33,9 +33,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5949674811797415695}
   - {fileID: 7116727194040688710}
-  - {fileID: 8312911582805963498}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &3519232012989054956
@@ -84,7 +82,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.3
+  m_Radius: 0.4
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &5551235614260211571
 BoxCollider:
@@ -165,13 +163,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5565635186098021589}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.1, z: 0}
+  m_LocalRotation: {x: -0.86602455, y: -0, z: -0, w: 0.5000014}
+  m_LocalPosition: {x: 0, y: -0.09150668, z: 0.3415063}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1390546611673445911}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Father: {fileID: 7116727194040688710}
+  m_LocalEulerAnglesHint: {x: -120, y: 0, z: 0}
 --- !u!198 &5981751013493283683
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -245,7 +243,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 0
+  moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0
@@ -255,7 +253,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.8
+      scalar: 0.6
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -426,7 +424,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.3
+      scalar: 0.4
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -803,7 +801,7 @@ ParticleSystem:
   ShapeModule:
     serializedVersion: 6
     enabled: 1
-    type: 0
+    type: 2
     angle: 30
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
@@ -1009,7 +1007,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 40
+      scalar: 45
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -1135,7 +1133,7 @@ ParticleSystem:
           outWeight: 0.33333334
         - serializedVersion: 3
           time: 1
-          value: 0.1000061
+          value: 0.2000122
           inSlope: -0.41357732
           outSlope: -0.41357732
           tangentMode: 0
@@ -1447,8 +1445,8 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 1, g: 1, b: 1, a: 0.3137255}
-        key1: {r: 1, g: 1, b: 1, a: 0}
+        key0: {r: 1, g: 1, b: 1, a: 0}
+        key1: {r: 1, g: 1, b: 1, a: 0.3137255}
         key2: {r: 0, g: 0, b: 0, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
@@ -1464,8 +1462,8 @@ ParticleSystem:
         ctime6: 0
         ctime7: 0
         atime0: 0
-        atime1: 65535
-        atime2: 0
+        atime1: 16384
+        atime2: 65535
         atime3: 0
         atime4: 0
         atime5: 0
@@ -1474,7 +1472,7 @@ ParticleSystem:
         m_Mode: 0
         m_ColorSpace: 0
         m_NumColorKeys: 2
-        m_NumAlphaKeys: 2
+        m_NumAlphaKeys: 3
       minGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -2881,7 +2879,7 @@ ParticleSystem:
     strengthY:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -2984,7 +2982,7 @@ ParticleSystem:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    separateAxes: 1
+    separateAxes: 0
     frequency: 1
     damping: 1
     octaves: 1
@@ -5001,12 +4999,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9127064215313087534}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.4, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0.2588186, y: -0, z: -0, w: 0.965926}
+  m_LocalPosition: {x: 0, y: 1.0825323, z: -0.624999}
+  m_LocalScale: {x: 2.5, y: 2.4999998, z: 2.4999998}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1390546611673445911}
+  m_Father: {fileID: 7116727194040688710}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!108 &5097178871595257560
 Light:
@@ -5019,13 +5017,13 @@ Light:
   serializedVersion: 11
   m_Type: 2
   m_Color: {r: 0.20496619, g: 0.8463623, b: 0.8867924, a: 1}
-  m_Intensity: 0.1
-  m_Range: 3
+  m_Intensity: 0.25
+  m_Range: 5
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -5112,15 +5110,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: c639529aff6273244a9482ec5ebd3bdd, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.3
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c639529aff6273244a9482ec5ebd3bdd, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.3
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c639529aff6273244a9482ec5ebd3bdd, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.3
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c639529aff6273244a9482ec5ebd3bdd, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5165,18 +5163,54 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: c639529aff6273244a9482ec5ebd3bdd, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 8414708f833adc34f9e6ef6b37100787, type: 2}
+      objectReference: {fileID: 2100000, guid: 052767a972124bf48ba3e48b642ef572, type: 2}
     - target: {fileID: 919132149155446097, guid: c639529aff6273244a9482ec5ebd3bdd, type: 3}
       propertyPath: m_Name
       value: Skull
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: c639529aff6273244a9482ec5ebd3bdd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8312911582805963498}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: c639529aff6273244a9482ec5ebd3bdd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5949674811797415695}
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c639529aff6273244a9482ec5ebd3bdd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 42578914649683539}
   m_SourcePrefab: {fileID: 100100000, guid: c639529aff6273244a9482ec5ebd3bdd, type: 3}
 --- !u!4 &7116727194040688710 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c639529aff6273244a9482ec5ebd3bdd, type: 3}
   m_PrefabInstance: {fileID: 7298374361425446829}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &7604434631338244860 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: c639529aff6273244a9482ec5ebd3bdd, type: 3}
+  m_PrefabInstance: {fileID: 7298374361425446829}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &42578914649683539
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7604434631338244860}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 99ab4efcca94f4c4cbbb00df4037d0eb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
