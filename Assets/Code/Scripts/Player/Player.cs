@@ -129,9 +129,10 @@ public class Player : NonSpawnableSingleton<Player>
 
     }
 
-    public void Reset()
+    public void DeathReset()
     {
         _playerStateMachine.SwitchState(_playerStateCache.RequestState(PlayerStateCache.PlayerState.Idle));
+        _currencySystem.SetGoldCurrency((int)Mathf.Floor(_currencySystem.GetGoldCurrency() * 0.5f));
         _health.ResetHealth();
     }
 

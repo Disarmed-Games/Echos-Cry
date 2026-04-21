@@ -12,6 +12,7 @@ public class PlayerHealth : MonoBehaviour
     public float CurrentArmor => _healthSystem.CurrentArmor;
     public float MaxHealth => _healthSystem.MaxHealth;
     public float MaxArmor => _healthSystem.MaxArmor;
+    public bool IsInvincible { get => _healthSystem.IsInvincible; set => _healthSystem.IsInvincible = value; }
 
     [Header("(Player Only) Event Channels")]
     [SerializeField] DoubleFloatEventChannel _healthChannel;

@@ -17,6 +17,8 @@ public class EnemyData : ScriptableObject
     [SerializeField] private Color _tintHealthFlash = Color.red;
     [SerializeField] private Color _tintShieldFlash = Color.blue;
 
+    [SerializeField] private int _baseScore = 100;
+
     public float DistanceCheck { get { return _distanceCheck; } }
     public float AttackChargeTime { get { return _attackChargeTime; } }
     public float AttackDashForce { get { return _attackDashForce; } }
@@ -29,4 +31,5 @@ public class EnemyData : ScriptableObject
     public float KnockbackDuration { get => _knockbackDuration; }
     public Color TintHealthFlash { get => _tintHealthFlash; }
     public Color TintShieldFlash { get => _tintShieldFlash; }
+    public int BaseScore { get => _baseScore; set => _baseScore = value; }
 }

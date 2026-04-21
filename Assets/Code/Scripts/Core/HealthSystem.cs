@@ -12,11 +12,13 @@ public class HealthSystem : MonoBehaviour
     private float _currentArmor;
     private float _maxHealth;
     private float _maxArmor;
-
+    private bool _isInvincible = false;
     public float CurrentHealth { get => _currentHealth; }
     public float CurrentArmor { get => _currentArmor; }
     public float MaxHealth { get => _maxHealth; set => _maxHealth = value; }
     public float MaxArmor { get => _maxArmor; set => _maxArmor = value; }
+
+    public bool IsInvincible { get => _isInvincible; set => _isInvincible = value; }
 
     private void Start()
     {

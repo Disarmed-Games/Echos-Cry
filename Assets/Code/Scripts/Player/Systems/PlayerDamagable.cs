@@ -7,14 +7,14 @@ public class PlayerDamagable : MonoBehaviour, IDamageable
 
     public void Execute(AttackInfo attackData)
     {
+        if (player.Health.IsInvincible) return;
+
         player.Health.Damage(attackData.Damage);
         if (player.Health.HasArmor)
         {
             player.Animator.TintFlash(Color.blue);
             if (GlobalSFXManager.Instance != null && GlobalSFXManager.Instance.ArmorHitSFX != null)
                 EchosCry.Sound.PlaySFX(GlobalSFXManager.Instance.ArmorHitSFX, player.transform, 0);
-            
-
         }
         else
         {

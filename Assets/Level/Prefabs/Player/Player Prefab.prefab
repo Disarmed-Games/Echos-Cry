@@ -10489,6 +10489,7 @@ MonoBehaviour:
   _newXPGoalCalculation: {fileID: 11400000, guid: 897d285cf068fb64eb59f41c8fad8f4c, type: 2}
   _updateXPChannel: {fileID: 11400000, guid: 5ef765da4634f204397ef3093ebeeee2, type: 2}
   _levelUpChannel: {fileID: 11400000, guid: 32986d85d32905d4abd66964bbb5f54e, type: 2}
+  levelSFX: {fileID: 11400000, guid: 09e3282e7dfd8344ab6ef1cb313d4e22, type: 2}
 --- !u!1 &2388622942831589221
 GameObject:
   m_ObjectHideFlags: 0
@@ -17168,7 +17169,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6698232584449221764, guid: e285dd95641fdc344a4f3e866609bf56, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

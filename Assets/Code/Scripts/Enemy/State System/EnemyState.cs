@@ -32,6 +32,8 @@ public class PursueEnemyState : EnemyState
     public override void Enter(Enemy enemyContext)
     {
         //Debug.Log("Pursue");
+
+        enemyContext.NavMeshAgent.stoppingDistance = enemyContext.Data.StoppingDistance;
         
         SetEnemyTarget(enemyContext);
         enemyContext.StartCoroutine(UpdateTarget(enemyContext));
@@ -195,7 +197,6 @@ public class FuseEnemyState : EnemyState
     {
         enemyContext.StateData.ReadyToAttack = false;
         enemyContext.StartCoroutine(ChargeAttackCoroutine(enemyContext));
-        enemyContext.NavMeshAgent.speed /= 1.25f;
         enemyContext.EnemyAnimator.PlayAnimation(EnemyAnimator.HashCodes.FuseHashCode);
         SetEnemyTarget(enemyContext);
         enemyContext.StartCoroutine(UpdateTarget(enemyContext));

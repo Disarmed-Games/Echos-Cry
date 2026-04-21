@@ -1,3 +1,4 @@
+using AudioSystem;
 using UnityEngine;
 
 public class PlayerXP : MonoBehaviour
@@ -8,6 +9,7 @@ public class PlayerXP : MonoBehaviour
     [SerializeField] private XPCalculationStrategy _newXPGoalCalculation;
     [SerializeField] private FloatFloatIntEventChannel _updateXPChannel;
     [SerializeField] private IntEventChannel _levelUpChannel;
+    [SerializeField] private soundEffect levelSFX;
 
     public int CurrentLevel { get => _currentLevel; }
     public float CurrentXPAmount { get => _currentXPAmount; }
@@ -22,6 +24,9 @@ public class PlayerXP : MonoBehaviour
     public void IncreaseXP(float xp)
     {
         _currentXPAmount += xp;
+
+        if (_currentXPAmount >= _goalXPAmount)
+            EchosCry.Sound.PlaySFX(levelSFX, PlayerRef.Transform, 0f);
 
         while (_currentXPAmount >= _goalXPAmount)
         {

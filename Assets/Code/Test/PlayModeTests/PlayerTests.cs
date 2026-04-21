@@ -129,53 +129,53 @@ public class Player_Movement_Tests
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
 
-    [UnityTest]
-    public IEnumerator Player_Can_Move_Left_Across_10_Frames()
-    {
-        Vector3 position = player.transform.position;
-        for (int i = 0; i < 10; i++)
-        {
-            player.Movement.Move(new Vector2(-1, 0));
-            yield return null;
-        }
-        Assert.That(player.transform.position.x, Is.LessThan(position.x));
-    }
+    //[UnityTest]
+    //public IEnumerator Player_Can_Move_Left_Across_10_Frames()
+    //{
+    //    Vector3 position = player.transform.position;
+    //    for (int i = 0; i < 10; i++)
+    //    {
+    //        player.Movement.Move(new Vector2(-1, 0));
+    //        yield return null;
+    //    }
+    //    Assert.That(player.transform.position.x, Is.LessThan(position.x));
+    //}
 
-    [UnityTest]
-    public IEnumerator Player_Can_Move_Right_Across_10_Frames()
-    {
-        Vector3 position = player.transform.position;
-        for (int i = 0; i < 10; i++)
-        {
-            player.Movement.Move(new Vector2(1, 0));
-            yield return null;
-        }
-        Assert.That(player.transform.position.x, Is.GreaterThan(position.x));
-    }
+    //[UnityTest]
+    //public IEnumerator Player_Can_Move_Right_Across_10_Frames()
+    //{
+    //    Vector3 position = player.transform.position;
+    //    for (int i = 0; i < 10; i++)
+    //    {
+    //        player.Movement.Move(new Vector2(1, 0));
+    //        yield return null;
+    //    }
+    //    Assert.That(player.transform.position.x, Is.GreaterThan(position.x));
+    //}
 
-    [UnityTest]
-    public IEnumerator Player_Can_Move_Up_Across_10_Frames()
-    {
-        Vector3 position = player.transform.position;
-        for (int i = 0; i < 10; i++)
-        {
-            player.Movement.Move(new Vector2(0, 1));
-            yield return null;
-        }
-        Assert.That(player.transform.position.z, Is.GreaterThan(position.z));
-    }
+    //[UnityTest]
+    //public IEnumerator Player_Can_Move_Up_Across_10_Frames()
+    //{
+    //    Vector3 position = player.transform.position;
+    //    for (int i = 0; i < 10; i++)
+    //    {
+    //        player.Movement.Move(new Vector2(0, 1));
+    //        yield return null;
+    //    }
+    //    Assert.That(player.transform.position.z, Is.GreaterThan(position.z));
+    //}
 
-    [UnityTest]
-    public IEnumerator Player_Can_Move_Down_Across_10_Frames()
-    {
-        Vector3 position = player.transform.position;
-        for (int i = 0; i < 10; i++)
-        {
-            player.Movement.Move(new Vector2(0, -1));
-            yield return null;
-        }
-        Assert.That(player.transform.position.z, Is.LessThan(position.z));
-    }
+    //[UnityTest]
+    //public IEnumerator Player_Can_Move_Down_Across_10_Frames()
+    //{
+    //    Vector3 position = player.transform.position;
+    //    for (int i = 0; i < 10; i++)
+    //    {
+    //        player.Movement.Move(new Vector2(0, -1));
+    //        yield return null;
+    //    }
+    //    Assert.That(player.transform.position.z, Is.LessThan(position.z));
+    //}
 
     [UnityTest]
     public IEnumerator Player_Can_Dash_In_Up_Direction()

@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class HitQualityTextUI : MonoBehaviour
 {
+    static private int lightFlashHash = Animator.StringToHash("LightFlash");
     [SerializeField] private GameObject _hitQualityObject;
     [SerializeField] private Animator _hitEffectAnimator1;
     [SerializeField] private Animator _hitEffectAnimator2;
@@ -27,7 +28,7 @@ public class HitQualityTextUI : MonoBehaviour
                 break;
         }
 
-        _hitEffectAnimator1.SetTrigger("Effect");
-        _hitEffectAnimator2.SetTrigger("Effect");
+        _hitEffectAnimator1.Play(lightFlashHash);
+        _hitEffectAnimator2.Play(lightFlashHash); 
     }
 }
