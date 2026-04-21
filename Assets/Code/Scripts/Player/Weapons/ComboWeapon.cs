@@ -13,7 +13,12 @@ public class ComboWeapon : Weapon
         //Stop Coroutines, specifically ComboResetTimer
         StopAllCoroutines();
         //Update the damage the weapon collider will use based on attack data
-        _weaponCollider.UpdateAttack(CurrentAttackData.BaseDamage * _playerAttackDamage.BaseDamageMultiplier, TempoConductor.Instance.CurrentHitQuality);
+        AttackInfo attack = new AttackInfo.Builder()
+            .SetDamage(CurrentAttackData.BaseDamage * _playerAttackDamage.BaseDamageMultiplier)
+            .SetHitQuality(TempoConductor.Instance.CurrentHitQuality)
+            .SetOrigin(Player.Instance.transform)
+            .Build();
+        _weaponCollider.UpdateAttack(attack);
         //Setup and play animations associated with the attack data
         AnimatorOverrideController controller = new AnimatorOverrideController(_attackAnimator.runtimeAnimatorController);
         controller[_clipName] = CurrentAttackData.AnimationClip;
