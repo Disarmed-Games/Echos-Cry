@@ -281,9 +281,10 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 1024
-  maxRayLength: 5
-  raySpeed: 1
-  rayLength: 0
+  maxRayLength: 10
+  raySpeed: 8
+  targetLerpSpeed: 1
+  _duration: 4
   laserPrefab: {fileID: 1095420324342751943, guid: eeec02d454a247c46b0274cb8a82d3f0, type: 3}
 --- !u!1 &6900823288402649937
 GameObject:

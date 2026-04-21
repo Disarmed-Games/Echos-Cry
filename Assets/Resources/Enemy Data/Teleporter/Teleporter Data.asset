@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: Teleporter Data
   m_EditorClassIdentifier: Echos Cry Core::EnemyData
   _distanceCheck: 10
-  _attackChargeTime: 0.4
+  _attackChargeTime: 0.6
   _attackDashForce: 0
-  _attackDuration: 5
+  _attackDuration: 6
   _attackCooldown: 1.2
   _staggerDuration: 1.2
   _baseDamage: 6
-  _stoppingDistance: 10
+  _stoppingDistance: 7
   _tintFlashDuration: 0.2
   _knockbackDuration: 0.15
   _tintHealthFlash: {r: 1, g: 0, b: 0, a: 1}
