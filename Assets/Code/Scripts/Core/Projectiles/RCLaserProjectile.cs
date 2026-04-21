@@ -50,14 +50,12 @@ public class RCLaserProjectile : AttackMethod
             currentLaser.transform.localScale = new Vector3(rayLength, 0.5f, 1.0f);
 
             RaycastHit hit;
-            if (Physics.Raycast(transform.position, direction, out hit, rayLength, layerMask))
+            if (Physics.Raycast(transform.position, direction, out hit, rayLength, layerMask) 
+                && !Player.Instance.Health.IsInvincible)
             {
-                if (!Player.Instance.Health.IsInvincible)
-                {
-                    Damage(hit.collider);
-                    AttackFinished();
-                    break;
-                }
+                Damage(hit.collider);
+                AttackFinished();
+                break;
             }
             else yield return null;
         } 
