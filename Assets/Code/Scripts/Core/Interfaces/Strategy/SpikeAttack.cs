@@ -25,7 +25,7 @@ public class SpikeAttack : RangedAttack
         int count = 0;
         while (count < _projectileCount)
         {
-            float angleStep = (Mathf.PI * 2f / _projectileCount) + Random.Range(-15.0f, 15.0f);
+            float angleStep = (Mathf.PI * 2f / _projectileCount);
             float angle = count * angleStep;
             Vector3 attackDirection = new Vector3(Mathf.Cos(angle), 0f, Mathf.Sin(angle)).normalized;
 

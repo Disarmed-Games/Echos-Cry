@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0af6e37581d16d47aa4a2ce36e29f5c, type: 3}
   m_Name: FrogAttack
   m_EditorClassIdentifier: Assembly-CSharp::AudioSystem.soundEffect
-  sfxVolume: 0.15
+  sfxVolume: 0.2
   sfxClips:
-  - {fileID: 8300000, guid: f4870fde340ac914db3158495f70d177, type: 3}
+  - {fileID: 8300000, guid: 582f837944482704aa4c571af72ac9de, type: 3}
   sfxMixerGroup: {fileID: 57649532358978260, guid: ac2ef84a7ad88f74fb5e10f3c7be54d1, type: 2}
   frequentlyPlayed: 0
   clipsAreRandomized: 0
