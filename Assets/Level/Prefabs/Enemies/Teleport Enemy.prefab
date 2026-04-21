@@ -243,9 +243,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8047365825517706431}
-  - component: {fileID: 1431885463616028180}
+  - component: {fileID: 5431813378970765609}
   m_Layer: 9
-  m_Name: Melee
+  m_Name: Laser
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -260,13 +260,13 @@ Transform:
   m_GameObject: {fileID: 5289895140864153484}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3702571202215447856}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1431885463616028180
+--- !u!114 &5431813378970765609
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -275,18 +275,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 5289895140864153484}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21e363f5d48148d408780e1d10a94ad8, type: 3}
+  m_Script: {fileID: 11500000, guid: 1214d16a342d4be4ebea44f1226a7d72, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Echos Cry Core::MeleeAttack
-  _boxExtents: {x: 0.5, y: 1, z: 0.5}
-  _playerMask:
+  m_EditorClassIdentifier: Echos Cry Core::RCLaserProjectile
+  layerMask:
     serializedVersion: 2
     m_Bits: 1024
-  _distance: 0.5
-  _attackSound: {fileID: 11400000, guid: c8c975e393c92cc4f8f6aa88905bcc9e, type: 2}
-  _duration: 0.4
-  _rb: {fileID: 6827338249854996756}
-  _dashForce: 4
+  maxRayLength: 5
+  raySpeed: 1
+  rayLength: 0
+  laserPrefab: {fileID: 1095420324342751943, guid: eeec02d454a247c46b0274cb8a82d3f0, type: 3}
 --- !u!1 &6900823288402649937
 GameObject:
   m_ObjectHideFlags: 0
@@ -367,6 +365,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a13bb9d731c3ce45a893640fcd98ebb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
+  _enemyType: 1
   _health: {fileID: 854592342237272632}
   _navMeshAgent: {fileID: 1592182489320676592}
   _rigidbody: {fileID: 6827338249854996756}
@@ -375,15 +374,14 @@ MonoBehaviour:
   _collider: {fileID: 8838160874129828706}
   _passiveEffectHandler: {fileID: 8005077659622388430}
   _deathEffect: {fileID: 2836163184616676573, guid: c9677a51a5d061340a514220e825b583, type: 3}
-  _data: {fileID: 11400000, guid: 8ba84a5f97a49024783483e648498d5f, type: 2}
+  _data: {fileID: 11400000, guid: bc72f3619a540fe458a54c8b91789f61, type: 2}
   _enemyHealthUI: {fileID: 1385049851521198975}
   _attackStrats:
-  - {fileID: 1431885463616028180}
+  - {fileID: 5431813378970765609}
   _targetStrats:
   - {fileID: 833673933763242198}
   _movementStrats: []
   _drops: {fileID: 11400000, guid: 077ec2d97228a87489e08f93f3aec007, type: 2}
-  _enemyCacheStrategy: {fileID: 11400000, guid: c87f18d3f1a7e8e4da228329182fc1dd, type: 2}
   _playerAttackEndChannel: {fileID: 11400000, guid: 32c2647349869554ca690720dab27258, type: 2}
   _updateWaveCount: {fileID: 11400000, guid: 7cab49118f492584f9f027f6ec0fa05a, type: 2}
   EnemySpawnerID: 0

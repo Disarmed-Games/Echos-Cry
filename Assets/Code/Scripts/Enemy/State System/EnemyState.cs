@@ -32,6 +32,8 @@ public class PursueEnemyState : EnemyState
     public override void Enter(Enemy enemyContext)
     {
         //Debug.Log("Pursue");
+
+        enemyContext.NavMeshAgent.stoppingDistance = enemyContext.Data.StoppingDistance;
         
         SetEnemyTarget(enemyContext);
         enemyContext.StartCoroutine(UpdateTarget(enemyContext));
