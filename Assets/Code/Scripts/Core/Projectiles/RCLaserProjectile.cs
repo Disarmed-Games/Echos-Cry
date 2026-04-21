@@ -52,9 +52,12 @@ public class RCLaserProjectile : AttackMethod
             RaycastHit hit;
             if (Physics.Raycast(transform.position, direction, out hit, rayLength, layerMask))
             {
-                Damage(hit.collider);
-                AttackFinished();
-                break;
+                if (!Player.Instance.Health.IsInvincible)
+                {
+                    Damage(hit.collider);
+                    AttackFinished();
+                    break;
+                }
             }
             else yield return null;
         } 
