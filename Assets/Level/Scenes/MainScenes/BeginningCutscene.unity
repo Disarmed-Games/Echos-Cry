@@ -5512,6 +5512,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Street Light (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 8327874246561177515, guid: 43c56ecbe7ffb7a4c874a41407cd819d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -12,22 +12,6 @@ public class CutsceneController : MonoBehaviour{
         currentTime = 0f;
         playing = true;
     }
-    /*IEnumerator PlayCutscene(List<CutsceneEvent> events){
-        float time = 0f;
-
-        while (true){
-            time += Time.deltaTime;
-            foreach (var e in events){
-                if (!e.triggered && time >= e.triggerTime){
-                    e.Execute();
-                    e.triggered = true;
-                }if (time >= e.triggerTime){
-                    e.UpdateEvent(time);
-                }
-            }
-            yield return null;
-        }
-    }*/
     void Update(){
         if(!playing || events == null){
             return;
