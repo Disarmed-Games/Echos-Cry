@@ -55,3 +55,28 @@ public class MoveEvent : CutsceneEvent{
         target.position = Vector3.Lerp(startPos, endPos, t);
     }
 }
+
+public class SpawnDemonEvent : CutsceneEvent{
+    private GameObject demon;
+    private GameObject circle;
+    private Vector3 spawnPosition;
+    private bool hasSpawned = false;
+
+    public SpawnDemonEvent(float time, GameObject demon, GameObject circle, Vector3 spawnPosition) : base(time){
+        this.demon = demon;
+        this.circle = circle;
+        this.spawnPosition = spawnPosition;
+    }
+    public override void Execute(){
+        if (hasSpawned) {return;}
+        if(demon != null){
+            demon.SetActive(true);
+            demon.transform.position = spawnPosition;
+        }
+        if(circle != null){
+            circle.SetActive(true);
+            circle.transform.position = spawnPosition;
+        }
+        hasSpawned = true;
+    }
+}
