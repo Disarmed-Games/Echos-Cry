@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 8683334590204975078}
   - component: {fileID: 2418832204660277948}
   - component: {fileID: 7622826424604207686}
-  - component: {fileID: 5805891843074360808}
   m_Layer: 0
   m_Name: Laser Beam
   m_TagString: Untagged
@@ -93,20 +92,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &5805891843074360808
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1095420324342751943}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea07031b24d8a9f4ca7368458aaa6f07, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Echos Cry Core::timedDestroy
-  destroyTime: 4
-  destroyOnStart: 1
 --- !u!1 &1341845437130108819
 GameObject:
   m_ObjectHideFlags: 0
