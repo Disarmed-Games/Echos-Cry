@@ -9,13 +9,13 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private DoubleIntEventChannel _dashUpdateChannel;
     private bool _isMovementLocked = false;
 
-    public void Move(Vector2 playerInputLocomotion)
+    public void Move(Vector2 playerInputLocomotion, float movementMultiplier)
     {
         if (_isMovementLocked) return;
         if (_playerMovementConfig == null) return;
 
         Vector3 moveDirection = ((playerInputLocomotion.y * forwardVector) + (playerInputLocomotion.x * rightVector)).normalized;
-        Vector3 targetVelocity = _moveSpeed * moveDirection;
+        Vector3 targetVelocity = movementMultiplier * _moveSpeed * moveDirection;
         Vector3 currentVelocity = _playerRigidbody.linearVelocity;
 
         Vector3 velocityChange = targetVelocity - currentVelocity;
