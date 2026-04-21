@@ -28,6 +28,10 @@ public class PlayerSpecialAttack1State : PlayerActionState
         _playerContext.WeaponHolder.ProcessWeaponHits(_playerContext.ComboMeter);
         _playerContext.WeaponHolder.SwitchWeapon(0);
     }
+    public override void FixedUpdate()
+    {
+        _playerContext.Movement.Move(_playerStateMachine.Locomotion, 0.75f);
+    }
     protected override void OnCheckSwitch()
     {
         if (_playerContext.WeaponHolder.IsActionEnded())

@@ -29,7 +29,10 @@ public class PlayerLightAttackState : PlayerActionState
 
         if (_playerContext.WeaponHolder.DidWeaponHit) _playerContext.HeatGauge.IncreaseCharge(1);
     }
-
+    public override void FixedUpdate()
+    {
+        _playerContext.Movement.Move(_playerStateMachine.Locomotion, 0.75f);
+    }
     protected override void OnCheckSwitch()
     {
         if (_playerContext.WeaponHolder.IsActionEnded())

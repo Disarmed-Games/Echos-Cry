@@ -10,12 +10,13 @@ public class HitStop : Singleton<HitStop>
         if (!_canHit) return;
         Time.timeScale = 0;
         StartCoroutine(TimeDuration(duration));
-        _canHit = false;
-        StartCoroutine(Cooldown());
+        //StartCoroutine(Cooldown());
     }
     IEnumerator TimeDuration(float duration)
     {
+        _canHit = false;
         yield return new WaitForSecondsRealtime(duration);
+        StartCoroutine(Cooldown());
         Time.timeScale = 1;
     }
     IEnumerator Cooldown()
