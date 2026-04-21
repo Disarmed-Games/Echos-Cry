@@ -82,19 +82,17 @@ public class UILineRenderer : Graphic
 
             vertex = UIVertex.simpleVert;
 
-            if (BeatManager.Instance)
+            if (Player.Instance != null && BeatManager.Instance)
             {
-                if (BeatManager.Instance.BeatInMeasure == 0)
-                    vertex.color = onBeatLineColor;
-                else if (BeatManager.Instance.BeatInMeasure == 1)
+                if (BeatManager.Instance.BeatInMeasure == 0 && Player.Instance.HeatGauge.CurrentCharge >= 6)
                     vertex.color = secondBeatLineColor;
-                else if (BeatManager.Instance.BeatInMeasure == 2)
-                    vertex.color = onBeatLineColor;
-                else
+                else if (BeatManager.Instance.BeatInMeasure == 2 && Player.Instance.HeatGauge.CurrentCharge >= 6)
                     vertex.color = fourthBeatLineColor;
+                else
+                    vertex.color = onBeatLineColor;
             }
 
-                vertex.position = p1 + normal * (thickness / 2);
+            vertex.position = p1 + normal * (thickness / 2);
             vh.AddVert(vertex);
 
             vertex.position = p1 - normal * (thickness / 2);

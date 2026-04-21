@@ -59,7 +59,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: cf39ed99c03a9b04cbd80ad48f486586, type: 2}
+  - {fileID: -876546973899608171, guid: a5b6a6fb1c2b5b245ab4ec899ca05564, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -173,9 +173,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e030241b353f4e42ae2952dd5c58d68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::shopkeeper
+  inkJSON: {fileID: 4900000, guid: 18610cf9d44bb6448a2ad04af23f6292, type: 3}
   ToolTipPrefab: {fileID: 5435326603873152583, guid: 2368d443f59e53f4dbdf1ce2d1423114, type: 3}
   shopOpenSFX: {fileID: 11400000, guid: f83534ee1030a2941a4bef753d73a245, type: 2}
   translator: {fileID: 11400000, guid: da8057efcf3a45a47bb320ce196e8d61, type: 2}
+  _distanceCheck: 2
 --- !u!65 &934338328406865295
 BoxCollider:
   m_ObjectHideFlags: 0

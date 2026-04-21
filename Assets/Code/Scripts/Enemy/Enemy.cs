@@ -1,27 +1,27 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.VFX;
 
-//ORDER:
-//- Create state transitions and then create StateNode
-//- Add StateNode to dictionary using enums
-//- Create a state container, setting the start state and placing dictionary 
-
 public class Enemy : MonoBehaviour
 {
-    private EnemyPool _pool;
-    
+    private static Dictionary<EnemyType, EnemyInitMethod> _initMethods;
     private static EnemyStateMachine _stateMachine;
     private static EnemyStateCache   _stateCache;
 
+    private EnemyPool _pool;
+
+    [SerializeField] private EnemyType _enemyType = EnemyType.Bat;
+
     private bool IsPooled => _pool != null;
+    public bool Invulnerable { get; set; } = false;
 
     [Header("Enemy-Related Components")]
     [SerializeField] private HealthSystem _health;
     [SerializeField] private NavMeshAgent _navMeshAgent;
     [SerializeField] private Rigidbody _rigidbody;
-    [SerializeField] private NPCAnimator _npcAnimator;
+    [SerializeField] private EnemyAnimator _enemyAnimator;
     [SerializeField] private EnemySoundConfig _soundConfig;
     [SerializeField] private Collider _collider;
     [SerializeField] private PassiveEffectHandler _passiveEffectHandler;
@@ -30,18 +30,13 @@ public class Enemy : MonoBehaviour
     [SerializeField] private EnemyHealthUI _enemyHealthUI;
     
     private EnemyStateHandler _stateHandler;
-    public EnemyStateHandler StateHandler { get => _stateHandler; set => _stateHandler = value; }
-    
     private EnemyStateData _stateData;
-    public EnemyStateData StateData { get => _stateData; set => _stateData = value; }
 
     [Header("Strategies")]
     [SerializeField] private AttackMethod[] _attackStrats;
     [SerializeField] private TargetStrategy[]   _targetStrats;
     [SerializeField] private MovementStrategy[] _movementStrats;
     [SerializeField] private ItemDropStrategy _drops;
-    [SerializeField] private SoundStrategy _soundStrategy;
-    [SerializeField] private EnemyCacheStrategy _enemyCacheStrategy;
 
     [Header("Event Channel (Subscriber)")]
     [Tooltip("Invoked when player's attack ends")]
@@ -50,25 +45,24 @@ public class Enemy : MonoBehaviour
     [SerializeField] private IntEventChannel _updateWaveCount;
 
     public EnemyPool Pool { get => _pool; set => _pool = value; }
-
     public EnemyStateMachine StateMachine { get => _stateMachine; }
     public EnemyStateCache StateCache { get => _stateCache; }
-
     public HealthSystem Health { get => _health; }
     public NavMeshAgent NavMeshAgent { get => _navMeshAgent; }
     public Rigidbody Rigidbody { get => _rigidbody; }
-    public NPCAnimator NPCAnimator { get => _npcAnimator; }
+    public EnemyAnimator EnemyAnimator { get => _enemyAnimator; }
     public EnemySoundConfig SoundConfig { get => _soundConfig; }
     public Collider Collider { get => _collider; }
     public PassiveEffectHandler PassiveEffectHandler { get => _passiveEffectHandler; }
     public EnemyHealthUI EnemyHealthUI { get => _enemyHealthUI; }
-
     public AttackMethod[] AttackStrategies { get => _attackStrats; }
     public TargetStrategy[] TargetStrategy { get => _targetStrats; }
     public MovementStrategy[] MovementStrategy { get => _movementStrats; }
     public ItemDropStrategy DropsStrategy { get => _drops; }
-    public SoundStrategy SoundStrategy { get => _soundStrategy; }
     public EnemyData Data { get => _data; }
+    public EnemyType EnemyType { get => _enemyType; }
+    public EnemyStateHandler StateHandler { get => _stateHandler; set => _stateHandler = value; }
+    public EnemyStateData StateData { get => _stateData; set => _stateData = value; }
 
     public int EnemySpawnerID;
 
@@ -77,15 +71,22 @@ public class Enemy : MonoBehaviour
         _stateMachine ??= new();
         _stateCache ??= new();
 
+        _initMethods ??= new()
+        {
+            {EnemyType.Bat, new BatInitMethod()},
+            {EnemyType.Crawler, new RangeInitMethod() },
+            {EnemyType.Frog, new BombInitMethod()},
+            {EnemyType.Walker, new WalkerInitMethod() },
+            {EnemyType.Slime, new SlimeInitMethod() },
+            {EnemyType.Turtle, new TurtleInitMethod()},
+            {EnemyType.Tower, new TowerInitMethod()},
+        };
+
         _stateData = new();
 
-        _enemyCacheStrategy.Execute(this);
+        _initMethods[_enemyType].Execute(this);
+    }
 
-    }
-    private void Start()
-    {
-        _enemyHealthUI.UpdateUI(_health.CurrentHealth, _health.MaxHealth, _health.CurrentArmor, _health.MaxArmor);
-    }
     private void OnEnable()
     {
         TickManager.Instance.GetTimer(0.2f).Tick += TickCheck;
@@ -94,7 +95,8 @@ public class Enemy : MonoBehaviour
         ResetCollider();
         _health.ResetSystem();
         _stateData.Reset();
-        _enemyHealthUI.ResetUI(_health.CurrentHealth, _health.MaxHealth, _health.CurrentArmor, _health.MaxArmor);
+        _enemyHealthUI.UpdateUI(_health.CurrentHealth, _health.MaxHealth, _health.CurrentArmor, _health.MaxArmor);
+        _rigidbody.isKinematic = true;
         _stateMachine.SwitchStates(_stateHandler.StartState, this);
     }
     private void OnDisable()
@@ -111,7 +113,6 @@ public class Enemy : MonoBehaviour
     }
     private void FixedUpdate()
     {
-
         if (_stateHandler == null || _stateData == null) return;
         _stateMachine.FixedUpdateStates(this);
     }
@@ -123,7 +124,7 @@ public class Enemy : MonoBehaviour
         _updateWaveCount.Invoke(EnemySpawnerID);
 
         DeathEffectHandler deathEffectPrefab = Instantiate(_deathEffect, transform.position, Quaternion.identity).GetComponent<DeathEffectHandler>();
-        deathEffectPrefab.SetSpriteShape(_npcAnimator.NPCSprite);
+        deathEffectPrefab.SetSpriteShape(_enemyAnimator.EnemySprite);
 
         if (IsPooled) _pool.ReleaseEnemy(this);
         else Destroy(gameObject);
@@ -132,14 +133,5 @@ public class Enemy : MonoBehaviour
     private void TickCheck()
     {
         _stateMachine.CheckTickSwitchStates(this);
-    }
-
-    public class Builder
-    {
-        public Enemy Build()
-        {
-            Enemy newEnemy = new GameObject("Enemy").AddComponent<Enemy>();
-            return newEnemy;
-        }
     }
 }

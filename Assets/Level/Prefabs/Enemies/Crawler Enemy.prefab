@@ -276,6 +276,7 @@ Transform:
   - {fileID: 8460212736984566330}
   - {fileID: 4401807804551835707}
   - {fileID: 8326345218243470427}
+  - {fileID: 8476139752854910962}
   - {fileID: 7869901826670146948}
   - {fileID: 2683587955824421299}
   m_Father: {fileID: 0}
@@ -292,10 +293,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a13bb9d731c3ce45a893640fcd98ebb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
+  _enemyType: 2
   _health: {fileID: 854592342237272632}
   _navMeshAgent: {fileID: 1592182489320676592}
   _rigidbody: {fileID: 6827338249854996756}
-  _npcAnimator: {fileID: 4267862705877107826}
+  _enemyAnimator: {fileID: 4267862705877107826}
   _soundConfig: {fileID: 11400000, guid: 13653aed55342c348ab4d4d298f40b62, type: 2}
   _collider: {fileID: 8838160874129828706}
   _passiveEffectHandler: {fileID: 6614945081944071576}
@@ -308,8 +310,6 @@ MonoBehaviour:
   - {fileID: 6333739501345131546}
   _movementStrats: []
   _drops: {fileID: 11400000, guid: a47f4f85153c2e448b18ad7bafa93e43, type: 2}
-  _soundStrategy: {fileID: 11400000, guid: 5c5a55ebf2f337c4a80a8fcd0ffba53d, type: 2}
-  _enemyCacheStrategy: {fileID: 11400000, guid: 4907069f9458e6f4abf2ff64f9c7bfa1, type: 2}
   _playerAttackEndChannel: {fileID: 11400000, guid: 32c2647349869554ca690720dab27258, type: 2}
   _updateWaveCount: {fileID: 11400000, guid: 7cab49118f492584f9f027f6ec0fa05a, type: 2}
   EnemySpawnerID: 0
@@ -335,14 +335,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 6900823288402649937}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d0eb3ab663eafd4f853f4be8ca4c96d, type: 3}
+  m_Script: {fileID: 11500000, guid: dfb6ec55a76b45641942a7cba479e5b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAnimator
-  _npcSprite: {fileID: 5765285837838741193}
+  _enemySprite: {fileID: 5765285837838741193}
   _animator: {fileID: 1879680284868728812}
   _visualEffect: {fileID: 7566651568526738815}
   _spriteTransform: {fileID: 8460212736984566330}
   _staggerParticles: {fileID: 6368195577958177802}
+  _armorBreakingParticles: {fileID: 5354945174089063789}
   _isReversed: 0
 --- !u!114 &393378646141688295
 MonoBehaviour:
@@ -522,6 +523,73 @@ Transform:
   - {fileID: 4632967722371620722}
   m_Father: {fileID: 2434889112220353080}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &4855197260945171852
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 2434889112220353080}
+    m_Modifications:
+    - target: {fileID: 3945272145628484222, guid: 6f4c9990cb8482e47811a6c5acfc44b7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945272145628484222, guid: 6f4c9990cb8482e47811a6c5acfc44b7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945272145628484222, guid: 6f4c9990cb8482e47811a6c5acfc44b7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945272145628484222, guid: 6f4c9990cb8482e47811a6c5acfc44b7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945272145628484222, guid: 6f4c9990cb8482e47811a6c5acfc44b7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945272145628484222, guid: 6f4c9990cb8482e47811a6c5acfc44b7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945272145628484222, guid: 6f4c9990cb8482e47811a6c5acfc44b7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945272145628484222, guid: 6f4c9990cb8482e47811a6c5acfc44b7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945272145628484222, guid: 6f4c9990cb8482e47811a6c5acfc44b7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945272145628484222, guid: 6f4c9990cb8482e47811a6c5acfc44b7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5618382336842130044, guid: 6f4c9990cb8482e47811a6c5acfc44b7, type: 3}
+      propertyPath: m_Name
+      value: ArmorChinkParticle
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6f4c9990cb8482e47811a6c5acfc44b7, type: 3}
+--- !u!198 &5354945174089063789 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 662511198533810401, guid: 6f4c9990cb8482e47811a6c5acfc44b7, type: 3}
+  m_PrefabInstance: {fileID: 4855197260945171852}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8476139752854910962 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3945272145628484222, guid: 6f4c9990cb8482e47811a6c5acfc44b7, type: 3}
+  m_PrefabInstance: {fileID: 4855197260945171852}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5762676627517735824
 PrefabInstance:
   m_ObjectHideFlags: 0

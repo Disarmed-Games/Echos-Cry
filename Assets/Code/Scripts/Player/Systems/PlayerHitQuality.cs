@@ -1,53 +1,48 @@
-using AudioSystem;
+using EchosCry;
 using UnityEngine;
 
 public class PlayerHitQuality : MonoBehaviour
 {
-    [SerializeField] soundEffect _excellentSFX;
-    [SerializeField] soundEffect _goodSFX;
-    [SerializeField] soundEffect _missSFX;
-    [SerializeField] InputTranslator _translator;
+    [SerializeField] Player player;
 
     private void OnEnable()
     {
-        if (_translator == null) return;
-        _translator.OnPrimaryActionEvent += DetermineHitQualitySound;
-        _translator.OnSecondaryActionEvent += DetermineHitQualitySound;
-        //_translator.OnDashEvent += DetermineHitQualitySound;
+        if (player.InputTranslator == null) return;
+        player.InputTranslator.OnPrimaryActionEvent += HandlePrimary;
+        player.InputTranslator.OnSecondaryActionEvent += HandleSecondary;
+        player.InputTranslator.OnSpecialAttackEvent += HandleSpecial;
     }
     private void OnDisable()
     {
-        if (_translator == null) return;
-        _translator.OnPrimaryActionEvent -= DetermineHitQualitySound;
-        _translator.OnSecondaryActionEvent -= DetermineHitQualitySound;
-        //_translator.OnDashEvent -= DetermineHitQualitySound;
+        if (player.InputTranslator == null) return;
+        player.InputTranslator.OnPrimaryActionEvent -= HandlePrimary;
+        player.InputTranslator.OnSecondaryActionEvent -= HandleSecondary;
+        player.InputTranslator.OnSpecialAttackEvent -= HandleSpecial;
     }
-    private void PlayHitQualitySound(soundEffect sfx)
-    {
-        if (sfx == null) return;
-        SoundEffectManager.Instance.Builder
-            .SetSound(sfx)
-            .SetSoundPosition(transform.position)
-            .ValidateAndPlaySound();
-    }
-    private void DetermineHitQualitySound(bool isPressed)
-    {
-        if (SpamPrevention.InputLocked) return;
-        if (!isPressed) return;
 
-        switch (TempoConductor.Instance.CurrentHitQuality)
+    public void HandlePrimary(bool buttonPressed)
+    {
+        if (buttonPressed && !SpamPrevention.InputLocked)
         {
-            case TempoConductor.HitQuality.Excellent:
-                PlayHitQualitySound(_excellentSFX);
-                break;
-            case TempoConductor.HitQuality.Good:
-                PlayHitQualitySound(_goodSFX);
-                break;
-            case TempoConductor.HitQuality.Miss:
-                PlayHitQualitySound(_missSFX);
-                break;
-            default:
-                break;
+            Sound.PlayHitSound(player.SFXConfig, TempoConductor.Instance.CurrentHitQuality, transform);
+            player.UI.HitQualityText.UpdateText();
+        }
+    }
+    public void HandleSecondary(bool buttonPressed)
+    {
+        if(player.HeatGauge.CurrentCharge >= 2 && buttonPressed && !SpamPrevention.InputLocked)
+        {
+            Sound.PlayHitSound(player.SFXConfig, TempoConductor.Instance.CurrentHitQuality, transform);
+            player.UI.HitQualityText.UpdateText();
+        }
+    }
+
+    public void HandleSpecial(bool buttonPressed)
+    {
+        if (player.HeatGauge.CurrentCharge >= 6 && buttonPressed && !SpamPrevention.InputLocked)
+        {
+            Sound.PlayHitSound(player.SFXConfig, TempoConductor.Instance.CurrentHitQuality, transform);
+            player.UI.HitQualityText.UpdateText();
         }
     }
 }

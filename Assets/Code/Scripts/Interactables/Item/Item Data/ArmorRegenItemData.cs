@@ -9,4 +9,9 @@ public class ArmorRegenItemData : InventoryItemData
     {
         _regenArmorChannel.Invoke();
     }
+    public override bool CanUse(Player player)
+    {
+        return true;
+    }
+
 }

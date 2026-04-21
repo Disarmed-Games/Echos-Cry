@@ -1,11 +1,15 @@
+using AudioSystem;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
-using AudioSystem;
 
 public class HeatGaugeUI : MonoBehaviour
 {
     [SerializeField] DoubleIntEventChannel _updateHeatGauge;
-    [SerializeField] Image[] heatImagesArray = new Image[6];
+    [SerializeField] Sprite defaultHeatImage;
+    [SerializeField] Sprite maxHeatImage;
+    [SerializeField] Sprite disabledHeatImage;
+    [SerializeField] GameObject[] heatGuages = new GameObject[6];
     [SerializeField] private soundEffect useGaugeSFX;
     private int pastGuageValue;
 
@@ -23,8 +27,16 @@ public class HeatGaugeUI : MonoBehaviour
     {
         for (int i = 0; i < max; i++)
         {
-            heatImagesArray[i].enabled = (i < current);
+            if (current == max)
+                heatGuages[i].GetComponent<Image>().sprite = maxHeatImage;
+            else if (i < current)
+                heatGuages[i].GetComponent<Image>().sprite = defaultHeatImage;
+            else
+                heatGuages[i].GetComponent<Image>().sprite = disabledHeatImage;
         }
+
+        int index = Mathf.Clamp(current - 1, 0, heatGuages.Count() - 1);
+        heatGuages[index].GetComponent<Animator>().SetTrigger("Spin");
 
         if (current < pastGuageValue)
         {

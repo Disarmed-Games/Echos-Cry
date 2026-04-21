@@ -9,4 +9,10 @@ public class ArmorItemData : InventoryItemData
     {
         player.Health.HealArmor(armorAmount);
     }
+
+    public override bool CanUse(Player player)
+    {
+        if (player.Health.CurrentArmor < player.Health.MaxArmor) return true;
+        return false;
+    }
 }

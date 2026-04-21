@@ -7,7 +7,7 @@ public class GameManager : Singleton<GameManager>
     public static event Action OnGameOverEvent;
     public static event Action OnPlayerDeathEvent;
 
-    private static int _maxPlayerLives = 3;
+    private static int _maxPlayerLives = 2;
     public static int PlayerLives = _maxPlayerLives;
 
     private EnemyManager _enemyManager;

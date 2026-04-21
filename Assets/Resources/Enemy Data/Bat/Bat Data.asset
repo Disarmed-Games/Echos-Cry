@@ -14,10 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Echos Cry Core::EnemyData
   _distanceCheck: 10
   _attackChargeTime: 0.4
-  _attackDashForce: 3
+  _attackDashForce: 5
   _attackDuration: 0.25
   _attackCooldown: 1.2
   _staggerDuration: 1.2
   _knockbackForce: 4
   _baseDamage: 6
   _stoppingDistance: 2
+  _tintFlashDuration: 0.2
+  _knockbackDuration: 0.15
+  _tintHealthFlash: {r: 1, g: 0, b: 0, a: 1}
+  _tintShieldFlash: {r: 0, g: 0, b: 1, a: 1}

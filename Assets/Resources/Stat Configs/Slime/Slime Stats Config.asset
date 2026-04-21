@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a896efee18ca34d499e4b48ef78861a9, type: 3}
   m_Name: Slime Stats Config
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStatsConfig
-  currentHealth: 20
-  maxHealth: 20
-  maxArmor: 0
-  currentArmor: 0
+  currentHealth: 15
+  maxHealth: 15
+  maxArmor: 5
+  currentArmor: 5

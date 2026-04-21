@@ -12,6 +12,7 @@ public class PlayerDashState : PlayerActionState
 
     public override void Enter()
     {
+        _playerStateMachine.CurrentStateEnum = PlayerState.Dash;
         // Handle Dash Attack
         //--------------------
         if (_playerContext.Stats.DashAttackEnabled)
@@ -21,7 +22,8 @@ public class PlayerDashState : PlayerActionState
         //_playerContext.ComboMeter.ResetComboMultiplier();
         _playerContext.Animator.SetIsTrailEmit(true);
         _playerContext.Animator.SpriteAnimator.Play("Dash");
-        _playerContext.SFX.Execute(_playerContext.SFXConfig.DashSFX, _playerContext.transform, 0);
+        _playerContext.PlayerParticles.StartDashParticles();
+        EchosCry.Sound.PlaySFX(_playerContext.SFXConfig.DashSFX, _playerContext.transform, 0);
         _playerContext.Movement.Dash();
         _playerStateMachine.CanDash = false;
         _playerContext.StartCoroutine(DashDuration());

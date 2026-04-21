@@ -69,3 +69,6 @@ MonoBehaviour:
   - Prefab: {fileID: 6900823288402649937, guid: cc2412d36d40d54469f1a824c37f02e4, type: 3}
     DefaultCapacity: 50
     MaxCapacity: 100
+  - Prefab: {fileID: 6900823288402649937, guid: 2a53b873969b1a94eb364081569ebdcf, type: 3}
+    DefaultCapacity: 50
+    MaxCapacity: 100

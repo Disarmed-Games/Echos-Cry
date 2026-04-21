@@ -12,9 +12,9 @@ public class EnvironmentObject : MonoBehaviour, IDamageable
     [SerializeField] private float _health;
     public float Health { get => _health; set => _health = value; }
 
-    public void Execute(float amount)
+    public void Execute(AttackInfo attackData)
     {
-        _health -= amount;
+        _health -= attackData.Damage;
         SoundEffectManager.Instance.Builder
             .SetSound(hitSFX)
             .SetSoundPosition(transform.position)

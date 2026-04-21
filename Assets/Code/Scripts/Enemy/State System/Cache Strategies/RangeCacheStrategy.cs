@@ -1,8 +1,7 @@
 using UnityEngine;
 using EchosCry.Enemy.StateSystem;
 
-[CreateAssetMenu(menuName = "Echo's Cry/Enemy/Cache Strategy/Range")]
-public class RangeCacheStrategy : EnemyCacheStrategy
+public class RangeInitMethod : EnemyInitMethod
 {
 
     public override void Execute(Enemy enemyContext)

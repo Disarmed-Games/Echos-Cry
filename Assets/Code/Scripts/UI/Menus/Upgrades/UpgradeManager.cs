@@ -43,7 +43,7 @@ public class UpgradeManager : MonoBehaviour
         [UpgradeType.Health] = "Increase your base health by +5 hp.",
         [UpgradeType.Armor] = "Increase your base armor by +5.",
         [UpgradeType.Dash_Count] = "Increase the total amount of dashes by +1.",
-        [UpgradeType.Dash_Cooldown] = "Decrease the dash cooldown time by 15%.",
+        [UpgradeType.Dash_Cooldown] = "Decrease the dash cooldown time by 25%.",
         [UpgradeType.Attack_Multiplier] = "Increase the base damage multiplier by 10%."
     };
 

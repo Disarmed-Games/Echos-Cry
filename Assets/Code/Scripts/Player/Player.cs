@@ -1,8 +1,9 @@
+using EchosCry;
 using System;
 using System.Collections;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : NonSpawnableSingleton<Player>
 {
     [Header("Relevant Player Components")]
     [SerializeField] private PlayerHealth _health;
@@ -14,13 +15,16 @@ public class Player : MonoBehaviour
     [SerializeField] private PlayerCurrencySystem _currencySystem;
     [SerializeField] private PlayerXP _xp;
     [SerializeField] private InputTranslator _inputTranslator;
-    [SerializeField] private SoundStrategy _sfx;
     [SerializeField] private SFXConfig _sfxConfig;
     [SerializeField] private Rigidbody _rb;
     [SerializeField] private DashWeapon _dashAttack;
     [SerializeField] private PlayerStats _stats;
     [SerializeField] private SpamPrevention _spamPrevention;
     [SerializeField] private HeatGauge _heatGauge;
+    [SerializeField] private PlayerParticles _particles;
+
+    [SerializeField] private GameObject _mainCanvas;
+    private PlayerUI _ui;
 
     [Header("Event Channel (Broadcaster)")]
     [SerializeField] EventChannel _attackEndedChannel;
@@ -31,7 +35,6 @@ public class Player : MonoBehaviour
     public PlayerHealth Health { get => _health; }
     public PlayerComboMeter ComboMeter { get => _comboMeter; }
     public PlayerAnimator Animator { get => _animator; }
-    public SoundStrategy SFX { get => _sfx; }
     public SFXConfig SFXConfig { get => _sfxConfig; }
     public PlayerMovement Movement { get => _movement; }
     public WeaponHolder WeaponHolder { get => _weaponHolder; }
@@ -44,6 +47,8 @@ public class Player : MonoBehaviour
     public PlayerStats Stats { get => _stats; }
     public SpamPrevention SpamPrevention { get => _spamPrevention; }
     public HeatGauge HeatGauge { get => _heatGauge; }
+    public PlayerParticles PlayerParticles { get => _particles; }
+    public PlayerUI UI { get => _ui; }
 
     private void InitStateCache()
     {
@@ -76,12 +81,24 @@ public class Player : MonoBehaviour
             new PlayerHeavyAttackState
             (this, _playerStateMachine, _playerStateCache)
         );
+        _playerStateCache.AddState(
+            PlayerStateCache.PlayerState.SpecialAttack1,
+            new PlayerSpecialAttack1State
+            (this, _playerStateMachine, _playerStateCache)
+        );
+        _playerStateCache.AddState(
+            PlayerStateCache.PlayerState.SpecialAttack2,
+            new PlayerSpecialAttack2State
+            (this, _playerStateMachine, _playerStateCache)
+        );
     }
 
     private void Awake()
     {
         _playerStateMachine = new();
         _playerStateCache = new();
+
+        _ui = Instantiate(_mainCanvas, transform).GetComponent<PlayerUI>();
     }
     private void Start()
     {
@@ -92,6 +109,7 @@ public class Player : MonoBehaviour
     private void OnEnable()
     {
         _playerStateMachine.BindInputs(_inputTranslator);
+        _heatGauge.UseCharge(99);
     }
     private void OnDisable()
     {
@@ -104,6 +122,11 @@ public class Player : MonoBehaviour
     private void FixedUpdate()
     {
         _playerStateMachine.FixedUpdateState();
+        if (!Physics.Raycast(transform.position + new Vector3(0,1,0), Vector3.down, 1.25f))
+        {
+            RB.AddForce(Vector3.down * 100, ForceMode.Impulse);
+        }
+
     }
 
     public void Reset()
@@ -117,6 +140,8 @@ public class Player : MonoBehaviour
         //Reset is already called on player death, so only reset other values.
         //ISSUE: Should all upgrades and levels be reset on game over?
         _health.ResetHealth();
+        _xp.ResetXP();
+        _heatGauge.UseCharge(99);
         _currencySystem.SetGoldCurrency(0);
     }
 

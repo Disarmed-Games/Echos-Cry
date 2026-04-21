@@ -1,55 +1,57 @@
-using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEngine.Rendering.DebugUI;
 
 public class EnemyHealthUI : MonoBehaviour
 {
     [SerializeField] private Image _healthBarFront;
     [SerializeField] private Image _healthBarBack;
     [SerializeField] private Image _shieldBar;
-    [SerializeField] private Color _frontFlashColor;
-    [SerializeField] private float chipSpeed = 3f;
-    
+    [SerializeField] private float frontSpeed = 8f;
+    [SerializeField] private float backSpeed = 3f;
+
+    private float targetHealthFraction;
+
+    private void Update()
+    {
+        if (_healthBarBack.fillAmount > targetHealthFraction)
+        { //Damage
+            _healthBarFront.fillAmount = targetHealthFraction;
+
+            _healthBarBack.fillAmount = Mathf.Lerp(
+                _healthBarBack.fillAmount,
+                targetHealthFraction,
+                backSpeed * Time.deltaTime
+            );
+        }
+        else if (_healthBarFront.fillAmount < targetHealthFraction)
+        { //Healing
+            _healthBarBack.fillAmount = targetHealthFraction;
+
+            _healthBarFront.fillAmount = Mathf.Lerp(
+                _healthBarFront.fillAmount,
+                targetHealthFraction,
+                frontSpeed * Time.deltaTime
+            );
+        }
+    }
+
     public void UpdateUI(float currentHealth, float maxHealth, float currentShield, float maxShield)
     {
-        float sFraction = currentShield / maxShield;
-        _shieldBar.fillAmount = sFraction;
+        targetHealthFraction = currentHealth / maxHealth;
 
-        float hFraction = currentHealth / maxHealth;
-        float fillF = _healthBarFront.fillAmount;
-        float fillB = _healthBarBack.fillAmount;
-        //lerpTimer = 0f;
-        if (fillB > hFraction)
-        {
-            _healthBarFront.fillAmount = hFraction;
-            _healthBarFront.DOKill();
-            DOTween.To(() => _healthBarFront.color, x => { _frontFlashColor = x; }, _frontFlashColor, 0.10f).SetEase(Ease.OutQuad).SetLink(this.gameObject);
-            _healthBarBack.DOKill();
-            DOTween.To(() => _healthBarBack.fillAmount, x => _healthBarBack.fillAmount = x, hFraction, chipSpeed).SetEase(Ease.OutQuad).SetLink(this.gameObject);
-        }
-        if (fillF < hFraction)
-        {
-            _healthBarBack.fillAmount = hFraction;
-            _healthBarBack.color = Color.green;
-            _healthBarFront.DOKill();
-            DOTween.To(() => _healthBarFront.fillAmount, x => _healthBarFront.fillAmount = x, hFraction, chipSpeed).SetEase(Ease.OutQuad).SetLink(this.gameObject);
-        }
+        float shieldFraction = (maxShield > 0) ? currentShield / maxShield : 0f;
+        _shieldBar.fillAmount = shieldFraction;
     }
 
     public void ResetUI(float currentHealth, float maxHealth, float currentShield, float maxShield)
     {
-        float sFraction = 1;
-        float hFraction = 1;
-        if(currentShield > 0 && maxShield > 0) sFraction = currentShield / maxShield;
-        if (currentHealth > 0 && maxHealth > 0) hFraction = currentHealth / maxHealth;
+        float hFraction = (maxHealth > 0) ? currentHealth / maxHealth : 1f;
+        float sFraction = (maxShield > 0) ? currentShield / maxShield : 0f;
 
-        _healthBarBack.fillAmount = hFraction;
+        targetHealthFraction = hFraction;
+
         _healthBarFront.fillAmount = hFraction;
+        _healthBarBack.fillAmount = hFraction;
         _shieldBar.fillAmount = sFraction;
-    }
-    private void OnDisable()
-    {
-
     }
 }

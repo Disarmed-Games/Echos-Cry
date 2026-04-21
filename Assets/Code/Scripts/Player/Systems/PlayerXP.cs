@@ -41,4 +41,8 @@ public class PlayerXP : MonoBehaviour
         if (_updateXPChannel != null)
             _updateXPChannel.Invoke(_currentXPAmount, _goalXPAmount, _currentLevel);
     }
+    public void ResetXP()
+    {
+        _currentXPAmount = 0;
+    }
 }

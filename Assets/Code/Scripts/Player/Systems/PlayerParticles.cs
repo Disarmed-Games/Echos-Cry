@@ -4,6 +4,7 @@ public class PlayerParticles : MonoBehaviour
 {
     //Particles
     [SerializeField] private ParticleSystem _experienceParticles;
+    [SerializeField] private ParticleSystem _dashParticles;
 
     //Channels
     [SerializeField] private IntEventChannel _levelUpChannel;
@@ -20,5 +21,10 @@ public class PlayerParticles : MonoBehaviour
     private void StartExperienceParticles(int level)
     {
         _experienceParticles.Play();
+    }
+    
+    public void StartDashParticles()
+    {
+        _dashParticles.Play();
     }
 }
