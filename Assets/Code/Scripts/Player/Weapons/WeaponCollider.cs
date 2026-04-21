@@ -8,8 +8,7 @@ using UnityEngine;
 public class WeaponCollider : MonoBehaviour
 {
     [SerializeField] private Weapon _weaponContext;
-    public float AttackDamage { get; private set; }
-    public TempoConductor.HitQuality AttackHitQuality { get; private set; }
+    private AttackInfo attackInfo;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -25,20 +24,13 @@ public class WeaponCollider : MonoBehaviour
 
         if (other.TryGetComponent<IDamageable>(out IDamageable damagable))
         {
-            AttackInfo attack = new AttackInfo.Builder()
-                .SetDamage(AttackDamage)
-                .SetDirection((other.transform.position - Player.Instance.transform.position).normalized)
-                .SetForce(7.5f)
-                .SetForceMode(ForceMode.Impulse)
-                .Build();
-            damagable.Execute(attack);
-            if (_weaponContext != null) _weaponContext.AddColliderToList(other, AttackHitQuality);
+            damagable.Execute(attackInfo);
+            if (_weaponContext != null) _weaponContext.AddColliderToList(other, attackInfo.HitQuality);
         }
     }
 
-    public void UpdateAttack(float attackDamage, TempoConductor.HitQuality hit)
+    public void UpdateAttack(AttackInfo attack)
     {
-        AttackDamage = attackDamage;
-        AttackHitQuality = hit;
+        attackInfo = attack;
     }
 }

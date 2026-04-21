@@ -8,7 +8,12 @@ public class DashWeapon : Weapon
     protected override void Attack()
     {
         StopAllCoroutines();
-        _weaponCollider.UpdateAttack(CurrentAttackData.BaseDamage * _playerAttackDamage.BaseDamageMultiplier, TempoConductor.Instance.CurrentHitQuality);
+        AttackInfo attack = new AttackInfo.Builder()
+            .SetDamage(CurrentAttackData.BaseDamage * _playerAttackDamage.BaseDamageMultiplier)
+            .SetHitQuality(TempoConductor.Instance.CurrentHitQuality)
+            .SetOrigin(Player.Instance.transform)
+            .Build();
+        _weaponCollider.UpdateAttack(attack);
         StartCoroutine(AttackLengthCoroutine(_dashAttackTime));
     }
     protected override void OnPrimaryAction()
