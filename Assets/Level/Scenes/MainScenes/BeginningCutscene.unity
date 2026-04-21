@@ -1035,7 +1035,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CutsceneBuilder
   shopkeep: {fileID: 2013070966}
-  shopkeepSprite: {fileID: 318065221}
+  demon: {fileID: 1972431079}
   controller: {fileID: 124705813}
 --- !u!1001 &129857273
 PrefabInstance:
@@ -2278,11 +2278,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5456377110616804673, guid: e0b0a5c608d7f4142acebb28fcc50795, type: 3}
   m_PrefabInstance: {fileID: 302515840}
   m_PrefabAsset: {fileID: 0}
---- !u!212 &318065221 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 7095747285150334150, guid: e1df6ecf5f146cd4ea241f3171b8ae54, type: 3}
-  m_PrefabInstance: {fileID: 1391330999}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &323425333
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3505,15 +3500,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2434889112220353080, guid: 29058e1cb20b8264b8f94e98792051cd, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.16
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2434889112220353080, guid: 29058e1cb20b8264b8f94e98792051cd, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.96
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2434889112220353080, guid: 29058e1cb20b8264b8f94e98792051cd, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 10.890384
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 2434889112220353080, guid: 29058e1cb20b8264b8f94e98792051cd, type: 3}
       propertyPath: m_LocalRotation.w
@@ -7684,15 +7679,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1281923376534781332, guid: e1df6ecf5f146cd4ea241f3171b8ae54, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -16.65
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 1281923376534781332, guid: e1df6ecf5f146cd4ea241f3171b8ae54, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.12
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1281923376534781332, guid: e1df6ecf5f146cd4ea241f3171b8ae54, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 11.95
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 1281923376534781332, guid: e1df6ecf5f146cd4ea241f3171b8ae54, type: 3}
       propertyPath: m_LocalRotation.w
@@ -9504,6 +9499,10 @@ PrefabInstance:
     - target: {fileID: 7591030504746827832, guid: 437111543cf5ec541b27385210249a0f, type: 3}
       propertyPath: m_Name
       value: Spawn Decal
+      objectReference: {fileID: 0}
+    - target: {fileID: 7591030504746827832, guid: 437111543cf5ec541b27385210249a0f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8832688731739451796, guid: 437111543cf5ec541b27385210249a0f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -11409,6 +11408,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 5797438283169641578, guid: ac0f790e7f72a0e40a17d122be6eb359, type: 3}
   m_PrefabInstance: {fileID: 1938085116}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1972431079 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2434889112220353080, guid: 29058e1cb20b8264b8f94e98792051cd, type: 3}
+  m_PrefabInstance: {fileID: 625136488}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1979681853
 PrefabInstance:

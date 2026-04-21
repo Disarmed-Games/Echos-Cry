@@ -12,21 +12,21 @@ public abstract class CutsceneEvent
     public virtual void UpdateEvent(float currentTime){}
 }
 public class FlipEvent : CutsceneEvent{
-    private SpriteRenderer sprite;
+    private Transform target;
     private bool faceLeft;
-    public FlipEvent(float time, SpriteRenderer sprite, bool faceLeft) : base(time){
-        this.sprite = sprite;
+
+    public FlipEvent(float time, Transform target, bool faceLeft) : base(time){
+        this.target = target;
         this.faceLeft = faceLeft;
     }
-    public override void Execute(){
-        if(sprite == null) return;
-        sprite.flipX = faceLeft;
-    }
-    public override void UpdateEvent(float currentTime){
-        
-        sprite.flipX = faceLeft;
-    }
 
+    public override void Execute(){
+        if(target == null) return;
+
+        Vector3 scale = target.localScale;
+        scale.x = Mathf.Abs(scale.x) * (faceLeft ? -1 : 1);
+        target.localScale = scale;
+    }
 }
 public class MoveEvent : CutsceneEvent{
     private Transform target;
