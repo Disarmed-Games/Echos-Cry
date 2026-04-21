@@ -13,15 +13,15 @@ MonoBehaviour:
   m_Name: Bomb Data
   m_EditorClassIdentifier: Echos Cry Core::EnemyData
   _distanceCheck: 10
-  _attackChargeTime: 2
+  _attackChargeTime: 1.8
   _attackDashForce: 0
   _attackDuration: 0
-  _attackCooldown: 0
+  _attackCooldown: 3
   _staggerDuration: 1
-  _knockbackForce: 3
   _baseDamage: 7.5
-  _stoppingDistance: 3.5
+  _stoppingDistance: 3
   _tintFlashDuration: 0.2
   _knockbackDuration: 0.15
   _tintHealthFlash: {r: 1, g: 0, b: 0, a: 1}
   _tintShieldFlash: {r: 0, g: 0, b: 1, a: 1}
+  _baseScore: 100

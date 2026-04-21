@@ -197,7 +197,6 @@ public class FuseEnemyState : EnemyState
     {
         enemyContext.StateData.ReadyToAttack = false;
         enemyContext.StartCoroutine(ChargeAttackCoroutine(enemyContext));
-        enemyContext.NavMeshAgent.speed /= 1.25f;
         enemyContext.EnemyAnimator.PlayAnimation(EnemyAnimator.HashCodes.FuseHashCode);
         SetEnemyTarget(enemyContext);
         enemyContext.StartCoroutine(UpdateTarget(enemyContext));
