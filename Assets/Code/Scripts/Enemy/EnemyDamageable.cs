@@ -16,6 +16,8 @@ public class EnemyDamageable : MonoBehaviour, IDamageable
         if (_enemy.Invulnerable) return;
 
         _enemy.Collider.enabled = false;
+        
+        _enemy.DeathInfo = attackData;
 
         float damage = attackData.Damage * _enemy.Health.DamageMultiplier;
 
