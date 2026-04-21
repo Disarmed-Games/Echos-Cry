@@ -10,13 +10,14 @@ Material:
   m_Name: DirtyGlass
   m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
   m_Parent: {fileID: 2100000, guid: 7b987acc9696b314490a95cd5b01b6ce, type: 2}
-  m_ModifiedSerializedProperties: 16
+  m_ModifiedSerializedProperties: 18
   m_ValidKeywords:
   - _ALPHAPREMULTIPLY_ON
+  - _EMISSION
   - _NORMALMAP
   - _SURFACE_TYPE_TRANSPARENT
   m_InvalidKeywords: []
-  m_LightmapFlags: 4
+  m_LightmapFlags: 1
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: 3000
@@ -60,6 +61,7 @@ Material:
     m_Colors:
     - _BaseColor: {r: 0.39506945, g: 0.4256281, b: 0.4339623, a: 0.2627451}
     - _Color: {r: 0.39506942, g: 0.42562807, b: 0.43396226, a: 0.2627451}
+    - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &8047488182412911778

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Walker Enemy Sound
   m_EditorClassIdentifier: Assembly-CSharp::EnemySoundConfig
   HitSFX: {fileID: 11400000, guid: c8c975e393c92cc4f8f6aa88905bcc9e, type: 2}
-  AttackSFX: {fileID: 11400000, guid: c7666da1df7e64647a69f91abaedda0f, type: 2}
+  AttackSFX: {fileID: 11400000, guid: 331b2e4095280464797ed62445135069, type: 2}
   ArmorHitSFX: {fileID: 11400000, guid: 51089fb434350ba41a45aded6bc7aac2, type: 2}
   ArmorBreakSFX: {fileID: 11400000, guid: 4bafeadefd63ae945a54618da55cb6fb, type: 2}

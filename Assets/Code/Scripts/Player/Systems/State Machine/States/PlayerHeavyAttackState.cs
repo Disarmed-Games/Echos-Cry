@@ -26,6 +26,10 @@ public class PlayerHeavyAttackState : PlayerActionState
 
         _playerContext.WeaponHolder.ProcessWeaponHits(_playerContext.ComboMeter);
     }
+    public override void FixedUpdate()
+    {
+        _playerContext.Movement.Move(_playerStateMachine.Locomotion, 0.75f);
+    }
     protected override void OnCheckSwitch()
     {
         if (_playerContext.WeaponHolder.IsActionEnded())

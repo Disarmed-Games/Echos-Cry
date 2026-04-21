@@ -8,7 +8,7 @@ public class BombInitMethod : EnemyInitMethod
     {
         EnemyStateTransition death_check = new(EnemyStates.Death, enemy => enemy.Health.CurrentHealth <= 0);
         EnemyStateTransition ready_to_attack = new(EnemyStates.Attack, enemy => enemy.StateData.ReadyToAttack);
-        EnemyStateTransition attack_ended = new(EnemyStates.Death, enemy => enemy.AttackStrategies[0].AttackEnded);
+        EnemyStateTransition attack_ended = new(EnemyStates.Cooldown, enemy => enemy.AttackStrategies[0].AttackEnded);
         EnemyStateTransition is_staggered = new(EnemyStates.Stagger, enemy => enemy.StateData.IsStaggered);
         EnemyStateTransition stagger_ended = new(EnemyStates.Pursue, enemy => !enemy.StateData.IsStaggered);
         EnemyStateTransition cooldown_ended = new(EnemyStates.Pursue, enemy => !enemy.StateData.OnCooldown);
@@ -76,6 +76,13 @@ public class BombInitMethod : EnemyInitMethod
                 enemyContext.StateCache,
                 EnemyStates.Attack,
                 new EnemyStateTransition[] { death_check, attack_ended, is_staggered },
+                new EnemyStateTransition[0]
+            );
+        handler.AddStateNode
+            (
+                enemyContext.StateCache,
+                EnemyStates.Cooldown,
+                new EnemyStateTransition[] { death_check, is_staggered, cooldown_ended },
                 new EnemyStateTransition[0]
             );
 

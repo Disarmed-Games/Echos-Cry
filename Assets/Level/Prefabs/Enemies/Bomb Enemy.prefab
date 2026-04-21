@@ -178,7 +178,7 @@ Animator:
   m_GameObject: {fileID: 1831394080825209204}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: add1ace28e20d9a47b2c54731a87f689, type: 2}
+  m_Controller: {fileID: 9100000, guid: 3f95f2f9bb408db47896f10239cbcb04, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -351,7 +351,7 @@ MonoBehaviour:
   _navMeshAgent: {fileID: 1592182489320676592}
   _rigidbody: {fileID: 6827338249854996756}
   _enemyAnimator: {fileID: 4267862705877107826}
-  _soundConfig: {fileID: 11400000, guid: 61a08e0075f1f394ba85aefac97da91e, type: 2}
+  _soundConfig: {fileID: 11400000, guid: bf9fc05af51911843a262964e711519a, type: 2}
   _collider: {fileID: 8838160874129828706}
   _passiveEffectHandler: {fileID: 8005077659622388430}
   _deathEffect: {fileID: 2836163184616676573, guid: c9677a51a5d061340a514220e825b583, type: 3}
@@ -517,7 +517,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Echos Cry Core::AOEAttack
   _aoeEffect: {fileID: 5464901287887852699, guid: d99ecb25eea317a43ada646ffd46000c, type: 3}
-  _aoeEffectTime: 0.25
+  _aoeEffectTime: 0.5
   _aoeRadius: 2
   _layerMask:
     serializedVersion: 2

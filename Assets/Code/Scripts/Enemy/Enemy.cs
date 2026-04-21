@@ -32,6 +32,8 @@ public class Enemy : MonoBehaviour
     private EnemyStateHandler _stateHandler;
     private EnemyStateData _stateData;
 
+    public AttackInfo DeathInfo;
+
     [Header("Strategies")]
     [SerializeField] private AttackMethod[] _attackStrats;
     [SerializeField] private TargetStrategy[]   _targetStrats;
@@ -125,6 +127,13 @@ public class Enemy : MonoBehaviour
 
         DeathEffectHandler deathEffectPrefab = Instantiate(_deathEffect, transform.position, Quaternion.identity).GetComponent<DeathEffectHandler>();
         deathEffectPrefab.SetSpriteShape(_enemyAnimator.EnemySprite);
+
+        ScoreManager scoreManager = ScoreManager.Instance;
+        if (scoreManager != null) {
+            int score = scoreManager.CalculateScore(DeathInfo, _data.BaseScore);
+            scoreManager.AddScore(score);
+            scoreManager.SpawnScoreText(score, transform);
+        }
 
         if (IsPooled) _pool.ReleaseEnemy(this);
         else Destroy(gameObject);
