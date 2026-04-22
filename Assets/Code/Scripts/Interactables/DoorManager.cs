@@ -19,7 +19,7 @@ public abstract class DoorManager : MonoBehaviour
             if (!isLocked)
             {
                 ToolTipPrefab.GetComponent<ToolTip>().text =
-                    $"Press '{translator.PlayerInputs.Gameplay.Interact.GetBindingDisplayString(InputBinding.MaskByGroup("KeyboardMouse"))}' to Open";
+                    $"'{translator.PlayerInputs.Gameplay.Interact.GetBindingDisplayString(InputBinding.MaskByGroup("KeyboardMouse"))}' to Open";
                 Instantiate(ToolTipPrefab, this.transform.position + new Vector3(0, 2, -1), Quaternion.identity);
             }
             else
