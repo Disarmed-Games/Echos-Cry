@@ -10,14 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: de3627f1a05e5e946830941c6060cb45, type: 3}
-  m_Name: Level2Wave2
+  m_Name: Level2Wave5
   m_EditorClassIdentifier: Assembly-CSharp::WaveData
   EnemySpawns:
-  - enemySpawnType: {fileID: 6900823288402649937, guid: 29058e1cb20b8264b8f94e98792051cd, type: 3}
-    enemySpawnCount: 2
+  - enemySpawnType: {fileID: 6900823288402649937, guid: 4e6ad55f889d65e40b6ce9414d619049, type: 3}
+    enemySpawnCount: 3
   - enemySpawnType: {fileID: 5404336137336009058, guid: 128fb26a87e63b6488058dafa47b63dd, type: 3}
     enemySpawnCount: 2
-  - enemySpawnType: {fileID: 5404336137336009058, guid: 128fb26a87e63b6488058dafa47b63dd, type: 3}
-    enemySpawnCount: 1
+  - enemySpawnType: {fileID: 6900823288402649937, guid: 921ea598b7611794dbcb535f728318d1, type: 3}
+    enemySpawnCount: 2
+  - enemySpawnType: {fileID: 6900823288402649937, guid: 4e6ad55f889d65e40b6ce9414d619049, type: 3}
+    enemySpawnCount: 2
   spawnRadius: 5
   spawnInterval: 8
