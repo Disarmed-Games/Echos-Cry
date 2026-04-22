@@ -56,7 +56,6 @@ public class ComboWeapon : Weapon
         SoundEffectManager.Instance.Builder
             .SetSound(CurrentAttackData.AttackSound)
             .SetSoundPosition(transform.position)
-            .SetDelay(_comboWeaponData.SecondarySoundDelay)
             .ValidateAndPlaySound();
     }
 

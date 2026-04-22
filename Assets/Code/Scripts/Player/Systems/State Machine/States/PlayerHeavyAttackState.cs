@@ -9,12 +9,13 @@ public class PlayerHeavyAttackState : PlayerActionState
     {
         _playerStateMachine.CurrentStateEnum = PlayerState.Heavy;
         _playerContext.HeatGauge.UseCharge(2);
-        _playerContext.WeaponHolder.SwitchWeapon(0);
+
+        _playerContext.WeaponHolder.SwitchToPrimary();
+        _playerContext.WeaponHolder.ActivateCurrentWeapon();
         _playerContext.WeaponHolder.SecondaryAction();
 
         _playerContext.Animator.SpriteAnimator.Play("Attack");
         CameraManager.Instance.ScreenShake(0.8f, 0.5f);
-        _playerContext.Movement.MomentumPush();
         _playerContext.Orientation.IsRotating = false;
     }
     public override void Exit()
@@ -25,6 +26,7 @@ public class PlayerHeavyAttackState : PlayerActionState
         _playerStateMachine.UsingSecondaryAction = false;
 
         _playerContext.WeaponHolder.ProcessWeaponHits(_playerContext.ComboMeter);
+        _playerContext.WeaponHolder.DeactivateCurrentWeapon();
     }
     public override void FixedUpdate()
     {
@@ -32,7 +34,7 @@ public class PlayerHeavyAttackState : PlayerActionState
     }
     protected override void OnCheckSwitch()
     {
-        if (_playerContext.WeaponHolder.IsActionEnded())
+        if (_playerContext.WeaponHolder.IsActionEnded)
             _playerStateMachine.SwitchState(_playerStateCache.RequestState(PlayerStateCache.PlayerState.Idle));
     }
 }

@@ -7,7 +7,6 @@ public class HitQualityTextUI : MonoBehaviour
     [SerializeField] private GameObject _hitQualityObject;
     [SerializeField] private Animator _hitEffectAnimator1;
     [SerializeField] private Animator _hitEffectAnimator2;
-    [SerializeField] private bool showHitText = true;
 
     public void UpdateText()
     {

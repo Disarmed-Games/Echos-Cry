@@ -16,7 +16,6 @@ public class LevelManager : MonoBehaviour
     public static LevelManager Instance { get { return _instance; } }
 
     public static event Action<LevelName> LevelUnlockedEvent;
-    public static event Action<LevelName> LevelLockEvent;
 
     public enum LevelName
     {

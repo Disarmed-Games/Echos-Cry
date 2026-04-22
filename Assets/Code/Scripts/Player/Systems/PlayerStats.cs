@@ -5,6 +5,7 @@ public class PlayerStats : MonoBehaviour
     [Header("Player Systems")]
     [SerializeField] PlayerMovement _movement;
     [SerializeField] PlayerHealth _health;
+    [SerializeField] AbilityManager _abilities;
     [SerializeField] PlayerAttackDamage _playerAttackDamage;
 
     [Header("Event Channels (Subscribers)")]
@@ -18,9 +19,6 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] EventChannel _dashCountChannel;
     [SerializeField] EventChannel _dashCooldownChannel;
     [SerializeField] EventChannel _dashAttackChannel;
-
-    private bool _dashAttackEnabled = false;
-    public bool DashAttackEnabled { get => _dashAttackEnabled; }
 
     private void OnEnable()
     {
@@ -109,6 +107,6 @@ public class PlayerStats : MonoBehaviour
     }
     void UpgradeDashAttack()
     {
-        _dashAttackEnabled = true;
+        _abilities.AddDashAttack();
     }
 }
