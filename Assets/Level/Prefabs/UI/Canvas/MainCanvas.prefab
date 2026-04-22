@@ -8526,6 +8526,7 @@ MonoBehaviour:
   _armorChannel: {fileID: 11400000, guid: ed980f021be41e944b80a689b2fca290, type: 2}
   _dashCountChannel: {fileID: 11400000, guid: 525432ab9a8309644a0c3e1894f626e4, type: 2}
   _dashCooldownChannel: {fileID: 11400000, guid: 01cfb1c9714eab745b95991f9c7b59f8, type: 2}
+  _knockbackChannel: {fileID: 11400000, guid: 3f5751c6174f00a42ac4d37142946366, type: 2}
 --- !u!1 &8890406559730160407
 GameObject:
   m_ObjectHideFlags: 0

@@ -5142,6 +5142,50 @@ MonoBehaviour:
   _healthSystem: {fileID: 4955914926744265378}
   _healthChannel: {fileID: 11400000, guid: c585d041cc469f04b887f8eeb82703dc, type: 2}
   _armorChannel: {fileID: 11400000, guid: cec94596b92da1b4a92dd5b3272c8302, type: 2}
+--- !u!1 &506504958644648809
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2630297719051255596}
+  - component: {fileID: 9055927008398821873}
+  m_Layer: 10
+  m_Name: Player Knockback
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2630297719051255596
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 506504958644648809}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 415338203038042998}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9055927008398821873
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 506504958644648809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b37038dc131cd147b4d950476d16045, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Echos Cry Core::PlayerKnockback
 --- !u!1 &1045470528465248169
 GameObject:
   m_ObjectHideFlags: 0
@@ -10635,6 +10679,7 @@ Transform:
   - {fileID: 2009047576672927120}
   - {fileID: 3502518302057154133}
   - {fileID: 7012856040756696430}
+  - {fileID: 2630297719051255596}
   - {fileID: 7751577463115772045}
   - {fileID: 4329563661653272559}
   - {fileID: 1876697883255032612}
@@ -10666,7 +10711,6 @@ MonoBehaviour:
   _inputTranslator: {fileID: 11400000, guid: da8057efcf3a45a47bb320ce196e8d61, type: 2}
   _sfxConfig: {fileID: 11400000, guid: adc0363584558ca40b2ee6043daa5f4c, type: 2}
   _rb: {fileID: 2019051602396369572}
-  _dashAttack: {fileID: 0}
   _stats: {fileID: 9198607601960987057}
   _spamPrevention: {fileID: 8377683321204229973}
   _heatGauge: {fileID: 4873508211248062902}
@@ -11033,6 +11077,7 @@ MonoBehaviour:
   _health: {fileID: 3652422203487027120}
   _abilities: {fileID: 6110703916965862278}
   _playerAttackDamage: {fileID: 7808688742119790450}
+  _playerKnockback: {fileID: 9055927008398821873}
   _upgradeDamageChannel: {fileID: 11400000, guid: 259cf655db4111946bf664a82d7bbd9c, type: 2}
   _moveSpeedChannel: {fileID: 11400000, guid: b9b7dd2a8f79bec4b9365537b310ce1e, type: 2}
   _dashSpeedChannel: {fileID: 11400000, guid: b49daf7febadf974d853b7c7efd88e9c, type: 2}
@@ -11043,6 +11088,7 @@ MonoBehaviour:
   _dashCountChannel: {fileID: 11400000, guid: 525432ab9a8309644a0c3e1894f626e4, type: 2}
   _dashCooldownChannel: {fileID: 11400000, guid: 01cfb1c9714eab745b95991f9c7b59f8, type: 2}
   _dashAttackChannel: {fileID: 11400000, guid: 0827540fa0d61a848adf46dd6bfb67db, type: 2}
+  _knockbackChannel: {fileID: 11400000, guid: b9b7dd2a8f79bec4b9365537b310ce1e, type: 2}
 --- !u!1 &4052686802092042489
 GameObject:
   m_ObjectHideFlags: 0
@@ -17068,6 +17114,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6557154924598691002, guid: e285dd95641fdc344a4f3e866609bf56, type: 3}
+      propertyPath: _playerKnockback
+      value: 
+      objectReference: {fileID: 9055927008398821873}
+    - target: {fileID: 6557154924598691002, guid: e285dd95641fdc344a4f3e866609bf56, type: 3}
       propertyPath: _playerAttackDamage
       value: 
       objectReference: {fileID: 7808688742119790450}
@@ -17179,6 +17229,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1242409098282706864}
     m_Modifications:
+    - target: {fileID: 1423634244738665547, guid: e0d33cc1b61b8d743b9d71a0b5652b14, type: 3}
+      propertyPath: _playerKnockback
+      value: 
+      objectReference: {fileID: 9055927008398821873}
     - target: {fileID: 1423634244738665547, guid: e0d33cc1b61b8d743b9d71a0b5652b14, type: 3}
       propertyPath: _playerAttackDamage
       value: 
