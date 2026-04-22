@@ -41,6 +41,7 @@ public class EnemyDamageable : MonoBehaviour, IDamageable
             EchosCry.Sound.PlaySFX(_enemy.SoundConfig.HitSFX, _enemy.transform, 0);
             _enemy.EnemyAnimator.TintFlash(_enemy.Data.TintHealthFlash, _enemy.Data.TintFlashDuration);
             _enemy.EnemyAnimator.PlayBloodVisualEffect();
+            KnockBackDuration(attackData, 0.2f);
         }
             
         if(DamageLabelManager.Instance != null)
