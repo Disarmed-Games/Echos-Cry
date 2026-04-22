@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddabb830e7b914f4fb031b6d809d92f9, type: 3}
   m_Name: Dash Attack
   m_EditorClassIdentifier: Assembly-CSharp::AttackData
-  OverrideController: {fileID: 0}
   AnimationClip: {fileID: 0}
   AttackSound: {fileID: 11400000, guid: 8e6fff67d6d1b4d46859475d8ddf7611, type: 2}
-  BaseDamage: 8
+  BaseDamage: 6
   PassiveEffects:
     OneThirdEffect: {fileID: 11400000, guid: 3664655054d7d144f873f217fd3e71cc, type: 2}
     TwoThirdsEffect: {fileID: 11400000, guid: 25e9fd5d2ef64b447905e84d09e57e47, type: 2}
     FullEffect: {fileID: 11400000, guid: 5d93e2ffc070cf648871667b95c1e5a9, type: 2}
+  HeatCost: 0
