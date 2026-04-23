@@ -5,17 +5,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
 
-//TODO:
-//Test player movement and dash functionality (without state machines)
-//Test state machine functionality for each state
-//Test spam prevention system functionality
-//Test if player can be damaged
-//Some other test ideas
-
-//Other tests outside of player:
-//Testing if managers exist (TickManager, TempoConductor, etc)
-//Testing wave system functionality
-
 public class Player_Town_Null_Tests
 {
     GameObject player;

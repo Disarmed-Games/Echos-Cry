@@ -12,7 +12,7 @@ public class DroppedXP : ItemDropHandler
             if(other.TryGetComponent<Player>(out Player player))
             {
                 _xp = player.XP;
-                _xp.IncreaseXP(_xpAmount); //TODO: Track with player level here so it increases.
+                _xp.IncreaseXP(_xpAmount);
             }
         }
         else _xp.IncreaseXP(_xpAmount);

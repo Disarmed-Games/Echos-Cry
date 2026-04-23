@@ -26,7 +26,7 @@ public class UpgradeManager : MonoBehaviour
 
     private int availablePoints = 0;
     public enum UpgradeType
-    { //TODO: Add damage muiltiplier upgrades!
+    {
         Haste,
         Dash_Speed,
         Health,

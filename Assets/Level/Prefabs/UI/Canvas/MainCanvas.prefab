@@ -10404,12 +10404,20 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5089965971204647835, guid: 053b402829316c14388441c4fd94025b, type: 3}
+      propertyPath: maxXPBonus
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 5089965971204647835, guid: 053b402829316c14388441c4fd94025b, type: 3}
       propertyPath: ratingText
       value: 
       objectReference: {fileID: 4895554626022061220}
     - target: {fileID: 5089965971204647835, guid: 053b402829316c14388441c4fd94025b, type: 3}
       propertyPath: timePerStep
       value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 5089965971204647835, guid: 053b402829316c14388441c4fd94025b, type: 3}
+      propertyPath: maxGoldBonus
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 5089965971204647835, guid: 053b402829316c14388441c4fd94025b, type: 3}
       propertyPath: starImages.Array.size

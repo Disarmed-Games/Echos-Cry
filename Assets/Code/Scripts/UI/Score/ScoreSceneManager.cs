@@ -1,7 +1,8 @@
+using DG.Tweening;
 using System.Collections;
 using TMPro;
 using UnityEngine;
-using DG.Tweening;
+using static ScoreSceneManager;
 
 public class ScoreSceneManager : MonoBehaviour
 {
@@ -19,6 +20,11 @@ public class ScoreSceneManager : MonoBehaviour
     private float transitionTime = 0.3f;
     private bool triggerRating = true;
 
+    [SerializeField] private int maxXPBonus;
+    [SerializeField] private int maxGoldBonus;
+    int xpBonus = 0;
+    int goldBonus = 0;
+
     //Rating Variables
     public enum Rank
     {
@@ -28,6 +34,8 @@ public class ScoreSceneManager : MonoBehaviour
         A = 3,
         SPlus = 4
     }
+    Rank calculatedRank = Rank.SPlus;
+
     public static string GetRankString(Rank rank)
     {
         switch (rank)
@@ -53,52 +61,42 @@ public class ScoreSceneManager : MonoBehaviour
         goldText.text = "?";
         xpText.text = "?";
         triggerRating = true;
+
+        //Calculate Stats
+        int score = ScoreManager.Instance.CurrentScore;
+        int topScore = ScoreManager.Instance.TopScore;
+
+        float percent = (float)score / topScore;
+        if (percent >= 0.9f)    calculatedRank = Rank.SPlus;
+        else if (percent >= 0.8f)    calculatedRank = Rank.A;
+        else if (percent >= 0.7f)    calculatedRank = Rank.B;
+        else if (percent >= 0.6f)    calculatedRank = Rank.C;
+        else                    calculatedRank = Rank.D;
+
+        float bonusMultiplier = Mathf.Min(1f, percent + 0.1f);
+        xpBonus = (int)Mathf.Floor(maxXPBonus * bonusMultiplier);
+        goldBonus = (int)Mathf.Floor(maxGoldBonus * bonusMultiplier);
+
+        Player.Instance.XP.IncreaseXP(xpBonus);
+        Player.Instance.CurrencySystem.IncrementGoldCurrency(goldBonus);
+
         StopAllCoroutines();
-        DisplayScore();
+        DisplayScore(score);
     }
-    private void DisplayScore()
+    private void DisplayScore(int score)
     {
         int currentScore = 0;
-        int targetScore = ScoreManager.Instance.CurrentScore;
+        int targetScore = score;
         int countPerStep = (int)((targetScore - currentScore) / divisor);
         StartCoroutine(CounterCoroutine(scoreText, currentScore, targetScore, countPerStep));
     }
-    private void CalculateAndDisplayRating()
+    private void DisplayRating()
     {
-        //Function to estimate rating
-        Rank calculatedRank = Rank.SPlus;
         StartCoroutine(StarCoroutine(calculatedRank));
     }
 
-    private void CalculateAndDisplayBonus(Rank rank)
+    private void DisplayBonus()
     {
-        //Calculate bonus based on rank
-        int xpBonus = 0;
-        int goldBonus = 0;
-        switch (rank)
-        {
-            case Rank.SPlus:
-                xpBonus = 10;
-                goldBonus = 5;
-                break;
-            case Rank.A:
-                xpBonus = 25;
-                goldBonus = 8;
-                break;
-            case Rank.B:
-                xpBonus = 50;
-                goldBonus = 10;
-                break;
-            case Rank.C:
-                xpBonus = 100;
-                goldBonus = 15;
-                break;
-            case Rank.D:
-                xpBonus = 150;
-                goldBonus = 25;
-                break;
-        }
-
         int currentScore = 0;
         int targetScore = xpBonus;
         int countPerStep = (int)((targetScore - currentScore) / divisor);
@@ -128,7 +126,7 @@ public class ScoreSceneManager : MonoBehaviour
         ratingtTransform.localRotation = Quaternion.identity;
         ratingtTransform.DOShakeRotation(transitionTime, 30, 10, 45, true);
 
-        CalculateAndDisplayBonus(rank);
+        DisplayBonus();
     }
     IEnumerator CounterCoroutine(TextMeshProUGUI textObj, int currentScore, int targetScore, int countPerStep)
     {
@@ -148,7 +146,7 @@ public class ScoreSceneManager : MonoBehaviour
         if (triggerRating)
         {
             triggerRating = false;
-            CalculateAndDisplayRating();
+            DisplayRating();
         }
     }
 }
