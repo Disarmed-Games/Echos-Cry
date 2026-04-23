@@ -23,7 +23,7 @@ public class Player_Town_Null_Tests
     [UnitySetUp]
     public IEnumerator Setup()
     {
-        SceneManager.LoadScene(EchosCry.Scene.Name.Town, LoadSceneMode.Single);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(EchosCry.Scene.Name.Town, LoadSceneMode.Single);
         //Scene does not finish loading until next frame, also wait for other entities of scene to load
         yield return new WaitForSeconds(1);
         player = GameObject.FindGameObjectWithTag("Player");
@@ -48,7 +48,7 @@ public class Player_Level1_Null_Tests
     [UnitySetUp]
     public IEnumerator Setup()
     {
-        SceneManager.LoadScene(EchosCry.Scene.Name.Level1, LoadSceneMode.Single);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(EchosCry.Scene.Name.Level1, LoadSceneMode.Single);
         //Scene does not finish loading until next frame, also wait for other entities of scene to load
         yield return new WaitForSeconds(1);
         player = GameObject.FindGameObjectWithTag("Player");
@@ -73,7 +73,7 @@ public class Player_Level2_Null_Tests
     [UnitySetUp]
     public IEnumerator Setup()
     {
-        SceneManager.LoadScene(EchosCry.Scene.Name.Level2, LoadSceneMode.Single);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(EchosCry.Scene.Name.Level2, LoadSceneMode.Single);
         //Scene does not finish loading until next frame, also wait for other entities of scene to load
         yield return new WaitForSeconds(1);
         player = GameObject.FindGameObjectWithTag("Player");
@@ -98,7 +98,7 @@ public class Player_Level3_Null_Tests
     [UnitySetUp]
     public IEnumerator Setup()
     {
-        SceneManager.LoadScene(EchosCry.Scene.Name.Level3, LoadSceneMode.Single);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(EchosCry.Scene.Name.Level3, LoadSceneMode.Single);
         //Scene does not finish loading until next frame, also wait for other entities of scene to load
         yield return new WaitForSeconds(1);
         player = GameObject.FindGameObjectWithTag("Player");
@@ -123,7 +123,7 @@ public class Player_Movement_Tests
     [UnitySetUp]
     public IEnumerator Setup()
     {
-        SceneManager.LoadScene(EchosCry.Scene.Name.Town, LoadSceneMode.Single);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(EchosCry.Scene.Name.Town, LoadSceneMode.Single);
         //Scene does not finish loading until next frame, also wait for other entities of scene to load
         yield return new WaitForSeconds(1);
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();

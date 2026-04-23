@@ -1155,9 +1155,8 @@ MonoBehaviour:
   sceneTarget:
     m_SceneAsset: {fileID: 102900000, guid: fb518b31aee77b4428d4f2b6b0821b8e, type: 3}
     m_SceneName: LevelFourScene
-  portalSFX: {fileID: 11400000, guid: 3c2c25fd20eacfe4aaa9eeece1a7174c, type: 2}
-  _isFinalExit: 0
   _inputTranslator: {fileID: 11400000, guid: da8057efcf3a45a47bb320ce196e8d61, type: 2}
+  _isLevelExit: 0
 --- !u!65 &137092495
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6383,9 +6382,8 @@ MonoBehaviour:
   sceneTarget:
     m_SceneAsset: {fileID: 102900000, guid: 309e65707ca7d8643b4487cd0073f99c, type: 3}
     m_SceneName: LevelOneScene
-  portalSFX: {fileID: 11400000, guid: 3c2c25fd20eacfe4aaa9eeece1a7174c, type: 2}
-  _isFinalExit: 0
   _inputTranslator: {fileID: 11400000, guid: da8057efcf3a45a47bb320ce196e8d61, type: 2}
+  _isLevelExit: 0
 --- !u!65 &1102349920
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8273,7 +8271,7 @@ GameObject:
   - component: {fileID: 1376063868}
   - component: {fileID: 1376063867}
   m_Layer: 0
-  m_Name: LevelFourTransition (1)
+  m_Name: LevelFiveTransition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8294,9 +8292,8 @@ MonoBehaviour:
   sceneTarget:
     m_SceneAsset: {fileID: 102900000, guid: ea025cd665cbe79468e1dd2ac6002218, type: 3}
     m_SceneName: LevelFiveScene
-  portalSFX: {fileID: 11400000, guid: 3c2c25fd20eacfe4aaa9eeece1a7174c, type: 2}
-  _isFinalExit: 0
   _inputTranslator: {fileID: 11400000, guid: da8057efcf3a45a47bb320ce196e8d61, type: 2}
+  _isLevelExit: 0
 --- !u!65 &1376063868
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10171,9 +10168,8 @@ MonoBehaviour:
   sceneTarget:
     m_SceneAsset: {fileID: 102900000, guid: 54131469adf76d748870efaec8ed3b1c, type: 3}
     m_SceneName: LevelThreeScene
-  portalSFX: {fileID: 11400000, guid: 3c2c25fd20eacfe4aaa9eeece1a7174c, type: 2}
-  _isFinalExit: 0
   _inputTranslator: {fileID: 11400000, guid: da8057efcf3a45a47bb320ce196e8d61, type: 2}
+  _isLevelExit: 0
 --- !u!65 &1692363685
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10656,9 +10652,8 @@ MonoBehaviour:
   sceneTarget:
     m_SceneAsset: {fileID: 102900000, guid: 0defd91a97699a643b7ff2f6fe832b04, type: 3}
     m_SceneName: LevelTwoScene
-  portalSFX: {fileID: 11400000, guid: 3c2c25fd20eacfe4aaa9eeece1a7174c, type: 2}
-  _isFinalExit: 0
   _inputTranslator: {fileID: 11400000, guid: da8057efcf3a45a47bb320ce196e8d61, type: 2}
+  _isLevelExit: 0
 --- !u!65 &1751731148
 BoxCollider:
   m_ObjectHideFlags: 0

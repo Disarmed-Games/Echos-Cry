@@ -37,4 +37,9 @@ public class GradientRender : Graphic
         vh.AddTriangle(startIdx, startIdx + 1, startIdx + 2);
         vh.AddTriangle(startIdx + 2, startIdx + 3, startIdx);
     }
+    protected override void OnValidate()
+    {
+        base.OnValidate();
+        SetVerticesDirty();
+    }
 }

@@ -4,9 +4,9 @@ using UnityEngine.EventSystems;
 
 public class GameoverManager : MonoBehaviour
 {
-    [SerializeField] SceneTriggerManager sceneTriggerManager;
     [SerializeField] private TextMeshProUGUI livesLeftText;
     [SerializeField] private TextMeshProUGUI deathText;
+    [SerializeField] private SceneField sceneTarget;
 
     private void OnEnable()
     {
@@ -27,8 +27,7 @@ public class GameoverManager : MonoBehaviour
 
     public void Respawn()
     {
-        Debug.Log("========Respawning player");
-        sceneTriggerManager.StartTransition();
+        GameManager.Instance.SceneManager.TransitionScene(sceneTarget, GameManager.Instance);
         DisableGameoverMenu();
     }
 }

@@ -11,7 +11,7 @@ public class PlayerHazardTest
     [UnitySetUp]
     public IEnumerator Setup()
     {
-        SceneManager.LoadScene(EchosCry.Scene.Name.Level3, LoadSceneMode.Single);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(EchosCry.Scene.Name.Level3, LoadSceneMode.Single);
         //Scene does not finish loading until next frame, also wait for other entities of scene to load
         yield return new WaitForSeconds(1);
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();

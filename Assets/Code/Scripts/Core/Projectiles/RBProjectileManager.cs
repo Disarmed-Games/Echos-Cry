@@ -20,15 +20,14 @@ public class RBProjectileManager : Singleton<RBProjectileManager>
     {
         projectilePools = new Dictionary<int, PoolNode>();
     }
-    private void Start()
+    private void OnEnable()
     {
-        SceneTriggerManager.OnSceneTransitionEvent += OnSceneTransition;
+        SceneManager.OnSceneTransitionEvent += OnSceneTransition;
     }
-    private void OnDestroy()
+    private void OnDisable()
     {
-        SceneTriggerManager.OnSceneTransitionEvent -= OnSceneTransition;
+        SceneManager.OnSceneTransitionEvent -= OnSceneTransition;
     }
-
     private void OnSceneTransition()
     {
         projectilePools.Clear();
