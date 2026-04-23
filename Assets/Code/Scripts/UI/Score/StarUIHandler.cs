@@ -1,3 +1,4 @@
+using AudioSystem;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,10 +7,12 @@ public class StarUIHandler : MonoBehaviour
 {
     [SerializeField] private Image bloodImage;
     [SerializeField] private float duration = 0.5f;
+    [SerializeField] private soundEffect unlockSFX;
 
     public void UnlockStar()
     {
         bloodImage.enabled = true;
+        EchosCry.Sound.PlaySFX(unlockSFX, PlayerRef.Transform, 0);
         StartCoroutine(StarAnimate());
     }
 
