@@ -22,29 +22,32 @@ public class UpgradeManager : MonoBehaviour
     [SerializeField] EventChannel _armorChannel;
     [SerializeField] EventChannel _dashCountChannel;
     [SerializeField] EventChannel _dashCooldownChannel;
+    [SerializeField] EventChannel _knockbackChannel;
 
     private int availablePoints = 0;
     public enum UpgradeType
     { //TODO: Add damage muiltiplier upgrades!
-        Move_Speed,
+        Haste,
         Dash_Speed,
         Health,
-        Armor,
+        Defense,
         Dash_Count,
-        Dash_Cooldown,
-        Attack_Multiplier
+        Stamina,
+        Strength,
+        Knockback_Power,
     }
 
     private Dictionary<UpgradeType, string> _upgradeDescriptions = new Dictionary<UpgradeType, string>
-    {
+    { //TODO: Use rich text to make this way less boring to look at!
         //[UpgradeType.] = "",
-        [UpgradeType.Move_Speed] = "Increase your base movement speed by 10%.",
+        [UpgradeType.Haste] = "Increase your base movement speed by 10%.",
         [UpgradeType.Dash_Speed] = "Increase the speed of your dashing by 15%.",
         [UpgradeType.Health] = "Increase your base health by +5 hp.",
-        [UpgradeType.Armor] = "Increase your base armor by +5.",
-        [UpgradeType.Dash_Count] = "Increase the total amount of dashes by +1.",
-        [UpgradeType.Dash_Cooldown] = "Decrease the dash cooldown time by 25%.",
-        [UpgradeType.Attack_Multiplier] = "Increase the base damage multiplier by 10%."
+        [UpgradeType.Defense] = "Increase your base armor by +5.",
+        [UpgradeType.Dash_Count] = "Increase the total amount of dashes available by +1.",
+        [UpgradeType.Stamina] = "Decrease the dash meter cooldown time by 20%.",
+        [UpgradeType.Strength] = "Increase the base damage multiplier by 10%.",
+        [UpgradeType.Knockback_Power] = "Increase the knockback force from attacks by 15%."
     };
 
     public static UpgradeManager Instance { get; private set; }
@@ -150,7 +153,7 @@ public class UpgradeManager : MonoBehaviour
 
         switch (upgradeType)
         {
-            case UpgradeType.Move_Speed:
+            case UpgradeType.Haste:
                 if (_moveSpeedChannel != null) _moveSpeedChannel.Invoke();
                 break;
             case UpgradeType.Dash_Speed:
@@ -159,17 +162,20 @@ public class UpgradeManager : MonoBehaviour
             case UpgradeType.Health:
                 if(_healthChannel != null) _healthChannel.Invoke();
                 break;
-            case UpgradeType.Armor:
+            case UpgradeType.Defense:
                 if(_armorChannel != null) _armorChannel.Invoke();
                 break;
             case UpgradeType.Dash_Count:
                 if (_dashCountChannel != null) _dashCountChannel.Invoke();
                 break;
-            case UpgradeType.Dash_Cooldown:
+            case UpgradeType.Stamina:
                 if (_dashCooldownChannel != null) _dashCooldownChannel.Invoke();
                 break;
-            case UpgradeType.Attack_Multiplier:
+            case UpgradeType.Strength:
                 if (_upgradeDamageChannel != null) _upgradeDamageChannel.Invoke();
+                break;
+            case UpgradeType.Knockback_Power:
+                if (_knockbackChannel != null) _knockbackChannel.Invoke();
                 break;
             default:
                 Debug.LogWarning("Unknown upgrade type.");

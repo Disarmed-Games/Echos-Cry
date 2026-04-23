@@ -7,6 +7,7 @@ public class AttackData : ScriptableObject
     public AnimationClip       AnimationClip;
     public soundEffect         AttackSound;
     public float               BaseDamage;
+    public float               BaseForce;
     public ThreePassiveEffects PassiveEffects;
     public int                 HeatCost;
 }

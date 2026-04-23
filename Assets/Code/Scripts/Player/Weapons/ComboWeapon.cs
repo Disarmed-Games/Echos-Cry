@@ -15,6 +15,8 @@ public class ComboWeapon : Weapon
         //Update the damage the weapon collider will use based on attack data
         AttackInfo attack = new AttackInfo.Builder()
             .SetDamage(CurrentAttackData.BaseDamage * _playerAttackDamage.BaseDamageMultiplier)
+            .SetForce(CurrentAttackData.BaseForce * _playerKnockback.BaseKnockbackMultiplier)
+            .SetForceMode(ForceMode.Impulse)
             .SetHitQuality(TempoConductor.Instance.CurrentHitQuality)
             .SetOrigin(Player.Instance.transform)
             .Build();
