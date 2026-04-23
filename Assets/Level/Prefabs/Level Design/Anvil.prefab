@@ -56,6 +56,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Anvil
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: cbc754850deb4ad43ba1cfa75fb7f2f5, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 1151388028547126963, guid: cbc754850deb4ad43ba1cfa75fb7f2f5, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.5
@@ -83,6 +87,10 @@ PrefabInstance:
     - target: {fileID: 1151388028547126963, guid: cbc754850deb4ad43ba1cfa75fb7f2f5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: cbc754850deb4ad43ba1cfa75fb7f2f5, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

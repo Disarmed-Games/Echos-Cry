@@ -73,7 +73,6 @@ public class HealthSystem : MonoBehaviour
         _currentArmor -= Mathf.Abs(damage);
     }
 
-    //TODO: Move somewhere else
     private float _damageMultiplier = 1f;
     public float DamageMultiplier => _damageMultiplier;
 

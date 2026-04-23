@@ -23,9 +23,6 @@ public class MenuManager : Singleton<MenuManager>
     [SerializeField] private SettingsManager _settingsManager;
     [SerializeField] private bool hideHUD = false;
 
-    public static event Action PauseStarted;
-    public static event Action PauseEnded;
-
     private string _currentMenu;
 
     protected override void OnAwake()
@@ -73,7 +70,6 @@ public class MenuManager : Singleton<MenuManager>
         _inputTranslator.PlayerInputs.Gameplay.Disable();
 
         SetMenu("Pause");
-        PauseStarted?.Invoke();
         VolumeManager.Instance.SetDepthOfField(true);
         Time.timeScale = 0f;
     }
@@ -84,7 +80,6 @@ public class MenuManager : Singleton<MenuManager>
         _inputTranslator.PlayerInputs.Gameplay.Disable();
 
         SetMenu("Upgrade");
-        PauseStarted?.Invoke();
         VolumeManager.Instance.SetDepthOfField(true);
         Time.timeScale = 0f;
     }
@@ -103,7 +98,6 @@ public class MenuManager : Singleton<MenuManager>
         _inputTranslator.PlayerInputs.PauseMenu.Disable();
         
         SetMenu("HUD");
-        PauseEnded?.Invoke();
         VolumeManager.Instance.SetDepthOfField(false);
         Time.timeScale = 1f;
     }

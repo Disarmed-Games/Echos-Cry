@@ -15,6 +15,7 @@ MonoBehaviour:
   AnimationClip: {fileID: 7400000, guid: 27dff9fd8056a3541bcb692ab3abf12b, type: 2}
   AttackSound: {fileID: 11400000, guid: 39e12e82cb30de44c8403249851de156, type: 2}
   BaseDamage: 5
+  BaseForce: 6
   PassiveEffects:
     OneThirdEffect: {fileID: 11400000, guid: 3664655054d7d144f873f217fd3e71cc, type: 2}
     TwoThirdsEffect: {fileID: 11400000, guid: 25e9fd5d2ef64b447905e84d09e57e47, type: 2}

@@ -7,6 +7,6 @@ public class CreditsManager : MonoBehaviour
 
     public void BackButton()
     {
-        SceneManager.LoadScene(_returnSceneName);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(_returnSceneName);
     }
 }

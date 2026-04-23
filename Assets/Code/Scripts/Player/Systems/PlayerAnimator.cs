@@ -16,6 +16,9 @@ public class PlayerAnimator : MonoBehaviour
     private Color defaultSpriteColor;
 
     private readonly int hashedTintColor = Shader.PropertyToID("_TintColor");
+    public readonly int hashedAttackAnim = Animator.StringToHash("Attack");
+    public readonly int hashedDashAnim = Animator.StringToHash("Dash");
+    public readonly int hashedMoveAnim = Animator.StringToHash("Run");
 
     private void Start()
     {

@@ -5,85 +5,51 @@ public class WeaponHolder : MonoBehaviour
     [SerializeField] private GameObject[] _weaponInventory;
     [SerializeField] private GameObject _dashWeapon;
 
+    [SerializeField] private Weapon primaryWeapon;
+    [SerializeField] private Weapon specialWeapon;
+
     private Weapon _currentlyEquippedWeapon;
-    private Weapon _previouslyEquippedWeapon;
+
     public Weapon CurrentlyEquippedWeapon
     {
         get => _currentlyEquippedWeapon;
         set => _currentlyEquippedWeapon = value; 
     }
     public bool HasWeapon => _currentlyEquippedWeapon != null;
-
     public bool DidWeaponHit => _currentlyEquippedWeapon.HitColliders.Count > 0;
+    public bool IsActionEnded => _currentlyEquippedWeapon.IsAttackEnded;
 
     private void Awake()
     {
-        if (_weaponInventory.Length > 0)
-        {
-            _currentlyEquippedWeapon = _weaponInventory[0].GetComponent<Weapon>();
-            ActivateWeapon();
-        }
+        _currentlyEquippedWeapon = primaryWeapon;
     }
 
-    private void ActivateWeapon()
+    public void ActivateCurrentWeapon()
     {
-        foreach (var weapon in _weaponInventory)
-        {
-            weapon.SetActive(weapon.GetComponent<Weapon>() == _currentlyEquippedWeapon);
-        }
+        _currentlyEquippedWeapon.gameObject.SetActive(true);
     }
 
-    private void DeactivateAllWeapons()
+    public void DeactivateCurrentWeapon()
     {
-        foreach (var weapon in _weaponInventory)
-        {
-            weapon.SetActive(false);
-        }
+        _currentlyEquippedWeapon.gameObject.SetActive(false);
     }
 
-    public void SwitchWeapon(int weaponIndex)
+    public void SwitchToPrimary()
     {
-        if (_weaponInventory.Length == 0) return;
-        if (!_currentlyEquippedWeapon.IsAttackEnded) return;
-
-        //Logic for choosing next weapon in array
-        //int currentIndex = System.Array.IndexOf(_weaponInventory, _currentlyEquippedWeapon.gameObject);
-        //int nextIndex = (currentIndex + 1) % _weaponInventory.Length;
-
-        _currentlyEquippedWeapon = _weaponInventory[weaponIndex].GetComponent<Weapon>();
-        ActivateWeapon();
+        _currentlyEquippedWeapon = primaryWeapon;
+    }
+    public void SwitchToSpecial()
+    {
+        _currentlyEquippedWeapon = specialWeapon;
     }
 
     public void PrimaryAction()
     {
-        if (_currentlyEquippedWeapon == null) return;
-
         _currentlyEquippedWeapon.PrimaryAction();
     }
     public void SecondaryAction() 
     {
-        if (_currentlyEquippedWeapon == null) return;
-
-        _currentlyEquippedWeapon.SecondaryAction();
-        
-    }
-    public void DashAction()
-    {
-        if (_currentlyEquippedWeapon == null) return;
-        _previouslyEquippedWeapon = _currentlyEquippedWeapon;
-        DeactivateAllWeapons();
-        _currentlyEquippedWeapon = _dashWeapon.GetComponent<Weapon>();
-        _currentlyEquippedWeapon.PrimaryAction();
-    }
-    public void ResetPreviousWeapon()
-    {
-        _currentlyEquippedWeapon = _previouslyEquippedWeapon;
-        ActivateWeapon();
-    }
-
-    public bool IsActionEnded()
-    {
-        return _currentlyEquippedWeapon.IsAttackEnded;
+        _currentlyEquippedWeapon.SecondaryAction();   
     }
 
     public void ProcessWeaponHits(PlayerComboMeter comboMeter)

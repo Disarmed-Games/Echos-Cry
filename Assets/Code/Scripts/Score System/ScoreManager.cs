@@ -3,10 +3,12 @@ using UnityEngine;
 public class ScoreManager : NonSpawnableSingleton<ScoreManager>
 {
     private int currentScore = 0;
+    private int topScore = 10000; //TODO: This needs to be updated per level
     [SerializeField] GameObject scoreTextPrefab;
     [SerializeField] IntEventChannel textUpdate;
 
     public int CurrentScore { get => currentScore; }
+    public int TopScore {  get => topScore; }
     public void AddScore(int score)
     {
         currentScore += score;

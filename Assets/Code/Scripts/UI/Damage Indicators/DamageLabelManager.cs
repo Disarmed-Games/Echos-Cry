@@ -66,11 +66,13 @@ public class DamageLabelManager : NonSpawnableSingleton<DamageLabelManager>
     private void GetLabel(DamageLabel damageLabel)
     {
         damageLabel.gameObject.SetActive(true);
+        allDamageLabels.Add(damageLabel);
         StartCoroutine(ReturnDamageLabelToPool(damageLabel));
     }
     private void ReleaseLabel(DamageLabel damageLabel)
     {
         damageLabel.gameObject.SetActive(false);
+        allDamageLabels.Remove(damageLabel);
     }
     private void DestroyLabel(DamageLabel damageLabel)
     {

@@ -9,6 +9,7 @@ public abstract class Weapon : MonoBehaviour
     [SerializeField] protected Animator _attackAnimator;
     [SerializeField] protected WeaponCollider _weaponCollider;
     [SerializeField] protected PlayerAttackDamage _playerAttackDamage;
+    [SerializeField] protected PlayerKnockback _playerKnockback;
 
     protected RuntimeAnimatorController _defaultAnimatorController;
 

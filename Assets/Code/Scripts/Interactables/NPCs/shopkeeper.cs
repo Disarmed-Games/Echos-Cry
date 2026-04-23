@@ -24,8 +24,8 @@ public class ShopKeeper : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             ToolTipPrefab.GetComponent<ToolTip>().text =
-                $"Press '{translator.PlayerInputs.Gameplay.Interact.GetBindingDisplayString(InputBinding.MaskByGroup("KeyboardMouse"))}' to Shop";
-            Instantiate(ToolTipPrefab, this.transform.position + new Vector3(0, 1, -1), Quaternion.identity);
+                $"'{translator.PlayerInputs.Gameplay.Interact.GetBindingDisplayString(InputBinding.MaskByGroup("KeyboardMouse"))}' to Shop";
+            Instantiate(ToolTipPrefab, this.transform.position + new Vector3(0, 0.5f, -1), Quaternion.identity);
         }
     }
 

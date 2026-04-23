@@ -10,12 +10,12 @@ public class PlayerSpecialAttack1State : PlayerActionState
         _playerStateMachine.CurrentStateEnum = PlayerState.Special1;
         _playerContext.HeatGauge.UseCharge(6);
 
-        _playerContext.WeaponHolder.SwitchWeapon(1);
+        _playerContext.WeaponHolder.SwitchToSpecial();
+        _playerContext.WeaponHolder.ActivateCurrentWeapon();
         _playerContext.WeaponHolder.PrimaryAction();
 
         _playerContext.Animator.SpriteAnimator.Play("Attack");
         CameraManager.Instance.ScreenShake(0.8f, 0.5f);
-        //_playerContext.Movement.MomentumPush();
         _playerContext.Orientation.IsRotating = false;
     }
     public override void Exit()
@@ -26,7 +26,7 @@ public class PlayerSpecialAttack1State : PlayerActionState
         _playerStateMachine.UsingSpecialAction = false;
 
         _playerContext.WeaponHolder.ProcessWeaponHits(_playerContext.ComboMeter);
-        _playerContext.WeaponHolder.SwitchWeapon(0);
+        _playerContext.WeaponHolder.DeactivateCurrentWeapon();
     }
     public override void FixedUpdate()
     {
@@ -34,7 +34,7 @@ public class PlayerSpecialAttack1State : PlayerActionState
     }
     protected override void OnCheckSwitch()
     {
-        if (_playerContext.WeaponHolder.IsActionEnded())
+        if (_playerContext.WeaponHolder.IsActionEnded)
             _playerStateMachine.SwitchState(_playerStateCache.RequestState(PlayerStateCache.PlayerState.Idle));
     }
 }

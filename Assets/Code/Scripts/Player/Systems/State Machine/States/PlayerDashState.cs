@@ -16,14 +16,17 @@ public class PlayerDashState : PlayerActionState
 
         // Handle Dash Attack
         //--------------------
-        if (_playerContext.Stats.DashAttackEnabled)
-            _playerContext.WeaponHolder.DashAction();
+        DashAttack dashAttack = _playerContext.Abilities.TryGetDashAttack();
+        if(dashAttack != null)
+        {
+            dashAttack.HitQuality = TempoConductor.Instance.CurrentHitQuality;
+            dashAttack.gameObject.SetActive(true);
+        }
         //--------------------
 
-        //_playerContext.ComboMeter.ResetComboMultiplier();
         _playerContext.Health.IsInvincible = true;
         _playerContext.Animator.SetIsTrailEmit(true);
-        _playerContext.Animator.SpriteAnimator.Play("Dash");
+        _playerContext.Animator.SpriteAnimator.Play(_playerContext.Animator.hashedDashAnim);
         _playerContext.PlayerParticles.StartDashParticles();
         EchosCry.Sound.PlaySFX(_playerContext.SFXConfig.DashSFX, _playerContext.transform, 0);
         _playerContext.Movement.Dash();
@@ -34,15 +37,10 @@ public class PlayerDashState : PlayerActionState
     {
         // Handle Dash Attack
         //--------------------
-        if (_playerContext.Stats.DashAttackEnabled)
+        DashAttack dashAttack = _playerContext.Abilities.TryGetDashAttack();
+        if (dashAttack != null)
         {
-            _playerContext.WeaponHolder.ResetPreviousWeapon();
-            int hitCount = _playerContext.WeaponHolder.CurrentlyEquippedWeapon.HitColliders.Count;
-            for (int i = 0; i < hitCount; i++)
-            {
-                TempoConductor.HitQuality hitQuality = _playerContext.WeaponHolder.CurrentlyEquippedWeapon.HitColliders[i].hit;
-                _playerContext.ComboMeter.AddToComboMeter(hitQuality);
-            }
+            dashAttack.gameObject.SetActive(false);
             _playerContext.InvokeAttackEnded();
         }
         //--------------------

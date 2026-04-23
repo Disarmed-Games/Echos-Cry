@@ -17,11 +17,11 @@ public class Player : NonSpawnableSingleton<Player>
     [SerializeField] private InputTranslator _inputTranslator;
     [SerializeField] private SFXConfig _sfxConfig;
     [SerializeField] private Rigidbody _rb;
-    [SerializeField] private DashWeapon _dashAttack;
     [SerializeField] private PlayerStats _stats;
     [SerializeField] private SpamPrevention _spamPrevention;
     [SerializeField] private HeatGauge _heatGauge;
     [SerializeField] private PlayerParticles _particles;
+    [SerializeField] private AbilityManager abilities;
 
     [SerializeField] private GameObject _mainCanvas;
     private PlayerUI _ui;
@@ -43,12 +43,12 @@ public class Player : NonSpawnableSingleton<Player>
     public PlayerXP XP { get => _xp; }
     public InputTranslator InputTranslator { get => _inputTranslator; }
     public Rigidbody RB { get => _rb; }
-    public DashWeapon DashAttack { get => _dashAttack; }
     public PlayerStats Stats { get => _stats; }
     public SpamPrevention SpamPrevention { get => _spamPrevention; }
     public HeatGauge HeatGauge { get => _heatGauge; }
     public PlayerParticles PlayerParticles { get => _particles; }
     public PlayerUI UI { get => _ui; }
+    public AbilityManager Abilities { get => abilities; }
 
     private void InitStateCache()
     {

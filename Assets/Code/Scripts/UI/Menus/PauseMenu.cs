@@ -32,7 +32,7 @@ public class PauseMenu : MonoBehaviour
                 break;
             case pauseOptions.MENU_YES:
                 MenuManager.Instance.DisablePauseMenu();
-                SceneManager.LoadScene("MainMenu");
+                UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
                 break;
             case pauseOptions.MENU_NO:
                 optionButtonsContainer.SetActive(false);

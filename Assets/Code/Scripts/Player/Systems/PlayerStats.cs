@@ -5,7 +5,9 @@ public class PlayerStats : MonoBehaviour
     [Header("Player Systems")]
     [SerializeField] PlayerMovement _movement;
     [SerializeField] PlayerHealth _health;
+    [SerializeField] AbilityManager _abilities;
     [SerializeField] PlayerAttackDamage _playerAttackDamage;
+    [SerializeField] PlayerKnockback _playerKnockback;
 
     [Header("Event Channels (Subscribers)")]
     [SerializeField] EventChannel _upgradeDamageChannel;
@@ -18,9 +20,7 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] EventChannel _dashCountChannel;
     [SerializeField] EventChannel _dashCooldownChannel;
     [SerializeField] EventChannel _dashAttackChannel;
-
-    private bool _dashAttackEnabled = false;
-    public bool DashAttackEnabled { get => _dashAttackEnabled; }
+    [SerializeField] EventChannel _knockbackChannel;
 
     private void OnEnable()
     {
@@ -34,6 +34,7 @@ public class PlayerStats : MonoBehaviour
         if(_dashCooldownChannel != null) _dashCooldownChannel.Channel += UpgradeDashCooldown;
         if(_dashCountChannel != null) _dashCountChannel.Channel += UpgradeDashCount;
         if (_dashAttackChannel != null) _dashAttackChannel.Channel += UpgradeDashAttack;
+        if (_dashAttackChannel != null) _knockbackChannel.Channel += UpgradeKnockback;
     }
     private void OnDisable()
     {
@@ -47,6 +48,7 @@ public class PlayerStats : MonoBehaviour
         if (_dashCooldownChannel != null) _dashCooldownChannel.Channel -= UpgradeDashCooldown;
         if (_dashCountChannel != null) _dashCountChannel.Channel -= UpgradeDashCount;
         if (_dashAttackChannel != null) _dashAttackChannel.Channel -= UpgradeDashAttack;
+        if (_dashAttackChannel != null) _knockbackChannel.Channel -= UpgradeKnockback;
     }
 
     //Currently using unmutable variables but will eventually change to handle configuration or scaling upgrades eventually
@@ -71,7 +73,7 @@ public class PlayerStats : MonoBehaviour
     }
     void UpgradeDashCooldown()
     {
-        if (_movement != null) _movement.DashCooldown *= 0.75f;
+        if (_movement != null) _movement.DashCooldown *= 0.80f;
     }
     void UpgradeMoveSpeed()
     {
@@ -109,6 +111,13 @@ public class PlayerStats : MonoBehaviour
     }
     void UpgradeDashAttack()
     {
-        _dashAttackEnabled = true;
+        _abilities.AddDashAttack();
+    }
+    void UpgradeKnockback()
+    {
+        if (_playerKnockback != null)
+        {
+            _playerKnockback.BaseKnockbackMultiplier *= 1.15f;
+        }
     }
 }

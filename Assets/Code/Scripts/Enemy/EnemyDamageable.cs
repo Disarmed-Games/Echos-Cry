@@ -41,6 +41,7 @@ public class EnemyDamageable : MonoBehaviour, IDamageable
             EchosCry.Sound.PlaySFX(_enemy.SoundConfig.HitSFX, _enemy.transform, 0);
             _enemy.EnemyAnimator.TintFlash(_enemy.Data.TintHealthFlash, _enemy.Data.TintFlashDuration);
             _enemy.EnemyAnimator.PlayBloodVisualEffect();
+            StartCoroutine(KnockBackDuration(attackData, 0.2f));
         }
             
         if(DamageLabelManager.Instance != null)
@@ -52,12 +53,14 @@ public class EnemyDamageable : MonoBehaviour, IDamageable
             _enemy.Health.CurrentArmor, 
             _enemy.Health.MaxArmor);
 
-        HitStop.Instance.Execute(0.04f);
+        //HitStop.Instance.Execute(0.04f);
     }
 
     private IEnumerator KnockBackDuration(AttackInfo attackData, float duration)
     {
-        _enemy.Rigidbody.AddForce(attackData.Force * attackData.Direction, attackData.ForceMode);
+        _enemy.Rigidbody.isKinematic = false;
+        Vector3 direction = (_enemy.transform.position - attackData.Origin.position).normalized;
+        _enemy.Rigidbody.AddForce(attackData.Force * direction, attackData.ForceMode);
         yield return new WaitForSeconds(duration);
         _enemy.Rigidbody.isKinematic = true;
     }

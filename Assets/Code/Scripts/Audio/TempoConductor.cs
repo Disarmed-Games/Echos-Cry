@@ -30,8 +30,6 @@ public class TempoConductor : Singleton<TempoConductor>
     //   |--|-|-|---------------|-|-|---|
     // BEAT 2                         BEAT 1
 
-    // Events
-    public event Action BeatTickEvent;
 
     public bool IsOnBeat()
     {
