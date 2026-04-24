@@ -9,7 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a67b5665675e23408ce35a4b130c597, type: 3}
-  m_Name: Default Currency Config
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerCurrencyConfig
-  _startingGoldCurrency: 999999
+  m_Script: {fileID: 11500000, guid: cc9c69852deee7a4597578fd76bc0c4c, type: 3}
+  m_Name: UpgradeHeatGauge
+  m_EditorClassIdentifier: Assembly-CSharp::EventChannel

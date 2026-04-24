@@ -23,6 +23,7 @@ public class UpgradeManager : MonoBehaviour
     [SerializeField] EventChannel _dashCountChannel;
     [SerializeField] EventChannel _dashCooldownChannel;
     [SerializeField] EventChannel _knockbackChannel;
+    [SerializeField] EventChannel _heatgaugeChannel;
 
     private int availablePoints = 0;
     public enum UpgradeType
@@ -35,6 +36,7 @@ public class UpgradeManager : MonoBehaviour
         Stamina,
         Strength,
         Knockback_Power,
+        Heat_Gauge,
     }
 
     private Dictionary<UpgradeType, string> _upgradeDescriptions = new Dictionary<UpgradeType, string>
@@ -47,7 +49,8 @@ public class UpgradeManager : MonoBehaviour
         [UpgradeType.Dash_Count] = "Increase the total amount of dashes available by <color=purple><b>+1</b></color>.",
         [UpgradeType.Stamina] = "Decrease the dash meter cooldown time by <color=purple><b>20%</b></color></b></color>.",
         [UpgradeType.Strength] = "Increase the base damage multiplier by <color=purple><b>10%</b></color>.",
-        [UpgradeType.Knockback_Power] = "Increase the knockback force from attacks by <color=purple><b>15%</b></color>."
+        [UpgradeType.Knockback_Power] = "Increase the knockback force from attacks by <color=purple><b>15%</b></color>.",
+        [UpgradeType.Heat_Gauge] = "Increase the base heat gauge count by <color=purple><b>+1</b></color>.",
     };
 
     public static UpgradeManager Instance { get; private set; }
@@ -176,6 +179,9 @@ public class UpgradeManager : MonoBehaviour
                 break;
             case UpgradeType.Knockback_Power:
                 if (_knockbackChannel != null) _knockbackChannel.Invoke();
+                break;
+            case UpgradeType.Heat_Gauge:
+                if (_heatgaugeChannel != null) _heatgaugeChannel.Invoke();
                 break;
             default:
                 Debug.LogWarning("Unknown upgrade type.");

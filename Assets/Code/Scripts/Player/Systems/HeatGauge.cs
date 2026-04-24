@@ -4,6 +4,7 @@ public class HeatGauge : MonoBehaviour
 {
     [SerializeField] private int m_maxCharge = 9;
     [SerializeField] private DoubleIntEventChannel _heatUpdateEvent;
+    [SerializeField] private HeatGaugeUI _heatGaugeUI;
 
     private int m_currentCharge = 0;
 
@@ -18,9 +19,18 @@ public class HeatGauge : MonoBehaviour
     }
     public bool UseCharge(int amount)
     {
-        if(m_currentCharge - amount < 0) return false;
+        if (m_currentCharge - amount < 0) return false;
         m_currentCharge -= amount;
         _heatUpdateEvent.Invoke(m_currentCharge, m_maxCharge);
         return true;
+    }
+    public void AddCharges(int amount)
+    {
+        m_maxCharge += amount;
+        for (int i = 0; i < amount; i++)
+        {
+            _heatGaugeUI.AddHeatGuage();
+        }
+        _heatUpdateEvent.Invoke(m_currentCharge, m_maxCharge);
     }
 }
