@@ -16,6 +16,11 @@ public class StarUIHandler : MonoBehaviour
         StartCoroutine(StarAnimate());
     }
 
+    public void ResetStar()
+    {
+        bloodImage.enabled = false;
+    }
+
     IEnumerator StarAnimate()
     {
         float time = 0f;

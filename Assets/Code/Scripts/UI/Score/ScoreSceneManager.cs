@@ -65,16 +65,21 @@ public class ScoreSceneManager : MonoBehaviour
         xpText.text = "?";
         triggerRating = true;
 
-        //Calculate Stats
-        int score = ScoreManager.Instance.CurrentScore;
+        for (int i = 0; i < starImages.Length; i++)
+        {
+            starImages[i].ResetStar();
+        }
+
+            //Calculate Stats
+            int score = ScoreManager.Instance.CurrentScore;
         int topScore = ScoreManager.Instance.TopScore;
 
         float percent = (float)score / topScore;
-        if (percent >= 0.9f)    calculatedRank = Rank.SPlus;
+        if (percent >= 0.9f)         calculatedRank = Rank.SPlus;
         else if (percent >= 0.8f)    calculatedRank = Rank.A;
         else if (percent >= 0.7f)    calculatedRank = Rank.B;
         else if (percent >= 0.6f)    calculatedRank = Rank.C;
-        else                    calculatedRank = Rank.D;
+        else                         calculatedRank = Rank.D;
 
         float bonusMultiplier = Mathf.Min(1f, percent + 0.1f);
         xpBonus = (int)Mathf.Floor(maxXPBonus * bonusMultiplier);
