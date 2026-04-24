@@ -1,4 +1,5 @@
 VAR actionName = "Dash"
 Practice attacking by breaking through those boulders blocking the path ahead.
-To make your way over that gap you'll need to dash using 'REPLACE_BUTTON'.
+When you're done clearing things up, try pressing 'REPLACE_BUTTON' to dash across the bridge.
+You don't take damage while dashing, so try using it to escape overwhelming situations.
 - ->END

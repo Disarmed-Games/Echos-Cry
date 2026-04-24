@@ -2373,9 +2373,13 @@ PrefabInstance:
       value: MusicPlayer
       objectReference: {fileID: 0}
     - target: {fileID: 8789275272379938032, guid: a3f10936ac1cbb44eaabfdc22b435d03, type: 3}
+      propertyPath: bpm
+      value: 95
+      objectReference: {fileID: 0}
+    - target: {fileID: 8789275272379938032, guid: a3f10936ac1cbb44eaabfdc22b435d03, type: 3}
       propertyPath: song
       value: 
-      objectReference: {fileID: 8300000, guid: 5519d7828280b3d47adc49231551fc4d, type: 3}
+      objectReference: {fileID: 8300000, guid: f7a9f1f5ce88f954593bb4d7508fa2e3, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

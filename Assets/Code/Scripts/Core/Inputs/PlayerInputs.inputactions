@@ -34,9 +34,9 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Pause",
+                    "name": "Special Attack",
                     "type": "Button",
-                    "id": "a1a286a4-d41c-4476-af6c-1766a4fea0c8",
+                    "id": "a0778ea0-d8ad-4fc8-aeb0-49d36bb4d532",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -46,6 +46,24 @@
                     "name": "Dash",
                     "type": "Button",
                     "id": "9a58ee9d-36b8-441e-81e0-449306af4936",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Interact",
+                    "type": "Button",
+                    "id": "66953180-c669-403c-a70c-326d528ceadf",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Drop",
+                    "type": "Button",
+                    "id": "967a3989-88a7-4f3d-9a00-86d52fae1aee",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -88,15 +106,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Interact",
-                    "type": "Button",
-                    "id": "66953180-c669-403c-a70c-326d528ceadf",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Teleport",
                     "type": "Button",
                     "id": "a5b953a0-7dc7-40cf-945f-2c90a29d100f",
@@ -106,27 +115,18 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Pause",
+                    "type": "Button",
+                    "id": "a1a286a4-d41c-4476-af6c-1766a4fea0c8",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Upgrade",
                     "type": "Button",
                     "id": "6956ad13-f854-468a-b769-7ed0a739d3dd",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Drop",
-                    "type": "Button",
-                    "id": "967a3989-88a7-4f3d-9a00-86d52fae1aee",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Special Attack",
-                    "type": "Button",
-                    "id": "a0778ea0-d8ad-4fc8-aeb0-49d36bb4d532",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",

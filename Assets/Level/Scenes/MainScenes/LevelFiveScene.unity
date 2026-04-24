@@ -2401,9 +2401,13 @@ PrefabInstance:
       value: MusicPlayer
       objectReference: {fileID: 0}
     - target: {fileID: 8789275272379938032, guid: a3f10936ac1cbb44eaabfdc22b435d03, type: 3}
+      propertyPath: bpm
+      value: 98
+      objectReference: {fileID: 0}
+    - target: {fileID: 8789275272379938032, guid: a3f10936ac1cbb44eaabfdc22b435d03, type: 3}
       propertyPath: song
       value: 
-      objectReference: {fileID: 8300000, guid: 80043274a40be4549af35ef69b3b6598, type: 3}
+      objectReference: {fileID: 8300000, guid: 718adaf45072e164e83cdabf69b6c662, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4146,8 +4150,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneTriggerManager
   sceneTarget:
-    m_SceneAsset: {fileID: 102900000, guid: 7b0faddb61c47924fa4e055b3b1bfd09, type: 3}
-    m_SceneName: TownScene
+    m_SceneAsset: {fileID: 102900000, guid: 09807d3c4b6077545b6143c27ff7240d, type: 3}
+    m_SceneName: EndCreditsMenu
   _inputTranslator: {fileID: 11400000, guid: da8057efcf3a45a47bb320ce196e8d61, type: 2}
   _isLevelExit: 1
 --- !u!65 &2102998044
