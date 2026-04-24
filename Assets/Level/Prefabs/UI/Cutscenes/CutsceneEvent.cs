@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using UnityEngine.UI;
 public abstract class CutsceneEvent
 {
     public float triggerTime;
@@ -89,5 +89,40 @@ public class SceneTransitionEvent : CutsceneEvent{
     }
     public override void Execute(){
         UnityEngine.SceneManagement.SceneManager.LoadScene(targetScene);
+    }
+}
+public class FadeEvent : CutsceneEvent{
+    private Image fadeImage;
+    private float duration;
+    private float start;
+    private float end;
+    private bool started = false;
+
+    public FadeEvent(float time, Image image, float start, float end, float duration) : base(time){
+        this.fadeImage = image;
+        this.start = start;
+        this. end = end;
+        this.duration = duration;
+    }
+    public override void Execute(){
+        if(fadeImage == null) {
+            return;
+        }
+        started = true;
+        SetAlpha(start);
+    }
+    public override void UpdateEvent(float currentTime){
+        if(!started){
+            return;
+        }
+        float t = (currentTime - triggerTime) / duration;
+        t = Mathf.Clamp01(t);
+        float alpha = Mathf.Lerp(start, end, t);
+        SetAlpha(alpha);
+    }
+    private void SetAlpha(float a){
+        Color c = fadeImage.color;
+        c.a = a;
+        fadeImage.color = c;
     }
 }

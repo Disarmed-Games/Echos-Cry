@@ -10,10 +10,12 @@ public class CutsceneBuilder : MonoBehaviour
     public GameObject circle;
     public CutsceneController controller;
     public SceneField nextScene;
+    public UnityEngine.UI.Image fadeImage;
 
     void Start(){
         List<CutsceneEvent> scene = new List<CutsceneEvent>();
         float t = 0f;
+        scene.Add(new FadeEvent(t, fadeImage, 1f, 0f, 2f));
         //Shopkeeper is pacing
         //scene.Add(new FlipEvent(t, shopkeep, true));
         scene.Add(new MoveEvent(t, shopkeep, new Vector3(-4,1,11), 1.5f));
@@ -38,12 +40,6 @@ public class CutsceneBuilder : MonoBehaviour
         scene.Add(new FlipEvent(t,shopkeep,false));
         scene.Add(new MoveEvent(t,shopkeep,new Vector3(-22,1,11), 1.2f));
         t+= 1.2f;
-
-        //ending
-        scene.Add(new FlipEvent(t,demon,true));
-
-        t+=1.0f;
-
         scene.Add(new MoveEvent(t,demon,new Vector3(4,1,11), 0.8f));
 
         scene.Add(new SpawnDemonEvent(t, demon2, circle, new Vector3(-2, 2, 11)));
@@ -54,6 +50,8 @@ public class CutsceneBuilder : MonoBehaviour
         scene.Add(new MoveEvent(t,demon2.transform,new Vector3(0,10,11), 0.8f));
         scene.Add(new MoveEvent(t,demon3.transform,new Vector3(0,10,11), 0.8f));
         t+= 1.0f;
+        scene.Add(new FadeEvent(t, fadeImage, 0f, 1f, 1.5f));
+        t += 1.5f;
         scene.Add(new SceneTransitionEvent(
             t,
             "TutorialScene",
