@@ -564,6 +564,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   bloodImage: {fileID: 7157494900719196233}
   duration: 1
+  unlockSFX: {fileID: 0}
 --- !u!1 &1272920472831080094
 GameObject:
   m_ObjectHideFlags: 0
@@ -655,6 +656,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   bloodImage: {fileID: 3380885637990109053}
   duration: 1
+  unlockSFX: {fileID: 0}
 --- !u!1 &1339142266099166322
 GameObject:
   m_ObjectHideFlags: 0
@@ -1222,6 +1224,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   bloodImage: {fileID: 1428684446927413882}
   duration: 1
+  unlockSFX: {fileID: 0}
 --- !u!1 &2642159521140947218
 GameObject:
   m_ObjectHideFlags: 0
@@ -1541,6 +1544,21 @@ MonoBehaviour:
   sceneTarget:
     m_SceneAsset: {fileID: 102900000, guid: 7b0faddb61c47924fa4e055b3b1bfd09, type: 3}
     m_SceneName: TownScene
+  boomSFX: {fileID: 0}
+  starImages:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  ratingText: {fileID: 0}
+  scoreText: {fileID: 0}
+  goldText: {fileID: 0}
+  xpText: {fileID: 0}
+  timeToMax: 1
+  timePerStep: 0.05
+  maxXPBonus: 0
+  maxGoldBonus: 0
 --- !u!1 &2875466235456867234
 GameObject:
   m_ObjectHideFlags: 0
@@ -1764,6 +1782,7 @@ GameObject:
   - component: {fileID: 3414233440565897684}
   - component: {fileID: 3673938135427716941}
   - component: {fileID: 8212092278613827465}
+  - component: {fileID: 1101031829794002720}
   m_Layer: 5
   m_Name: BackButton
   m_TagString: Untagged
@@ -1885,6 +1904,20 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1101031829794002720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3386377878497606805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 808250dd918e09a449e4479658d427c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  clickSFX: {fileID: 11400000, guid: 3116c60bb40aeac4a9ad79e49ded5e88, type: 2}
+  hoverSFX: {fileID: 11400000, guid: 75f616c90014e4e4fa12677fbb006c64, type: 2}
 --- !u!1 &3825140942286574481
 GameObject:
   m_ObjectHideFlags: 0
@@ -1976,6 +2009,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   bloodImage: {fileID: 8342684271700291101}
   duration: 1
+  unlockSFX: {fileID: 0}
 --- !u!1 &3992577569592888728
 GameObject:
   m_ObjectHideFlags: 0
@@ -2319,6 +2353,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   bloodImage: {fileID: 8635751057168017706}
   duration: 1
+  unlockSFX: {fileID: 0}
 --- !u!1 &5508326268042062592
 GameObject:
   m_ObjectHideFlags: 0

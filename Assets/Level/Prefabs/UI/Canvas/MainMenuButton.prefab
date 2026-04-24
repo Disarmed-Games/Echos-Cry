@@ -213,6 +213,7 @@ GameObject:
   - component: {fileID: 7522982706507682660}
   - component: {fileID: 3470762379343719215}
   - component: {fileID: 8837318747494016070}
+  - component: {fileID: 1179107039673829224}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -347,6 +348,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainMenuButton
   _selectImage: {fileID: 8366520040598382208}
+--- !u!114 &1179107039673829224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2405572594755415816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 808250dd918e09a449e4479658d427c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  clickSFX: {fileID: 11400000, guid: 3116c60bb40aeac4a9ad79e49ded5e88, type: 2}
+  hoverSFX: {fileID: 11400000, guid: 75f616c90014e4e4fa12677fbb006c64, type: 2}
 --- !u!1 &8366520040598382208
 GameObject:
   m_ObjectHideFlags: 0

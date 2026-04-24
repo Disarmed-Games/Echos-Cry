@@ -8,9 +8,12 @@ public class WaveManager : MonoBehaviour
     public event Action OnNewWaveSpawned, OnWaveSpawningEnded, OnAllWavesCompleted;
 
     [SerializeField] private float _timeBetweenWaves = 10f;
+    [SerializeField] private float _spawnDistance = 5f;
     [SerializeField] private WaveData[] _allWaves;
     [SerializeField] private NewEnemySpawner _enemySpawner;
     [SerializeField] private IntEventChannel _updateKillCountChannel;
+
+    public WaveData[] AllWaves { get => _allWaves; }
 
     private int _currentWave = 0;
     private int _totalEnemiesKilled = 0;
@@ -39,14 +42,13 @@ public class WaveManager : MonoBehaviour
         }
     }
 
-    private int GetTotalEnemiesInWave(WaveData currentWave)
+    public int GetTotalEnemiesInWave(WaveData currentWave)
     {
         int count = 0;
         foreach (SpawnData enemySpawns in currentWave.EnemySpawns)
         {
             count += enemySpawns.enemySpawnCount;
         }
-        //Debug.Log($"Total enemies in the wave needed to be killed is: {count}");
         return count;
     }
     public void UpdateKillCount(int enemySpawnerID)
@@ -99,8 +101,8 @@ public class WaveManager : MonoBehaviour
             EnemyPool pool = EnemyPoolManager.Instance.GetPool(enemyPrefab);
             for (int j = 0; j < wave.EnemySpawns[i].enemySpawnCount; j++)
             {
-                Vector3 enemyPosition = _enemySpawner.GetRandomPoint(wave.spawnRadius);
-                StartCoroutine(_enemySpawner.SpawnWithDecal(pool, enemyPosition, wave.spawnRadius, (enemy) => { }));
+                Vector3 enemyPosition = _enemySpawner.GetRandomPoint(_spawnDistance);
+                StartCoroutine(_enemySpawner.SpawnWithDecal(pool, enemyPosition, _spawnDistance, (enemy) => { }));
             }
             yield return new WaitForSeconds(wave.spawnInterval);
         }
@@ -108,4 +110,9 @@ public class WaveManager : MonoBehaviour
         OnWaveSpawningEnded?.Invoke();
         yield return null;
     }
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(transform.position, _spawnDistance);
+    }
+
 }

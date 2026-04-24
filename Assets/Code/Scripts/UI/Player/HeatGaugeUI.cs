@@ -1,4 +1,5 @@
 using AudioSystem;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,7 +10,8 @@ public class HeatGaugeUI : MonoBehaviour
     [SerializeField] Sprite defaultHeatImage;
     [SerializeField] Sprite maxHeatImage;
     [SerializeField] Sprite disabledHeatImage;
-    [SerializeField] GameObject[] heatGuages = new GameObject[6];
+    [SerializeField] private GameObject heatIconPrefab;
+    [SerializeField] private List<GameObject> heatGuages;
     [SerializeField] private soundEffect useGaugeSFX;
     private int pastGuageValue;
 
@@ -22,7 +24,11 @@ public class HeatGaugeUI : MonoBehaviour
     {
         if (_updateHeatGauge != null) _updateHeatGauge.Channel -= UpdateHeatGauge;
     }
-
+    public void AddHeatGuage()
+    {
+        GameObject newHeatIcon = Instantiate(heatIconPrefab, transform);
+        heatGuages.Add(newHeatIcon);
+    }
     private void UpdateHeatGauge(int current, int max)
     {
         for (int i = 0; i < max; i++)

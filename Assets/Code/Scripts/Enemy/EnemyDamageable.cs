@@ -44,7 +44,7 @@ public class EnemyDamageable : MonoBehaviour, IDamageable
             StartCoroutine(KnockBackDuration(attackData, 0.2f));
         }
             
-        if(DamageLabelManager.Instance != null)
+        if(DamageLabelManager.Instance != null && DamageLabelManager.Instance.isActiveAndEnabled)
             DamageLabelManager.Instance.SpawnPopup(damage, _enemy.transform.position, Color.white);
         
         
@@ -52,8 +52,6 @@ public class EnemyDamageable : MonoBehaviour, IDamageable
             _enemy.Health.MaxHealth, 
             _enemy.Health.CurrentArmor, 
             _enemy.Health.MaxArmor);
-
-        //HitStop.Instance.Execute(0.04f);
     }
 
     private IEnumerator KnockBackDuration(AttackInfo attackData, float duration)

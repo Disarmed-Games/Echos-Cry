@@ -1097,12 +1097,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8789275272379938032, guid: a3f10936ac1cbb44eaabfdc22b435d03, type: 3}
       propertyPath: bpm
-      value: 98
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 8789275272379938032, guid: a3f10936ac1cbb44eaabfdc22b435d03, type: 3}
       propertyPath: song
       value: 
-      objectReference: {fileID: 8300000, guid: 718adaf45072e164e83cdabf69b6c662, type: 3}
+      objectReference: {fileID: 8300000, guid: 9f3301078f606c046a7bf32eb2ab8b46, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1405,6 +1405,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3645533978470768532, guid: e1ffdf3d89e980e48901136d6808dd91, type: 3}
+      propertyPath: _spawnDistance
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 3645533978470768532, guid: e1ffdf3d89e980e48901136d6808dd91, type: 3}
       propertyPath: _allWaves.Array.size
       value: 3

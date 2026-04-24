@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.UI;
+using static TempoConductor;
 
 public class AttackIndicatorUI : MonoBehaviour
 {
@@ -33,30 +34,22 @@ struct SpriteNode
 
     void Update()
     {
-        float currentProgress = BeatManager.Instance.BeatInMeasure + BeatManager.Instance.BeatProgress;
-
-        float goodPercent = TempoConductor.Instance.GoodPercent;
-        float targetProgressLow1 = 1 - goodPercent;
-        float targetProgressHigh1 = goodPercent + 1;
-
-        float targetProgressLow2 = 3 - goodPercent;
-        float targetProgressHigh2 = goodPercent + 3;
-
-        if (currentProgress >= targetProgressLow1 
-            && currentProgress <= targetProgressHigh1
-            && Player.Instance.HeatGauge.CurrentCharge >= 6)
-        {
-            SetAttackIndicator(1);
-        }
-        else if (currentProgress >= targetProgressLow2
-            && currentProgress <= targetProgressHigh2
-            && Player.Instance.HeatGauge.CurrentCharge >= 6)
-        {
-            SetAttackIndicator(2);
-        }
-        else
+        if (Player.Instance.HeatGauge.CurrentCharge < 6)
         {
             SetAttackIndicator(0);
+            return;
         }
+
+        float progress = BeatManager.Instance.BeatProgress;
+        float goodPercent = TempoConductor.Instance.GoodPercent;
+
+        if (BeatManager.Instance.BeatInMeasure == 0 && progress >= (1f - goodPercent)
+            || BeatManager.Instance.BeatInMeasure == 1 && progress <= goodPercent * 0.25f)
+            SetAttackIndicator(1);
+        else if (BeatManager.Instance.BeatInMeasure == 2 && progress >= (1f - goodPercent)
+            || BeatManager.Instance.BeatInMeasure == 3 && progress <= goodPercent * 0.25f)
+            SetAttackIndicator(2);
+        else
+            SetAttackIndicator(0);
     }
 }

@@ -1,3 +1,4 @@
+using AudioSystem;
 using DG.Tweening;
 using System.Collections;
 using TMPro;
@@ -7,6 +8,7 @@ using static ScoreSceneManager;
 public class ScoreSceneManager : MonoBehaviour
 {
     [SerializeField] private SceneField sceneTarget;
+    [SerializeField] private soundEffect boomSFX;
     [SerializeField] private StarUIHandler[] starImages = new StarUIHandler[5];
     [SerializeField] private TextMeshProUGUI ratingText;
     [SerializeField] private TextMeshProUGUI scoreText;
@@ -50,6 +52,7 @@ public class ScoreSceneManager : MonoBehaviour
     }
     public void ContinueButton()
     {
+        ScoreManager.Instance.ResetScore();
         GameManager.Instance.SceneManager.TransitionScene(sceneTarget, GameManager.Instance);
         MenuManager.Instance.DisablePauseMenu();
     }
@@ -62,16 +65,21 @@ public class ScoreSceneManager : MonoBehaviour
         xpText.text = "?";
         triggerRating = true;
 
-        //Calculate Stats
-        int score = ScoreManager.Instance.CurrentScore;
+        for (int i = 0; i < starImages.Length; i++)
+        {
+            starImages[i].ResetStar();
+        }
+
+            //Calculate Stats
+            int score = ScoreManager.Instance.CurrentScore;
         int topScore = ScoreManager.Instance.TopScore;
 
         float percent = (float)score / topScore;
-        if (percent >= 0.9f)    calculatedRank = Rank.SPlus;
+        if (percent >= 0.9f)         calculatedRank = Rank.SPlus;
         else if (percent >= 0.8f)    calculatedRank = Rank.A;
         else if (percent >= 0.7f)    calculatedRank = Rank.B;
         else if (percent >= 0.6f)    calculatedRank = Rank.C;
-        else                    calculatedRank = Rank.D;
+        else                         calculatedRank = Rank.D;
 
         float bonusMultiplier = Mathf.Min(1f, percent + 0.1f);
         xpBonus = (int)Mathf.Floor(maxXPBonus * bonusMultiplier);
@@ -122,9 +130,12 @@ public class ScoreSceneManager : MonoBehaviour
 
         ratingText.text = GetRankString(rank);
         Transform ratingtTransform = ratingText.GetComponent<Transform>();
+
         ratingtTransform.DOKill();
         ratingtTransform.localRotation = Quaternion.identity;
         ratingtTransform.DOShakeRotation(transitionTime, 30, 10, 45, true);
+
+        EchosCry.Sound.PlaySFX(boomSFX, PlayerRef.Transform, 0);
 
         DisplayBonus();
     }

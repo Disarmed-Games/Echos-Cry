@@ -999,6 +999,7 @@ GameObject:
   - component: {fileID: 975472690}
   - component: {fileID: 975472689}
   - component: {fileID: 975472688}
+  - component: {fileID: 975472691}
   m_Layer: 5
   m_Name: ContinueButton
   m_TagString: Untagged
@@ -1120,6 +1121,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 975472686}
   m_CullTransparentMesh: 1
+--- !u!114 &975472691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 975472686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 808250dd918e09a449e4479658d427c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  clickSFX: {fileID: 11400000, guid: 3116c60bb40aeac4a9ad79e49ded5e88, type: 2}
+  hoverSFX: {fileID: 11400000, guid: 75f616c90014e4e4fa12677fbb006c64, type: 2}
 --- !u!1 &1080819441
 GameObject:
   m_ObjectHideFlags: 0
@@ -7392,6 +7407,7 @@ GameObject:
   - component: {fileID: 1975400779}
   - component: {fileID: 1975400778}
   - component: {fileID: 1975400777}
+  - component: {fileID: 1975400780}
   m_Layer: 5
   m_Name: RetryButton
   m_TagString: Untagged
@@ -7513,6 +7529,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1975400775}
   m_CullTransparentMesh: 1
+--- !u!114 &1975400780
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1975400775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 808250dd918e09a449e4479658d427c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  clickSFX: {fileID: 11400000, guid: 3116c60bb40aeac4a9ad79e49ded5e88, type: 2}
+  hoverSFX: {fileID: 11400000, guid: 75f616c90014e4e4fa12677fbb006c64, type: 2}
 --- !u!1 &2136558142
 GameObject:
   m_ObjectHideFlags: 0

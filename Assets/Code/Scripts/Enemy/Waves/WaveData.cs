@@ -13,7 +13,5 @@ public class WaveData : ScriptableObject
 {
     [Tooltip("List of every enemy type and how many will spawn in a given wave.")] 
     public SpawnData[] EnemySpawns;
-
-    public float spawnRadius = 10f;
     public float spawnInterval; 
 }

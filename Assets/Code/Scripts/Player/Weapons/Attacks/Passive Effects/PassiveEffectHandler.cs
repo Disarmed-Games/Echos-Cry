@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class PassiveEffectHandler : MonoBehaviour
 {
     [SerializeField] private Enemy enemyReference;
@@ -66,36 +67,6 @@ public class PassiveEffectHandler : MonoBehaviour
     //Also seems that the damage multiplier stuff should happen in the NPC Damageable script rather than the Health System
     public void UseEffect(PassiveEffect effect)
     {
-        switch (effect)
-        {
-            case BleedPassiveEffect bleed:
-                enemyReference.Health.Damage(bleed.bleedDamage);
-
-                EchosCry.Sound.PlaySFX(enemyReference.SoundConfig.HitSFX, enemyReference.transform, 0);
-                enemyReference.EnemyAnimator.TintFlash(Color.red, 0.2f);
-                enemyReference.EnemyAnimator.PlayBloodVisualEffect();
-
-                if (DamageLabelManager.Instance != null)
-                    DamageLabelManager.Instance.SpawnPopup(bleed.bleedDamage, enemyReference.transform.position, Color.purple);
-                break;
-            case MarkedForDeathPassive marked:
-                enemyReference.Health.SetDamageMultiplier(marked.damageMultiplier);
-                StartCoroutine(ResetDamageMultiplier(marked.duration));
-                break;
-            case CriticalHitPassiveEffect critical:
-                bool isCriticalHit = critical.RollCriticalHit();
-                if (isCriticalHit)
-                {
-                    enemyReference.Health.SetDamageMultiplier(critical.criticalMultiplier);
-                    StartCoroutine(ResetDamageMultiplier(.1f));
-                }
-                break;
-        }
-    }
-
-    private IEnumerator ResetDamageMultiplier(float time)
-    {
-        yield return new WaitForSeconds(time);
-        enemyReference.Health.SetDamageMultiplier(1f);
+        effect.Use(enemyReference);
     }
 }

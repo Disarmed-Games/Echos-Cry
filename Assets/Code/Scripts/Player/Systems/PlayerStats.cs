@@ -8,6 +8,7 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] AbilityManager _abilities;
     [SerializeField] PlayerAttackDamage _playerAttackDamage;
     [SerializeField] PlayerKnockback _playerKnockback;
+    [SerializeField] HeatGauge _heatGauge;
 
     [Header("Event Channels (Subscribers)")]
     [SerializeField] EventChannel _upgradeDamageChannel;
@@ -21,6 +22,7 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] EventChannel _dashCooldownChannel;
     [SerializeField] EventChannel _dashAttackChannel;
     [SerializeField] EventChannel _knockbackChannel;
+    [SerializeField] EventChannel _heatgaugeChannel;
 
     private void OnEnable()
     {
@@ -35,6 +37,7 @@ public class PlayerStats : MonoBehaviour
         if(_dashCountChannel != null) _dashCountChannel.Channel += UpgradeDashCount;
         if (_dashAttackChannel != null) _dashAttackChannel.Channel += UpgradeDashAttack;
         if (_dashAttackChannel != null) _knockbackChannel.Channel += UpgradeKnockback;
+        if (_heatgaugeChannel != null) _heatgaugeChannel.Channel += UpgradeHeatGauge;
     }
     private void OnDisable()
     {
@@ -49,6 +52,7 @@ public class PlayerStats : MonoBehaviour
         if (_dashCountChannel != null) _dashCountChannel.Channel -= UpgradeDashCount;
         if (_dashAttackChannel != null) _dashAttackChannel.Channel -= UpgradeDashAttack;
         if (_dashAttackChannel != null) _knockbackChannel.Channel -= UpgradeKnockback;
+        if (_heatgaugeChannel != null) _heatgaugeChannel.Channel -= UpgradeHeatGauge;
     }
 
     //Currently using unmutable variables but will eventually change to handle configuration or scaling upgrades eventually
@@ -119,5 +123,9 @@ public class PlayerStats : MonoBehaviour
         {
             _playerKnockback.BaseKnockbackMultiplier *= 1.15f;
         }
+    }
+    void UpgradeHeatGauge()
+    {
+        _heatGauge.AddCharges(1);
     }
 }
