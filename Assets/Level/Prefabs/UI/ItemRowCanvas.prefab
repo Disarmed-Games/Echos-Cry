@@ -148,6 +148,7 @@ GameObject:
   - component: {fileID: 4287409349756313278}
   - component: {fileID: 6917916588866613099}
   - component: {fileID: 679693313745579827}
+  - component: {fileID: 5989287512044393842}
   m_Layer: 5
   m_Name: IncreaseButton
   m_TagString: Untagged
@@ -269,6 +270,20 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &5989287512044393842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2025812258036539751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 808250dd918e09a449e4479658d427c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  clickSFX: {fileID: 11400000, guid: 3116c60bb40aeac4a9ad79e49ded5e88, type: 2}
+  hoverSFX: {fileID: 11400000, guid: 75f616c90014e4e4fa12677fbb006c64, type: 2}
 --- !u!1 &2233461018621612806
 GameObject:
   m_ObjectHideFlags: 0
@@ -493,6 +508,7 @@ GameObject:
   - component: {fileID: 3001966765221954087}
   - component: {fileID: 6039628391454165315}
   - component: {fileID: 4884851836423831808}
+  - component: {fileID: 1511784480527784720}
   m_Layer: 5
   m_Name: DecreaseButton
   m_TagString: Untagged
@@ -614,6 +630,20 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1511784480527784720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4099045255963652516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 808250dd918e09a449e4479658d427c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  clickSFX: {fileID: 11400000, guid: 3116c60bb40aeac4a9ad79e49ded5e88, type: 2}
+  hoverSFX: {fileID: 11400000, guid: 75f616c90014e4e4fa12677fbb006c64, type: 2}
 --- !u!1 &4400773162681308327
 GameObject:
   m_ObjectHideFlags: 0

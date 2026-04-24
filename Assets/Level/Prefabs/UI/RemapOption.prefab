@@ -148,6 +148,7 @@ GameObject:
   - component: {fileID: 5953981893414265971}
   - component: {fileID: 3280808003174753123}
   - component: {fileID: 4710409083493329790}
+  - component: {fileID: 5435212681397155492}
   m_Layer: 5
   m_Name: RemapButton
   m_TagString: Untagged
@@ -269,6 +270,20 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &5435212681397155492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2589919974730273345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 808250dd918e09a449e4479658d427c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  clickSFX: {fileID: 11400000, guid: 3116c60bb40aeac4a9ad79e49ded5e88, type: 2}
+  hoverSFX: {fileID: 11400000, guid: 75f616c90014e4e4fa12677fbb006c64, type: 2}
 --- !u!1 &4427267245605819445
 GameObject:
   m_ObjectHideFlags: 0

@@ -2330,6 +2330,7 @@ GameObject:
   - component: {fileID: 2094422238886301368}
   - component: {fileID: 4348639523225507597}
   - component: {fileID: 3394944895207677158}
+  - component: {fileID: 3038720515356039118}
   m_Layer: 5
   m_Name: BackButton
   m_TagString: Untagged
@@ -2451,6 +2452,20 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &3038720515356039118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3853097434967285319}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 808250dd918e09a449e4479658d427c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  clickSFX: {fileID: 11400000, guid: 3116c60bb40aeac4a9ad79e49ded5e88, type: 2}
+  hoverSFX: {fileID: 11400000, guid: 75f616c90014e4e4fa12677fbb006c64, type: 2}
 --- !u!1 &3904396820073756897
 GameObject:
   m_ObjectHideFlags: 0
@@ -3168,6 +3183,7 @@ GameObject:
   - component: {fileID: 2062596249735402563}
   - component: {fileID: 8557654464933575336}
   - component: {fileID: 1486092203015091274}
+  - component: {fileID: 2408003251446209001}
   m_Layer: 5
   m_Name: GraphicsTab
   m_TagString: Untagged
@@ -3248,6 +3264,20 @@ MonoBehaviour:
   _tabGroup: {fileID: 1872446481622251028}
   _backgroundImage: {fileID: 8557654464933575336}
   _tabText: {fileID: 7965674182837933859}
+--- !u!114 &2408003251446209001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4357432831418556004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 808250dd918e09a449e4479658d427c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  clickSFX: {fileID: 11400000, guid: 3116c60bb40aeac4a9ad79e49ded5e88, type: 2}
+  hoverSFX: {fileID: 11400000, guid: 75f616c90014e4e4fa12677fbb006c64, type: 2}
 --- !u!1 &4445861674563073816
 GameObject:
   m_ObjectHideFlags: 0
@@ -3461,6 +3491,7 @@ GameObject:
   - component: {fileID: 3753154109889897452}
   - component: {fileID: 8895331206689707844}
   - component: {fileID: 652967661049556025}
+  - component: {fileID: 4253019704235327650}
   m_Layer: 5
   m_Name: SoundTab
   m_TagString: Untagged
@@ -3541,6 +3572,20 @@ MonoBehaviour:
   _tabGroup: {fileID: 1872446481622251028}
   _backgroundImage: {fileID: 8895331206689707844}
   _tabText: {fileID: 7481180557926823597}
+--- !u!114 &4253019704235327650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4838240435699480639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 808250dd918e09a449e4479658d427c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  clickSFX: {fileID: 11400000, guid: 3116c60bb40aeac4a9ad79e49ded5e88, type: 2}
+  hoverSFX: {fileID: 11400000, guid: 75f616c90014e4e4fa12677fbb006c64, type: 2}
 --- !u!1 &4917603481300686283
 GameObject:
   m_ObjectHideFlags: 0
@@ -3553,6 +3598,7 @@ GameObject:
   - component: {fileID: 3778589034289276010}
   - component: {fileID: 8431435186362028659}
   - component: {fileID: 3136836303894270243}
+  - component: {fileID: 2361676797203237048}
   m_Layer: 5
   m_Name: ControlTab
   m_TagString: Untagged
@@ -3633,6 +3679,20 @@ MonoBehaviour:
   _tabGroup: {fileID: 1872446481622251028}
   _backgroundImage: {fileID: 8431435186362028659}
   _tabText: {fileID: 3811766394586216218}
+--- !u!114 &2361676797203237048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4917603481300686283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 808250dd918e09a449e4479658d427c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  clickSFX: {fileID: 11400000, guid: 3116c60bb40aeac4a9ad79e49ded5e88, type: 2}
+  hoverSFX: {fileID: 11400000, guid: 75f616c90014e4e4fa12677fbb006c64, type: 2}
 --- !u!1 &5449280437756552304
 GameObject:
   m_ObjectHideFlags: 0

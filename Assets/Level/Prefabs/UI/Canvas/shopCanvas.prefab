@@ -495,6 +495,7 @@ GameObject:
   - component: {fileID: 5257562261474341798}
   - component: {fileID: 455690942615088639}
   - component: {fileID: 400197433599310374}
+  - component: {fileID: 7069483402226610413}
   m_Layer: 5
   m_Name: CheckoutButton
   m_TagString: Untagged
@@ -616,6 +617,20 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &7069483402226610413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7453725169229354938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 808250dd918e09a449e4479658d427c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  clickSFX: {fileID: 11400000, guid: 3116c60bb40aeac4a9ad79e49ded5e88, type: 2}
+  hoverSFX: {fileID: 11400000, guid: 75f616c90014e4e4fa12677fbb006c64, type: 2}
 --- !u!1 &8056770187113982842
 GameObject:
   m_ObjectHideFlags: 0
