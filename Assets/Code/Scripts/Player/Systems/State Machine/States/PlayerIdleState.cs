@@ -23,14 +23,15 @@ public class PlayerIdleState : PlayerActionState
         }
         else if (_playerStateMachine.UsingSpecialAction && _playerContext.HeatGauge.CurrentCharge >= 6)
         {
-            if (BeatManager.Instance.BeatInMeasure == 1)
-            {
+            float progress = BeatManager.Instance.BeatProgress;
+            float goodPercent = TempoConductor.Instance.GoodPercent;
+
+            if (BeatManager.Instance.BeatInMeasure == 0 && progress >= (1f - goodPercent)
+                || BeatManager.Instance.BeatInMeasure == 1 && progress <= goodPercent * 0.25f)
                 _playerStateMachine.SwitchState(_playerStateCache.RequestState(PlayerStateCache.PlayerState.SpecialAttack1));
-            }
-            else if (BeatManager.Instance.BeatInMeasure == 3)
-            {
+            else if (BeatManager.Instance.BeatInMeasure == 2 && progress >= (1f - goodPercent)
+                || BeatManager.Instance.BeatInMeasure == 3 && progress <= goodPercent * 0.25f)
                 _playerStateMachine.SwitchState(_playerStateCache.RequestState(PlayerStateCache.PlayerState.SpecialAttack2));
-            }
         }
     }
 
