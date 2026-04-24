@@ -44,7 +44,7 @@ public class EnemyDamageable : MonoBehaviour, IDamageable
             StartCoroutine(KnockBackDuration(attackData, 0.2f));
         }
             
-        if(DamageLabelManager.Instance != null)
+        if(DamageLabelManager.Instance != null && DamageLabelManager.Instance.isActiveAndEnabled)
             DamageLabelManager.Instance.SpawnPopup(damage, _enemy.transform.position, Color.white);
         
         

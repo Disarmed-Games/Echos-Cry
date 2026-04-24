@@ -18,7 +18,7 @@ public class DummyDamageable : MonoBehaviour, IDamageable
         _enemyAnimator.TintFlash(Color.red, 0.15f);
         _particleSystem.Play();
 
-        if (DamageLabelManager.Instance != null)
+        if (DamageLabelManager.Instance != null && DamageLabelManager.Instance.isActiveAndEnabled)
             DamageLabelManager.Instance.SpawnPopup(attackData.Damage, transform.position, Color.white);
     }
 

@@ -75,7 +75,7 @@ public class PassiveEffectHandler : MonoBehaviour
                 enemyReference.EnemyAnimator.TintFlash(Color.red, 0.2f);
                 enemyReference.EnemyAnimator.PlayBloodVisualEffect();
 
-                if (DamageLabelManager.Instance != null)
+                if (DamageLabelManager.Instance != null && DamageLabelManager.Instance.isActiveAndEnabled)
                     DamageLabelManager.Instance.SpawnPopup(bleed.bleedDamage, enemyReference.transform.position, Color.purple);
                 break;
             case MarkedForDeathPassive marked:
