@@ -1,3 +1,4 @@
+using AudioSystem;
 using DG.Tweening;
 using System.Collections;
 using TMPro;
@@ -7,6 +8,7 @@ using static ScoreSceneManager;
 public class ScoreSceneManager : MonoBehaviour
 {
     [SerializeField] private SceneField sceneTarget;
+    [SerializeField] private soundEffect boomSFX;
     [SerializeField] private StarUIHandler[] starImages = new StarUIHandler[5];
     [SerializeField] private TextMeshProUGUI ratingText;
     [SerializeField] private TextMeshProUGUI scoreText;
@@ -50,6 +52,7 @@ public class ScoreSceneManager : MonoBehaviour
     }
     public void ContinueButton()
     {
+        ScoreManager.Instance.ResetScore();
         GameManager.Instance.SceneManager.TransitionScene(sceneTarget, GameManager.Instance);
         MenuManager.Instance.DisablePauseMenu();
     }
@@ -122,9 +125,12 @@ public class ScoreSceneManager : MonoBehaviour
 
         ratingText.text = GetRankString(rank);
         Transform ratingtTransform = ratingText.GetComponent<Transform>();
+
         ratingtTransform.DOKill();
         ratingtTransform.localRotation = Quaternion.identity;
         ratingtTransform.DOShakeRotation(transitionTime, 30, 10, 45, true);
+
+        EchosCry.Sound.PlaySFX(boomSFX, PlayerRef.Transform, 0);
 
         DisplayBonus();
     }

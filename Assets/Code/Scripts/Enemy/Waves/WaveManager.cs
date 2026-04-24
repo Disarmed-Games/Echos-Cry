@@ -12,6 +12,8 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private NewEnemySpawner _enemySpawner;
     [SerializeField] private IntEventChannel _updateKillCountChannel;
 
+    public WaveData[] AllWaves { get => _allWaves; }
+
     private int _currentWave = 0;
     private int _totalEnemiesKilled = 0;
     private bool _allWavesCompleted = false;
@@ -39,14 +41,13 @@ public class WaveManager : MonoBehaviour
         }
     }
 
-    private int GetTotalEnemiesInWave(WaveData currentWave)
+    public int GetTotalEnemiesInWave(WaveData currentWave)
     {
         int count = 0;
         foreach (SpawnData enemySpawns in currentWave.EnemySpawns)
         {
             count += enemySpawns.enemySpawnCount;
         }
-        //Debug.Log($"Total enemies in the wave needed to be killed is: {count}");
         return count;
     }
     public void UpdateKillCount(int enemySpawnerID)

@@ -10392,6 +10392,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3631189504435209130}
     - target: {fileID: 5089965971204647835, guid: 053b402829316c14388441c4fd94025b, type: 3}
+      propertyPath: boomSFX
+      value: 
+      objectReference: {fileID: 11400000, guid: d0e7cf7a5e1ac1a48973e03147e96a7d, type: 2}
+    - target: {fileID: 5089965971204647835, guid: 053b402829316c14388441c4fd94025b, type: 3}
       propertyPath: goldText
       value: 
       objectReference: {fileID: 5099822739926086637}

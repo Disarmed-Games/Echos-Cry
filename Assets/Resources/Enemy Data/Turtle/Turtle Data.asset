@@ -24,4 +24,4 @@ MonoBehaviour:
   _knockbackDuration: 0.15
   _tintHealthFlash: {r: 1, g: 0, b: 0, a: 1}
   _tintShieldFlash: {r: 0, g: 0, b: 1, a: 1}
-  _baseScore: 100
+  _baseScore: 120

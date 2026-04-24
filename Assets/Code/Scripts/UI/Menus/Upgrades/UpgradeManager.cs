@@ -40,14 +40,14 @@ public class UpgradeManager : MonoBehaviour
     private Dictionary<UpgradeType, string> _upgradeDescriptions = new Dictionary<UpgradeType, string>
     { //TODO: Use rich text to make this way less boring to look at!
         //[UpgradeType.] = "",
-        [UpgradeType.Haste] = "Increase your base movement speed by 10%.",
-        [UpgradeType.Dash_Speed] = "Increase the speed of your dashing by 15%.",
-        [UpgradeType.Health] = "Increase your base health by +5 hp.",
-        [UpgradeType.Defense] = "Increase your base armor by +5.",
-        [UpgradeType.Dash_Count] = "Increase the total amount of dashes available by +1.",
-        [UpgradeType.Stamina] = "Decrease the dash meter cooldown time by 20%.",
-        [UpgradeType.Strength] = "Increase the base damage multiplier by 10%.",
-        [UpgradeType.Knockback_Power] = "Increase the knockback force from attacks by 15%."
+        [UpgradeType.Haste] = "Increase your base movement speed by <color=purple><b>10%</b></color>.",
+        [UpgradeType.Dash_Speed] = "Increase the speed of your dashing by <color=purple><b>15%</b></color>.",
+        [UpgradeType.Health] = "Increase your base health by <color=purple><b>+5 hp</b></color>.",
+        [UpgradeType.Defense] = "Increase your base armor by <color=purple><b>+5</b></color>.",
+        [UpgradeType.Dash_Count] = "Increase the total amount of dashes available by <color=purple><b>+1</b></color>.",
+        [UpgradeType.Stamina] = "Decrease the dash meter cooldown time by <color=purple><b>20%</b></color></b></color>.",
+        [UpgradeType.Strength] = "Increase the base damage multiplier by <color=purple><b>10%</b></color>.",
+        [UpgradeType.Knockback_Power] = "Increase the knockback force from attacks by <color=purple><b>15%</b></color>."
     };
 
     public static UpgradeManager Instance { get; private set; }
