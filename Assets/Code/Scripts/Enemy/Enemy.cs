@@ -103,6 +103,7 @@ public class Enemy : MonoBehaviour
     }
     private void OnDisable()
     {
+        StopAllCoroutines();
         if(TickManager.Instance != null) TickManager.Instance.GetTimer(0.2f).Tick -= TickCheck;
         _playerAttackEndChannel.Channel -= ResetCollider; 
     }

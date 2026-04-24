@@ -9,4 +9,6 @@ public abstract class PassiveEffect : ScriptableObject
     public bool isEffectOneTime = false;
     public float effectUseInterval;
     public float effectDuration;
+
+    public abstract void Use(Enemy enemy);
 }

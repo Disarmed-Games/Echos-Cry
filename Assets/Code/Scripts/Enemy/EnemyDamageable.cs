@@ -52,8 +52,6 @@ public class EnemyDamageable : MonoBehaviour, IDamageable
             _enemy.Health.MaxHealth, 
             _enemy.Health.CurrentArmor, 
             _enemy.Health.MaxArmor);
-
-        //HitStop.Instance.Execute(0.04f);
     }
 
     private IEnumerator KnockBackDuration(AttackInfo attackData, float duration)
