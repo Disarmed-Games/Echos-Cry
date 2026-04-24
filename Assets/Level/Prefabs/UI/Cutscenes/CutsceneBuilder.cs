@@ -9,6 +9,7 @@ public class CutsceneBuilder : MonoBehaviour
     public GameObject demon3;
     public GameObject circle;
     public CutsceneController controller;
+    public SceneField nextScene;
 
     void Start(){
         List<CutsceneEvent> scene = new List<CutsceneEvent>();
@@ -52,6 +53,12 @@ public class CutsceneBuilder : MonoBehaviour
         scene.Add(new MoveEvent(t,demon,new Vector3(0,10,11), 0.8f));
         scene.Add(new MoveEvent(t,demon2.transform,new Vector3(0,10,11), 0.8f));
         scene.Add(new MoveEvent(t,demon3.transform,new Vector3(0,10,11), 0.8f));
+        t+= 1.0f;
+        scene.Add(new SceneTransitionEvent(
+            t,
+            "TutorialScene",
+            this
+        ));
         controller.Play(scene);
     }
 }

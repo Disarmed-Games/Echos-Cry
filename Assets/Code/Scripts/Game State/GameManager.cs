@@ -111,4 +111,5 @@ public class SceneNames
     public static readonly string Level5 = "LevelFiveScene";
     public static readonly string MainMenu = "MainMenu";
     public static readonly string Credits = "EndCreditsMenu";
+    public static readonly string Cutscene1 = "BeginningCutscene";
 }

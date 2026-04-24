@@ -80,3 +80,14 @@ public class SpawnDemonEvent : CutsceneEvent{
         hasSpawned = true;
     }
 }
+public class SceneTransitionEvent : CutsceneEvent{
+    private string targetScene;
+    private MonoBehaviour runner;
+    public SceneTransitionEvent(float time, string scene, MonoBehaviour runner) : base(time){
+        this.targetScene = scene;
+        this.runner = runner;
+    }
+    public override void Execute(){
+        UnityEngine.SceneManagement.SceneManager.LoadScene(targetScene);
+    }
+}
