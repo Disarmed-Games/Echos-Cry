@@ -1406,6 +1406,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3645533978470768532, guid: e1ffdf3d89e980e48901136d6808dd91, type: 3}
+      propertyPath: _spawnDistance
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3645533978470768532, guid: e1ffdf3d89e980e48901136d6808dd91, type: 3}
       propertyPath: _allWaves.Array.size
       value: 3
       objectReference: {fileID: 0}

@@ -4467,6 +4467,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1665838283}
     - target: {fileID: 3645533978470768532, guid: e1ffdf3d89e980e48901136d6808dd91, type: 3}
+      propertyPath: _spawnDistance
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3645533978470768532, guid: e1ffdf3d89e980e48901136d6808dd91, type: 3}
       propertyPath: _allWaves.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -10574,6 +10578,10 @@ PrefabInstance:
       propertyPath: _enemySpawner
       value: 
       objectReference: {fileID: 1812364796}
+    - target: {fileID: 3645533978470768532, guid: e1ffdf3d89e980e48901136d6808dd91, type: 3}
+      propertyPath: _spawnDistance
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 3645533978470768532, guid: e1ffdf3d89e980e48901136d6808dd91, type: 3}
       propertyPath: _allWaves.Array.size
       value: 3
