@@ -68,7 +68,7 @@ public class CalibrationManager : MonoBehaviour
         if (_hitCount == _maxHitCount)
         {
             HitAccuracy = _overallAccuracy;
-            UnityEngine.SceneManagement.SceneManager.LoadScene("BeginningCutscene");
+            UnityEngine.SceneManagement.SceneManager.LoadScene(SceneNames.Cutscene);
         }
     }
     public void RetryButton()
