@@ -15,11 +15,11 @@ public class WeaponCollider : MonoBehaviour
         if (other.TryGetComponent<EffectHandler>(out EffectHandler passiveEffectHandler))
         {
             if (PlayerComboMeter.CurrentMeterState == PlayerComboMeter.MeterState.OneThird)
-                passiveEffectHandler.UsePassiveEffect(_weaponContext.CurrentAttackData.PassiveEffects.OneThirdEffect);
+                passiveEffectHandler.ApplyEffect(_weaponContext.CurrentAttackData.PassiveEffects.OneThirdEffect);
             else if (PlayerComboMeter.CurrentMeterState == PlayerComboMeter.MeterState.TwoThirds)
-                passiveEffectHandler.UsePassiveEffect(_weaponContext.CurrentAttackData.PassiveEffects.TwoThirdsEffect);
+                passiveEffectHandler.ApplyEffect(_weaponContext.CurrentAttackData.PassiveEffects.TwoThirdsEffect);
             else if (PlayerComboMeter.CurrentMeterState == PlayerComboMeter.MeterState.Full)
-                passiveEffectHandler.UsePassiveEffect(_weaponContext.CurrentAttackData.PassiveEffects.FullEffect);
+                passiveEffectHandler.ApplyEffect(_weaponContext.CurrentAttackData.PassiveEffects.FullEffect);
         }
 
         if (other.TryGetComponent<IDamageable>(out IDamageable damagable))
