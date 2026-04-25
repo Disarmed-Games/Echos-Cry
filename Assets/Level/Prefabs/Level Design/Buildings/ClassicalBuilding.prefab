@@ -53,6 +53,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 115013684627018558, guid: fc15301d352865d4a9286375b4cd490d, type: 3}
+      propertyPath: m_StaticShadowCaster
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 115013684627018558, guid: fc15301d352865d4a9286375b4cd490d, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 239805dfe136c9545a436d7719730b7c, type: 2}
@@ -65,6 +69,10 @@ PrefabInstance:
       value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 3387735567758258893, guid: fc15301d352865d4a9286375b4cd490d, type: 3}
+      propertyPath: m_StaticShadowCaster
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3387735567758258893, guid: fc15301d352865d4a9286375b4cd490d, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: b286e45bde2c9714299eb981c531ddd7, type: 2}
@@ -73,13 +81,25 @@ PrefabInstance:
       value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6803343817056843111, guid: fc15301d352865d4a9286375b4cd490d, type: 3}
+      propertyPath: m_StaticShadowCaster
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6803343817056843111, guid: fc15301d352865d4a9286375b4cd490d, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: d15df2997ddf18847b4fc11df5f68f7d, type: 2}
     - target: {fileID: 7003692364609736950, guid: fc15301d352865d4a9286375b4cd490d, type: 3}
+      propertyPath: m_StaticShadowCaster
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7003692364609736950, guid: fc15301d352865d4a9286375b4cd490d, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 7834cc82f3ea82644a98ba1da3548508, type: 2}
+    - target: {fileID: 7640567192012744018, guid: fc15301d352865d4a9286375b4cd490d, type: 3}
+      propertyPath: m_StaticShadowCaster
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7640567192012744018, guid: fc15301d352865d4a9286375b4cd490d, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 

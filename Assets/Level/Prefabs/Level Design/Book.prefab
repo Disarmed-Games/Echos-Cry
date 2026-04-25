@@ -9,20 +9,24 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -8911057752214625927, guid: 0ba7c3e16b629174da5e3b220ea93a85, type: 3}
+      propertyPath: m_StaticShadowCaster
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8911057752214625927, guid: 0ba7c3e16b629174da5e3b220ea93a85, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: d15bc7295384a614280ee104d01e0178, type: 2}
     - target: {fileID: -8679921383154817045, guid: 0ba7c3e16b629174da5e3b220ea93a85, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.6123188
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0ba7c3e16b629174da5e3b220ea93a85, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.26
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0ba7c3e16b629174da5e3b220ea93a85, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 24.699556
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0ba7c3e16b629174da5e3b220ea93a85, type: 3}
       propertyPath: m_LocalRotation.w
@@ -34,11 +38,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0ba7c3e16b629174da5e3b220ea93a85, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0ba7c3e16b629174da5e3b220ea93a85, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0ba7c3e16b629174da5e3b220ea93a85, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -61,24 +65,32 @@ PrefabInstance:
       value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: -2499326105323859472, guid: 0ba7c3e16b629174da5e3b220ea93a85, type: 3}
+      propertyPath: m_StaticShadowCaster
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -2499326105323859472, guid: 0ba7c3e16b629174da5e3b220ea93a85, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 646c5ee2032dbe6408dd71be32f21b9e, type: 2}
     - target: {fileID: -1157183923651069282, guid: 0ba7c3e16b629174da5e3b220ea93a85, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.5
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: -1157183923651069282, guid: 0ba7c3e16b629174da5e3b220ea93a85, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.5
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: -1157183923651069282, guid: 0ba7c3e16b629174da5e3b220ea93a85, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.5
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: -1157183923651069282, guid: 0ba7c3e16b629174da5e3b220ea93a85, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -1157183923651069282, guid: 0ba7c3e16b629174da5e3b220ea93a85, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.18
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 0ba7c3e16b629174da5e3b220ea93a85, type: 3}
       propertyPath: m_Name
@@ -90,19 +102,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5974626834193008097, guid: 0ba7c3e16b629174da5e3b220ea93a85, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.5
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 5974626834193008097, guid: 0ba7c3e16b629174da5e3b220ea93a85, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.5
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 5974626834193008097, guid: 0ba7c3e16b629174da5e3b220ea93a85, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.5
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 5974626834193008097, guid: 0ba7c3e16b629174da5e3b220ea93a85, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5974626834193008097, guid: 0ba7c3e16b629174da5e3b220ea93a85, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.18
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -140,7 +156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c47dfac5985c04643909043d14eaa785, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Echos Cry Core::dialogueTrigger
-  inkJSON: {fileID: 4900000, guid: 6e429ba239ca9e44b8ae49bb9c4d0169, type: 3}
+  inkJSON: {fileID: 4900000, guid: 1c966e2d45a89fb4e9f959ca5f9e2d46, type: 3}
   ToolTipPrefab: {fileID: 5435326603873152583, guid: 2368d443f59e53f4dbdf1ce2d1423114, type: 3}
   _inputTranslator: {fileID: 11400000, guid: da8057efcf3a45a47bb320ce196e8d61, type: 2}
   _distanceCheck: 1
@@ -164,7 +180,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 2.5, y: 2.5, z: 2.5}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 1.25, z: 0}
 --- !u!1001 &9059522802503601795
 PrefabInstance:
   m_ObjectHideFlags: 0
