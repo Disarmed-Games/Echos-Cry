@@ -1,5 +1,4 @@
 using System.Collections;
-using Unity.VisualScripting.YamlDotNet.Core;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Marked For Death Effect", menuName = "Echo's Cry/Passive Effects/Marked For Death")]

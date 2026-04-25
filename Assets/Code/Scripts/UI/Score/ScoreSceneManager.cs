@@ -52,7 +52,6 @@ public class ScoreSceneManager : MonoBehaviour
     }
     public void ContinueButton()
     {
-        ScoreManager.Instance.ResetScore();
         GameManager.Instance.SceneManager.TransitionScene(sceneTarget, GameManager.Instance);
         MenuManager.Instance.DisablePauseMenu();
     }

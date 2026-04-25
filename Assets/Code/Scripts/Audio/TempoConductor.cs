@@ -47,10 +47,10 @@ public class TempoConductor : Singleton<TempoConductor>
 
     private HitQuality GetHitQuality(float progress)
     {
-        if (progress <= _excellentPercent * 0.25f || progress >= (1f - _excellentPercent))
+        if (progress <= _excellentPercent * 0.5f || progress >= (1f - _excellentPercent))
             return HitQuality.Excellent;
 
-        if (progress <= _goodPercent * 0.25f || progress >= (1f - _goodPercent))
+        if (progress <= _goodPercent * 0.5f || progress >= (1f - _goodPercent))
             return HitQuality.Good;
 
         return HitQuality.Miss;

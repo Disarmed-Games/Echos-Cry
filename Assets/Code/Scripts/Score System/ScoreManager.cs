@@ -64,7 +64,7 @@ public class ScoreManager : NonSpawnableSingleton<ScoreManager>
         {
             foreach (WaveData wave in wm.AllWaves)
             {
-                topScore += wm.GetTotalEnemiesInWave(wave) * 1000;
+                topScore += wm.GetTotalEnemiesInWave(wave) * 1200;
             }
         }
         Debug.Log(topScore);
