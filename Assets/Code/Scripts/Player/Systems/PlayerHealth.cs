@@ -135,7 +135,7 @@ public class PlayerHealth : MonoBehaviour
         {
             yield return new WaitForSeconds(_regenHealthTickTime);
 
-            if (_canRegenHealth)
+            if (_canRegenHealth && CurrentHealth < MaxHealth)
             {
                 HealHealth(_regenHealthAmount);
                 _healthChannel.Invoke(_healthSystem.CurrentHealth, _healthSystem.MaxHealth);
@@ -171,7 +171,7 @@ public class PlayerHealth : MonoBehaviour
         {
             yield return new WaitForSeconds(_regenArmorTickTime);
 
-            if (_canRegenArmor)
+            if (_canRegenArmor && CurrentArmor < MaxArmor)
             {
                 HealArmor(_regenArmorAmount);
                 _armorChannel.Invoke(_healthSystem.CurrentArmor, _healthSystem.MaxArmor);

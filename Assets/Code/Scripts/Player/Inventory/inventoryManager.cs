@@ -5,29 +5,18 @@ using UnityEngine;
 /// Original Author: Abby
 /// All Contributors Since Creation: Abby, Andrew
 
-public class InventoryManager : MonoBehaviour
+public class InventoryManager : Singleton<InventoryManager>
 {
-    private static InventoryManager _instance;
-    public static InventoryManager Instance { get { return _instance; } }
-
     private Dictionary<InventoryItemData, InventoryItem> itemDictionary;
     public List<InventoryItem> inventoryList { get; private set; }  
 
     [SerializeField] private InventoryDisplay _inventoryDisplay;
     [SerializeField] private InputTranslator _inputTranslator;
     [SerializeField] private soundEffect _useItemSound;
+    [SerializeField] private soundEffect _invalidItemSound;
 
     private Player _player;
 
-    private void Awake()
-    {
-        if (_instance != null)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        _instance = this;
-    }
     void Start()
     {
         inventoryList = new List<InventoryItem>();
@@ -66,30 +55,24 @@ public class InventoryManager : MonoBehaviour
     {
         if (inventoryList.Count <= 0 || inventoryList.Count <= index) return;
 
-        SoundEffectManager.Instance.Builder
-                .SetSound(_useItemSound)
-                .SetSoundPosition(PlayerRef.Transform.position)
-                .ValidateAndPlaySound();
-
         InventoryItem usedItem = inventoryList[index];
 
         if (usedItem.data.CanUse(_player))
         {
+            EchosCry.Sound.PlaySFX(_useItemSound, PlayerRef.Transform, 0);
             usedItem.data.Use(_player);
             Remove(usedItem.data);
         }
+        else
+            EchosCry.Sound.PlaySFX(_invalidItemSound, PlayerRef.Transform, 0);
     }
 
     public bool IsFull(InventoryItemData referenceData)
     {
         if (referenceData.isStackable && itemDictionary.ContainsKey(referenceData))
-        {
             return false;
-        }
         else
-        {
-            return inventoryList.Count >= _inventoryDisplay.slotScriptArray.Length;
-        }   
+            return inventoryList.Count >= _inventoryDisplay.slotScriptArray.Length; 
     }
     public InventoryItem Get(InventoryItemData referenceData)
     {

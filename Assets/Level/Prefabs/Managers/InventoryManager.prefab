@@ -65,3 +65,4 @@ MonoBehaviour:
   _inventoryDisplay: {fileID: 2156123696442323902}
   _inputTranslator: {fileID: 11400000, guid: da8057efcf3a45a47bb320ce196e8d61, type: 2}
   _useItemSound: {fileID: 11400000, guid: 41822ffa48839a14490c776b17fa35c4, type: 2}
+  _invalidItemSound: {fileID: 11400000, guid: 11db790d863c97e4aa6f5b2adedc95c9, type: 2}
