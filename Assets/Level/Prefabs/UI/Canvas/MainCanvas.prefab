@@ -4608,6 +4608,9 @@ MonoBehaviour:
   sceneTarget:
     m_SceneAsset: {fileID: 102900000, guid: 7b0faddb61c47924fa4e055b3b1bfd09, type: 3}
     m_SceneName: TownScene
+  sceneEndTarget:
+    m_SceneAsset: {fileID: 102900000, guid: ecbc9e2a918bb4e4cb098f4fdd549ca5, type: 3}
+    m_SceneName: MainMenu
 --- !u!114 &7798869468456135768
 MonoBehaviour:
   m_ObjectHideFlags: 0

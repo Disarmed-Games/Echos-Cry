@@ -7,6 +7,7 @@ public class GameoverManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI livesLeftText;
     [SerializeField] private TextMeshProUGUI deathText;
     [SerializeField] private SceneField sceneTarget;
+    [SerializeField] private SceneField sceneEndTarget;
 
     private void OnEnable()
     {
@@ -27,7 +28,10 @@ public class GameoverManager : MonoBehaviour
 
     public void Respawn()
     {
-        GameManager.Instance.SceneManager.TransitionScene(sceneTarget, GameManager.Instance);
         DisableGameoverMenu();
+        if (GameManager.Instance.IsGameOver)
+            GameManager.Instance.SceneManager.TransitionScene(sceneEndTarget, GameManager.Instance);
+        else
+            GameManager.Instance.SceneManager.TransitionScene(sceneTarget, GameManager.Instance);
     }
 }

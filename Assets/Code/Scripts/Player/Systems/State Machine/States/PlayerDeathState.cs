@@ -9,6 +9,6 @@ public class PlayerDeathState : PlayerActionState
     {
         _playerStateMachine.CurrentStateEnum = PlayerState.Death;
         _playerContext.DeathReset();
-        GameManager.HandlePlayerDeath(_playerContext);
+        GameManager.Instance.HandlePlayerDeath(_playerContext);
     }
 }
