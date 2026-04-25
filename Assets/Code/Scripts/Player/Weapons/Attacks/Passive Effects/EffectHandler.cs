@@ -3,6 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+namespace EchosCry
+{
+    public enum Effects
+    {
+        Bleed, MarkForDeath, Critical
+    }
+}
 
 public class EffectHandler : MonoBehaviour
 {
@@ -19,7 +26,7 @@ public class EffectHandler : MonoBehaviour
 
     [SerializeField] private Enemy enemyReference;
 
-    private Dictionary<Type, EffectNode> _activePassiveEffects = new();
+    private readonly Dictionary<EchosCry.Effects, EffectNode> _activePassiveEffects = new();
 
     private void OnDisable()
     {
@@ -28,7 +35,8 @@ public class EffectHandler : MonoBehaviour
 
     public void ApplyEffect(EffectData effect)
     {
-        Type effectType = effect.GetType();
+        EchosCry.Effects effectType = effect.EffectEnum;
+        Debug.Log(effectType);
 
         if (_activePassiveEffects.ContainsKey(effectType)) //Check if effect active
         {
@@ -47,6 +55,7 @@ public class EffectHandler : MonoBehaviour
             return;
         }
 
+        _activePassiveEffects.Add(effectType, new EffectNode(null, 1)); //Add passive effect so it is registered to the dictionary to be checked
         StartCoroutine(EndRoutineEffect(effect));
 
         Coroutine routine = null;
@@ -59,13 +68,12 @@ public class EffectHandler : MonoBehaviour
             routine = StartCoroutine(RoutineEffect(effect));
         }
 
-        _activePassiveEffects.Add(effectType, new EffectNode(routine, 1));
-        
+        _activePassiveEffects[effectType] = new EffectNode(routine, 1);
     }
 
     public void RemovePassiveEffect(EffectData effect)
     {
-        Type type = effect.GetType();
+        EchosCry.Effects type = effect.EffectEnum;
 
         if (_activePassiveEffects[type].coroutine != null)
         {
@@ -82,9 +90,10 @@ public class EffectHandler : MonoBehaviour
 
     private IEnumerator RoutineEffect(EffectData effect)
     {
-        while (_activePassiveEffects.ContainsKey(effect.GetType()))
+        while (_activePassiveEffects.ContainsKey(effect.EffectEnum))
         {
             yield return new WaitForSeconds(effect.EffectUseInterval);
+            
             UseEffect(effect);
         }
     }
@@ -93,6 +102,7 @@ public class EffectHandler : MonoBehaviour
     {
         foreach (Effect effect in effectData.Effects)
         {
+            Debug.Log("Using effect");
             effect.Use(enemyReference, this);
         }
     }

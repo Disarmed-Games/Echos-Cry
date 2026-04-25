@@ -12,14 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a24831c2a3be90f4ea678b9b4739ad3c, type: 3}
   m_Name: MarkForDeath
   m_EditorClassIdentifier: Echos Cry Core::EffectData
-  EffectName: 
+  EffectName: Mark For Death Effect
   EffectDescription: 
-  EffectIcon: {fileID: 0}
-  IsEffectUseOneTime: 0
+  EffectIcon: {fileID: 21300000, guid: a64ab6a7aa63e6643b39541efaecbcdd, type: 3}
+  IsEffectUseOneTime: 1
   EffectUseInterval: 0
-  EffectDuration: 0
+  EffectDuration: 2
   MaxStacks: 1
-  Effects: []
+  EffectEnum: 1
+  Effects:
+  - rid: 3227708212704182370
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 3227708212704182370
+      type: {class: DamageMultiplierEffect, ns: , asm: Echos Cry Core}
+      data:
+        damageMultiplier: 1.5
+        duration: 2
+        multiplierChance: 1

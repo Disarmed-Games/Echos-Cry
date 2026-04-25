@@ -12,14 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a24831c2a3be90f4ea678b9b4739ad3c, type: 3}
   m_Name: Critical Chance
   m_EditorClassIdentifier: Echos Cry Core::EffectData
-  EffectName: 
+  EffectName: Critical Effect
   EffectDescription: 
-  EffectIcon: {fileID: 0}
-  IsEffectUseOneTime: 0
+  EffectIcon: {fileID: 21300000, guid: 6879e49a661d7844eb8fe6ac95c88e4b, type: 3}
+  IsEffectUseOneTime: 1
   EffectUseInterval: 0
-  EffectDuration: 0
+  EffectDuration: 2
   MaxStacks: 1
-  Effects: []
+  EffectEnum: 2
+  Effects:
+  - rid: 3227708212704182371
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 3227708212704182371
+      type: {class: DamageMultiplierEffect, ns: , asm: Echos Cry Core}
+      data:
+        damageMultiplier: 2
+        duration: 2
+        multiplierChance: 0.2

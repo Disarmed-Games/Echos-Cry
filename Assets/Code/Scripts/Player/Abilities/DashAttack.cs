@@ -15,6 +15,7 @@ public class DashAttack : MonoBehaviour
         AttackInfo attack = new AttackInfo.Builder()
             .SetDamage(dashAttackData.Damage)
             .SetHitQuality(HitQuality)
+            .SetOrigin(Player.Instance.transform)
             .Build();
         other.GetComponent<IDamageable>()?.Execute(attack);
     }

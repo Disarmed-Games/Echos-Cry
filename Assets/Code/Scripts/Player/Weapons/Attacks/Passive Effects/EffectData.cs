@@ -14,6 +14,7 @@ public class EffectData : ScriptableObject
     public float EffectUseInterval;
     public float EffectDuration;
     [Min(1)] public int MaxStacks = 1;
+    public EchosCry.Effects EffectEnum;
 
     [SerializeReference] public List<Effect> Effects;
 
@@ -36,6 +37,7 @@ public class DamageEffect : Effect
     public float damage = 2f;
     public override void Use(Enemy enemy, EffectHandler handler)
     {
+        Debug.Log("Effect 2");
         enemy.Health.Damage(damage);
 
         EchosCry.Sound.PlaySFX(enemy.SoundConfig.HitSFX, enemy.transform, 0);
@@ -44,6 +46,11 @@ public class DamageEffect : Effect
 
         if (DamageLabelManager.Instance != null && DamageLabelManager.Instance.isActiveAndEnabled)
             DamageLabelManager.Instance.SpawnPopup(damage, enemy.transform.position, Color.purple);
+
+        if (enemy.EnemyHealthUI != null) enemy.EnemyHealthUI.UpdateUI(enemy.Health.CurrentHealth,
+        enemy.Health.MaxHealth,
+        enemy.Health.CurrentArmor,
+        enemy.Health.MaxArmor);
     }
 }
 
@@ -57,6 +64,7 @@ public class DamageMultiplierEffect : Effect
 
     public override void Use(Enemy enemy, EffectHandler handler)
     {
+        Debug.Log("Effect 2");
         if (CheckHitChance())
         {
             enemy.Health.SetDamageMultiplier(damageMultiplier);
