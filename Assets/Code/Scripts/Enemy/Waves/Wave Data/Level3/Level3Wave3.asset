@@ -15,7 +15,8 @@ MonoBehaviour:
   EnemySpawns:
   - enemySpawnType: {fileID: 6730894656085681688, guid: 18676ec0132be884cb685389feb03828, type: 3}
     enemySpawnCount: 2
-  - enemySpawnType: {fileID: 5404336137336009058, guid: 128fb26a87e63b6488058dafa47b63dd, type: 3}
+  - enemySpawnType: {fileID: 6900823288402649937, guid: cc2412d36d40d54469f1a824c37f02e4, type: 3}
     enemySpawnCount: 2
-  spawnRadius: 5
+  - enemySpawnType: {fileID: 5404336137336009058, guid: 128fb26a87e63b6488058dafa47b63dd, type: 3}
+    enemySpawnCount: 3
   spawnInterval: 8
