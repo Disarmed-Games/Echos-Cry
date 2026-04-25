@@ -5,11 +5,8 @@ using UnityEngine;
 /// Original Author: Abby
 /// All Contributors Since Creation: Abby, Andrew
 
-public class InventoryManager : MonoBehaviour
+public class InventoryManager : Singleton<InventoryManager>
 {
-    private static InventoryManager _instance;
-    public static InventoryManager Instance { get { return _instance; } }
-
     private Dictionary<InventoryItemData, InventoryItem> itemDictionary;
     public List<InventoryItem> inventoryList { get; private set; }  
 
@@ -20,15 +17,6 @@ public class InventoryManager : MonoBehaviour
 
     private Player _player;
 
-    private void Awake()
-    {
-        if (_instance != null)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        _instance = this;
-    }
     void Start()
     {
         inventoryList = new List<InventoryItem>();
@@ -82,13 +70,9 @@ public class InventoryManager : MonoBehaviour
     public bool IsFull(InventoryItemData referenceData)
     {
         if (referenceData.isStackable && itemDictionary.ContainsKey(referenceData))
-        {
             return false;
-        }
         else
-        {
-            return inventoryList.Count >= _inventoryDisplay.slotScriptArray.Length;
-        }   
+            return inventoryList.Count >= _inventoryDisplay.slotScriptArray.Length; 
     }
     public InventoryItem Get(InventoryItemData referenceData)
     {
