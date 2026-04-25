@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2581201042721848054
 Transform:
   m_ObjectHideFlags: 0
@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Echos Cry Core::DashAttack
   dashAttackData: {fileID: 11400000, guid: 59382ef7177ae0f48a719e3dc18cfa5e, type: 2}
+  HitQuality: 0
 --- !u!65 &4016720477532463458
 BoxCollider:
   m_ObjectHideFlags: 0
