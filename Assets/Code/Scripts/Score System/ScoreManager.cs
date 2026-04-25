@@ -52,6 +52,7 @@ public class ScoreManager : NonSpawnableSingleton<ScoreManager>
     }
     void OnDisable()
     {
+        ResetScore();
         UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnSceneLoaded;
     }
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)

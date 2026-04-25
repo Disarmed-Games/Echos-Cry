@@ -69,8 +69,8 @@ public class ScoreSceneManager : MonoBehaviour
             starImages[i].ResetStar();
         }
 
-            //Calculate Stats
-            int score = ScoreManager.Instance.CurrentScore;
+        //Calculate Stats
+        int score = ScoreManager.Instance.CurrentScore;
         int topScore = ScoreManager.Instance.TopScore;
 
         float percent = (float)score / topScore;
