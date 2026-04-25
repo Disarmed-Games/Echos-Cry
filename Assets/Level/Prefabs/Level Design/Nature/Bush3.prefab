@@ -65,6 +65,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -6719916215063423, guid: 683ff738c480add46a91f40a7f493ae6, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -6719916215063423, guid: 683ff738c480add46a91f40a7f493ae6, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 4ae69f833e5201c4fb41fa597aa79c03, type: 2}
@@ -91,6 +95,10 @@ PrefabInstance:
     - target: {fileID: 4371276483340876309, guid: 683ff738c480add46a91f40a7f493ae6, type: 3}
       propertyPath: m_LocalScale.z
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5175051307682049335, guid: 683ff738c480add46a91f40a7f493ae6, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5175051307682049335, guid: 683ff738c480add46a91f40a7f493ae6, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
