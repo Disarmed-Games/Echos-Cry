@@ -2,6 +2,7 @@ using AudioSystem;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -31,8 +32,9 @@ public class CalibrationManager : MonoBehaviour
 
     private void CheckHitAccuracy(bool isPressed)
     {
-        if (!isPressed) return;
-        if (_hitCount >= _maxHitCount) return;
+        if (!isPressed
+            || _hitCount >= _maxHitCount
+            || EventSystem.current.IsPointerOverGameObject()) return;
 
         EchosCry.Sound.PlaySFX(tapSFX, this.transform, 0);
 
