@@ -26,7 +26,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0ba7c3e16b629174da5e3b220ea93a85, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0ba7c3e16b629174da5e3b220ea93a85, type: 3}
       propertyPath: m_LocalRotation.w
@@ -159,7 +159,7 @@ MonoBehaviour:
   inkJSON: {fileID: 4900000, guid: 1c966e2d45a89fb4e9f959ca5f9e2d46, type: 3}
   ToolTipPrefab: {fileID: 5435326603873152583, guid: 2368d443f59e53f4dbdf1ce2d1423114, type: 3}
   _inputTranslator: {fileID: 11400000, guid: da8057efcf3a45a47bb320ce196e8d61, type: 2}
-  _distanceCheck: 1
+  _distanceCheck: 2
 --- !u!65 &3866360474120129319
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -179,7 +179,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.5, y: 2.5, z: 2.5}
+  m_Size: {x: 3, y: 3, z: 3}
   m_Center: {x: 0, y: 1.25, z: 0}
 --- !u!1001 &9059522802503601795
 PrefabInstance:
@@ -205,6 +205,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: c377b6440037a544d9f3da89a3d9da24, type: 3}
+    - target: {fileID: 2777490805778018125, guid: 0d50f88ae7f3d5e4f90dda63bc35d732, type: 3}
+      propertyPath: range
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5602594005257015888, guid: 0d50f88ae7f3d5e4f90dda63bc35d732, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
