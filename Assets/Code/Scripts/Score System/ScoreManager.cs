@@ -52,6 +52,7 @@ public class ScoreManager : NonSpawnableSingleton<ScoreManager>
     }
     void OnDisable()
     {
+        ResetScore();
         UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnSceneLoaded;
     }
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -64,7 +65,7 @@ public class ScoreManager : NonSpawnableSingleton<ScoreManager>
         {
             foreach (WaveData wave in wm.AllWaves)
             {
-                topScore += wm.GetTotalEnemiesInWave(wave) * 1000;
+                topScore += wm.GetTotalEnemiesInWave(wave) * 1200;
             }
         }
         Debug.Log(topScore);

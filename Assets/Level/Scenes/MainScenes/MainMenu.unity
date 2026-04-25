@@ -556,6 +556,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50937df2aa7f77a418a96dcda154592a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  tapSFX: {fileID: 11400000, guid: 1bc36dd1aff413744ab35704623169a5, type: 2}
   _inputTranslator: {fileID: 11400000, guid: da8057efcf3a45a47bb320ce196e8d61, type: 2}
   _resultsText: {fileID: 1645726409}
   _continueButton: {fileID: 975472688}

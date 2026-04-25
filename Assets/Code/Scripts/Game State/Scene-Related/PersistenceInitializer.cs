@@ -17,7 +17,7 @@ public static class PersistenceInitializer
     {
         var currentScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
 
-        if (currentScene.name == "EndCreditsMenu" || currentScene.name == "MainMenu" || currentScene.name == "BeginningCutscene")
+        if (currentScene.name == SceneNames.Credits || currentScene.name == SceneNames.MainMenu || currentScene.name == SceneNames.Cutscene)
         {
             if (_persistenceRef != null)
             {

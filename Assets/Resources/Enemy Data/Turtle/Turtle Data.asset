@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Turtle Data
   m_EditorClassIdentifier: Echos Cry Core::EnemyData
   _distanceCheck: 10
-  _attackChargeTime: 0.4
+  _attackChargeTime: 1
   _attackDashForce: 0
   _attackDuration: 0
   _attackCooldown: 2

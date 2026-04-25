@@ -44,10 +44,10 @@ struct SpriteNode
         float goodPercent = TempoConductor.Instance.GoodPercent;
 
         if (BeatManager.Instance.BeatInMeasure == 0 && progress >= (1f - goodPercent)
-            || BeatManager.Instance.BeatInMeasure == 1 && progress <= goodPercent * 0.25f)
+            || BeatManager.Instance.BeatInMeasure == 1 && progress <= goodPercent * 0.5f)
             SetAttackIndicator(1);
         else if (BeatManager.Instance.BeatInMeasure == 2 && progress >= (1f - goodPercent)
-            || BeatManager.Instance.BeatInMeasure == 3 && progress <= goodPercent * 0.25f)
+            || BeatManager.Instance.BeatInMeasure == 3 && progress <= goodPercent * 0.5f)
             SetAttackIndicator(2);
         else
             SetAttackIndicator(0);

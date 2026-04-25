@@ -6,12 +6,17 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : NonSpawnableSingleton<GameManager>
 {
+    [SerializeField] private GameObject musicManager;
+
     public static event Action OnGameStartEvent;
     public static event Action OnGameOverEvent;
     public static event Action OnPlayerDeathEvent;
 
     private static int _maxPlayerLives = 2;
     public static int PlayerLives = _maxPlayerLives;
+
+    private bool _isGameOver = false;
+    public bool IsGameOver { get => _isGameOver; }
 
     private SceneManager _sceneManager;
     public SceneManager SceneManager { get => _sceneManager; }
@@ -21,25 +26,32 @@ public class GameManager : NonSpawnableSingleton<GameManager>
         _sceneManager = new();
     }
 
-    public static void GameStart()
+    public void GameStart()
     {
         OnGameStartEvent?.Invoke();
     }
 
-    public static void HandlePlayerDeath(Player player)
+    public void HandlePlayerDeath(Player player)
     {
         PlayerLives--;
         OnPlayerDeathEvent?.Invoke();
 
         if (PlayerLives <= 0)
         {
-            player.FullReset();
-            PlayerLives = _maxPlayerLives;
-            OnGameOverEvent?.Invoke();
+            _isGameOver = true;
+            //player.FullReset();
+            //PlayerLives = _maxPlayerLives;
+            //OnGameOverEvent?.Invoke();
         }
     }
     private void OnEnable()
     {
+        if (!GameObject.FindAnyObjectByType<BeatManager>())
+        {
+            GameObject musicManagerRef = UnityEngine.Object.Instantiate(musicManager);
+            UnityEngine.Object.DontDestroyOnLoad(musicManagerRef);
+        }
+
         _sceneManager.OnEnable();
     }
     private void OnDisable()
@@ -111,5 +123,5 @@ public class SceneNames
     public static readonly string Level5 = "LevelFiveScene";
     public static readonly string MainMenu = "MainMenu";
     public static readonly string Credits = "EndCreditsMenu";
-    public static readonly string Cutscene1 = "BeginningCutscene";
+    public static readonly string Cutscene = "IntroScene";
 }

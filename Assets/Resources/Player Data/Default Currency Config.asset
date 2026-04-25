@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a67b5665675e23408ce35a4b130c597, type: 3}
   m_Name: Default Currency Config
   m_EditorClassIdentifier: Assembly-CSharp::PlayerCurrencyConfig
-  _startingGoldCurrency: 999999
+  _startingGoldCurrency: 0

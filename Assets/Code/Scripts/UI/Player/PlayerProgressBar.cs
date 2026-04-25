@@ -23,12 +23,6 @@ public class PlayerProgressBar : MonoBehaviour
     private float targetFraction;
     private HealthSystem playerHealth = null;
 
-    private void Start()
-    {
-        UpdateLives();
-        
-    }
-
     void OnEnable()
     {
         if (healthChannel != null) healthChannel.Channel += UpdateBar;
@@ -60,9 +54,10 @@ public class PlayerProgressBar : MonoBehaviour
                 
                 //Debug.Log($"in progress bar curr armor: {playerHealth.CurrentArmor}, max plyr armor: {playerHealth.MaxArmor}");
                 UpdateBar(playerHealth.CurrentArmor, playerHealth.MaxArmor);
-            }
-                
+            }    
         }
+
+        UpdateLives();
     }
 
     void OnDisable()
