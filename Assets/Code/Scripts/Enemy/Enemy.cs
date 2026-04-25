@@ -28,9 +28,11 @@ public class Enemy : MonoBehaviour
     [SerializeField] private GameObject _deathEffect;
     [SerializeField] private EnemyData _data;
     [SerializeField] private EnemyHealthUI _enemyHealthUI;
+    [SerializeField] private StatsData _statsData;
     
     private EnemyStateHandler _stateHandler;
     private EnemyStateData _stateData;
+    private Stats _stats;
 
     public AttackInfo DeathInfo;
 
@@ -63,14 +65,15 @@ public class Enemy : MonoBehaviour
     public EnemyType EnemyType { get => _enemyType; }
     public EnemyStateHandler StateHandler { get => _stateHandler; set => _stateHandler = value; }
     public EnemyStateData StateData { get => _stateData; set => _stateData = value; }
+    public Stats Stats { get => _stats; }
 
     public int EnemySpawnerID;
 
    private void Awake()
     {   
+        //Static initialization
         _stateMachine ??= new();
         _stateCache ??= new();
-
         _initMethods ??= new()
         {
             {EnemyType.Bat, new BatInitMethod()},
@@ -83,6 +86,9 @@ public class Enemy : MonoBehaviour
         };
 
         _stateData = new();
+        
+        if (_statsData != null) _stats = new(_statsData);
+        else _stats = new();
 
         _initMethods[_enemyType].Execute(this);
     }
@@ -94,6 +100,7 @@ public class Enemy : MonoBehaviour
         
         ResetCollider();
         _health.ResetSystem();
+        _stats.Reset();
         _stateData.Reset();
         _enemyHealthUI.UpdateUI(_health.CurrentHealth, _health.MaxHealth, _health.CurrentArmor, _health.MaxArmor);
         _rigidbody.isKinematic = true;

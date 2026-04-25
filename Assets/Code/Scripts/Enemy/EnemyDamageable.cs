@@ -19,7 +19,7 @@ public class EnemyDamageable : MonoBehaviour, IDamageable
         
         _enemy.DeathInfo = attackData;
 
-        float damage = attackData.Damage * _enemy.Health.DamageMultiplier;
+        float damage = attackData.Damage * _enemy.Stats.DamageMultiplier;
 
         _enemy.Health.Damage(damage);
 

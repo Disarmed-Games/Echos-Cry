@@ -72,15 +72,4 @@ public class HealthSystem : MonoBehaviour
     {
         _currentArmor -= Mathf.Abs(damage);
     }
-
-    private float _damageMultiplier = 1f;
-    public float DamageMultiplier => _damageMultiplier;
-
-    //ISSUE: This should be moved somewhere else, doesn't seem appropriate in HealthSystem, 
-    //seems like it would be better in NPC Damageable so that the multiplier can be passed to damage already being done to enemy
-    //Either that or having another system that handles debuffs/damage multipliers for enemies or player
-    public void SetDamageMultiplier(float multiplier)
-    {
-        _damageMultiplier = multiplier;
-    }
 }

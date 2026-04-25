@@ -65,7 +65,7 @@ public class DamageMultiplierEffect : Effect
     {
         if (CheckHitChance())
         {
-            enemy.Health.SetDamageMultiplier(damageMultiplier);
+            enemy.Stats.DamageMultiplier *= damageMultiplier;
             enemy.StartCoroutine(ResetDamageMultiplier(duration, enemy));
         }
     }
@@ -77,6 +77,6 @@ public class DamageMultiplierEffect : Effect
     private IEnumerator ResetDamageMultiplier(float time, Enemy enemy)
     {
         yield return new WaitForSeconds(time);
-        enemy.Health.SetDamageMultiplier(1f);
+        enemy.Stats.DamageMultiplier /= damageMultiplier;
     }
 }
