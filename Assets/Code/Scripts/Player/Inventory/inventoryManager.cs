@@ -16,6 +16,7 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private InventoryDisplay _inventoryDisplay;
     [SerializeField] private InputTranslator _inputTranslator;
     [SerializeField] private soundEffect _useItemSound;
+    [SerializeField] private soundEffect _invalidItemSound;
 
     private Player _player;
 
@@ -66,18 +67,16 @@ public class InventoryManager : MonoBehaviour
     {
         if (inventoryList.Count <= 0 || inventoryList.Count <= index) return;
 
-        SoundEffectManager.Instance.Builder
-                .SetSound(_useItemSound)
-                .SetSoundPosition(PlayerRef.Transform.position)
-                .ValidateAndPlaySound();
-
         InventoryItem usedItem = inventoryList[index];
 
         if (usedItem.data.CanUse(_player))
         {
+            EchosCry.Sound.PlaySFX(_useItemSound, PlayerRef.Transform, 0);
             usedItem.data.Use(_player);
             Remove(usedItem.data);
         }
+        else
+            EchosCry.Sound.PlaySFX(_invalidItemSound, PlayerRef.Transform, 0);
     }
 
     public bool IsFull(InventoryItemData referenceData)

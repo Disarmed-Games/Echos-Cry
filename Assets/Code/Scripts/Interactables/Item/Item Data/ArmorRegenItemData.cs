@@ -13,5 +13,4 @@ public class ArmorRegenItemData : InventoryItemData
     {
         return true;
     }
-
 }
