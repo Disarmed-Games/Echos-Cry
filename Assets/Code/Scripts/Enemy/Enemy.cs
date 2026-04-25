@@ -37,7 +37,6 @@ public class Enemy : MonoBehaviour
     [Header("Strategies")]
     [SerializeField] private AttackMethod[] _attackStrats;
     [SerializeField] private TargetStrategy[]   _targetStrats;
-    [SerializeField] private MovementStrategy[] _movementStrats;
     [SerializeField] private ItemDropStrategy _drops;
 
     [Header("Event Channel (Subscriber)")]
@@ -59,7 +58,6 @@ public class Enemy : MonoBehaviour
     public EnemyHealthUI EnemyHealthUI { get => _enemyHealthUI; }
     public AttackMethod[] AttackStrategies { get => _attackStrats; }
     public TargetStrategy[] TargetStrategy { get => _targetStrats; }
-    public MovementStrategy[] MovementStrategy { get => _movementStrats; }
     public ItemDropStrategy DropsStrategy { get => _drops; }
     public EnemyData Data { get => _data; }
     public EnemyType EnemyType { get => _enemyType; }

@@ -37,7 +37,6 @@ public class DamageEffect : Effect
     public float damage = 2f;
     public override void Use(Enemy enemy, EffectHandler handler)
     {
-        Debug.Log("Effect 2");
         enemy.Health.Damage(damage);
 
         EchosCry.Sound.PlaySFX(enemy.SoundConfig.HitSFX, enemy.transform, 0);
@@ -64,7 +63,6 @@ public class DamageMultiplierEffect : Effect
 
     public override void Use(Enemy enemy, EffectHandler handler)
     {
-        Debug.Log("Effect 2");
         if (CheckHitChance())
         {
             enemy.Health.SetDamageMultiplier(damageMultiplier);

@@ -26,36 +26,38 @@ public class EffectHandler : MonoBehaviour
 
     [SerializeField] private Enemy enemyReference;
 
-    private readonly Dictionary<EchosCry.Effects, EffectNode> _activePassiveEffects = new();
+    private readonly Dictionary<EchosCry.Effects, EffectNode> _activeEffectData = new();
+    private readonly HashSet<EchosCry.Effects> _activeEffects = new();
 
     private void OnDisable()
     {
-        _activePassiveEffects.Clear();
+        _activeEffects.Clear();
+        _activeEffectData.Clear();
     }
 
     public void ApplyEffect(EffectData effect)
     {
-        EchosCry.Effects effectType = effect.EffectEnum;
-        Debug.Log(effectType);
+        EchosCry.Effects effectEnum = effect.EffectEnum;
 
-        if (_activePassiveEffects.ContainsKey(effectType)) //Check if effect active
+        if (_activeEffects.Contains(effectEnum)) //Check if effect active
         {
-            int newStack = _activePassiveEffects[effectType].stacks + 1; 
-            if (newStack > _activePassiveEffects[effectType].stacks) return; //If new stack count greater than max count, return
+            int newStack = _activeEffectData[effectEnum].stacks + 1; 
+            if (newStack > _activeEffectData[effectEnum].stacks) return; //If new stack count greater than max count, return
 
             Coroutine newRoutine = null;
-            if (_activePassiveEffects[effectType].coroutine != null)
+            if (_activeEffectData[effectEnum].coroutine != null)
             {
-                StopCoroutine(_activePassiveEffects[effectType].coroutine); //Stop prior routine interval if has it
+                StopCoroutine(_activeEffectData[effectEnum].coroutine); //Stop prior routine interval if has it
                 newRoutine = StartCoroutine(RoutineEffect(effect)); //Restart coroutine
             }
 
-            _activePassiveEffects.Remove(effectType);
-            _activePassiveEffects.Add(effectType, new EffectNode(newRoutine, newStack));
+            _activeEffectData.Remove(effectEnum);
+            _activeEffectData.Add(effectEnum, new EffectNode(newRoutine, newStack));
             return;
         }
 
-        _activePassiveEffects.Add(effectType, new EffectNode(null, 1)); //Add passive effect so it is registered to the dictionary to be checked
+        _activeEffects.Add(effectEnum); 
+
         StartCoroutine(EndRoutineEffect(effect));
 
         Coroutine routine = null;
@@ -68,18 +70,19 @@ public class EffectHandler : MonoBehaviour
             routine = StartCoroutine(RoutineEffect(effect));
         }
 
-        _activePassiveEffects[effectType] = new EffectNode(routine, 1);
+        _activeEffectData.Add(effectEnum, new EffectNode(routine, 1));
     }
 
     public void RemovePassiveEffect(EffectData effect)
     {
-        EchosCry.Effects type = effect.EffectEnum;
+        EchosCry.Effects effectEnum = effect.EffectEnum;
 
-        if (_activePassiveEffects[type].coroutine != null)
+        if (_activeEffectData[effectEnum].coroutine != null)
         {
-            StopCoroutine(_activePassiveEffects[type].coroutine);
+            StopCoroutine(_activeEffectData[effectEnum].coroutine);
         }
-        _activePassiveEffects.Remove(type);
+        _activeEffects.Remove(effectEnum);
+        _activeEffectData.Remove(effectEnum);
     }
 
     private IEnumerator EndRoutineEffect(EffectData effect)
@@ -90,7 +93,7 @@ public class EffectHandler : MonoBehaviour
 
     private IEnumerator RoutineEffect(EffectData effect)
     {
-        while (_activePassiveEffects.ContainsKey(effect.EffectEnum))
+        while (_activeEffects.Contains(effect.EffectEnum))
         {
             yield return new WaitForSeconds(effect.EffectUseInterval);
             
@@ -100,9 +103,9 @@ public class EffectHandler : MonoBehaviour
 
     public void UseEffect(EffectData effectData)
     {
+        //Use every effect attributed to effectData
         foreach (Effect effect in effectData.Effects)
         {
-            Debug.Log("Using effect");
             effect.Use(enemyReference, this);
         }
     }
