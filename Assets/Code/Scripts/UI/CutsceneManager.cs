@@ -1,3 +1,4 @@
+using AudioSystem;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -9,6 +10,8 @@ public class CutsceneManager : MonoBehaviour
     [SerializeField] private GameObject[] cutsceneObject;
     [SerializeField] private TextMeshProUGUI expositionText;
     [SerializeField] private float sceneWaitTime;
+    [SerializeField] private soundEffect slideSFX;
+    [SerializeField] private soundEffect screamsSFX;
 
     public void OnEnable()
     {
@@ -28,12 +31,16 @@ public class CutsceneManager : MonoBehaviour
         int count = 0;
         while (count < cutsceneObject.Length)
         {
-            yield return new WaitForSeconds(sceneWaitTime);
-            StartCoroutine(FadeOutImage(count));
+            if (count == 1) EchosCry.Sound.PlaySFX(screamsSFX, this.transform, 0);
+            EchosCry.Sound.PlaySFX(slideSFX, this.transform, 0);
+            expositionText.text = cutsceneObject[count].GetComponent<CutsceneText>().Text;
+            StartCoroutine(FadeInImage(count));
             count++;
+            yield return new WaitForSeconds(sceneWaitTime);
         }
+        UnityEngine.SceneManagement.SceneManager.LoadScene(SceneNames.Tutorial);
     }
-    IEnumerator FadeOutImage(int image)
+    IEnumerator FadeInImage(int image)
     {
         float elapsed = 0f;
         float duration = 1f;
@@ -43,10 +50,8 @@ public class CutsceneManager : MonoBehaviour
             elapsed += Time.deltaTime;
             float t = elapsed / duration;
 
-            cutsceneObject[image].GetComponent<CanvasGroup>().alpha = Mathf.Lerp(1f, 0f, t);
+            cutsceneObject[image].GetComponent<CanvasGroup>().alpha = Mathf.Lerp(0f, 1f, t);
             yield return null;
         }
-
-        expositionText.text = cutsceneObject[image].GetComponent<CutsceneText>().Text;
     }
 }

@@ -1567,7 +1567,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2158403951494366317, guid: c207864393097ac4d8958f8cf4331e56, type: 3}
       propertyPath: m_text
-      value: Fallenoak North
+      value: Fallenoak - N
       objectReference: {fileID: 0}
     - target: {fileID: 2158403951494366317, guid: c207864393097ac4d8958f8cf4331e56, type: 3}
       propertyPath: m_fontSize

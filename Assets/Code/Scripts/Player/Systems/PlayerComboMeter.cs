@@ -11,7 +11,7 @@ public class PlayerComboMeter : MonoBehaviour
     [SerializeField] private InputTranslator _inputTranslator;
 
     private float _comboMeterDrainRate = 10f;
-    private float _comboDrainDelay = 5f;
+    private float _comboDrainDelay = 8f;
     private float _comboMeterAmount = 0;
     private float _comboBaseIncrease = 2f;
     private float _comboBaseDecrease = 20f;

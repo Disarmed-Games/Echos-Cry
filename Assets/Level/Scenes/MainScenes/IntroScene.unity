@@ -174,7 +174,7 @@ PrefabInstance:
     - target: {fileID: 8789275272379938032, guid: a3f10936ac1cbb44eaabfdc22b435d03, type: 3}
       propertyPath: song
       value: 
-      objectReference: {fileID: 8300000, guid: fa5ac7196b9917f448c452a373cef33f, type: 3}
+      objectReference: {fileID: 8300000, guid: 41ed58899eebff64c890b954823f9bb2, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -262,6 +262,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1017388416}
     m_Modifications:
+    - target: {fileID: 252109370183578809, guid: a37415a1292df9245940773ffdc6b8a4, type: 3}
+      propertyPath: text
+      value: While young Echo was cleaning his cellar, he chanced upon a clarinet
+        and with it, perhaps, the means to restore peace to his shattered world.
+      objectReference: {fileID: 0}
     - target: {fileID: 3862440350256192616, guid: a37415a1292df9245940773ffdc6b8a4, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -348,6 +353,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5268002537285094631, guid: a37415a1292df9245940773ffdc6b8a4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8511886877532977082, guid: a37415a1292df9245940773ffdc6b8a4, type: 3}
+      propertyPath: m_Alpha
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -482,11 +491,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   cutsceneObject:
-  - {fileID: 507963243}
-  - {fileID: 2034995566}
   - {fileID: 325779572}
+  - {fileID: 2034995566}
+  - {fileID: 507963243}
   expositionText: {fileID: 920577161}
   sceneWaitTime: 10
+  slideSFX: {fileID: 11400000, guid: e20c9a5c30861824d897c64150b8327c, type: 2}
+  screamsSFX: {fileID: 11400000, guid: 343dda8f240f1e04fb72eb3eacc133fa, type: 2}
 --- !u!1 &920577159
 GameObject:
   m_ObjectHideFlags: 0
@@ -498,6 +509,7 @@ GameObject:
   - component: {fileID: 920577160}
   - component: {fileID: 920577162}
   - component: {fileID: 920577161}
+  - component: {fileID: 920577163}
   m_Layer: 5
   m_Name: ExpositionText
   m_TagString: Untagged
@@ -519,9 +531,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 497626368}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 960, y: -1031.127}
   m_SizeDelta: {x: 1024, y: 128}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &920577161
@@ -544,7 +556,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Hello World.
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: caafb0e39abac1f42bc58ea30b28ade9, type: 2}
   m_sharedMaterial: {fileID: 3582427398192158066, guid: caafb0e39abac1f42bc58ea30b28ade9, type: 2}
@@ -574,7 +586,7 @@ MonoBehaviour:
   m_fontSize: 48
   m_fontSizeBase: 48
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 2
@@ -623,6 +635,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 920577159}
   m_CullTransparentMesh: 1
+--- !u!114 &920577163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 920577159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.ContentSizeFitter
+  m_HorizontalFit: 0
+  m_VerticalFit: 0
 --- !u!1 &942125958
 GameObject:
   m_ObjectHideFlags: 0
@@ -740,6 +766,63 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1920, y: 864}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1001 &1241324660
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3511404713060042568, guid: 4d1aae933e2db804c8b7f0ae6fa88728, type: 3}
+      propertyPath: m_Name
+      value: MusicManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 6600554860785283334, guid: 4d1aae933e2db804c8b7f0ae6fa88728, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 629.81354
+      objectReference: {fileID: 0}
+    - target: {fileID: 6600554860785283334, guid: 4d1aae933e2db804c8b7f0ae6fa88728, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 413.76755
+      objectReference: {fileID: 0}
+    - target: {fileID: 6600554860785283334, guid: 4d1aae933e2db804c8b7f0ae6fa88728, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3.59537
+      objectReference: {fileID: 0}
+    - target: {fileID: 6600554860785283334, guid: 4d1aae933e2db804c8b7f0ae6fa88728, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6600554860785283334, guid: 4d1aae933e2db804c8b7f0ae6fa88728, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6600554860785283334, guid: 4d1aae933e2db804c8b7f0ae6fa88728, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6600554860785283334, guid: 4d1aae933e2db804c8b7f0ae6fa88728, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6600554860785283334, guid: 4d1aae933e2db804c8b7f0ae6fa88728, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6600554860785283334, guid: 4d1aae933e2db804c8b7f0ae6fa88728, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6600554860785283334, guid: 4d1aae933e2db804c8b7f0ae6fa88728, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4d1aae933e2db804c8b7f0ae6fa88728, type: 3}
 --- !u!1 &1587374983
 GameObject:
   m_ObjectHideFlags: 0
@@ -960,6 +1043,12 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1017388416}
     m_Modifications:
+    - target: {fileID: 252109370183578809, guid: a37415a1292df9245940773ffdc6b8a4, type: 3}
+      propertyPath: text
+      value: "Drawn by the town\u2019s music, the demons descended upon the people
+        to wreak havoc. As the last of them fled or fell, an eerie silence settled
+        over Fallenoak."
+      objectReference: {fileID: 0}
     - target: {fileID: 3862440350256192616, guid: a37415a1292df9245940773ffdc6b8a4, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -1048,6 +1137,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8511886877532977082, guid: a37415a1292df9245940773ffdc6b8a4, type: 3}
+      propertyPath: m_Alpha
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1107,6 +1200,12 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1017388416}
     m_Modifications:
+    - target: {fileID: 252109370183578809, guid: a37415a1292df9245940773ffdc6b8a4, type: 3}
+      propertyPath: text
+      value: Fallenoak had once been a place of lively refinement, its square filled
+        with music and gentel company until the earth split open. From a fire-lit
+        chasm arose unspeakable demons.
+      objectReference: {fileID: 0}
     - target: {fileID: 4661042279230515849, guid: a37415a1292df9245940773ffdc6b8a4, type: 3}
       propertyPath: m_Name
       value: CutsceneImage
@@ -1191,6 +1290,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8511886877532977082, guid: a37415a1292df9245940773ffdc6b8a4, type: 3}
+      propertyPath: m_Alpha
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1200,6 +1303,7 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 1241324660}
   - {fileID: 321538375}
   - {fileID: 581383070}
   - {fileID: 942125961}
