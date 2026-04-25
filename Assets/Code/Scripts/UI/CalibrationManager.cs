@@ -1,3 +1,4 @@
+using AudioSystem;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -6,6 +7,7 @@ using UnityEngine.UI;
 
 public class CalibrationManager : MonoBehaviour
 {
+    [SerializeField] private soundEffect tapSFX;
     [SerializeField] private InputTranslator _inputTranslator;
     [SerializeField] private TextMeshProUGUI _resultsText;
     [SerializeField] private Button _continueButton;
@@ -31,6 +33,8 @@ public class CalibrationManager : MonoBehaviour
     {
         if (!isPressed) return;
         if (_hitCount >= _maxHitCount) return;
+
+        EchosCry.Sound.PlaySFX(tapSFX, this.transform, 0);
 
         //Debug.Log(_currentBeatProgress);
         float distanceFromBeat = Mathf.Min(_currentBeatProgress, 1f - _currentBeatProgress);
