@@ -12,7 +12,7 @@ public class WeaponCollider : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent<PassiveEffectHandler>(out PassiveEffectHandler passiveEffectHandler))
+        if (other.TryGetComponent<EffectHandler>(out EffectHandler passiveEffectHandler))
         {
             if (PlayerComboMeter.CurrentMeterState == PlayerComboMeter.MeterState.OneThird)
                 passiveEffectHandler.UsePassiveEffect(_weaponContext.CurrentAttackData.PassiveEffects.OneThirdEffect);

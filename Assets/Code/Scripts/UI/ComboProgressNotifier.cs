@@ -7,7 +7,7 @@ public class ComboProgressNotifier : MonoBehaviour, IPointerEnterHandler, IPoint
 {
     [SerializeField] private TextMeshProUGUI _notificationText;
     [SerializeField] private Image _iconImage;
-    private PassiveEffect currentPassive;
+    private EffectData currentPassive;
     private bool messageStarted = false;
 
     void Start()
@@ -19,7 +19,7 @@ public class ComboProgressNotifier : MonoBehaviour, IPointerEnterHandler, IPoint
     {
         PlayerComboMeter.OnComboMeterPassiveUnlocked -= UpdateNotification;
     }
-    private void UpdateNotification(PassiveEffect effect)
+    private void UpdateNotification(EffectData effect)
     {
         currentPassive = effect;
 
@@ -37,8 +37,8 @@ public class ComboProgressNotifier : MonoBehaviour, IPointerEnterHandler, IPoint
         else
         {
             _iconImage.enabled = true;
-            _iconImage.sprite = currentPassive.effectIcon;
-            _notificationText.text = currentPassive.effectName;
+            _iconImage.sprite = currentPassive.EffectIcon;
+            _notificationText.text = currentPassive.EffectName;
         } 
     }
 
@@ -47,7 +47,7 @@ public class ComboProgressNotifier : MonoBehaviour, IPointerEnterHandler, IPoint
         if (currentPassive != null)
         {
             messageStarted = true;
-            UITip.Instance.StartMessage(currentPassive.effectDescription);
+            UITip.Instance.StartMessage(currentPassive.EffectDescription);
         }
     }
 

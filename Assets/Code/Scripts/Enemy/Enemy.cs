@@ -24,7 +24,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private EnemyAnimator _enemyAnimator;
     [SerializeField] private EnemySoundConfig _soundConfig;
     [SerializeField] private Collider _collider;
-    [SerializeField] private PassiveEffectHandler _passiveEffectHandler;
+    [SerializeField] private EffectHandler _passiveEffectHandler;
     [SerializeField] private GameObject _deathEffect;
     [SerializeField] private EnemyData _data;
     [SerializeField] private EnemyHealthUI _enemyHealthUI;
@@ -55,7 +55,7 @@ public class Enemy : MonoBehaviour
     public EnemyAnimator EnemyAnimator { get => _enemyAnimator; }
     public EnemySoundConfig SoundConfig { get => _soundConfig; }
     public Collider Collider { get => _collider; }
-    public PassiveEffectHandler PassiveEffectHandler { get => _passiveEffectHandler; }
+    public EffectHandler PassiveEffectHandler { get => _passiveEffectHandler; }
     public EnemyHealthUI EnemyHealthUI { get => _enemyHealthUI; }
     public AttackMethod[] AttackStrategies { get => _attackStrats; }
     public TargetStrategy[] TargetStrategy { get => _targetStrats; }

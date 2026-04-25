@@ -21,7 +21,7 @@ public class PlayerComboMeter : MonoBehaviour
     private bool _isDraining = false;
 
     public static event Action<float, float> OnComboMeterChangeEvent;
-    public static event Action<PassiveEffect> OnComboMeterPassiveUnlocked;
+    public static event Action<EffectData> OnComboMeterPassiveUnlocked;
     public float ComboMeterAmount { get { return _comboMeterAmount; } }
 
     public enum MeterState
