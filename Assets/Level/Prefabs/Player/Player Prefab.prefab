@@ -15260,7 +15260,6 @@ GameObject:
   - component: {fileID: 4484604223191530329}
   - component: {fileID: 4710593916071543663}
   - component: {fileID: 7282090404085320965}
-  - component: {fileID: 6527782957679665622}
   m_Layer: 10
   m_Name: Player Prefab
   m_TagString: Player
@@ -15447,20 +15446,6 @@ MonoBehaviour:
   player: {fileID: 1520755955600332291}
   flameEffect: {fileID: 11400000, guid: 3a440bd36af11cc4a99be37318f963d4, type: 2}
   _flameEvent: {fileID: 11400000, guid: ebb716e1030fb8043b176d7335203b25, type: 2}
---- !u!114 &6527782957679665622
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2428720641269041060}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 422f4f54c0048aa4bbc14caff91e1def, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Echos Cry Core::TestingEffects
-  channel: {fileID: 11400000, guid: ebb716e1030fb8043b176d7335203b25, type: 2}
-  adding: 0
 --- !u!1 &3006569362082907649
 GameObject:
   m_ObjectHideFlags: 0
