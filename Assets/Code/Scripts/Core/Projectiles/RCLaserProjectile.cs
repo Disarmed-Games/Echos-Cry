@@ -31,7 +31,7 @@ public class RCLaserProjectile : AttackMethod
     {
         while (true)
         {
-            if (_attackEnded) yield return null;
+            if (_attackEnded) yield break;
 
             rayLength += raySpeed * Time.deltaTime;
             rayLength = Mathf.Min(rayLength, maxRayLength);
