@@ -22,15 +22,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: aeccacb89c6ce4c4d9c74479818a760e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 12.630004
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: aeccacb89c6ce4c4d9c74479818a760e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.06304932
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: aeccacb89c6ce4c4d9c74479818a760e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -5.8923016
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: aeccacb89c6ce4c4d9c74479818a760e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -134,23 +134,21 @@ LODGroup:
   m_GameObject: {fileID: 511243387901254305}
   serializedVersion: 2
   m_LocalReferencePoint: {x: -0.21163082, y: 14.282216, z: 0.11177158}
-  m_Size: 28.564432
+  m_Size: 1
   m_FadeMode: 0
   m_AnimateCrossFading: 0
   m_LastLODIsBillboard: 0
   m_LODs:
-  - screenRelativeHeight: 0.6
+  - screenRelativeHeight: 0
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 2024563020380814196}
-  - screenRelativeHeight: 0.3
+  - screenRelativeHeight: 0
     fadeTransitionWidth: 0
-    renderers:
-    - renderer: {fileID: 2024563020380814196}
-  - screenRelativeHeight: 0.1
+    renderers: []
+  - screenRelativeHeight: 0
     fadeTransitionWidth: 0
-    renderers:
-    - renderer: {fileID: 2024563020380814196}
+    renderers: []
   m_Enabled: 1
 --- !u!23 &2024563020380814196 stripped
 MeshRenderer:
