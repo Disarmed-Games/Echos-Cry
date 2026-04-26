@@ -28,8 +28,6 @@ public class EffectHandler : MonoBehaviour
         }
     }
 
-    [SerializeField] private Enemy enemyReference;
-
     private readonly Dictionary<EchosCry.Effects, EffectNode> _activeEffectData = new();
     private readonly HashSet<EchosCry.Effects> _activeEffects = new();
 
@@ -39,7 +37,7 @@ public class EffectHandler : MonoBehaviour
         _activeEffectData.Clear();
     }
 
-    public void ApplyEffect(EffectData effect)
+    public void ApplyEffect(EffectData effect, Enemy enemy)
     {
         EchosCry.Effects effectEnum = effect.EffectEnum;
 
@@ -52,7 +50,7 @@ public class EffectHandler : MonoBehaviour
             if (_activeEffectData[effectEnum].coroutine != null)
             {
                 StopCoroutine(_activeEffectData[effectEnum].coroutine); //Stop prior routine interval if has it
-                newRoutine = StartCoroutine(RoutineEffect(effect)); //Restart coroutine
+                newRoutine = StartCoroutine(RoutineEffect(effect, enemy)); //Restart coroutine
             }
 
             _activeEffectData.Remove(effectEnum);
@@ -67,11 +65,11 @@ public class EffectHandler : MonoBehaviour
         Coroutine routine = null;
         if(effect.IsEffectUseOneTime) 
         {
-            UseEffect(effect, 1); //Use once if only one time use
+            UseEffect(effect, enemy, 1); //Use once if only one time use
         }
         else
         {
-            routine = StartCoroutine(RoutineEffect(effect)); //Else start coroutine
+            routine = StartCoroutine(RoutineEffect(effect, enemy)); //Else start coroutine
         }
 
         _activeEffectData.Add(effectEnum, new EffectNode(routine, 1)); //Add to activeEffectData
@@ -95,22 +93,22 @@ public class EffectHandler : MonoBehaviour
         RemovePassiveEffect(effect);
     }
 
-    private IEnumerator RoutineEffect(EffectData effect)
+    private IEnumerator RoutineEffect(EffectData effect, Enemy enemy)
     {
         while (_activeEffects.Contains(effect.EffectEnum))
         {
             yield return new WaitForSeconds(effect.EffectUseInterval);
             
-            UseEffect(effect, _activeEffectData[effect.EffectEnum].stacks);
+            UseEffect(effect, enemy, _activeEffectData[effect.EffectEnum].stacks);
         }
     }
 
-    public void UseEffect(EffectData effectData, int stackCount)
+    private void UseEffect(EffectData effectData, Enemy enemy, int stackCount)
     {
         //Use every effect attributed to effectData
         foreach (Effect effect in effectData.Effects)
         {
-            effect.Use(enemyReference, this, stackCount);
+            effect.Use(enemy, this, stackCount);
         }
     }
 }

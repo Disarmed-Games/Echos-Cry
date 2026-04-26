@@ -79,15 +79,15 @@ public class EnemyDamageable : MonoBehaviour, IDamageable
             {
                 case EchosCry.EffectTier.One:
                     if (PlayerComboMeter.CurrentMeterState != PlayerComboMeter.MeterState.Starting)
-                        _enemy.PassiveEffectHandler.ApplyEffect(effect);
+                        _enemy.PassiveEffectHandler.ApplyEffect(effect, _enemy);
                     break;
                 case EchosCry.EffectTier.Two:
                     if (PlayerComboMeter.CurrentMeterState >= PlayerComboMeter.MeterState.TwoThirds)
-                        _enemy.PassiveEffectHandler.ApplyEffect(effect);
+                        _enemy.PassiveEffectHandler.ApplyEffect(effect, _enemy);
                     break;
                 case EchosCry.EffectTier.Three:
                     if (PlayerComboMeter.CurrentMeterState == PlayerComboMeter.MeterState.Full)
-                        _enemy.PassiveEffectHandler.ApplyEffect(effect);
+                        _enemy.PassiveEffectHandler.ApplyEffect(effect, _enemy);
                     break;
             }
         }
