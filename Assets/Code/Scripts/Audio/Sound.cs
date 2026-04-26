@@ -5,12 +5,12 @@ namespace EchosCry
 {
     public class Sound 
     {
-        public static void PlaySFX(soundEffect sfx, Transform origin, float time)
+        public static void PlaySFX(soundEffect sfx, Transform origin, float delay)
         {
             SoundEffectManager.Instance.Builder
             .SetSound(sfx)
             .SetSoundPosition(origin.position)
-            .SetDelay(time)
+            .SetDelay(delay)
             .ValidateAndPlaySound();
         }
         public static void PlayHitSound(SFXConfig sounds, TempoConductor.HitQuality currentHit, Transform origin)

@@ -26,7 +26,7 @@ public class PlayerComboMeter : MonoBehaviour
 
     public enum MeterState
     {
-        Starting,
+        Starting = 0,
         OneThird,
         TwoThirds,
         Full
@@ -96,9 +96,8 @@ public class PlayerComboMeter : MonoBehaviour
     }
     private void UpdateComboMeterState()
     {
-        if (playerRef.WeaponHolder.CurrentlyEquippedWeapon.CurrentAttackData == null) return;
-
-        ThreePassiveEffects currentPassives = playerRef.WeaponHolder.CurrentlyEquippedWeapon.CurrentAttackData.PassiveEffects;
+        //if (playerRef.WeaponHolder.CurrentlyEquippedWeapon._currentAttackData == null) return;
+        //ThreePassiveEffects currentPassives = playerRef.WeaponHolder.CurrentlyEquippedWeapon.CurrentAttackData.PassiveEffects;
 
         float progress = _comboMeterAmount / _comboMeterMax;
         float oneThird = .33f;
@@ -112,17 +111,17 @@ public class PlayerComboMeter : MonoBehaviour
         else if (progress >= oneThird && progress < twoThirds)
         {
             _currentMeterState = MeterState.OneThird;
-            OnComboMeterPassiveUnlocked?.Invoke(currentPassives.OneThirdEffect);
+            //OnComboMeterPassiveUnlocked?.Invoke(currentPassives.OneThirdEffect);
         } 
         else if (progress >= twoThirds && progress < 1f)
         {
             _currentMeterState = MeterState.TwoThirds;
-            OnComboMeterPassiveUnlocked?.Invoke(currentPassives.TwoThirdsEffect);
+            //OnComboMeterPassiveUnlocked?.Invoke(currentPassives.TwoThirdsEffect);
         }  
         else
         {
             _currentMeterState = MeterState.Full;
-            OnComboMeterPassiveUnlocked?.Invoke(currentPassives.FullEffect);
+            //OnComboMeterPassiveUnlocked?.Invoke(currentPassives.FullEffect);
         }  
     }
 

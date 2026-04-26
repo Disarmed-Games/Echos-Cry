@@ -15,7 +15,6 @@ public class Enemy : MonoBehaviour
     [SerializeField] private EnemyType _enemyType = EnemyType.Bat;
 
     private bool IsPooled => _pool != null;
-    public bool Invulnerable { get; set; } = false;
 
     [Header("Enemy-Related Components")]
     [SerializeField] private HealthSystem _health;

@@ -20,7 +20,7 @@ public class SpikeAttack : RangedAttack
 
     protected override IEnumerator ProjectileAttack(float damage, Vector3 direction, Transform origin)
     {
-        _enemy.Invulnerable = true;
+        _enemy.Health.IsInvincible = true;
 
         int count = 0;
         while (count < _projectileCount)
@@ -35,7 +35,7 @@ public class SpikeAttack : RangedAttack
         }
 
         yield return new WaitForSeconds(invincibleCooldown);
-        _enemy.Invulnerable = false;
+        _enemy.Health.IsInvincible = false;
         _attackEnded = true;
     }
 }

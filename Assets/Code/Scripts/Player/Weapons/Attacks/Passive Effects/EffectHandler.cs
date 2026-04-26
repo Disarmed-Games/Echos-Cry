@@ -7,7 +7,11 @@ namespace EchosCry
 {
     public enum Effects
     {
-        Bleed, MarkForDeath, Critical
+        None, Bleed, MarkForDeath, Critical, Flame
+    }
+    public enum EffectTier
+    {
+        One, Two, Three
     }
 }
 
@@ -42,7 +46,7 @@ public class EffectHandler : MonoBehaviour
         if (_activeEffects.Contains(effectEnum)) //Check if effect active
         {
             int newStack = _activeEffectData[effectEnum].stacks + 1; 
-            if (newStack > _activeEffectData[effectEnum].stacks) return; //If new stack count greater than max count, return
+            if (newStack > effect.MaxStacks) return; //If new stack count greater than max count, return
 
             Coroutine newRoutine = null;
             if (_activeEffectData[effectEnum].coroutine != null)
@@ -56,21 +60,21 @@ public class EffectHandler : MonoBehaviour
             return;
         }
 
-        _activeEffects.Add(effectEnum); 
+        _activeEffects.Add(effectEnum); //Add effect to active effects
 
-        StartCoroutine(EndRoutineEffect(effect));
+        StartCoroutine(EndRoutineEffect(effect)); //Start coroutine for effect duration
 
         Coroutine routine = null;
         if(effect.IsEffectUseOneTime) 
         {
-            UseEffect(effect);
+            UseEffect(effect, 1); //Use once if only one time use
         }
         else
         {
-            routine = StartCoroutine(RoutineEffect(effect));
+            routine = StartCoroutine(RoutineEffect(effect)); //Else start coroutine
         }
 
-        _activeEffectData.Add(effectEnum, new EffectNode(routine, 1));
+        _activeEffectData.Add(effectEnum, new EffectNode(routine, 1)); //Add to activeEffectData
     }
 
     public void RemovePassiveEffect(EffectData effect)
@@ -97,16 +101,16 @@ public class EffectHandler : MonoBehaviour
         {
             yield return new WaitForSeconds(effect.EffectUseInterval);
             
-            UseEffect(effect);
+            UseEffect(effect, _activeEffectData[effect.EffectEnum].stacks);
         }
     }
 
-    public void UseEffect(EffectData effectData)
+    public void UseEffect(EffectData effectData, int stackCount)
     {
         //Use every effect attributed to effectData
         foreach (Effect effect in effectData.Effects)
         {
-            effect.Use(enemyReference, this);
+            effect.Use(enemyReference, this, stackCount);
         }
     }
 }

@@ -6121,7 +6121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bad69f5cc54697b4092c9095bc8d96d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponCollider
-  _weaponContext: {fileID: 1423634244738665547}
+  _weaponContext: {fileID: 0}
 --- !u!135 &7863098072516889262
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -6241,7 +6241,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8474684134448079835}
-  - component: {fileID: 1423634244738665547}
+  - component: {fileID: 4991933029243496479}
   - component: {fileID: 2358810359375941040}
   - component: {fileID: 3010039756392889669}
   m_Layer: 0
@@ -6270,7 +6270,7 @@ Transform:
   - {fileID: 1620220025848709498}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1423634244738665547
+--- !u!114 &4991933029243496479
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6279,13 +6279,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 9140038939595962721}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53ab3a6cab3f8a44599b4cb4dc61d137, type: 3}
+  m_Script: {fileID: 11500000, guid: 8db2965048fdbc544b2500d085e2027f, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ComboWeapon
+  m_EditorClassIdentifier: Echos Cry Core::Weapon
   _attackAnimator: {fileID: 2358810359375941040}
   _weaponCollider: {fileID: 7182362231579992798}
-  _playerAttackDamage: {fileID: 0}
-  CurrentAttackData: {fileID: 0}
   _comboWeaponData: {fileID: 11400000, guid: 4aa5959af4f42e44382577bd6d90a5c8, type: 2}
 --- !u!95 &2358810359375941040
 Animator:

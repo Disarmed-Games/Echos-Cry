@@ -78,7 +78,7 @@ public class PlayerHealth : MonoBehaviour
         _healthSystem.Damage(damage);
 
         if (DamageLabelManager.Instance != null && DamageLabelManager.Instance.isActiveAndEnabled)
-            DamageLabelManager.Instance.SpawnPopup(damage, PlayerRef.Transform.position, Color.red);
+            DamageLabelManager.Instance.SpawnPopup(damage, Player.Instance.transform.position, Color.red);
 
         PauseHealthRegen();
 
@@ -91,7 +91,7 @@ public class PlayerHealth : MonoBehaviour
         //Debug.Log($"invoking current health as: {_healthSystem.CurrentHealth} and max health as: {_healthSystem.MaxHealth}");
 
         if (DamageLabelManager.Instance != null && DamageLabelManager.Instance.isActiveAndEnabled)
-            DamageLabelManager.Instance.SpawnPopup(amount, PlayerRef.Transform.position, Color.green);
+            DamageLabelManager.Instance.SpawnPopup(amount, Player.Instance.transform.position, Color.green);
 
         _healthSystem.HealHealth(amount);
         _healthChannel.Invoke(_healthSystem.CurrentHealth, _healthSystem.MaxHealth);
@@ -101,7 +101,7 @@ public class PlayerHealth : MonoBehaviour
         //Debug.Log($"Healing armor by amount: ${amount}");
         //Debug.Log($"invoking current armor as: {_healthSystem.CurrentArmor} and max armor as: {_healthSystem.MaxArmor}");
         if (DamageLabelManager.Instance != null && DamageLabelManager.Instance.isActiveAndEnabled)
-            DamageLabelManager.Instance.SpawnPopup(amount, PlayerRef.Transform.position, Color.blue);
+            DamageLabelManager.Instance.SpawnPopup(amount, Player.Instance.transform.position, Color.blue);
 
         _healthSystem.HealArmor(amount);
         _armorChannel.Invoke(_healthSystem.CurrentArmor, _healthSystem.MaxArmor);

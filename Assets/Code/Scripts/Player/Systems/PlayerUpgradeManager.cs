@@ -1,14 +1,8 @@
 using UnityEngine;
 
-public class PlayerStats : MonoBehaviour
+public class PlayerUpgradeManager : MonoBehaviour
 {
-    [Header("Player Systems")]
-    [SerializeField] PlayerMovement _movement;
-    [SerializeField] PlayerHealth _health;
-    [SerializeField] AbilityManager _abilities;
-    [SerializeField] PlayerAttackDamage _playerAttackDamage;
-    [SerializeField] PlayerKnockback _playerKnockback;
-    [SerializeField] HeatGauge _heatGauge;
+    [SerializeField] Player player;
 
     [Header("Event Channels (Subscribers)")]
     [SerializeField] EventChannel _upgradeDamageChannel;
@@ -58,74 +52,55 @@ public class PlayerStats : MonoBehaviour
     //Currently using unmutable variables but will eventually change to handle configuration or scaling upgrades eventually
     void UpgradeBaseDamageMultiplier()
     {
-        if (_playerAttackDamage != null)
-        {
-            _playerAttackDamage.BaseDamageMultiplier *= 1.1f;
-        }
+        player.Stats.DamageMultiplier *= 1.1f;
     }
     void UpgradeDashSpeed()
     {
-        if (_movement != null) _movement.DashSpeed *= 1.15f;
+        player.Movement.DashSpeed *= 1.15f;
     }
     void UpgradeDashCount()
     {
-        if (_movement != null)
-        {
-            _movement.DashCount++;
-            _movement.DashMaxCount++;
-        }
+        player.Movement.DashCount++;
+        player.Movement.DashMaxCount++;
     }
     void UpgradeDashCooldown()
     {
-        if (_movement != null) _movement.DashCooldown *= 0.80f;
+        player.Movement.DashCooldown *= 0.80f;
     }
     void UpgradeMoveSpeed()
     {
-        if (_movement != null) _movement.MoveSpeed *= 1.1f;
+        player.Movement.MoveSpeed *= 1.1f;
     }
     void UpgradeMaxHealth()
     {
-        if (_health != null)
-        {
-            _health.IncreaseMaxHealth(5f);
-        }
+        player.Health.IncreaseMaxHealth(5f);
+        player.Health.HealHealth(5f);
     }
     void UpgradeMaxArmor()
     {
-        if (_health != null)
-        {
-            _health.IncreaseMaxArmor(5f);
-        }
+        player.Health.IncreaseMaxArmor(5f);
+        player.Health.HealArmor(5f);
     }
     void UpgradeHealthRegen()
     {
-        if (_health != null)
-        {
-            _health.RegenHealthAmount++;
-            _health.EnableHealthRegen();
-        }    
+        player.Health.RegenHealthAmount++;
+        player.Health.EnableHealthRegen();
     }
     void UpgradeArmorRegen()
     {
-        if (_health != null)
-        {
-            _health.RegenArmorAmount++;
-            _health.EnableArmorRegen();
-        }
+        player.Health.RegenArmorAmount++;
+        player.Health.EnableArmorRegen();
     }
     void UpgradeDashAttack()
     {
-        _abilities.AddDashAttack();
+        player.Abilities.AddDashAttack();
     }
     void UpgradeKnockback()
     {
-        if (_playerKnockback != null)
-        {
-            _playerKnockback.BaseKnockbackMultiplier *= 1.15f;
-        }
+        player.Stats.KnockbackMultiplier *= 1.15f;
     }
     void UpgradeHeatGauge()
     {
-        _heatGauge.AddCharges(1);
+        player.HeatGauge.AddCharges(1);
     }
 }

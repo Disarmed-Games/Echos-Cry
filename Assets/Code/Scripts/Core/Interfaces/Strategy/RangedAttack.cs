@@ -33,7 +33,7 @@ public class RangedAttack : AttackMethod
         int count = 0;
         while(count < _projectileCount)
         {
-            Vector3 attackDirection = (PlayerRef.Transform.position - origin.position).normalized;
+            Vector3 attackDirection = (Player.Instance.transform.position - origin.position).normalized;
             _rb.AddForce(-attackDirection * _blowbackForce, ForceMode.Impulse);
             ShootProjectile(origin, attackDirection, damage);
             count++;

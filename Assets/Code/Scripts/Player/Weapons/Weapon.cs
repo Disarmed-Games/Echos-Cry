@@ -3,77 +3,99 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using EchosCry.Combo;
 
-public abstract class Weapon : MonoBehaviour
+public class Weapon : MonoBehaviour
 {
-    [SerializeField] protected Animator _attackAnimator;
-    [SerializeField] protected WeaponCollider _weaponCollider;
-    [SerializeField] protected PlayerAttackDamage _playerAttackDamage;
-    [SerializeField] protected PlayerKnockback _playerKnockback;
+    [SerializeField] private Animator _attackAnimator;
+    [SerializeField] private WeaponCollider _weaponCollider;
+    [SerializeField] private ComboWeaponData _comboWeaponData;
+    
+    private AttackData _currentAttackData;
+    private ComboTree _comboTree;
 
-    protected RuntimeAnimatorController _defaultAnimatorController;
+    private RuntimeAnimatorController _defaultAnimatorController;
+    private string _animationClipName;
 
-    [HideInInspector]
-    public AttackData CurrentAttackData;
     public bool IsAttackEnded { get; private set; }
+    public WeaponCollider Collider { get { return _weaponCollider; } }
 
-    public struct ColliderInfo
+    public void PrimaryAction(Stats multipliers)
     {
-        public Collider collider;
-        public TempoConductor.HitQuality hit;
+        SetChildrenActive(true);
+        _weaponCollider.ClearColliderList();
+        IsAttackEnded = false;
+        
+        _currentAttackData = _comboTree.ProcessPrimaryAction().AttackData;
+
+        EchosCry.Sound.PlaySFX(_currentAttackData.AttackSound, transform, 0);
+
+        Attack(multipliers);
     }
-    private List<ColliderInfo> _hitColliders;
-    public List<ColliderInfo> HitColliders { get => _hitColliders; }
-
-    protected float baseDamageMultiplier = 1f;
-
-    public void AddColliderToList(Collider collider, TempoConductor.HitQuality hit)
+    public void SecondaryAction(Stats multipliers) 
     {
-        if (_hitColliders == null || collider == null) return;
-        _hitColliders.Add(new ColliderInfo { collider = collider, hit = hit });
+        SetChildrenActive(true);
+        _weaponCollider.ClearColliderList();
+        IsAttackEnded = false;
+        
+        _currentAttackData = _comboTree.ProcessSecondaryAction().AttackData;
+
+        EchosCry.Sound.PlaySFX(_currentAttackData.AttackSound, transform, 0);
+
+        Attack(multipliers);
     }
-    public void ClearColliderList()
+    public void AddEffect(StateName index, EffectData effect)
     {
-        _hitColliders.Clear();
+        _comboTree.AddEffect(index, effect);
+    }
+    public void ResetEffects()
+    {
+        _comboTree.ResetEffects();
     }
 
-    protected virtual void OnAwake() { } 
-    protected virtual void OnPrimaryAction() { }
-    protected virtual void OnSecondaryAction() { }
-    protected virtual void OnAttackEnded() { }
-    protected abstract void Attack();
+    private void Attack(Stats multipliers)
+    {
+        StopAllCoroutines(); //Stop Coroutines, specifically ComboResetTimer
 
+        AttackInfo attack = new AttackInfo.Builder()
+            .SetDamage(_currentAttackData.BaseDamage * multipliers.DamageMultiplier)
+            .SetForce(_currentAttackData.BaseForce * multipliers.KnockbackMultiplier)
+            .SetForceMode(ForceMode.Impulse)
+            .SetHitQuality(TempoConductor.Instance.CurrentHitQuality)
+            .SetOrigin(Player.Instance.transform)
+            .SetEffects(_comboTree.GetCurrentState().Effects.ToArray())
+            .Build();
+
+        _weaponCollider.UpdateAttack(attack);
+        
+        //Setup and play animations associated with the attack data
+        AnimatorOverrideController controller = new AnimatorOverrideController(_attackAnimator.runtimeAnimatorController);
+        controller[_animationClipName] = _currentAttackData.AnimationClip;
+        _attackAnimator.runtimeAnimatorController = controller;
+        _attackAnimator.Play("Attack");
+        
+        //Begin coroutine that will measure the animation length and then reset weapon
+        StartCoroutine(AttackLengthCoroutine(_currentAttackData.AnimationClip.length));
+    }
     private void Awake()
     {
         _defaultAnimatorController = _attackAnimator.runtimeAnimatorController;
-        _hitColliders = new();
+        _animationClipName = _attackAnimator.runtimeAnimatorController.animationClips[0].name;
+        
         SetChildrenActive(false);
-        OnAwake();
+        
+        _comboTree = new();
+        _comboTree.InitTreeAttackData(_comboWeaponData.AttackData);
     }
     private void AttackEnded()
     {
         _attackAnimator.runtimeAnimatorController = _defaultAnimatorController;
         IsAttackEnded = true;
-        OnAttackEnded();
+       
+        StartCoroutine(_comboTree.ComboResetTimer(_comboWeaponData.ComboResetTime));
+        
         SetChildrenActive(false);
     }
-    public void PrimaryAction()
-    {
-        SetChildrenActive(true);
-        ClearColliderList();
-        IsAttackEnded = false;
-        OnPrimaryAction();
-        Attack();
-    }
-    public void SecondaryAction() 
-    {
-        SetChildrenActive(true);
-        ClearColliderList();
-        IsAttackEnded = false;
-        OnSecondaryAction();
-        Attack();
-    }
-
     private void SetChildrenActive(bool active)
     {
         for(int i = 0; i < gameObject.transform.childCount; i++)
@@ -81,7 +103,7 @@ public abstract class Weapon : MonoBehaviour
             gameObject.transform.GetChild(i).gameObject.SetActive(active);
         }
     }
-    protected IEnumerator AttackLengthCoroutine(float animationLength)
+    private IEnumerator AttackLengthCoroutine(float animationLength)
     {
         yield return new WaitForSeconds(animationLength);
         AttackEnded();

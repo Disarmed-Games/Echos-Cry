@@ -10,22 +10,26 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a24831c2a3be90f4ea678b9b4739ad3c, type: 3}
-  m_Name: Bleed Effect
+  m_Name: Flame Effect
   m_EditorClassIdentifier: Echos Cry Core::EffectData
-  EffectName: Bleed Effect
+  EffectName: Flame Effect
   EffectDescription: 
-  EffectIcon: {fileID: 21300000, guid: 7614c7064a94cc14b84af01090920b9a, type: 3}
+  EffectIcon: {fileID: 0}
   IsEffectUseOneTime: 0
-  EffectUseInterval: 0.2
-  EffectDuration: 2
-  MaxStacks: 1
-  EffectEnum: 0
+  EffectUseInterval: 0.25
+  EffectDuration: 1
+  MaxStacks: 2
+  EffectEnum: 4
+  EffectTier: 0
   Effects:
-  - rid: 3227708212704182372
+  - rid: 3227708235182244004
   references:
     version: 2
     RefIds:
-    - rid: 3227708212704182372
+    - rid: 3227708235182244004
       type: {class: DamageEffect, ns: , asm: Echos Cry Core}
       data:
-        damage: 2
+        damage: 1.5
+        textColor: {r: 1, g: 0.5721819, b: 0.15566039, a: 1}
+        tintColor: {r: 1, g: 0.7060223, b: 0.3915094, a: 1}
+        sound: {fileID: 11400000, guid: e20c9a5c30861824d897c64150b8327c, type: 2}

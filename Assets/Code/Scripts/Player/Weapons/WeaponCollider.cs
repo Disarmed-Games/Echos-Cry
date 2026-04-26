@@ -7,30 +7,32 @@ using UnityEngine;
 
 public class WeaponCollider : MonoBehaviour
 {
+    public struct ColliderInfo
+    {
+        public Collider collider;
+        public TempoConductor.HitQuality hitQuality;
+    }
+    private List<ColliderInfo> _hitColliders = new();
+    public List<ColliderInfo> HitColliders { get => _hitColliders; }
+
     [SerializeField] private Weapon _weaponContext;
     private AttackInfo attackInfo;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent<EffectHandler>(out EffectHandler passiveEffectHandler))
-        {
-            if (PlayerComboMeter.CurrentMeterState == PlayerComboMeter.MeterState.OneThird)
-                passiveEffectHandler.ApplyEffect(_weaponContext.CurrentAttackData.PassiveEffects.OneThirdEffect);
-            else if (PlayerComboMeter.CurrentMeterState == PlayerComboMeter.MeterState.TwoThirds)
-                passiveEffectHandler.ApplyEffect(_weaponContext.CurrentAttackData.PassiveEffects.TwoThirdsEffect);
-            else if (PlayerComboMeter.CurrentMeterState == PlayerComboMeter.MeterState.Full)
-                passiveEffectHandler.ApplyEffect(_weaponContext.CurrentAttackData.PassiveEffects.FullEffect);
-        }
-
         if (other.TryGetComponent<IDamageable>(out IDamageable damagable))
         {
             damagable.Execute(attackInfo);
-            if (_weaponContext != null) _weaponContext.AddColliderToList(other, attackInfo.HitQuality);
+            _hitColliders.Add(new ColliderInfo { collider = other, hitQuality = attackInfo.HitQuality });
         }
     }
 
     public void UpdateAttack(AttackInfo attack)
     {
         attackInfo = attack;
+    }
+    public void ClearColliderList()
+    {
+        _hitColliders.Clear();
     }
 }

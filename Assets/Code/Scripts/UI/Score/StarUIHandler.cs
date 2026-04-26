@@ -12,7 +12,7 @@ public class StarUIHandler : MonoBehaviour
     public void UnlockStar()
     {
         bloodImage.enabled = true;
-        EchosCry.Sound.PlaySFX(unlockSFX, PlayerRef.Transform, 0);
+        EchosCry.Sound.PlaySFX(unlockSFX, Player.Instance.transform, 0);
         StartCoroutine(StarAnimate());
     }
 

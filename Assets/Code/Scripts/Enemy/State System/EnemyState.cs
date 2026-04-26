@@ -46,12 +46,12 @@ public class PursueEnemyState : EnemyState
     public override void Update(Enemy enemyContext)
     {
         enemyContext.EnemyAnimator
-            .UpdateSpriteDirection((PlayerRef.Transform.position - enemyContext.transform.position).normalized);
+            .UpdateSpriteDirection((Player.Instance.transform.position - enemyContext.transform.position).normalized);
     }
     private void SetEnemyTarget(Enemy enemyContext)
     {
-        if (enemyContext.NavMeshAgent == null || PlayerRef.Transform == null) return;
-        enemyContext.NavMeshAgent.SetDestination(PlayerRef.Transform.position);
+        if (enemyContext.NavMeshAgent == null || Player.Instance.transform == null) return;
+        enemyContext.NavMeshAgent.SetDestination(Player.Instance.transform.position);
     }
     private IEnumerator UpdateTarget(Enemy enemyContext)
     {
@@ -101,7 +101,7 @@ public class ChargeEnemyState : EnemyState
     public override void Update(Enemy enemyContext)
     {
         enemyContext.EnemyAnimator
-            .UpdateSpriteDirection((PlayerRef.Transform.position - enemyContext.transform.position).normalized);
+            .UpdateSpriteDirection((Player.Instance.transform.position - enemyContext.transform.position).normalized);
     }
     private IEnumerator ChargeAttackCoroutine(Enemy enemyContext)
     {
@@ -130,7 +130,7 @@ public class AttackEnemyState : EnemyState
     {
         //Debug.Log("Attack");
 
-        Vector3 attackDirection = (PlayerRef.Transform.position - enemyContext.transform.position).normalized;
+        Vector3 attackDirection = (Player.Instance.transform.position - enemyContext.transform.position).normalized;
         enemyContext.EnemyAnimator.PlayAnimation(EnemyAnimator.HashCodes.AttackHashCode);
         EchosCry.Sound.PlaySFX(enemyContext.SoundConfig.AttackSFX, enemyContext.transform, 0f);
         enemyContext.AttackStrategies[0].Execute(enemyContext.Data.BaseDamage, attackDirection, enemyContext.transform);
@@ -182,12 +182,12 @@ public class RoamEnemyState : EnemyState
     public override void Update(Enemy enemyContext)
     {
         enemyContext.EnemyAnimator
-            .UpdateSpriteDirection((PlayerRef.Transform.position - enemyContext.transform.position).normalized);
+            .UpdateSpriteDirection((Player.Instance.transform.position - enemyContext.transform.position).normalized);
     }
     private void SetEnemyTarget(Enemy enemyContext)
     {
-        if (enemyContext.NavMeshAgent == null || PlayerRef.Transform == null) return;
-        enemyContext.NavMeshAgent.SetDestination(enemyContext.TargetStrategy[0].Execute(PlayerRef.Transform));
+        if (enemyContext.NavMeshAgent == null || Player.Instance.transform == null) return;
+        enemyContext.NavMeshAgent.SetDestination(enemyContext.TargetStrategy[0].Execute(Player.Instance.transform));
     }
 }
 
@@ -208,7 +208,7 @@ public class FuseEnemyState : EnemyState
     public override void Update(Enemy enemyContext)
     {
         enemyContext.EnemyAnimator
-            .UpdateSpriteDirection((PlayerRef.Transform.position - enemyContext.transform.position).normalized);
+            .UpdateSpriteDirection((Player.Instance.transform.position - enemyContext.transform.position).normalized);
 
     }
     private IEnumerator ChargeAttackCoroutine(Enemy enemyContext)
@@ -232,8 +232,8 @@ public class FuseEnemyState : EnemyState
     }
     private void SetEnemyTarget(Enemy enemyContext)
     {
-        if (enemyContext.NavMeshAgent == null || PlayerRef.Transform == null) return;
-        enemyContext.NavMeshAgent.SetDestination(PlayerRef.Transform.position);
+        if (enemyContext.NavMeshAgent == null || Player.Instance.transform == null) return;
+        enemyContext.NavMeshAgent.SetDestination(Player.Instance.transform.position);
     }
     private IEnumerator UpdateTarget(Enemy enemyContext)
     {

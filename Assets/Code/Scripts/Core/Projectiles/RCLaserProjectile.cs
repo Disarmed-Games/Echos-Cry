@@ -20,7 +20,7 @@ public class RCLaserProjectile : AttackMethod
         projectileDamage = damage;
         _attackEnded = false;
         currentLaser = Instantiate(laserPrefab, transform);
-        smoothedTarget = PlayerRef.Transform.position;
+        smoothedTarget = Player.Instance.transform.position;
         
         StopAllCoroutines();
         StartCoroutine(StartAttack());
@@ -38,7 +38,7 @@ public class RCLaserProjectile : AttackMethod
 
             smoothedTarget = Vector3.Lerp(
                 smoothedTarget,
-                PlayerRef.Transform.position + new Vector3(0, 1.0f, 0),
+                Player.Instance.transform.position + new Vector3(0, 1.0f, 0),
                 targetLerpSpeed * Time.deltaTime
             );
 

@@ -1,3 +1,4 @@
+using AudioSystem;
 using Ink.Parsed;
 using System;
 using System.Collections;
@@ -14,7 +15,8 @@ public class EffectData : ScriptableObject
     public float EffectUseInterval;
     public float EffectDuration;
     [Min(1)] public int MaxStacks = 1;
-    public EchosCry.Effects EffectEnum;
+    public EchosCry.Effects EffectEnum = EchosCry.Effects.None;
+    public EchosCry.EffectTier EffectTier = EchosCry.EffectTier.One;
 
     [SerializeReference] public List<Effect> Effects;
 
@@ -27,7 +29,7 @@ public class EffectData : ScriptableObject
 [Serializable]
 public abstract class Effect
 {
-    public abstract void Use(Enemy enemy, EffectHandler handler);  
+    public abstract void Use(Enemy enemy, EffectHandler handler, int stackCount);  
 }
 
 //Does damage to target enemy on Use
@@ -35,16 +37,23 @@ public abstract class Effect
 public class DamageEffect : Effect
 {
     public float damage = 2f;
-    public override void Use(Enemy enemy, EffectHandler handler)
-    {
-        enemy.Health.Damage(damage);
+    public Color textColor = Color.white;
+    public Color tintColor = Color.red;
+    public soundEffect sound = null;
 
-        EchosCry.Sound.PlaySFX(enemy.SoundConfig.HitSFX, enemy.transform, 0);
-        enemy.EnemyAnimator.TintFlash(Color.red, 0.2f);
+    public override void Use(Enemy enemy, EffectHandler handler, int stackCount)
+    {
+        float attackDamage = damage * stackCount;
+        enemy.Health.Damage(attackDamage);
+
+        if(sound != null) EchosCry.Sound.PlaySFX(sound, enemy.transform, 0);
+        else EchosCry.Sound.PlaySFX(enemy.SoundConfig.HitSFX, enemy.transform, 0);
+
+        enemy.EnemyAnimator.TintFlash(tintColor, 0.2f);
         enemy.EnemyAnimator.PlayBloodVisualEffect();
 
         if (DamageLabelManager.Instance != null && DamageLabelManager.Instance.isActiveAndEnabled)
-            DamageLabelManager.Instance.SpawnPopup(damage, enemy.transform.position, Color.purple);
+            DamageLabelManager.Instance.SpawnPopup(attackDamage, enemy.transform.position, textColor);
 
         if (enemy.EnemyHealthUI != null) enemy.EnemyHealthUI.UpdateUI(enemy.Health.CurrentHealth,
         enemy.Health.MaxHealth,
@@ -61,7 +70,7 @@ public class DamageMultiplierEffect : Effect
     public float duration = 2f;
     [Range(0f, 1f)] public float multiplierChance = 1f;
 
-    public override void Use(Enemy enemy, EffectHandler handler)
+    public override void Use(Enemy enemy, EffectHandler handler, int stackCount)
     {
         if (CheckHitChance())
         {

@@ -59,12 +59,12 @@ public class InventoryManager : Singleton<InventoryManager>
 
         if (usedItem.data.CanUse(_player))
         {
-            EchosCry.Sound.PlaySFX(_useItemSound, PlayerRef.Transform, 0);
+            EchosCry.Sound.PlaySFX(_useItemSound, Player.Instance.transform, 0);
             usedItem.data.Use(_player);
             Remove(usedItem.data);
         }
         else
-            EchosCry.Sound.PlaySFX(_invalidItemSound, PlayerRef.Transform, 0);
+            EchosCry.Sound.PlaySFX(_invalidItemSound, Player.Instance.transform, 0);
     }
 
     public bool IsFull(InventoryItemData referenceData)

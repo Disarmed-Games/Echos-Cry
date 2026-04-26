@@ -32,7 +32,7 @@ public class DialogueTrigger : MonoBehaviour
 
     private void Update()
     {
-        _playerInRange = (Vector3.Distance(PlayerRef.Transform.position, transform.position) <= _distanceCheck);
+        _playerInRange = (Vector3.Distance(Player.Instance.transform.position, transform.position) <= _distanceCheck);
     }
 
     private void OnTriggerEnter(Collider other)

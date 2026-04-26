@@ -107,7 +107,7 @@ public class SceneManager
         HUDMessage.Instance.UpdateMessage("Loading...", 1f);
         SoundEffectManager.Instance.Builder
             .SetSound(portalSFX)
-            .SetSoundPosition(PlayerRef.Transform.position)
+            .SetSoundPosition(Player.Instance.transform.position)
             .ValidateAndPlaySound();
     }
 }

@@ -16,8 +16,8 @@ public class WalkerInitMethod : EnemyInitMethod
             new(EnemyStates.Pursue,
             enemy =>
             {
-                if (PlayerRef.Transform == null) return false;
-                float playerDistance = Vector3.Distance(enemy.transform.position, PlayerRef.Transform.position);
+                if (Player.Instance.transform == null) return false;
+                float playerDistance = Vector3.Distance(enemy.transform.position, Player.Instance.transform.position);
                 if (playerDistance < enemy.Data.DistanceCheck) return true;
                 return false;
             });
