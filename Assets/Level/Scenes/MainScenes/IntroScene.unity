@@ -1203,8 +1203,8 @@ PrefabInstance:
     - target: {fileID: 252109370183578809, guid: a37415a1292df9245940773ffdc6b8a4, type: 3}
       propertyPath: text
       value: Fallenoak had once been a place of lively refinement, its square filled
-        with music and gentel company until the earth split open. From a fire-lit
-        chasm arose unspeakable demons.
+        with music and warm company until the earth split open. From a fire-lit chasm
+        arose unspeakable demons.
       objectReference: {fileID: 0}
     - target: {fileID: 4661042279230515849, guid: a37415a1292df9245940773ffdc6b8a4, type: 3}
       propertyPath: m_Name

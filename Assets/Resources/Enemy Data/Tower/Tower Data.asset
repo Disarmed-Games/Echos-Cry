@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94b2c210b3406954c9bb07cfe657c510, type: 3}
   m_Name: Tower Data
   m_EditorClassIdentifier: Echos Cry Core::EnemyData
-  _distanceCheck: 10
+  _distanceCheck: 12
   _attackChargeTime: 0.6
   _attackDashForce: 0
-  _attackDuration: 6
-  _attackCooldown: 1.2
+  _attackDuration: 5
+  _attackCooldown: 1.5
   _staggerDuration: 1.2
   _baseDamage: 6
   _stoppingDistance: 7

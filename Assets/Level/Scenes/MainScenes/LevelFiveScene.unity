@@ -2610,7 +2610,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2926762493016262346, guid: 4501873209b269e4388d8b611831bf33, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2
+      value: 0.90000004
       objectReference: {fileID: 0}
     - target: {fileID: 2926762493016262346, guid: 4501873209b269e4388d8b611831bf33, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2618,7 +2618,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2926762493016262346, guid: 4501873209b269e4388d8b611831bf33, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -6
+      value: -3.8
       objectReference: {fileID: 0}
     - target: {fileID: 2926762493016262346, guid: 4501873209b269e4388d8b611831bf33, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4060,18 +4060,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3645533978470768532, guid: e1ffdf3d89e980e48901136d6808dd91, type: 3}
       propertyPath: _allWaves.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3645533978470768532, guid: e1ffdf3d89e980e48901136d6808dd91, type: 3}
       propertyPath: '_allWaves.Array.data[0]'
       value: 
-      objectReference: {fileID: 11400000, guid: 102c82520b40ade4a96b49598b511d86, type: 2}
+      objectReference: {fileID: 11400000, guid: f81a1091cdac93a4b95c9fe75cf4dfc8, type: 2}
     - target: {fileID: 3645533978470768532, guid: e1ffdf3d89e980e48901136d6808dd91, type: 3}
       propertyPath: '_allWaves.Array.data[1]'
       value: 
-      objectReference: {fileID: 11400000, guid: 765b2ce4bbaf0fc45871c4345d5eee9c, type: 2}
+      objectReference: {fileID: 11400000, guid: 102c82520b40ade4a96b49598b511d86, type: 2}
     - target: {fileID: 3645533978470768532, guid: e1ffdf3d89e980e48901136d6808dd91, type: 3}
       propertyPath: '_allWaves.Array.data[2]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 765b2ce4bbaf0fc45871c4345d5eee9c, type: 2}
+    - target: {fileID: 3645533978470768532, guid: e1ffdf3d89e980e48901136d6808dd91, type: 3}
+      propertyPath: '_allWaves.Array.data[3]'
       value: 
       objectReference: {fileID: 11400000, guid: b52d983cfea05e544978b5747e2e7432, type: 2}
     - target: {fileID: 6460877931832319526, guid: e1ffdf3d89e980e48901136d6808dd91, type: 3}

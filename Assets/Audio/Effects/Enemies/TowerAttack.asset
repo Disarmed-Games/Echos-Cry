@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0af6e37581d16d47aa4a2ce36e29f5c, type: 3}
   m_Name: TowerAttack
   m_EditorClassIdentifier: Assembly-CSharp::AudioSystem.soundEffect
-  sfxVolume: 0.1
+  sfxVolume: 0.15
   sfxClips:
   - {fileID: 8300000, guid: 4d0d4c1f62291004bb8d94ce950d92fe, type: 3}
   sfxMixerGroup: {fileID: 57649532358978260, guid: ac2ef84a7ad88f74fb5e10f3c7be54d1, type: 2}

@@ -10,19 +10,27 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: de3627f1a05e5e946830941c6060cb45, type: 3}
-  m_Name: Level5Wave3
+  m_Name: Level5Wave4
   m_EditorClassIdentifier: Assembly-CSharp::WaveData
   EnemySpawns:
+  - enemySpawnType: {fileID: 6900823288402649937, guid: 921ea598b7611794dbcb535f728318d1, type: 3}
+    enemySpawnCount: 2
   - enemySpawnType: {fileID: 6900823288402649937, guid: 29058e1cb20b8264b8f94e98792051cd, type: 3}
-    enemySpawnCount: 5
+    enemySpawnCount: 2
+  - enemySpawnType: {fileID: 5404336137336009058, guid: 128fb26a87e63b6488058dafa47b63dd, type: 3}
+    enemySpawnCount: 2
+  - enemySpawnType: {fileID: 6900823288402649937, guid: 4e6ad55f889d65e40b6ce9414d619049, type: 3}
+    enemySpawnCount: 2
+  - enemySpawnType: {fileID: 6730894656085681688, guid: 18676ec0132be884cb685389feb03828, type: 3}
+    enemySpawnCount: 2
   - enemySpawnType: {fileID: 6900823288402649937, guid: b6393c099ff99e547b82c84b1a483987, type: 3}
     enemySpawnCount: 2
-  - enemySpawnType: {fileID: 6900823288402649937, guid: 9847284d3467756489d3f6673964dd70, type: 3}
-    enemySpawnCount: 1
-  - enemySpawnType: {fileID: 6900823288402649937, guid: 4e6ad55f889d65e40b6ce9414d619049, type: 3}
-    enemySpawnCount: 1
+  - enemySpawnType: {fileID: 9145729383849834323, guid: d3ddc9f8e3a13e141817a6baffb95bfb, type: 3}
+    enemySpawnCount: 2
   - enemySpawnType: {fileID: 6900823288402649937, guid: cc2412d36d40d54469f1a824c37f02e4, type: 3}
-    enemySpawnCount: 1
+    enemySpawnCount: 2
   - enemySpawnType: {fileID: 6900823288402649937, guid: 2a53b873969b1a94eb364081569ebdcf, type: 3}
     enemySpawnCount: 2
-  spawnInterval: 6
+  - enemySpawnType: {fileID: 6900823288402649937, guid: 2a53b873969b1a94eb364081569ebdcf, type: 3}
+    enemySpawnCount: 2
+  spawnInterval: 10

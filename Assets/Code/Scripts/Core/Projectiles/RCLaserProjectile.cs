@@ -21,7 +21,8 @@ public class RCLaserProjectile : AttackMethod
         _attackEnded = false;
         currentLaser = Instantiate(laserPrefab, transform);
         smoothedTarget = PlayerRef.Transform.position;
-
+        
+        StopAllCoroutines();
         StartCoroutine(StartAttack());
         StartCoroutine(AttackDuration(_duration));
     }
