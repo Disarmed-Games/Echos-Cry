@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class WaveManager : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private WaveData[] _allWaves;
     [SerializeField] private NewEnemySpawner _enemySpawner;
     [SerializeField] private IntEventChannel _updateKillCountChannel;
+    [SerializeField] private GameObject chestObject;
 
     public WaveData[] AllWaves { get => _allWaves; }
 
@@ -66,6 +68,14 @@ public class WaveManager : MonoBehaviour
             {
                 //Debug.Log("Waves Complete!");
                 HUDMessage.Instance.UpdateMessage("All Waves Completed!", 2.5f);
+
+                //Spawn Final Loot Crate
+                Vector3 chestPosition = _enemySpawner.GetRandomPoint(_spawnDistance);
+                if (NavMesh.SamplePosition(chestPosition, out NavMeshHit hit, _spawnDistance, NavMesh.AllAreas))
+                {
+                    Instantiate(chestObject, hit.position, Quaternion.identity);
+                }
+
                 OnAllWavesCompleted?.Invoke();
                 _allWavesCompleted = true;
             }
@@ -114,5 +124,4 @@ public class WaveManager : MonoBehaviour
     {
         Gizmos.DrawWireSphere(transform.position, _spawnDistance);
     }
-
 }
