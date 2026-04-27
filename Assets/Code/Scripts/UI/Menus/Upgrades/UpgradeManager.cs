@@ -49,7 +49,7 @@ public class UpgradeManager : MonoBehaviour
         [UpgradeType.Dash_Count] = "Increase the total amount of dashes available by <color=purple><b>+1</b></color>.",
         [UpgradeType.Stamina] = "Decrease the dash meter cooldown time by <color=purple><b>20%</b></color></b></color>.",
         [UpgradeType.Strength] = "Increase the base damage multiplier by <color=purple><b>10%</b></color>.",
-        [UpgradeType.Knockback_Power] = "Increase the knockback force from attacks by <color=purple><b>10%</b></color>.",
+        [UpgradeType.Knockback_Power] = "Increase the knockback force from attacks by <color=purple><b>15%</b></color>.",
         [UpgradeType.Heat_Gauge] = "Increase the base heat gauge count by <color=purple><b>+1</b></color>.",
     };
 

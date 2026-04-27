@@ -89,7 +89,7 @@ public class PlayerUpgradeManager : MonoBehaviour
 
     void UpgradeKnockback()
     {
-        player.Stats.KnockbackMultiplier *= 1.1f;
+        player.Stats.KnockbackMultiplier *= 1.15f;
     }
     void UpgradeHeatGauge()
     {
