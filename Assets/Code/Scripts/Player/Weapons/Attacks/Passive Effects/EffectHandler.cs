@@ -5,10 +5,10 @@ using UnityEngine;
 
 namespace EchosCry
 {
-    public enum Effects
-    {
-        None, Bleed, MarkForDeath, Critical, Flame
-    }
+    //public enum Effects
+    //{
+    //    None, Bleed, MarkForDeath, Critical, Flame
+    //}
     public enum EffectTier
     {
         One, Two, Three
@@ -28,8 +28,8 @@ public class EffectHandler : MonoBehaviour
         }
     }
 
-    private readonly Dictionary<EchosCry.Effects, EffectNode> _activeEffectData = new();
-    private readonly HashSet<EchosCry.Effects> _activeEffects = new();
+    private readonly Dictionary<string, EffectNode> _activeEffectData = new();
+    private readonly HashSet<string> _activeEffects = new();
 
     private void OnDisable()
     {
@@ -39,7 +39,7 @@ public class EffectHandler : MonoBehaviour
 
     public void ApplyEffect(EffectData effect, Enemy enemy)
     {
-        EchosCry.Effects effectEnum = effect.EffectEnum;
+        string effectEnum = effect.EffectName;
 
         if (_activeEffects.Contains(effectEnum)) //Check if effect active
         {
@@ -77,7 +77,7 @@ public class EffectHandler : MonoBehaviour
 
     public void RemovePassiveEffect(EffectData effect)
     {
-        EchosCry.Effects effectEnum = effect.EffectEnum;
+        string effectEnum = effect.EffectName;
 
         if (_activeEffectData[effectEnum].coroutine != null)
         {
@@ -95,11 +95,11 @@ public class EffectHandler : MonoBehaviour
 
     private IEnumerator RoutineEffect(EffectData effect, Enemy enemy)
     {
-        while (_activeEffects.Contains(effect.EffectEnum))
+        while (_activeEffects.Contains(effect.EffectName))
         {
             yield return new WaitForSeconds(effect.EffectUseInterval);
             
-            UseEffect(effect, enemy, _activeEffectData[effect.EffectEnum].stacks);
+            UseEffect(effect, enemy, _activeEffectData[effect.EffectName].stacks);
         }
     }
 

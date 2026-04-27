@@ -14,7 +14,6 @@ public class PlayerUpgradeManager : MonoBehaviour
     [SerializeField] EventChannel _regenArmorChannel;
     [SerializeField] EventChannel _dashCountChannel;
     [SerializeField] EventChannel _dashCooldownChannel;
-    [SerializeField] EventChannel _dashAttackChannel;
     [SerializeField] EventChannel _knockbackChannel;
     [SerializeField] EventChannel _heatgaugeChannel;
 
@@ -29,8 +28,7 @@ public class PlayerUpgradeManager : MonoBehaviour
         if (_dashSpeedChannel != null) _dashSpeedChannel.Channel += UpgradeDashSpeed;
         if(_dashCooldownChannel != null) _dashCooldownChannel.Channel += UpgradeDashCooldown;
         if(_dashCountChannel != null) _dashCountChannel.Channel += UpgradeDashCount;
-        if (_dashAttackChannel != null) _dashAttackChannel.Channel += UpgradeDashAttack;
-        if (_dashAttackChannel != null) _knockbackChannel.Channel += UpgradeKnockback;
+        if (_knockbackChannel != null) _knockbackChannel.Channel += UpgradeKnockback;
         if (_heatgaugeChannel != null) _heatgaugeChannel.Channel += UpgradeHeatGauge;
     }
     private void OnDisable()
@@ -44,8 +42,7 @@ public class PlayerUpgradeManager : MonoBehaviour
         if (_dashSpeedChannel != null) _dashSpeedChannel.Channel -= UpgradeDashSpeed;
         if (_dashCooldownChannel != null) _dashCooldownChannel.Channel -= UpgradeDashCooldown;
         if (_dashCountChannel != null) _dashCountChannel.Channel -= UpgradeDashCount;
-        if (_dashAttackChannel != null) _dashAttackChannel.Channel -= UpgradeDashAttack;
-        if (_dashAttackChannel != null) _knockbackChannel.Channel -= UpgradeKnockback;
+        if (_knockbackChannel != null) _knockbackChannel.Channel -= UpgradeKnockback;
         if (_heatgaugeChannel != null) _heatgaugeChannel.Channel -= UpgradeHeatGauge;
     }
 
@@ -91,10 +88,7 @@ public class PlayerUpgradeManager : MonoBehaviour
         player.Health.RegenArmorAmount++;
         player.Health.EnableArmorRegen();
     }
-    void UpgradeDashAttack()
-    {
-        player.Abilities.AddDashAttack();
-    }
+
     void UpgradeKnockback()
     {
         player.Stats.KnockbackMultiplier *= 1.15f;

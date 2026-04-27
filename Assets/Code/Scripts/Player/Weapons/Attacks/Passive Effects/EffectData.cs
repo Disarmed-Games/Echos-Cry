@@ -15,7 +15,7 @@ public class EffectData : ScriptableObject
     public float EffectUseInterval;
     public float EffectDuration;
     [Min(1)] public int MaxStacks = 1;
-    public EchosCry.Effects EffectEnum = EchosCry.Effects.None;
+    //public EchosCry.Effects EffectEnum = EchosCry.Effects.None;
     public EchosCry.EffectTier EffectTier = EchosCry.EffectTier.One;
 
     [SerializeReference] public List<Effect> Effects;

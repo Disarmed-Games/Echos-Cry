@@ -19,7 +19,6 @@ MonoBehaviour:
   EffectUseInterval: 0.5
   EffectDuration: 2
   MaxStacks: 3
-  EffectEnum: 1
   EffectTier: 1
   Effects:
   - rid: 3227708212704182372
@@ -30,3 +29,6 @@ MonoBehaviour:
       type: {class: DamageEffect, ns: , asm: Echos Cry Core}
       data:
         damage: 2
+        textColor: {r: 0.754717, g: 0, b: 0.52309936, a: 1}
+        tintColor: {r: 1, g: 0, b: 0, a: 1}
+        sound: {fileID: 0}

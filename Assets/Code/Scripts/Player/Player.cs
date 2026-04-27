@@ -22,7 +22,6 @@ public class Player : NonSpawnableSingleton<Player>
     [SerializeField] private SpamPrevention _spamPrevention;
     [SerializeField] private HeatGauge _heatGauge;
     [SerializeField] private PlayerParticles _particles;
-    [SerializeField] private AbilityManager abilities;
     [SerializeField] private DashHandler _dashHandler;
     private Stats _stats;
 
@@ -54,7 +53,6 @@ public class Player : NonSpawnableSingleton<Player>
     public HeatGauge HeatGauge { get => _heatGauge; }
     public PlayerParticles PlayerParticles { get => _particles; }
     public PlayerUI UI { get => _ui; }
-    public AbilityManager Abilities { get => abilities; }
     public Stats Stats { get => _stats; }
     public DashHandler DashHandler { get => _dashHandler; }
     public List<EffectData> ActiveEffectsTier1 { get => _activeEffectsTier1; }
