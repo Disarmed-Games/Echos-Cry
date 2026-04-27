@@ -66,9 +66,10 @@ public class EnemyAnimator : MonoBehaviour
     }
     private IEnumerator TintFlashCoroutine(Color tintColor, float flashDuration)
     {
-        SetTint(tintColor);
+        Color currentColor = _enemySprite.material.GetColor(hashedTintColor);
+        _enemySprite.material.SetColor(hashedTintColor, tintColor);
         yield return new WaitForSeconds(flashDuration);
-        ResetTint();
+        _enemySprite.material.SetColor(hashedTintColor, currentColor);
     }
 
     private void Awake()
