@@ -318,18 +318,18 @@ MonoBehaviour:
   _health: {fileID: 854592342237272632}
   _navMeshAgent: {fileID: 1592182489320676592}
   _rigidbody: {fileID: 6827338249854996756}
-  _enemyAnimator: {fileID: 4267862705877107826}
+  _animator: {fileID: 4267862705877107826}
   _soundConfig: {fileID: 11400000, guid: 61a08e0075f1f394ba85aefac97da91e, type: 2}
   _collider: {fileID: 8838160874129828706}
   _passiveEffectHandler: {fileID: 3727599544175325857}
   _deathEffect: {fileID: 2836163184616676573, guid: c9677a51a5d061340a514220e825b583, type: 3}
   _data: {fileID: 11400000, guid: 805c36080d6e68641a1d327dc6d9f451, type: 2}
   _enemyHealthUI: {fileID: 1768173714303068742}
+  _statsData: {fileID: 0}
   _attackStrats:
   - {fileID: 5298147001227487547}
   _targetStrats:
   - {fileID: 2292350096531518148}
-  _movementStrats: []
   _drops: {fileID: 11400000, guid: a47f4f85153c2e448b18ad7bafa93e43, type: 2}
   _playerAttackEndChannel: {fileID: 11400000, guid: 32c2647349869554ca690720dab27258, type: 2}
   _updateWaveCount: {fileID: 11400000, guid: 7cab49118f492584f9f027f6ec0fa05a, type: 2}
@@ -439,7 +439,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 219d456fc537c6046ac48271bca6bb45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PassiveEffectHandler
-  enemyReference: {fileID: 3180805991097293313}
 --- !u!1 &8093237397332565904
 GameObject:
   m_ObjectHideFlags: 0
