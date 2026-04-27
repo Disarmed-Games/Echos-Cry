@@ -33,7 +33,7 @@ public class HeatGaugeUI : MonoBehaviour
     {
         for (int i = 0; i < max; i++)
         {
-            if (current == max)
+            if (current >= 6)
                 heatGuages[i].GetComponent<Image>().sprite = maxHeatImage;
             else if (i < current)
                 heatGuages[i].GetComponent<Image>().sprite = defaultHeatImage;

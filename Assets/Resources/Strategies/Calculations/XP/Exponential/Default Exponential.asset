@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Default Exponential
   m_EditorClassIdentifier: Assembly-CSharp::ExponentialXPCalculation
   _baseXP: 50
-  _growthRate: 0.1
+  _growthRate: 0.15
