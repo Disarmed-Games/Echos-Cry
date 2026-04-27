@@ -5,6 +5,7 @@ public class EnemyDamageable : MonoBehaviour, IDamageable
 {
     [SerializeField] private Enemy _enemy;
     private bool _armorBreak = false;
+    private bool _isHitStop = false;
 
     private void OnEnable()
     {
@@ -30,20 +31,16 @@ public class EnemyDamageable : MonoBehaviour, IDamageable
 
         _enemy.Health.Damage(damage);
 
+        if(_enemy.EnemyHealthUI != null) _enemy.EnemyHealthUI.UpdateUI(_enemy.Health.CurrentHealth, 
+            _enemy.Health.MaxHealth, 
+            _enemy.Health.CurrentArmor, 
+            _enemy.Health.MaxArmor);
+
         HandleEffects(attackData.Effects);
 
-
-        if (_enemy.Health.CurrentArmor <= 0)
-        {
-            _enemy.StateData.IsStaggered = true;
-            StartCoroutine(KnockBackDuration(attackData, 0.2f));
-        }
-
-        //Visuals
         if (_enemy.Health.CurrentArmor > 0)
         {
             EchosCry.Sound.PlaySFX(_enemy.SoundConfig.ArmorHitSFX, _enemy.transform, 0);
-            _enemy.Animator.TintFlash(_enemy.Data.TintShieldFlash, _enemy.Data.TintFlashDuration);
             _enemy.Animator.PlayArmorVisualEffect();
         }
         else
@@ -55,26 +52,49 @@ public class EnemyDamageable : MonoBehaviour, IDamageable
             }
             DecalManager.Instance.GetBloodDecal().transform.position = _enemy.transform.position;
             EchosCry.Sound.PlaySFX(_enemy.SoundConfig.HitSFX, _enemy.transform, 0);
-            _enemy.Animator.TintFlash(_enemy.Data.TintHealthFlash, _enemy.Data.TintFlashDuration);
             _enemy.Animator.PlayBloodVisualEffect();
         }
-            
-        if(DamageLabelManager.Instance != null && DamageLabelManager.Instance.isActiveAndEnabled)
+
+        if (DamageLabelManager.Instance != null && DamageLabelManager.Instance.isActiveAndEnabled)
             DamageLabelManager.Instance.SpawnPopup(damage, _enemy.transform.position, Color.white);
-        
-        if(_enemy.EnemyHealthUI != null) _enemy.EnemyHealthUI.UpdateUI(_enemy.Health.CurrentHealth, 
-            _enemy.Health.MaxHealth, 
-            _enemy.Health.CurrentArmor, 
-            _enemy.Health.MaxArmor);
+
+        if (!_isHitStop) StartCoroutine(HitStop(attackData, damage, 0.1f));
     }
 
     private IEnumerator KnockBackDuration(AttackInfo attackData, float duration)
     {
         _enemy.Rigidbody.isKinematic = false;
         Vector3 direction = (_enemy.transform.position - attackData.Origin.position).normalized;
-        _enemy.Rigidbody.AddForce(attackData.Force * direction * _enemy.Stats.KnockbackMultiplier, attackData.ForceMode);
+        _enemy.Rigidbody.AddForce(_enemy.Stats.KnockbackMultiplier * attackData.Force * direction, attackData.ForceMode);
         yield return new WaitForSeconds(duration);
         _enemy.Rigidbody.isKinematic = true;
+    }
+
+    private IEnumerator HitStop(AttackInfo attackData, float damage, float duration)
+    {
+        _isHitStop = true;
+        yield return new WaitForSeconds(duration);
+
+        if (_enemy.Health.CurrentArmor > 0)
+        {
+            _enemy.Animator.TintFlash(_enemy.Data.TintShieldFlash, _enemy.Data.TintFlashDuration);
+        }
+        else
+        {
+            if (!_armorBreak)
+            {
+                _armorBreak = true;
+                EchosCry.Sound.PlaySFX(_enemy.SoundConfig.ArmorBreakSFX, _enemy.transform, 0);
+            }
+            _enemy.Animator.TintFlash(_enemy.Data.TintHealthFlash, _enemy.Data.TintFlashDuration);
+        }
+
+        if (_enemy.Health.CurrentArmor <= 0)
+        {
+            _enemy.StateData.IsStaggered = true;
+            StartCoroutine(KnockBackDuration(attackData, 0.2f));
+        }
+        _isHitStop = false;
     }
 
     private void HandleEffects(EffectData[] effects)
