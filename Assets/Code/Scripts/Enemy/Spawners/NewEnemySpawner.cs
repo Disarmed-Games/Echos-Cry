@@ -12,12 +12,20 @@ public class NewEnemySpawner : MonoBehaviour
     private float spawnFromDecalWait = 3f;
     public int SpawnerID;
 
-    public IEnumerator SpawnWithDecal(EnemyPool enemyPool, Vector3 initialPos, float samplingDistance, Action<Enemy> callback)
+    public IEnumerator SpawnWithDecal(EnemyPool enemyPool, float samplingDistance, Action<Enemy> callback)
     {
-        Vector3 spawnPos = new Vector3(1f, 1f, 1f);
-        if (NavMesh.SamplePosition(initialPos, out NavMeshHit hit, samplingDistance, NavMesh.AllAreas)) {
-            spawnPos = hit.position;
+        Vector3 spawnPos = Vector3.one;
+        while (true)
+        {
+            Vector3 enemyPosition = GetRandomPoint(samplingDistance);
+            if (NavMesh.SamplePosition(enemyPosition, out NavMeshHit hit, samplingDistance, NavMesh.AllAreas))
+            {
+                spawnPos = hit.position;
+                break;
+            }
+            yield return null;
         }
+        
         var decal = Instantiate(spawnDecal, spawnPos, Quaternion.Euler(90f, 0f, 0f));
 
         yield return new WaitForSeconds(spawnFromDecalWait);

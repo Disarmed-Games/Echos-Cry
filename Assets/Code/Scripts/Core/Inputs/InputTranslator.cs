@@ -100,19 +100,23 @@ public class InputTranslator : ScriptableObject,
     }
     public void OnItem1(InputAction.CallbackContext context)
     {
-        if (context.started) OnItem1Event?.Invoke(0);
+        if (context.started) OnItem1Event?.Invoke(true, 0);
+        else if (context.canceled) OnItem1Event?.Invoke(false, 0);
     }
     public void OnItem2(InputAction.CallbackContext context)
     {
-        if (context.started) OnItem2Event?.Invoke(1);
+        if (context.started) OnItem2Event?.Invoke(true, 1);
+        else if (context.canceled) OnItem2Event?.Invoke(false, 1);
     }
     public void OnItem3(InputAction.CallbackContext context)
     {
-        if (context.started) OnItem3Event?.Invoke(2);
+        if (context.started) OnItem3Event?.Invoke(true, 2);
+        else if (context.canceled) OnItem3Event?.Invoke(false, 2);
     }
     public void OnItem4(InputAction.CallbackContext context)
     {
-        if (context.started)OnItem4Event?.Invoke(3);
+        if (context.started) OnItem4Event?.Invoke(true, 3);
+        else if (context.canceled) OnItem4Event?.Invoke(false, 3);
     }
     public void OnInteract(InputAction.CallbackContext context)
     {
@@ -153,5 +157,5 @@ public class InputTranslator : ScriptableObject,
     public event Action             OnResumeEvent;
     public event Action             OnCloseShopEvent;
     public event Action             OnDropEvent;
-    public event Action<int>        OnItem1Event, OnItem2Event, OnItem3Event, OnItem4Event;
+    public event Action<bool, int>  OnItem1Event, OnItem2Event, OnItem3Event, OnItem4Event;
 }

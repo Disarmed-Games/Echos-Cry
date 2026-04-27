@@ -18,16 +18,16 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] DoubleFloatEventChannel _healthChannel;
     [SerializeField] DoubleFloatEventChannel _armorChannel;
 
-    private float _regenHealthCooldown = 5f;
-    private float _regenHealthTickTime = 10f;
-    private float _regenHealthAmount = 0f;
+    private float _regenHealthTickTime = 1.5f;
+    private float _regenHealthAmount = 2f;
+    private float _regenHealthDuration = 30f;
     private bool _canRegenHealth = false;
     private Coroutine _regenHealthTickCoroutine;
     public float RegenHealthAmount { get => _regenHealthAmount; set => _regenHealthAmount = value; }
 
-    private float _regenArmorCooldown = 5f;
-    private float _regenArmorTickTime = 10f;
-    private float _regenArmorAmount = 0f;
+    private float _regenArmorTickTime = 2f;
+    private float _regenArmorAmount = 1f;
+    private float _regenArmorDuration = 20f;
     private bool _canRegenArmor = false;
     private Coroutine _regenArmorTickCoroutine;
     public float RegenArmorAmount { get => _regenArmorAmount; set => _regenArmorAmount = value; }
@@ -80,8 +80,6 @@ public class PlayerHealth : MonoBehaviour
         if (DamageLabelManager.Instance != null && DamageLabelManager.Instance.isActiveAndEnabled)
             DamageLabelManager.Instance.SpawnPopup(damage, Player.Instance.transform.position, Color.red);
 
-        PauseHealthRegen();
-
         _armorChannel.Invoke(_healthSystem.CurrentArmor, _healthSystem.MaxArmor); 
         _healthChannel.Invoke(_healthSystem.CurrentHealth, _healthSystem.MaxHealth);
     }
@@ -112,22 +110,16 @@ public class PlayerHealth : MonoBehaviour
     /// </summary>
     public void EnableHealthRegen()
     {
+        if (_canRegenHealth) return;
         _canRegenHealth = true;
         _regenHealthTickCoroutine = StartCoroutine(RegenTickRate());
+        StartCoroutine(DisableHealthRegenTimer());
     }
-    public void PauseHealthRegen()
+    private IEnumerator DisableHealthRegenTimer()
     {
+        yield return new WaitForSeconds(_regenHealthDuration);
         _canRegenHealth = false;
-        if (_regenHealthTickCoroutine != null)
-        {
-            StopCoroutine(_regenHealthTickCoroutine);
-            StartCoroutine(RegenCooldown());
-        }
-    }
-    private IEnumerator RegenCooldown() //After taking damage, how long should pass till health can regen once more.
-    {
-        yield return new WaitForSeconds(_regenHealthCooldown);
-        EnableHealthRegen();
+        StopCoroutine(_regenHealthTickCoroutine);
     }
     private IEnumerator RegenTickRate()
     {
@@ -138,7 +130,6 @@ public class PlayerHealth : MonoBehaviour
             if (_canRegenHealth && CurrentHealth < MaxHealth)
             {
                 HealHealth(_regenHealthAmount);
-                _healthChannel.Invoke(_healthSystem.CurrentHealth, _healthSystem.MaxHealth);
             }   
         }
     }
@@ -148,22 +139,16 @@ public class PlayerHealth : MonoBehaviour
     /// </summary>
     public void EnableArmorRegen()
     {
+        if (_canRegenArmor) return;
         _canRegenArmor = true;
         _regenArmorTickCoroutine = StartCoroutine(RegenArmorTickRate());
+        StartCoroutine(DisableArmorRegenTimer());
     }
-    public void PauseArmorRegen()
+    private IEnumerator DisableArmorRegenTimer()
     {
+        yield return new WaitForSeconds(_regenArmorDuration);
         _canRegenArmor = false;
-        if (_regenArmorTickCoroutine != null)
-        {
-            StopCoroutine(_regenArmorTickCoroutine);
-            StartCoroutine(RegenArmorCooldown());
-        }
-    }
-    private IEnumerator RegenArmorCooldown() //After taking damage, how long should pass till health can regen once more.
-    {
-        yield return new WaitForSeconds(_regenArmorCooldown);
-        EnableArmorRegen();
+        StopCoroutine(_regenArmorTickCoroutine);
     }
     private IEnumerator RegenArmorTickRate()
     {
@@ -174,11 +159,9 @@ public class PlayerHealth : MonoBehaviour
             if (_canRegenArmor && CurrentArmor < MaxArmor)
             {
                 HealArmor(_regenArmorAmount);
-                _armorChannel.Invoke(_healthSystem.CurrentArmor, _healthSystem.MaxArmor);
             }
         }
     }
-
     public HealthSystem GetPlayerHealthSystemRef()
     {
         return _healthSystem;

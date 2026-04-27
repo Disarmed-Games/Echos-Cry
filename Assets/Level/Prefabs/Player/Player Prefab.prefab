@@ -15321,7 +15321,6 @@ GameObject:
   - component: {fileID: 415338203038042998}
   - component: {fileID: 1520755955600332291}
   - component: {fileID: 5749001807359641443}
-  - component: {fileID: 4710593916071543663}
   - component: {fileID: 2019051602396369572}
   - component: {fileID: 6060951237239432870}
   - component: {fileID: 4484604223191530329}
@@ -15405,30 +15404,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerDamagable
   player: {fileID: 1520755955600332291}
---- !u!114 &4710593916071543663
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2428720641269041060}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c73dc3df49160a47a3514b3c3e5e166, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Echos Cry Core::PlayerUpgradeManager
-  player: {fileID: 1520755955600332291}
-  _upgradeDamageChannel: {fileID: 11400000, guid: 259cf655db4111946bf664a82d7bbd9c, type: 2}
-  _moveSpeedChannel: {fileID: 11400000, guid: b9b7dd2a8f79bec4b9365537b310ce1e, type: 2}
-  _dashSpeedChannel: {fileID: 11400000, guid: b49daf7febadf974d853b7c7efd88e9c, type: 2}
-  _healthChannel: {fileID: 11400000, guid: 500d6e615a856a844a407ce00b7f4ff7, type: 2}
-  _armorChannel: {fileID: 11400000, guid: ed980f021be41e944b80a689b2fca290, type: 2}
-  _regenHealthChannel: {fileID: 11400000, guid: 58f244f8770115148acb4868ba17b6b8, type: 2}
-  _regenArmorChannel: {fileID: 11400000, guid: 32e8668cebf73d74994810528e57ffd2, type: 2}
-  _dashCountChannel: {fileID: 11400000, guid: 525432ab9a8309644a0c3e1894f626e4, type: 2}
-  _dashCooldownChannel: {fileID: 11400000, guid: 01cfb1c9714eab745b95991f9c7b59f8, type: 2}
-  _knockbackChannel: {fileID: 11400000, guid: 3f5751c6174f00a42ac4d37142946366, type: 2}
-  _heatgaugeChannel: {fileID: 11400000, guid: 1b00fa362e50faf4eb0832f295fbc340, type: 2}
 --- !u!54 &2019051602396369572
 Rigidbody:
   m_ObjectHideFlags: 0

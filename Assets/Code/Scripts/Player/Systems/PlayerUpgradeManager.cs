@@ -80,12 +80,10 @@ public class PlayerUpgradeManager : MonoBehaviour
     }
     void UpgradeHealthRegen()
     {
-        player.Health.RegenHealthAmount++;
         player.Health.EnableHealthRegen();
     }
     void UpgradeArmorRegen()
     {
-        player.Health.RegenArmorAmount++;
         player.Health.EnableArmorRegen();
     }
 

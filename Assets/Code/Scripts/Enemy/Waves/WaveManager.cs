@@ -115,8 +115,7 @@ public class WaveManager : MonoBehaviour
             EnemyPool pool = EnemyPoolManager.Instance.GetPool(enemyPrefab);
             for (int j = 0; j < wave.EnemySpawns[i].enemySpawnCount; j++)
             {
-                Vector3 enemyPosition = _enemySpawner.GetRandomPoint(_spawnDistance);
-                StartCoroutine(_enemySpawner.SpawnWithDecal(pool, enemyPosition, _spawnDistance, (enemy) => { }));
+                StartCoroutine(_enemySpawner.SpawnWithDecal(pool, _spawnDistance, (enemy) => { }));
             }
             yield return new WaitForSeconds(wave.spawnInterval);
         }

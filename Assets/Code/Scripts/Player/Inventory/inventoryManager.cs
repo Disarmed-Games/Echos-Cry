@@ -51,8 +51,10 @@ public class InventoryManager : Singleton<InventoryManager>
         }
     }
 
-    private void UseItem(int index)
+    private void UseItem(bool isPressed, int index)
     {
+        if (!isPressed) return;
+
         if (inventoryList.Count <= 0 || inventoryList.Count <= index) return;
 
         InventoryItem usedItem = inventoryList[index];
