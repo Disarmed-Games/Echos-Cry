@@ -5228,6 +5228,8 @@ MonoBehaviour:
     frequency: 0.5
   - item: {fileID: 11400000, guid: 930f8bb0d3c560b46975abaea34cf747, type: 2}
     frequency: 0.5
+  - item: {fileID: 11400000, guid: ad5d7c9693ecb3e4f83a13fa6af705bf, type: 2}
+    frequency: 0.5
 --- !u!65 &117534156992106354
 BoxCollider:
   m_ObjectHideFlags: 0
