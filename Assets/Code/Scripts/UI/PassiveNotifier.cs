@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ComboProgressNotifier : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class PassiveNotifier : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private TextMeshProUGUI _notificationText;
     [SerializeField] private Image _iconImage;
