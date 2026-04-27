@@ -5,12 +5,10 @@ public class EnemyDamageable : MonoBehaviour, IDamageable
 {
     [SerializeField] private Enemy _enemy;
     private bool _armorBreak = false;
-    private bool _isHitStop = false;
 
     private void OnEnable()
     {
         _armorBreak = false;
-        _isHitStop = false;
     }
 
     private void DamageEnemy(float damage)
@@ -45,12 +43,19 @@ public class EnemyDamageable : MonoBehaviour, IDamageable
 
         DamageEnemy(damage);
 
+        if (_enemy.Health.CurrentArmor <= 0)
+        {
+            _enemy.StateData.IsStaggered = true;
+            StartCoroutine(KnockBackDuration(attackData, 0.2f));
+        }
+
         HandleEffects(attackData.Effects);
 
         if (_enemy.Health.CurrentArmor > 0)
         {
             EchosCry.Sound.PlaySFX(_enemy.SoundConfig.ArmorHitSFX, _enemy.transform, 0);
             _enemy.Animator.PlayArmorVisualEffect();
+            _enemy.Animator.TintFlash(_enemy.Data.TintShieldFlash, _enemy.Data.TintFlashDuration);
         }
         else
         {
@@ -62,37 +67,8 @@ public class EnemyDamageable : MonoBehaviour, IDamageable
             DecalManager.Instance.GetBloodDecal().transform.position = _enemy.transform.position;
             EchosCry.Sound.PlaySFX(_enemy.SoundConfig.HitSFX, _enemy.transform, 0);
             _enemy.Animator.PlayBloodVisualEffect();
-        }
-
-        if (!_isHitStop) StartCoroutine(HitStop(attackData, damage, 0.1f));
-    }
-
-
-    private IEnumerator HitStop(AttackInfo attackData, float damage, float duration)
-    {
-        _isHitStop = true;
-        yield return new WaitForSeconds(duration);
-
-        if (_enemy.Health.CurrentArmor > 0)
-        {
-            _enemy.Animator.TintFlash(_enemy.Data.TintShieldFlash, _enemy.Data.TintFlashDuration);
-        }
-        else
-        {
-            if (!_armorBreak)
-            {
-                _armorBreak = true;
-                EchosCry.Sound.PlaySFX(_enemy.SoundConfig.ArmorBreakSFX, _enemy.transform, 0);
-            }
             _enemy.Animator.TintFlash(_enemy.Data.TintHealthFlash, _enemy.Data.TintFlashDuration);
         }
-
-        if (_enemy.Health.CurrentArmor <= 0)
-        {
-            _enemy.StateData.IsStaggered = true;
-            StartCoroutine(KnockBackDuration(attackData, 0.2f));
-        }
-        _isHitStop = false;
     }
 
     private IEnumerator KnockBackDuration(AttackInfo attackData, float duration)
