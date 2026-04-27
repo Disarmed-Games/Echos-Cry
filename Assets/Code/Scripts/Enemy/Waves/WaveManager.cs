@@ -1,3 +1,4 @@
+using AudioSystem;
 using System;
 using System.Collections;
 using Unity.Mathematics;
@@ -14,6 +15,7 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private NewEnemySpawner _enemySpawner;
     [SerializeField] private IntEventChannel _updateKillCountChannel;
     [SerializeField] private GameObject chestObject;
+    [SerializeField] private soundEffect waveCompleteSFX;
 
     public WaveData[] AllWaves { get => _allWaves; }
 
@@ -70,6 +72,7 @@ public class WaveManager : MonoBehaviour
                 HUDMessage.Instance.UpdateMessage("All Waves Completed!", 2.5f);
 
                 //Spawn Final Loot Crate
+                EchosCry.Sound.PlaySFX(waveCompleteSFX, Player.Instance.transform, 0);
                 Vector3 chestPosition = _enemySpawner.GetRandomPoint(_spawnDistance);
                 if (NavMesh.SamplePosition(chestPosition, out NavMeshHit hit, _spawnDistance, NavMesh.AllAreas))
                 {
@@ -81,6 +84,7 @@ public class WaveManager : MonoBehaviour
             }
             else
             {
+                EchosCry.Sound.PlaySFX(waveCompleteSFX, Player.Instance.transform, 0);
                 StartCoroutine(SpawnWaveAfterDelay(_timeBetweenWaves));
             }
         }

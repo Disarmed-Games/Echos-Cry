@@ -192,15 +192,6 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Teleport"",
-                    ""type"": ""Button"",
-                    ""id"": ""a5b953a0-7dc7-40cf-945f-2c90a29d100f"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""Pause"",
                     ""type"": ""Button"",
                     ""id"": ""a1a286a4-d41c-4476-af6c-1766a4fea0c8"",
@@ -387,17 +378,6 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""1709b4f0-e67d-4cd7-b7e7-9e0d66cad322"",
-                    ""path"": ""<Keyboard>/t"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";KeyboardMouse"",
-                    ""action"": ""Teleport"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""26e30141-f912-448a-8b72-ccca140c9897"",
                     ""path"": ""<Keyboard>/q"",
                     ""interactions"": """",
@@ -531,7 +511,6 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         m_Gameplay_Item2 = m_Gameplay.FindAction("Item 2", throwIfNotFound: true);
         m_Gameplay_Item3 = m_Gameplay.FindAction("Item 3", throwIfNotFound: true);
         m_Gameplay_Item4 = m_Gameplay.FindAction("Item 4", throwIfNotFound: true);
-        m_Gameplay_Teleport = m_Gameplay.FindAction("Teleport", throwIfNotFound: true);
         m_Gameplay_Pause = m_Gameplay.FindAction("Pause", throwIfNotFound: true);
         m_Gameplay_Upgrade = m_Gameplay.FindAction("Upgrade", throwIfNotFound: true);
         // Pause Menu
@@ -637,7 +616,6 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_Item2;
     private readonly InputAction m_Gameplay_Item3;
     private readonly InputAction m_Gameplay_Item4;
-    private readonly InputAction m_Gameplay_Teleport;
     private readonly InputAction m_Gameplay_Pause;
     private readonly InputAction m_Gameplay_Upgrade;
     /// <summary>
@@ -696,10 +674,6 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @Item4 => m_Wrapper.m_Gameplay_Item4;
         /// <summary>
-        /// Provides access to the underlying input action "Gameplay/Teleport".
-        /// </summary>
-        public InputAction @Teleport => m_Wrapper.m_Gameplay_Teleport;
-        /// <summary>
         /// Provides access to the underlying input action "Gameplay/Pause".
         /// </summary>
         public InputAction @Pause => m_Wrapper.m_Gameplay_Pause;
@@ -724,9 +698,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         /// <summary>
         /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
         /// </summary>
-        /// <param itemName="instance">Callback instance.</param>
+        /// <param name="instance">Callback instance.</param>
         /// <remarks>
-        /// If <paramref itemName="instance" /> is <c>null</c> or <paramref itemName="instance"/> have already been added this method does nothing.
+        /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
         /// </remarks>
         /// <seealso cref="GameplayActions" />
         public void AddCallbacks(IGameplayActions instance)
@@ -766,9 +740,6 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @Item4.started += instance.OnItem4;
             @Item4.performed += instance.OnItem4;
             @Item4.canceled += instance.OnItem4;
-            @Teleport.started += instance.OnTeleport;
-            @Teleport.performed += instance.OnTeleport;
-            @Teleport.canceled += instance.OnTeleport;
             @Pause.started += instance.OnPause;
             @Pause.performed += instance.OnPause;
             @Pause.canceled += instance.OnPause;
@@ -781,7 +752,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         /// Removes <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
         /// </summary>
         /// <remarks>
-        /// Calling this method when <paramref itemName="instance" /> have not previously been registered has no side-effects.
+        /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
         /// </remarks>
         /// <seealso cref="GameplayActions" />
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -819,9 +790,6 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @Item4.started -= instance.OnItem4;
             @Item4.performed -= instance.OnItem4;
             @Item4.canceled -= instance.OnItem4;
-            @Teleport.started -= instance.OnTeleport;
-            @Teleport.performed -= instance.OnTeleport;
-            @Teleport.canceled -= instance.OnTeleport;
             @Pause.started -= instance.OnPause;
             @Pause.performed -= instance.OnPause;
             @Pause.canceled -= instance.OnPause;
@@ -844,7 +812,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         /// Replaces all existing callback instances and previously registered input action callbacks associated with them with callbacks provided via <param cref="instance" />.
         /// </summary>
         /// <remarks>
-        /// If <paramref itemName="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
+        /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
         /// </remarks>
         /// <seealso cref="GameplayActions.AddCallbacks(IGameplayActions)" />
         /// <seealso cref="GameplayActions.RemoveCallbacks(IGameplayActions)" />
@@ -898,9 +866,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         /// <summary>
         /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
         /// </summary>
-        /// <param itemName="instance">Callback instance.</param>
+        /// <param name="instance">Callback instance.</param>
         /// <remarks>
-        /// If <paramref itemName="instance" /> is <c>null</c> or <paramref itemName="instance"/> have already been added this method does nothing.
+        /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
         /// </remarks>
         /// <seealso cref="PauseMenuActions" />
         public void AddCallbacks(IPauseMenuActions instance)
@@ -916,7 +884,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         /// Removes <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
         /// </summary>
         /// <remarks>
-        /// Calling this method when <paramref itemName="instance" /> have not previously been registered has no side-effects.
+        /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
         /// </remarks>
         /// <seealso cref="PauseMenuActions" />
         private void UnregisterCallbacks(IPauseMenuActions instance)
@@ -940,7 +908,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         /// Replaces all existing callback instances and previously registered input action callbacks associated with them with callbacks provided via <param cref="instance" />.
         /// </summary>
         /// <remarks>
-        /// If <paramref itemName="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
+        /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
         /// </remarks>
         /// <seealso cref="PauseMenuActions.AddCallbacks(IPauseMenuActions)" />
         /// <seealso cref="PauseMenuActions.RemoveCallbacks(IPauseMenuActions)" />
@@ -994,9 +962,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         /// <summary>
         /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
         /// </summary>
-        /// <param itemName="instance">Callback instance.</param>
+        /// <param name="instance">Callback instance.</param>
         /// <remarks>
-        /// If <paramref itemName="instance" /> is <c>null</c> or <paramref itemName="instance"/> have already been added this method does nothing.
+        /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
         /// </remarks>
         /// <seealso cref="ShopMenuActions" />
         public void AddCallbacks(IShopMenuActions instance)
@@ -1012,7 +980,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         /// Removes <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
         /// </summary>
         /// <remarks>
-        /// Calling this method when <paramref itemName="instance" /> have not previously been registered has no side-effects.
+        /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
         /// </remarks>
         /// <seealso cref="ShopMenuActions" />
         private void UnregisterCallbacks(IShopMenuActions instance)
@@ -1036,7 +1004,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         /// Replaces all existing callback instances and previously registered input action callbacks associated with them with callbacks provided via <param cref="instance" />.
         /// </summary>
         /// <remarks>
-        /// If <paramref itemName="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
+        /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
         /// </remarks>
         /// <seealso cref="ShopMenuActions.AddCallbacks(IShopMenuActions)" />
         /// <seealso cref="ShopMenuActions.RemoveCallbacks(IShopMenuActions)" />
@@ -1090,9 +1058,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         /// <summary>
         /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
         /// </summary>
-        /// <param itemName="instance">Callback instance.</param>
+        /// <param name="instance">Callback instance.</param>
         /// <remarks>
-        /// If <paramref itemName="instance" /> is <c>null</c> or <paramref itemName="instance"/> have already been added this method does nothing.
+        /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
         /// </remarks>
         /// <seealso cref="DialogueActions" />
         public void AddCallbacks(IDialogueActions instance)
@@ -1108,7 +1076,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         /// Removes <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
         /// </summary>
         /// <remarks>
-        /// Calling this method when <paramref itemName="instance" /> have not previously been registered has no side-effects.
+        /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
         /// </remarks>
         /// <seealso cref="DialogueActions" />
         private void UnregisterCallbacks(IDialogueActions instance)
@@ -1132,7 +1100,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         /// Replaces all existing callback instances and previously registered input action callbacks associated with them with callbacks provided via <param cref="instance" />.
         /// </summary>
         /// <remarks>
-        /// If <paramref itemName="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
+        /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
         /// </remarks>
         /// <seealso cref="DialogueActions.AddCallbacks(IDialogueActions)" />
         /// <seealso cref="DialogueActions.RemoveCallbacks(IDialogueActions)" />
@@ -1259,13 +1227,6 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnItem4(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "Teleport" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnTeleport(InputAction.CallbackContext context);
         /// <summary>
         /// Method invoked when associated input action "Pause" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>

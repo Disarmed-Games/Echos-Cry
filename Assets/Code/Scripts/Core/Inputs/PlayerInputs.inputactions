@@ -106,15 +106,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Teleport",
-                    "type": "Button",
-                    "id": "a5b953a0-7dc7-40cf-945f-2c90a29d100f",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Pause",
                     "type": "Button",
                     "id": "a1a286a4-d41c-4476-af6c-1766a4fea0c8",
@@ -296,17 +287,6 @@
                     "processors": "",
                     "groups": ";KeyboardMouse",
                     "action": "Upgrade",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "1709b4f0-e67d-4cd7-b7e7-9e0d66cad322",
-                    "path": "<Keyboard>/t",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";KeyboardMouse",
-                    "action": "Teleport",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

@@ -496,7 +496,7 @@ MonoBehaviour:
   - {fileID: 507963243}
   expositionText: {fileID: 920577161}
   sceneWaitTime: 10
-  slideSFX: {fileID: 11400000, guid: e20c9a5c30861824d897c64150b8327c, type: 2}
+  slideSFX: {fileID: 11400000, guid: 09b8b46fcb3c4654dab51ccd6ffe8715, type: 2}
   screamsSFX: {fileID: 11400000, guid: 343dda8f240f1e04fb72eb3eacc133fa, type: 2}
 --- !u!1 &920577159
 GameObject:
@@ -533,7 +533,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 960, y: -1031.127}
+  m_AnchoredPosition: {x: 960, y: -1103.5663}
   m_SizeDelta: {x: 1024, y: 128}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &920577161
