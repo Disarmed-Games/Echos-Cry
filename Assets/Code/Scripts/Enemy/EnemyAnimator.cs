@@ -14,7 +14,7 @@ public class EnemyAnimator : MonoBehaviour
 
     public SpriteRenderer EnemySprite { get { return _enemySprite; } }
 
-    private Color _defaultTintColor;
+    private Color _defaultTintColor = Color.white;
     private readonly int hashedTintColor = Shader.PropertyToID("_TintColor");
  
     public void TintFlash(Color tintColor, float flashDuration)
@@ -70,12 +70,6 @@ public class EnemyAnimator : MonoBehaviour
         _enemySprite.material.SetColor(hashedTintColor, tintColor);
         yield return new WaitForSeconds(flashDuration);
         _enemySprite.material.SetColor(hashedTintColor, currentColor);
-    }
-
-    private void Awake()
-    {
-        if (_enemySprite != null)
-            _defaultTintColor = _enemySprite.material.GetColor(hashedTintColor);        
     }
 
     private void OnEnable()

@@ -111,6 +111,8 @@ public class MovementAdjustEffect : Effect
     }
     public override void Remove(Enemy enemy, EffectHandler handler)
     {
-            enemy.Animator.ResetTint();
+        enemy.Animator.ResetTint();
+        enemy.Stats.MovementMultiplier /= speedAdjustment;
+        enemy.NavMeshAgent.speed = enemy.DefaultMovementSpeed;
     }
 }

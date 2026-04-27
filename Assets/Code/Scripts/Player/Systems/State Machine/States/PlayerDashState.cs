@@ -33,6 +33,7 @@ public class PlayerDashState : PlayerActionState
         // Handle Dash Attack
         //--------------------
         _playerContext.DashHandler.DisableCollider();
+        _playerContext.InvokeAttackEnded();
         //--------------------
 
         _playerContext.Health.IsInvincible = false;

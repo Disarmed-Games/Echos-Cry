@@ -18,19 +18,19 @@ MonoBehaviour:
   EffectIcon: {fileID: 21300000, guid: 012e9cb1c198c194da708e72b3e44388, type: 3}
   IsEffectUseOneTime: 1
   EffectUseInterval: 0
-  EffectDuration: 2
+  EffectDuration: 4
   MaxStacks: 1
   EffectTier: 1
   Effects:
-  - rid: 3227708254238539924
   - rid: 3227708254238539925
+  - rid: 3227708254238539924
   references:
     version: 2
     RefIds:
     - rid: 3227708254238539924
       type: {class: DamageEffect, ns: , asm: Echos Cry Core}
       data:
-        damage: 10
+        damage: 3
         textColor: {r: 0.0047169924, g: 0.6988818, b: 1, a: 1}
         tintColor: {r: 0.52716494, g: 0, b: 1, a: 1}
         sound: {fileID: 0}
@@ -38,4 +38,4 @@ MonoBehaviour:
       type: {class: MovementAdjustEffect, ns: , asm: Echos Cry Core}
       data:
         speedAdjustment: 0.75
-        tintColor: {r: 0.6084906, g: 0.9882593, b: 1, a: 1}
+        tintColor: {r: 0.8443396, g: 0.9953302, b: 1, a: 1}
