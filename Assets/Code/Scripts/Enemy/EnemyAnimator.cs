@@ -21,7 +21,11 @@ public class EnemyAnimator : MonoBehaviour
  
     public void TintFlash(Color tintColor, float flashDuration)
     {
-        if(_coroutine != null) StopCoroutine(_coroutine);
+        if (_coroutine != null)
+        {
+            StopCoroutine(_coroutine);
+            _enemySprite.material.SetColor(hashedTintColor, _currentTintColor);
+        }
         _coroutine = StartCoroutine(TintFlashCoroutine(tintColor, flashDuration));
     }
 
