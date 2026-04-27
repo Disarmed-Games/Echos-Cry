@@ -17,8 +17,8 @@ MonoBehaviour:
   EffectIcon: {fileID: 21300000, guid: f73e34ee43a5a8844ad2f3955af3afa7, type: 3}
   IsEffectUseOneTime: 1
   EffectUseInterval: 0
-  EffectDuration: 4
-  MaxStacks: 1
+  EffectDuration: 5
+  MaxStacks: 3
   EffectTier: 0
   Effects:
   - rid: 8131980911248146845
