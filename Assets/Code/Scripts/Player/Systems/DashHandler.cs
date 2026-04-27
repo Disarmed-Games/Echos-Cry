@@ -39,6 +39,7 @@ public class DashHandler : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if(effects.Count <= 0) return;  
         AttackInfo attack = new AttackInfo.Builder()
             .SetDamage(0)
             .SetHitQuality(hitQuality)
