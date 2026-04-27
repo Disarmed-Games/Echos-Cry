@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 431ee22ecd46e8f429b87aa1340dab88, type: 3}
-  m_Name: Lucky Clover
+  m_Name: Flame Item
   m_EditorClassIdentifier: Echos Cry Core::LuckyCloverItemData
-  displayName: Lucky Clover
-  description: implement later when use function is setup
-  icon: {fileID: 21300000, guid: a1e1518a82084694eaabbe906203ad72, type: 3}
-  isStackable: 0
+  displayName: Flaming Touch
+  description: Enemies are set on fire for 3 seconds.
+  icon: {fileID: 21300000, guid: fed6dd84509e96747897f82c287018ea, type: 3}
+  isStackable: 1
+  effectChannel: {fileID: 11400000, guid: ebb716e1030fb8043b176d7335203b25, type: 2}
