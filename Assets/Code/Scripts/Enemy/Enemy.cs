@@ -33,6 +33,9 @@ public class Enemy : MonoBehaviour
     private EnemyStateData _stateData;
     private Stats _stats;
 
+    [SerializeField] float _whiplashThreshold = 30f;
+    public float WhiplashThreshold { get => _whiplashThreshold; }
+
     public float DefaultMovementSpeed { get; private set; }
 
     public AttackInfo DeathInfo;

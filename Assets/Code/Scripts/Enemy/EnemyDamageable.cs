@@ -10,8 +10,22 @@ public class EnemyDamageable : MonoBehaviour, IDamageable
     private void OnEnable()
     {
         _armorBreak = false;
+        _isHitStop = false;
     }
 
+    private void DamageEnemy(float damage)
+    {
+        _enemy.Health.Damage(damage);
+
+        //Visuals
+        if (_enemy.EnemyHealthUI != null) _enemy.EnemyHealthUI.UpdateUI(_enemy.Health.CurrentHealth,
+            _enemy.Health.MaxHealth,
+            _enemy.Health.CurrentArmor,
+            _enemy.Health.MaxArmor);
+
+        if (DamageLabelManager.Instance != null && DamageLabelManager.Instance.isActiveAndEnabled)
+            DamageLabelManager.Instance.SpawnPopup(damage, _enemy.transform.position, Color.white);
+    }
     public void Execute(AttackInfo attackData)
     {
         //Logic
@@ -29,12 +43,7 @@ public class EnemyDamageable : MonoBehaviour, IDamageable
 
         float damage = attackData.Damage * _enemy.Stats.DamageMultiplier;
 
-        _enemy.Health.Damage(damage);
-
-        if(_enemy.EnemyHealthUI != null) _enemy.EnemyHealthUI.UpdateUI(_enemy.Health.CurrentHealth, 
-            _enemy.Health.MaxHealth, 
-            _enemy.Health.CurrentArmor, 
-            _enemy.Health.MaxArmor);
+        DamageEnemy(damage);
 
         HandleEffects(attackData.Effects);
 
@@ -54,9 +63,6 @@ public class EnemyDamageable : MonoBehaviour, IDamageable
             EchosCry.Sound.PlaySFX(_enemy.SoundConfig.HitSFX, _enemy.transform, 0);
             _enemy.Animator.PlayBloodVisualEffect();
         }
-
-        if (DamageLabelManager.Instance != null && DamageLabelManager.Instance.isActiveAndEnabled)
-            DamageLabelManager.Instance.SpawnPopup(damage, _enemy.transform.position, Color.white);
 
         if (!_isHitStop) StartCoroutine(HitStop(attackData, damage, 0.1f));
     }
@@ -95,6 +101,15 @@ public class EnemyDamageable : MonoBehaviour, IDamageable
         Vector3 direction = (_enemy.transform.position - attackData.Origin.position).normalized;
         _enemy.Rigidbody.AddForce(_enemy.Stats.KnockbackMultiplier * attackData.Force * direction, attackData.ForceMode);
         yield return new WaitForSeconds(duration);
+
+        float damage = _enemy.Rigidbody.linearVelocity.magnitude;
+        if(damage >= 25f)
+        {
+            DamageEnemy(damage);
+            _enemy.Animator.TintFlash(_enemy.Data.TintHealthFlash, _enemy.Data.TintFlashDuration);
+            EchosCry.Sound.PlaySFX(_enemy.SoundConfig.HitSFX, _enemy.transform, 0);
+        }
+
         _enemy.Rigidbody.isKinematic = true;
     }
 
