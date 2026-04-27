@@ -29,7 +29,7 @@ public class EffectData : ScriptableObject
 [Serializable]
 public abstract class Effect
 {
-    public abstract void Use(Enemy enemy, EffectHandler handler, int stackCount); 
+    public virtual void Use(Enemy enemy, EffectHandler handler, int stackCount) { }
     public virtual void Apply(Enemy enemy, EffectHandler handler) { }
     public virtual void Remove(Enemy enemy, EffectHandler handler) { }
 }
@@ -70,27 +70,31 @@ public class DamageEffect : Effect
 public class DamageMultiplierEffect : Effect
 {
     public float damageMultiplier = 1.2f;
-    public float duration = 2f;
+    //public float duration = 2f;
     [Range(0f, 1f)] public float multiplierChance = 1f;
 
-    public override void Use(Enemy enemy, EffectHandler handler, int stackCount)
+    public override void Apply(Enemy enemy, EffectHandler handler)
     {
         if (CheckHitChance())
         {
             enemy.Stats.DamageMultiplier *= damageMultiplier;
-            enemy.StartCoroutine(ResetDamageMultiplier(duration, enemy));
+            //enemy.StartCoroutine(ResetDamageMultiplier(duration, enemy));
         }
+    }
+    public override void Remove(Enemy enemy, EffectHandler handler)
+    {
+        enemy.Stats.DamageMultiplier /= damageMultiplier;
     }
     private bool CheckHitChance()
     {
         float randomVal = UnityEngine.Random.Range(0f, 1f);
         return (randomVal <= multiplierChance);
     }
-    private IEnumerator ResetDamageMultiplier(float time, Enemy enemy)
-    {
-        yield return new WaitForSeconds(time);
-        enemy.Stats.DamageMultiplier /= damageMultiplier;
-    }
+    //private IEnumerator ResetDamageMultiplier(float time, Enemy enemy)
+    //{
+    //    yield return new WaitForSeconds(time);
+    //    enemy.Stats.DamageMultiplier /= damageMultiplier;
+    //}
 }
 
 [Serializable]

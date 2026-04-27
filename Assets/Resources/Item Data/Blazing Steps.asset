@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5534ba77d91fc4c4e8dbd4a00d017432, type: 3}
+  m_Name: Blazing Steps
+  m_EditorClassIdentifier: Echos Cry Core::BlazingStepsItemData
+  displayName: Blazing Steps
+  description: With the fury of the sun, burn your foes to dust!
+  icon: {fileID: 0}
+  isStackable: 0
+  _effect: {fileID: 11400000, guid: 0ddc26c79ac75334c8b260108d3f3236, type: 2}

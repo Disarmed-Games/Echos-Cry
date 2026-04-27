@@ -103,7 +103,7 @@ public class EnemyDamageable : MonoBehaviour, IDamageable
         yield return new WaitForSeconds(duration);
 
         float damage = _enemy.Rigidbody.linearVelocity.magnitude;
-        if(damage >= 25f)
+        if(damage >= _enemy.WhiplashThreshold)
         {
             DamageEnemy(damage);
             _enemy.Animator.TintFlash(_enemy.Data.TintHealthFlash, _enemy.Data.TintFlashDuration);

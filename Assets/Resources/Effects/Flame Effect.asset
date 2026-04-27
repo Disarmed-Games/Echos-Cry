@@ -16,12 +16,13 @@ MonoBehaviour:
   EffectDescription: Enemies are set on fire for 3 seconds.
   EffectIcon: {fileID: 21300000, guid: 18fc345cacadc55419c9498c16340343, type: 3}
   IsEffectUseOneTime: 0
-  EffectUseInterval: 0.5
+  EffectUseInterval: 1
   EffectDuration: 3
   MaxStacks: 2
-  EffectTier: 0
+  EffectTier: 1
   Effects:
   - rid: 3227708235182244004
+  - rid: 3227708259094233281
   references:
     version: 2
     RefIds:
@@ -32,3 +33,8 @@ MonoBehaviour:
         textColor: {r: 1, g: 0.5721819, b: 0.15566039, a: 1}
         tintColor: {r: 1, g: 0.7060223, b: 0.3915094, a: 1}
         sound: {fileID: 11400000, guid: e20c9a5c30861824d897c64150b8327c, type: 2}
+    - rid: 3227708259094233281
+      type: {class: DamageMultiplierEffect, ns: , asm: Echos Cry Core}
+      data:
+        damageMultiplier: 1.4
+        multiplierChance: 1

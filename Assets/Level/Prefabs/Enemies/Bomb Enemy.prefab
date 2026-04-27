@@ -358,6 +358,7 @@ MonoBehaviour:
   _data: {fileID: 11400000, guid: d25d8e2208736e446b0835c9b958b647, type: 2}
   _enemyHealthUI: {fileID: 1385049851521198975}
   _statsData: {fileID: 0}
+  _whiplashThreshold: 25
   _attackStrats:
   - {fileID: 5361766758243608955}
   _targetStrats:

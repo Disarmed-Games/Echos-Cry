@@ -306,6 +306,8 @@ MonoBehaviour:
     frequency: 0.5
   - item: {fileID: 11400000, guid: 930f8bb0d3c560b46975abaea34cf747, type: 2}
     frequency: 0.5
+  - item: {fileID: 11400000, guid: ace208ef9654b5f4b925adcab58a0beb, type: 2}
+    frequency: 0.5
 --- !u!1 &6995668911894562656
 GameObject:
   m_ObjectHideFlags: 0

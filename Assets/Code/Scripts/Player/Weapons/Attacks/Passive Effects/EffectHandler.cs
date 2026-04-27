@@ -46,25 +46,19 @@ public class EffectHandler : MonoBehaviour
             int newStack = _activeEffectData[effectEnum].stacks + 1; 
             if (newStack > effect.MaxStacks) return; //If new stack count greater than max count, return
 
-            Coroutine newRoutine = null;
-            if (_activeEffectData[effectEnum].coroutine != null)
-            {
-                StopCoroutine(_activeEffectData[effectEnum].coroutine); //Stop prior routine interval if has it
-                newRoutine = StartCoroutine(RoutineEffect(effect, enemy)); //Restart coroutine
-            }
-
             _activeEffectData.Remove(effectEnum);
 
-            _activeEffectData.Add(effectEnum, new EffectNode(newRoutine, newStack));
+            _activeEffectData.Add(effectEnum, new EffectNode(_activeEffectData[effectEnum].coroutine, newStack));
 
-            foreach (Effect e in effect.Effects)
-            {
-                e.Apply(enemy, this);
-            }
             return;
         }
 
         _activeEffects.Add(effectEnum); //Add effect to active effects
+
+        foreach (Effect e in effect.Effects)
+        {
+            e.Apply(enemy, this);
+        }
 
         StartCoroutine(EndRoutineEffect(effect, enemy)); //Start coroutine for effect duration
 

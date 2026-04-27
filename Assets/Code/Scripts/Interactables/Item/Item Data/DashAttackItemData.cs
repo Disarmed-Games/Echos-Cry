@@ -10,9 +10,4 @@ public class DashAttackItemData : InventoryItemData
         player.DashHandler.AddEffect(_dashAttack);
         player.ActiveEffectsTier1.Add(_dashAttack);
     }
-
-    public override bool CanUse(Player player)
-    {
-        return true;
-    }
 }
