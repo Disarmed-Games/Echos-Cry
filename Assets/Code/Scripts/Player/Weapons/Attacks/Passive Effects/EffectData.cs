@@ -116,3 +116,27 @@ public class MovementAdjustEffect : Effect
         enemy.NavMeshAgent.speed = enemy.DefaultMovementSpeed;
     }
 }
+
+[Serializable]
+public class KnockbackAdjustEffect : Effect
+{
+    public float knockbackAdjustment = 1;
+    public Color tintColor = Color.white;
+    public override void Use(Enemy enemy, EffectHandler handler, int stackCount)
+    {
+        for (int i = 0; i < stackCount; i++)
+        {
+            enemy.Stats.MovementMultiplier *= speedAdjustment;
+        }
+    }
+    public override void Apply(Enemy enemy, EffectHandler handler)
+    {
+        enemy.Animator.SetTint(tintColor);
+    }
+    public override void Remove(Enemy enemy, EffectHandler handler)
+    {
+        enemy.Animator.ResetTint();
+        enemy.Stats.MovementMultiplier /= speedAdjustment;
+        enemy.NavMeshAgent.speed = enemy.DefaultMovementSpeed;
+    }
+}
