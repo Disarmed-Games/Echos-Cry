@@ -31,4 +31,4 @@ MonoBehaviour:
         damage: 2
         textColor: {r: 0.754717, g: 0, b: 0.52309936, a: 1}
         tintColor: {r: 1, g: 0, b: 0, a: 1}
-        sound: {fileID: 0}
+        sound: {fileID: 11400000, guid: c8c975e393c92cc4f8f6aa88905bcc9e, type: 2}

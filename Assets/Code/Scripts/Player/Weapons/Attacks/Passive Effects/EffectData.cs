@@ -62,6 +62,7 @@ public class DamageEffect : Effect
         enemy.Health.CurrentArmor,
         enemy.Health.MaxArmor);
     }
+    
 }
 
 //Updates the damage multiplier of target enemy, unless it is chance-based, which then means it'll check based on the multiplier chance passed to it
