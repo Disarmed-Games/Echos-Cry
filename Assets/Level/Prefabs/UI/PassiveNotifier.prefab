@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8914425852931834478}
-  - component: {fileID: 4795848718724799425}
+  - component: {fileID: 6136000709020325543}
   m_Layer: 5
   m_Name: PassiveNotifier
   m_TagString: Untagged
@@ -39,7 +39,7 @@ RectTransform:
   m_AnchoredPosition: {x: 64, y: -56}
   m_SizeDelta: {x: 128, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &4795848718724799425
+--- !u!114 &6136000709020325543
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -48,9 +48,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1838267211631144033}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fbd26fee9010c8141a0b0f2028a7ecd5, type: 3}
+  m_Script: {fileID: 11500000, guid: 9199d8000b1e95340932d7a9b064770d, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Echos Cry Core::ComboProgressNotifier
+  m_EditorClassIdentifier: Echos Cry Core::PassiveNotifier
   _notificationText: {fileID: 1231007869084413755}
   _iconImage: {fileID: 9053534957640572559}
 --- !u!1 &2675255343100480926
