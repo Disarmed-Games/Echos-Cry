@@ -15321,11 +15321,10 @@ GameObject:
   - component: {fileID: 415338203038042998}
   - component: {fileID: 1520755955600332291}
   - component: {fileID: 5749001807359641443}
+  - component: {fileID: 4710593916071543663}
   - component: {fileID: 2019051602396369572}
   - component: {fileID: 6060951237239432870}
   - component: {fileID: 4484604223191530329}
-  - component: {fileID: 4710593916071543663}
-  - component: {fileID: 7282090404085320965}
   m_Layer: 10
   m_Name: Player Prefab
   m_TagString: Player
@@ -15358,7 +15357,6 @@ Transform:
   - {fileID: 3502518302057154133}
   - {fileID: 7751577463115772045}
   - {fileID: 7138270232428516407}
-  - {fileID: 4329563661653272559}
   - {fileID: 1876697883255032612}
   - {fileID: 8707577586730841642}
   - {fileID: 864604785593361342}
@@ -15407,6 +15405,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerDamagable
   player: {fileID: 1520755955600332291}
+--- !u!114 &4710593916071543663
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2428720641269041060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c73dc3df49160a47a3514b3c3e5e166, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Echos Cry Core::PlayerUpgradeManager
+  player: {fileID: 1520755955600332291}
+  _upgradeDamageChannel: {fileID: 11400000, guid: 259cf655db4111946bf664a82d7bbd9c, type: 2}
+  _moveSpeedChannel: {fileID: 11400000, guid: b9b7dd2a8f79bec4b9365537b310ce1e, type: 2}
+  _dashSpeedChannel: {fileID: 11400000, guid: b49daf7febadf974d853b7c7efd88e9c, type: 2}
+  _healthChannel: {fileID: 11400000, guid: 500d6e615a856a844a407ce00b7f4ff7, type: 2}
+  _armorChannel: {fileID: 11400000, guid: ed980f021be41e944b80a689b2fca290, type: 2}
+  _regenHealthChannel: {fileID: 11400000, guid: 58f244f8770115148acb4868ba17b6b8, type: 2}
+  _regenArmorChannel: {fileID: 11400000, guid: 32e8668cebf73d74994810528e57ffd2, type: 2}
+  _dashCountChannel: {fileID: 11400000, guid: 525432ab9a8309644a0c3e1894f626e4, type: 2}
+  _dashCooldownChannel: {fileID: 11400000, guid: 01cfb1c9714eab745b95991f9c7b59f8, type: 2}
+  _knockbackChannel: {fileID: 11400000, guid: 3f5751c6174f00a42ac4d37142946366, type: 2}
+  _heatgaugeChannel: {fileID: 11400000, guid: 1b00fa362e50faf4eb0832f295fbc340, type: 2}
 --- !u!54 &2019051602396369572
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -15474,45 +15496,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   _playerRigidbody: {fileID: 2019051602396369572}
---- !u!114 &4710593916071543663
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2428720641269041060}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c73dc3df49160a47a3514b3c3e5e166, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Echos Cry Core::PlayerUpgradeManager
-  player: {fileID: 1520755955600332291}
-  _upgradeDamageChannel: {fileID: 11400000, guid: 259cf655db4111946bf664a82d7bbd9c, type: 2}
-  _moveSpeedChannel: {fileID: 11400000, guid: b9b7dd2a8f79bec4b9365537b310ce1e, type: 2}
-  _dashSpeedChannel: {fileID: 11400000, guid: b49daf7febadf974d853b7c7efd88e9c, type: 2}
-  _healthChannel: {fileID: 11400000, guid: 500d6e615a856a844a407ce00b7f4ff7, type: 2}
-  _armorChannel: {fileID: 11400000, guid: ed980f021be41e944b80a689b2fca290, type: 2}
-  _regenHealthChannel: {fileID: 11400000, guid: 58f244f8770115148acb4868ba17b6b8, type: 2}
-  _regenArmorChannel: {fileID: 11400000, guid: 32e8668cebf73d74994810528e57ffd2, type: 2}
-  _dashCountChannel: {fileID: 11400000, guid: 525432ab9a8309644a0c3e1894f626e4, type: 2}
-  _dashCooldownChannel: {fileID: 11400000, guid: 01cfb1c9714eab745b95991f9c7b59f8, type: 2}
-  _knockbackChannel: {fileID: 11400000, guid: 3f5751c6174f00a42ac4d37142946366, type: 2}
-  _heatgaugeChannel: {fileID: 11400000, guid: 1b00fa362e50faf4eb0832f295fbc340, type: 2}
---- !u!114 &7282090404085320965
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2428720641269041060}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c1bc1e69253b674d93654631b97343b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  player: {fileID: 1520755955600332291}
-  flameEffect: {fileID: 11400000, guid: 3a440bd36af11cc4a99be37318f963d4, type: 2}
-  _flameEvent: {fileID: 11400000, guid: ebb716e1030fb8043b176d7335203b25, type: 2}
 --- !u!1 &3006569362082907649
 GameObject:
   m_ObjectHideFlags: 0
@@ -20891,8 +20874,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7201518023208895514}
-  - component: {fileID: 5456387347239662864}
-  - component: {fileID: 813663695114538974}
   - component: {fileID: 4816427086802465722}
   m_Layer: 10
   m_Name: Upgrade Managers
@@ -20916,36 +20897,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 415338203038042998}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5456387347239662864
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5721226915542625667}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 385b7baeb3f726449bf241b60ee0f5bb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Echos Cry Core::DashUpgradeManager
-  player: {fileID: 1520755955600332291}
-  _damageEffect: {fileID: 0}
-  _dashAttackEvent: {fileID: 11400000, guid: 0827540fa0d61a848adf46dd6bfb67db, type: 2}
---- !u!114 &813663695114538974
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5721226915542625667}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c1bc1e69253b674d93654631b97343b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  player: {fileID: 1520755955600332291}
-  flameEffect: {fileID: 11400000, guid: 3a440bd36af11cc4a99be37318f963d4, type: 2}
-  _flameEvent: {fileID: 11400000, guid: ebb716e1030fb8043b176d7335203b25, type: 2}
 --- !u!114 &4816427086802465722
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21209,51 +21160,6 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!1 &8250561437041970932
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4329563661653272559}
-  - component: {fileID: 6110703916965862278}
-  m_Layer: 10
-  m_Name: Abilities
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4329563661653272559
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8250561437041970932}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 415338203038042998}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6110703916965862278
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8250561437041970932}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d6bc1471fa4b8a44e9f37bc444954cc9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Echos Cry Core::AbilityManager
-  dashAttackPrefab: {fileID: 4358567150161637453, guid: 44984c03e6757cc4e87c1feeb55775fa, type: 3}
 --- !u!1 &8404479966868727612
 GameObject:
   m_ObjectHideFlags: 0
