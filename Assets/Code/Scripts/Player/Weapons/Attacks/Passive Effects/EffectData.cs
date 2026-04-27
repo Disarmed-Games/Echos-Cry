@@ -29,9 +29,7 @@ public class EffectData : ScriptableObject
 [Serializable]
 public abstract class Effect
 {
-    public virtual void Use(Enemy enemy, EffectHandler handler, int stackCount) { }
-    public virtual void Apply(Enemy enemy, EffectHandler handler) { }
-    public virtual void Remove(Enemy enemy, EffectHandler handler) { }
+    public abstract void Use(Enemy enemy, EffectHandler handler, int stackCount, float duration);
 }
 
 //Does damage to target enemy on Use
@@ -43,7 +41,7 @@ public class DamageEffect : Effect
     public Color tintColor = Color.red;
     public soundEffect sound = null;
 
-    public override void Use(Enemy enemy, EffectHandler handler, int stackCount)
+    public override void Use(Enemy enemy, EffectHandler handler, int stackCount, float duration)
     {
         float attackDamage = damage * stackCount;
         enemy.Health.Damage(attackDamage);
@@ -70,31 +68,27 @@ public class DamageEffect : Effect
 public class DamageMultiplierEffect : Effect
 {
     public float damageMultiplier = 1.2f;
-    //public float duration = 2f;
+    public float duration = 2f;
     [Range(0f, 1f)] public float multiplierChance = 1f;
-
-    public override void Apply(Enemy enemy, EffectHandler handler)
+    public override void Use(Enemy enemy, EffectHandler handler, int stackCount, float duration)
     {
         if (CheckHitChance())
         {
             enemy.Stats.DamageMultiplier *= damageMultiplier;
-            //enemy.StartCoroutine(ResetDamageMultiplier(duration, enemy));
+            handler.StartCoroutine(ResetDamageMultiplier(duration, enemy));
         }
     }
-    public override void Remove(Enemy enemy, EffectHandler handler)
-    {
-        enemy.Stats.DamageMultiplier /= damageMultiplier;
-    }
+
     private bool CheckHitChance()
     {
         float randomVal = UnityEngine.Random.Range(0f, 1f);
         return (randomVal <= multiplierChance);
     }
-    //private IEnumerator ResetDamageMultiplier(float time, Enemy enemy)
-    //{
-    //    yield return new WaitForSeconds(time);
-    //    enemy.Stats.DamageMultiplier /= damageMultiplier;
-    //}
+    private IEnumerator ResetDamageMultiplier(float time, Enemy enemy)
+    {
+        yield return new WaitForSeconds(time);
+        enemy.Stats.DamageMultiplier /= damageMultiplier;
+    }
 }
 
 [Serializable]
@@ -102,22 +96,21 @@ public class MovementAdjustEffect : Effect
 {
     public float speedAdjustment = 1;
     public Color tintColor = Color.white;
-    public override void Use(Enemy enemy, EffectHandler handler, int stackCount)
+    public override void Use(Enemy enemy, EffectHandler handler, int stackCount, float duration)
     {
         for (int i = 0; i < stackCount; i++)
         {
             enemy.Stats.MovementMultiplier *= speedAdjustment;
         }
-    }
-    public override void Apply(Enemy enemy, EffectHandler handler)
-    {
         enemy.Animator.SetTint(tintColor);
+        handler.StartCoroutine(ResetMovementMultiplier(1f, enemy));
     }
-    public override void Remove(Enemy enemy, EffectHandler handler)
+    private IEnumerator ResetMovementMultiplier(float time, Enemy enemy)
     {
+        yield return new WaitForSeconds(time);
         enemy.Animator.ResetTint();
         enemy.Stats.MovementMultiplier /= speedAdjustment;
-        enemy.NavMeshAgent.speed = enemy.DefaultMovementSpeed;
+        enemy.NavMeshAgent.speed = enemy.DefaultMovementSpeed * enemy.Stats.MovementMultiplier;
     }
 }
 
@@ -126,15 +119,19 @@ public class KnockbackAdjustEffect : Effect
 {
     public float knockbackAdjustment = 1.5f;
     public Color tintColor = Color.white;
-    public override void Use(Enemy enemy, EffectHandler handler, int stackCount)
+    public override void Use(Enemy enemy, EffectHandler handler, int stackCount, float duration)
     {
         for (int i = 0; i < stackCount; i++)
         {
             enemy.Stats.KnockbackMultiplier *= knockbackAdjustment;
         }
+        enemy.Animator.SetTint(tintColor);
+        handler.StartCoroutine(ResetKnockbackMultiplier(1f, enemy));
     }
-    public override void Remove(Enemy enemy, EffectHandler handler)
+    private IEnumerator ResetKnockbackMultiplier(float time, Enemy enemy)
     {
+        yield return new WaitForSeconds(time);
+        enemy.Animator.ResetTint();
         enemy.Stats.KnockbackMultiplier /= knockbackAdjustment;
     }
 }

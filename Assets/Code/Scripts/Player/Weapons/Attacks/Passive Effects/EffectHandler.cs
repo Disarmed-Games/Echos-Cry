@@ -39,26 +39,21 @@ public class EffectHandler : MonoBehaviour
 
     public void ApplyEffect(EffectData effect, Enemy enemy)
     {
-        string effectEnum = effect.EffectName;
+        string effectName = effect.EffectName;
 
-        if (_activeEffects.Contains(effectEnum)) //Check if effect active
+        if (_activeEffects.Contains(effectName)) //Check if effect active
         {
-            int newStack = _activeEffectData[effectEnum].stacks + 1; 
+            int newStack = _activeEffectData[effectName].stacks + 1; 
             if (newStack > effect.MaxStacks) return; //If new stack count greater than max count, return
 
-            _activeEffectData.Remove(effectEnum);
+            _activeEffectData.Remove(effectName);
 
-            _activeEffectData.Add(effectEnum, new EffectNode(_activeEffectData[effectEnum].coroutine, newStack));
+            _activeEffectData.Add(effectName, new EffectNode(_activeEffectData[effectName].coroutine, newStack));
 
             return;
         }
 
-        _activeEffects.Add(effectEnum); //Add effect to active effects
-
-        foreach (Effect e in effect.Effects)
-        {
-            e.Apply(enemy, this);
-        }
+        _activeEffects.Add(effectName); //Add effect to active effects
 
         StartCoroutine(EndRoutineEffect(effect, enemy)); //Start coroutine for effect duration
 
@@ -72,7 +67,7 @@ public class EffectHandler : MonoBehaviour
             routine = StartCoroutine(RoutineEffect(effect, enemy)); //Else start coroutine
         }
 
-        _activeEffectData.Add(effectEnum, new EffectNode(routine, 1)); //Add to activeEffectData
+        _activeEffectData.Add(effectName, new EffectNode(routine, 1)); //Add to activeEffectData
     }
 
     public void RemovePassiveEffect(EffectData effect, Enemy enemy)
@@ -85,11 +80,6 @@ public class EffectHandler : MonoBehaviour
         }
         _activeEffects.Remove(effectEnum);
         _activeEffectData.Remove(effectEnum);
-
-        foreach (Effect e in effect.Effects)
-        {
-            e.Remove(enemy, this);
-        }
     }
 
     private IEnumerator EndRoutineEffect(EffectData effect, Enemy enemy)
@@ -113,7 +103,7 @@ public class EffectHandler : MonoBehaviour
         //Use every effect attributed to effectData
         foreach (Effect effect in effectData.Effects)
         {
-            effect.Use(enemy, this, stackCount);
+            effect.Use(enemy, this, stackCount, effectData.EffectDuration);
         }
     }
 }
