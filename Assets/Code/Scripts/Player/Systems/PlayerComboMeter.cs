@@ -21,7 +21,7 @@ public class PlayerComboMeter : MonoBehaviour
     private bool _isDraining = false;
 
     public static event Action<float, float> OnComboMeterChangeEvent;
-    public static event Action<EffectData> OnComboMeterPassiveUnlocked;
+    public static event Action OnComboMeterStateChanged;
     public float ComboMeterAmount { get { return _comboMeterAmount; } }
 
     public enum MeterState
@@ -106,22 +106,22 @@ public class PlayerComboMeter : MonoBehaviour
         if (progress < oneThird)
         {
             _currentMeterState = MeterState.Starting;
-            OnComboMeterPassiveUnlocked?.Invoke(null);
+            OnComboMeterStateChanged?.Invoke();
         }
         else if (progress >= oneThird && progress < twoThirds)
         {
             _currentMeterState = MeterState.OneThird;
-            //OnComboMeterPassiveUnlocked?.Invoke(currentPassives.OneThirdEffect);
+            OnComboMeterStateChanged?.Invoke();
         } 
         else if (progress >= twoThirds && progress < 1f)
         {
             _currentMeterState = MeterState.TwoThirds;
-            //OnComboMeterPassiveUnlocked?.Invoke(currentPassives.TwoThirdsEffect);
+            OnComboMeterStateChanged?.Invoke();
         }  
         else
         {
             _currentMeterState = MeterState.Full;
-            //OnComboMeterPassiveUnlocked?.Invoke(currentPassives.FullEffect);
+            OnComboMeterStateChanged?.Invoke();
         }  
     }
 
