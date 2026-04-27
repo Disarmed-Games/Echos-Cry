@@ -129,13 +129,8 @@ public class KnockbackAdjustEffect : Effect
             enemy.Stats.KnockbackMultiplier *= knockbackAdjustment;
         }
     }
-    public override void Apply(Enemy enemy, EffectHandler handler)
-    {
-        enemy.Animator.SetTint(tintColor);
-    }
     public override void Remove(Enemy enemy, EffectHandler handler)
     {
-        enemy.Animator.ResetTint();
-        enemy.Stats.MovementMultiplier /= knockbackAdjustment;
+        enemy.Stats.KnockbackMultiplier /= knockbackAdjustment;
     }
 }
