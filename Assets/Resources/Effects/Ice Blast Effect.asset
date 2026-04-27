@@ -17,21 +17,21 @@ MonoBehaviour:
   EffectIcon: {fileID: 0}
   IsEffectUseOneTime: 1
   EffectUseInterval: 0
-  EffectDuration: 3
+  EffectDuration: 2
   MaxStacks: 1
-  EffectTier: 0
+  EffectTier: 1
   Effects:
-  - rid: 3227708254238539925
   - rid: 3227708254238539924
+  - rid: 3227708254238539925
   references:
     version: 2
     RefIds:
     - rid: 3227708254238539924
       type: {class: DamageEffect, ns: , asm: Echos Cry Core}
       data:
-        damage: 2
-        textColor: {r: 1, g: 1, b: 1, a: 1}
-        tintColor: {r: 1, g: 0, b: 0, a: 1}
+        damage: 10
+        textColor: {r: 0.0047169924, g: 0.6988818, b: 1, a: 1}
+        tintColor: {r: 0.52716494, g: 0, b: 1, a: 1}
         sound: {fileID: 0}
     - rid: 3227708254238539925
       type: {class: MovementAdjustEffect, ns: , asm: Echos Cry Core}
