@@ -1,6 +1,8 @@
 using EchosCry;
+using Ink.Parsed;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : NonSpawnableSingleton<Player>
@@ -21,6 +23,7 @@ public class Player : NonSpawnableSingleton<Player>
     [SerializeField] private HeatGauge _heatGauge;
     [SerializeField] private PlayerParticles _particles;
     [SerializeField] private AbilityManager abilities;
+    [SerializeField] private DashHandler _dashHandler;
     private Stats _stats;
 
     [SerializeField] private GameObject _mainCanvas;
@@ -31,7 +34,11 @@ public class Player : NonSpawnableSingleton<Player>
 
     private PlayerStateMachine _playerStateMachine;
     private PlayerStateCache _playerStateCache;
-    
+
+    private List<EffectData> _activeEffectsTier1 = new();
+    private List<EffectData> _activeEffectsTier2 = new();
+    private List<EffectData> _activeEffectsTier3 = new();
+
     public PlayerHealth Health { get => _health; }
     public PlayerComboMeter ComboMeter { get => _comboMeter; }
     public PlayerAnimator Animator { get => _animator; }
@@ -49,6 +56,10 @@ public class Player : NonSpawnableSingleton<Player>
     public PlayerUI UI { get => _ui; }
     public AbilityManager Abilities { get => abilities; }
     public Stats Stats { get => _stats; }
+    public DashHandler DashHandler { get => _dashHandler; }
+    public List<EffectData> ActiveEffectsTier1 { get => _activeEffectsTier1; }
+    public List<EffectData> ActiveEffectsTier2 { get => _activeEffectsTier2; }
+    public List<EffectData> ActiveEffectsTier3 { get => _activeEffectsTier3; }
 
     private void InitStateCache()
     {
@@ -148,6 +159,7 @@ public class Player : NonSpawnableSingleton<Player>
         _currencySystem.SetGoldCurrency(0);
         _stats.Reset();
         _weaponHolder.ResetEffects();
+        _dashHandler.ClearEffects();
     }
 
     public void InvokeAttackEnded()

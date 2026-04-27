@@ -16,12 +16,7 @@ public class PlayerDashState : PlayerActionState
 
         // Handle Dash Attack
         //--------------------
-        DashAttack dashAttack = _playerContext.Abilities.TryGetDashAttack();
-        if(dashAttack != null)
-        {
-            dashAttack.HitQuality = TempoConductor.Instance.CurrentHitQuality;
-            dashAttack.gameObject.SetActive(true);
-        }
+        _playerContext.DashHandler.EnableCollider(TempoConductor.Instance.CurrentHitQuality);
         //--------------------
 
         _playerContext.Health.IsInvincible = true;
@@ -37,12 +32,7 @@ public class PlayerDashState : PlayerActionState
     {
         // Handle Dash Attack
         //--------------------
-        DashAttack dashAttack = _playerContext.Abilities.TryGetDashAttack();
-        if (dashAttack != null)
-        {
-            dashAttack.gameObject.SetActive(false);
-            _playerContext.InvokeAttackEnded();
-        }
+        _playerContext.DashHandler.DisableCollider();
         //--------------------
 
         _playerContext.Health.IsInvincible = false;

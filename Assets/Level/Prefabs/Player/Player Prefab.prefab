@@ -15063,6 +15063,73 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!1 &1983278983046200198
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7138270232428516407}
+  - component: {fileID: 808184228267354090}
+  - component: {fileID: 2387737472951845598}
+  m_Layer: 11
+  m_Name: Dash Handler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7138270232428516407
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1983278983046200198}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.643, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 415338203038042998}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &808184228267354090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1983278983046200198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3757d4bb0b144af44bc4bccc4a6c3f7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Echos Cry Core::DashHandler
+  effectData: {fileID: 11400000, guid: 3a440bd36af11cc4a99be37318f963d4, type: 2}
+--- !u!65 &2387737472951845598
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1983278983046200198}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 512
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 65015
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2010116007821540472
 GameObject:
   m_ObjectHideFlags: 0
@@ -15290,6 +15357,7 @@ Transform:
   - {fileID: 2009047576672927120}
   - {fileID: 3502518302057154133}
   - {fileID: 7751577463115772045}
+  - {fileID: 7138270232428516407}
   - {fileID: 4329563661653272559}
   - {fileID: 1876697883255032612}
   - {fileID: 8707577586730841642}
@@ -15324,6 +15392,7 @@ MonoBehaviour:
   _heatGauge: {fileID: 4873508211248062902}
   _particles: {fileID: 2948394587096347692}
   abilities: {fileID: 6110703916965862278}
+  _dashHandler: {fileID: 808184228267354090}
   _mainCanvas: {fileID: 7943711229740518397, guid: 42f411ff78ea6ef4f9d4785b36fbf7c0, type: 3}
   _attackEndedChannel: {fileID: 11400000, guid: 32c2647349869554ca690720dab27258, type: 2}
 --- !u!114 &5749001807359641443
