@@ -61,14 +61,6 @@ public class EnemyDamageable : MonoBehaviour, IDamageable
         if (!_isHitStop) StartCoroutine(HitStop(attackData, damage, 0.1f));
     }
 
-    private IEnumerator KnockBackDuration(AttackInfo attackData, float duration)
-    {
-        _enemy.Rigidbody.isKinematic = false;
-        Vector3 direction = (_enemy.transform.position - attackData.Origin.position).normalized;
-        _enemy.Rigidbody.AddForce(_enemy.Stats.KnockbackMultiplier * attackData.Force * direction, attackData.ForceMode);
-        yield return new WaitForSeconds(duration);
-        _enemy.Rigidbody.isKinematic = true;
-    }
 
     private IEnumerator HitStop(AttackInfo attackData, float damage, float duration)
     {
@@ -95,6 +87,15 @@ public class EnemyDamageable : MonoBehaviour, IDamageable
             StartCoroutine(KnockBackDuration(attackData, 0.2f));
         }
         _isHitStop = false;
+    }
+
+    private IEnumerator KnockBackDuration(AttackInfo attackData, float duration)
+    {
+        _enemy.Rigidbody.isKinematic = false;
+        Vector3 direction = (_enemy.transform.position - attackData.Origin.position).normalized;
+        _enemy.Rigidbody.AddForce(_enemy.Stats.KnockbackMultiplier * attackData.Force * direction, attackData.ForceMode);
+        yield return new WaitForSeconds(duration);
+        _enemy.Rigidbody.isKinematic = true;
     }
 
     private void HandleEffects(EffectData[] effects)
