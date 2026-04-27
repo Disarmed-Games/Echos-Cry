@@ -20,11 +20,18 @@ public class EnemyDamageable : MonoBehaviour, IDamageable
         
         _enemy.DeathInfo = attackData;
 
+        if(attackData.Damage == 0)
+        {
+            HandleEffects(attackData.Effects);
+            return;
+        }
+
         float damage = attackData.Damage * _enemy.Stats.DamageMultiplier;
 
         _enemy.Health.Damage(damage);
 
         HandleEffects(attackData.Effects);
+
 
         if (_enemy.Health.CurrentArmor <= 0)
         {

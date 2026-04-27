@@ -11,6 +11,7 @@ public class EnemyAnimator : MonoBehaviour
     [SerializeField] private ParticleSystem _staggerParticles;
     [SerializeField] private ParticleSystem _armorBreakingParticles;
     [SerializeField] private bool _isReversed;
+    private Coroutine _coroutine;
 
     public SpriteRenderer EnemySprite { get { return _enemySprite; } }
 
@@ -19,8 +20,8 @@ public class EnemyAnimator : MonoBehaviour
  
     public void TintFlash(Color tintColor, float flashDuration)
     {
-        StopCoroutine(TintFlashCoroutine(tintColor, flashDuration));
-        StartCoroutine(TintFlashCoroutine(tintColor, flashDuration));
+        if(_coroutine != null) StopCoroutine(_coroutine);
+        _coroutine = StartCoroutine(TintFlashCoroutine(tintColor, flashDuration));
     }
 
     public void UpdateSpriteDirection(Vector3 direction)
@@ -70,6 +71,7 @@ public class EnemyAnimator : MonoBehaviour
         _enemySprite.material.SetColor(hashedTintColor, tintColor);
         yield return new WaitForSeconds(flashDuration);
         _enemySprite.material.SetColor(hashedTintColor, currentColor);
+        _coroutine = null;
     }
 
     private void OnEnable()
