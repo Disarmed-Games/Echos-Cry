@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Echos Cry Core::EffectData
   EffectName: Dash Attack
   EffectDescription: 
-  EffectIcon: {fileID: 0}
+  EffectIcon: {fileID: 21300000, guid: 200560c6c2a998344ab5e66585e0b592, type: 3}
   IsEffectUseOneTime: 1
   EffectUseInterval: 0
   EffectDuration: 0

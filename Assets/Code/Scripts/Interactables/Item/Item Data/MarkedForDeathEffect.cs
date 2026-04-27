@@ -1,7 +1,7 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Flame Item", menuName = "Echo's Cry/Inventory/Flame Item")]
-public class FlameEffectItemData: InventoryItemData
+[CreateAssetMenu(fileName = "Marked Death Item", menuName = "Echo's Cry/Inventory/Marked Death Item")]
+public class MarkedForDeathEffect : InventoryItemData
 {
     [SerializeField] private EffectData effect;
 
@@ -15,3 +15,4 @@ public class FlameEffectItemData: InventoryItemData
         player.WeaponHolder.AddEffectPrimary(EchosCry.Combo.StateName.Light5, effect);
     }
 }
+

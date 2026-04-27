@@ -1,13 +1,13 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Flame Item", menuName = "Echo's Cry/Inventory/Flame Item")]
-public class FlameEffectItemData: InventoryItemData
+[CreateAssetMenu(fileName = "Bleed Item", menuName = "Echo's Cry/Inventory/Bleed Item")]
+public class BleedEffectItemData : InventoryItemData
 {
     [SerializeField] private EffectData effect;
 
     public override void Use(Player player)
     {
-        player.ActiveEffectsTier2.Add(effect);
+        player.ActiveEffectsTier1.Add(effect);
         player.WeaponHolder.AddEffectPrimary(EchosCry.Combo.StateName.Light1, effect);
         player.WeaponHolder.AddEffectPrimary(EchosCry.Combo.StateName.Light2, effect);
         player.WeaponHolder.AddEffectPrimary(EchosCry.Combo.StateName.Light3, effect);

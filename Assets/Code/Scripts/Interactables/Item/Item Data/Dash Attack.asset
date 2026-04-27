@@ -15,4 +15,5 @@ MonoBehaviour:
   displayName: Dash Attack
   description: Dash into enemies to deal damage.
   icon: {fileID: 21300000, guid: 3aa7628cef7b3c04795278b4a59d6b9e, type: 3}
-  _dashAttackChannel: {fileID: 11400000, guid: 0827540fa0d61a848adf46dd6bfb67db, type: 2}
+  isStackable: 0
+  _dashAttack: {fileID: 11400000, guid: 551dbe7b43ac52849a8baca7eda93228, type: 2}
