@@ -134,7 +134,7 @@ public class ScoreSceneManager : MonoBehaviour
         ratingtTransform.localRotation = Quaternion.identity;
         ratingtTransform.DOShakeRotation(transitionTime, 30, 10, 45, true);
 
-        EchosCry.Sound.PlaySFX(boomSFX, PlayerRef.Transform, 0);
+        EchosCry.Sound.PlaySFX(boomSFX, Player.Instance.transform, 0);
 
         DisplayBonus();
     }

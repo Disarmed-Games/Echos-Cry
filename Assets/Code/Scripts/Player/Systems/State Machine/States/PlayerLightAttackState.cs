@@ -12,7 +12,7 @@ public class PlayerLightAttackState : PlayerActionState
 
         _playerContext.WeaponHolder.SwitchToPrimary();
         _playerContext.WeaponHolder.ActivateCurrentWeapon();
-        _playerContext.WeaponHolder.PrimaryAction();
+        _playerContext.WeaponHolder.PrimaryAction(_playerContext.Stats);
 
         _playerContext.Animator.SpriteAnimator.Play(_playerContext.Animator.hashedAttackAnim);
 
@@ -34,7 +34,8 @@ public class PlayerLightAttackState : PlayerActionState
     }
     public override void FixedUpdate()
     {
-        _playerContext.Movement.Move(_playerStateMachine.Locomotion, 0.75f);
+        float movementMult = _playerContext.Stats.MovementMultiplier * 0.75f;
+        _playerContext.Movement.Move(_playerStateMachine.Locomotion, movementMult);
     }
     protected override void OnCheckSwitch()
     {

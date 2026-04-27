@@ -15,7 +15,7 @@ public class AttackData : ScriptableObject
 [System.Serializable]
 public class ThreePassiveEffects
 {
-    public PassiveEffect OneThirdEffect;
-    public PassiveEffect TwoThirdsEffect;
-    public PassiveEffect FullEffect;
+    public EffectData OneThirdEffect;
+    public EffectData TwoThirdsEffect;
+    public EffectData FullEffect;
 }

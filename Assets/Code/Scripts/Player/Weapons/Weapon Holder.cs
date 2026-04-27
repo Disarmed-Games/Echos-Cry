@@ -3,7 +3,6 @@ using UnityEngine;
 public class WeaponHolder : MonoBehaviour
 {
     [SerializeField] private GameObject[] _weaponInventory;
-    [SerializeField] private GameObject _dashWeapon;
 
     [SerializeField] private Weapon primaryWeapon;
     [SerializeField] private Weapon specialWeapon;
@@ -13,10 +12,9 @@ public class WeaponHolder : MonoBehaviour
     public Weapon CurrentlyEquippedWeapon
     {
         get => _currentlyEquippedWeapon;
-        set => _currentlyEquippedWeapon = value; 
     }
     public bool HasWeapon => _currentlyEquippedWeapon != null;
-    public bool DidWeaponHit => _currentlyEquippedWeapon.HitColliders.Count > 0;
+    public bool DidWeaponHit => _currentlyEquippedWeapon.Collider.HitColliders.Count > 0;
     public bool IsActionEnded => _currentlyEquippedWeapon.IsAttackEnded;
 
     private void Awake()
@@ -43,23 +41,35 @@ public class WeaponHolder : MonoBehaviour
         _currentlyEquippedWeapon = specialWeapon;
     }
 
-    public void PrimaryAction()
+    public void PrimaryAction(Stats stats)
     {
-        _currentlyEquippedWeapon.PrimaryAction();
+        _currentlyEquippedWeapon.PrimaryAction(stats);
     }
-    public void SecondaryAction() 
+    public void SecondaryAction(Stats stats) 
     {
-        _currentlyEquippedWeapon.SecondaryAction();   
+        _currentlyEquippedWeapon.SecondaryAction(stats);   
     }
 
     public void ProcessWeaponHits(PlayerComboMeter comboMeter)
     {
-        int hitCount = _currentlyEquippedWeapon.HitColliders.Count;
+        int hitCount = _currentlyEquippedWeapon.Collider.HitColliders.Count;
 
         for (int i = 0; i < hitCount; i++)
         {
-            TempoConductor.HitQuality hitQuality = _currentlyEquippedWeapon.HitColliders[i].hit;
-            comboMeter.AddToComboMeter(hitQuality);
+            comboMeter.AddToComboMeter(_currentlyEquippedWeapon.Collider.HitColliders[i].hitQuality);
         }
+    }
+    public void AddEffectPrimary(EchosCry.Combo.StateName index, EffectData data)
+    {
+        primaryWeapon.AddEffect(index, data);   
+    }
+    public void AddEffectSpecial(EchosCry.Combo.StateName index, EffectData data)
+    {
+        specialWeapon.AddEffect(index, data);
+    }
+    public void ResetEffects()
+    {
+        primaryWeapon.ResetEffects();
+        specialWeapon.ResetEffects();
     }
 }

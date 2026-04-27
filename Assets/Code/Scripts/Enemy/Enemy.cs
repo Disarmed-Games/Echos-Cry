@@ -15,7 +15,6 @@ public class Enemy : MonoBehaviour
     [SerializeField] private EnemyType _enemyType = EnemyType.Bat;
 
     private bool IsPooled => _pool != null;
-    public bool Invulnerable { get; set; } = false;
 
     [Header("Enemy-Related Components")]
     [SerializeField] private HealthSystem _health;
@@ -24,20 +23,21 @@ public class Enemy : MonoBehaviour
     [SerializeField] private EnemyAnimator _enemyAnimator;
     [SerializeField] private EnemySoundConfig _soundConfig;
     [SerializeField] private Collider _collider;
-    [SerializeField] private PassiveEffectHandler _passiveEffectHandler;
+    [SerializeField] private EffectHandler _passiveEffectHandler;
     [SerializeField] private GameObject _deathEffect;
     [SerializeField] private EnemyData _data;
     [SerializeField] private EnemyHealthUI _enemyHealthUI;
+    [SerializeField] private StatsData _statsData;
     
     private EnemyStateHandler _stateHandler;
     private EnemyStateData _stateData;
+    private Stats _stats;
 
     public AttackInfo DeathInfo;
 
     [Header("Strategies")]
     [SerializeField] private AttackMethod[] _attackStrats;
     [SerializeField] private TargetStrategy[]   _targetStrats;
-    [SerializeField] private MovementStrategy[] _movementStrats;
     [SerializeField] private ItemDropStrategy _drops;
 
     [Header("Event Channel (Subscriber)")]
@@ -55,24 +55,24 @@ public class Enemy : MonoBehaviour
     public EnemyAnimator EnemyAnimator { get => _enemyAnimator; }
     public EnemySoundConfig SoundConfig { get => _soundConfig; }
     public Collider Collider { get => _collider; }
-    public PassiveEffectHandler PassiveEffectHandler { get => _passiveEffectHandler; }
+    public EffectHandler PassiveEffectHandler { get => _passiveEffectHandler; }
     public EnemyHealthUI EnemyHealthUI { get => _enemyHealthUI; }
     public AttackMethod[] AttackStrategies { get => _attackStrats; }
     public TargetStrategy[] TargetStrategy { get => _targetStrats; }
-    public MovementStrategy[] MovementStrategy { get => _movementStrats; }
     public ItemDropStrategy DropsStrategy { get => _drops; }
     public EnemyData Data { get => _data; }
     public EnemyType EnemyType { get => _enemyType; }
     public EnemyStateHandler StateHandler { get => _stateHandler; set => _stateHandler = value; }
     public EnemyStateData StateData { get => _stateData; set => _stateData = value; }
+    public Stats Stats { get => _stats; }
 
     public int EnemySpawnerID;
 
    private void Awake()
     {   
+        //Static initialization
         _stateMachine ??= new();
         _stateCache ??= new();
-
         _initMethods ??= new()
         {
             {EnemyType.Bat, new BatInitMethod()},
@@ -85,6 +85,9 @@ public class Enemy : MonoBehaviour
         };
 
         _stateData = new();
+        
+        if (_statsData != null) _stats = new(_statsData);
+        else _stats = new();
 
         _initMethods[_enemyType].Execute(this);
     }
@@ -96,6 +99,7 @@ public class Enemy : MonoBehaviour
         
         ResetCollider();
         _health.ResetSystem();
+        _stats.Reset();
         _stateData.Reset();
         _enemyHealthUI.UpdateUI(_health.CurrentHealth, _health.MaxHealth, _health.CurrentArmor, _health.MaxArmor);
         _rigidbody.isKinematic = true;

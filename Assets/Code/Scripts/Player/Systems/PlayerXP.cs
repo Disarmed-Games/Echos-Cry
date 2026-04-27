@@ -26,7 +26,7 @@ public class PlayerXP : MonoBehaviour
         _currentXPAmount += xp;
 
         if (_currentXPAmount >= _goalXPAmount)
-            EchosCry.Sound.PlaySFX(levelSFX, PlayerRef.Transform, 0f);
+            EchosCry.Sound.PlaySFX(levelSFX, Player.Instance.transform, 0f);
 
         while (_currentXPAmount >= _goalXPAmount)
         {

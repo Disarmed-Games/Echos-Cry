@@ -12,7 +12,7 @@ public class PlayerSpecialAttack1State : PlayerActionState
 
         _playerContext.WeaponHolder.SwitchToSpecial();
         _playerContext.WeaponHolder.ActivateCurrentWeapon();
-        _playerContext.WeaponHolder.PrimaryAction();
+        _playerContext.WeaponHolder.PrimaryAction(_playerContext.Stats);
 
         _playerContext.Animator.SpriteAnimator.Play("Attack");
         CameraManager.Instance.ScreenShake(0.8f, 0.5f);
@@ -30,7 +30,8 @@ public class PlayerSpecialAttack1State : PlayerActionState
     }
     public override void FixedUpdate()
     {
-        _playerContext.Movement.Move(_playerStateMachine.Locomotion, 0.75f);
+        float movementMult = _playerContext.Stats.MovementMultiplier * 0.75f;
+        _playerContext.Movement.Move(_playerStateMachine.Locomotion, movementMult);
     }
     protected override void OnCheckSwitch()
     {

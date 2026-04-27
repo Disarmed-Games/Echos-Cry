@@ -50,7 +50,7 @@ public class ShopManager : MonoBehaviour
                     if (InventoryManager.Instance.IsFull(shopItemScript.GetItemData()))
                     {
                         droppedItem.GetComponent<DroppedItem>().item = shopItemScript.GetItemData();
-                        Instantiate(droppedItem, PlayerRef.Transform.position, Quaternion.identity);
+                        Instantiate(droppedItem, Player.Instance.transform.position, Quaternion.identity);
                     }
                     else
                         InventoryManager.Instance.Add(shopItemScript.GetItemData());

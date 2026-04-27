@@ -1,6 +1,8 @@
 using EchosCry;
+using Ink.Parsed;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : NonSpawnableSingleton<Player>
@@ -17,11 +19,11 @@ public class Player : NonSpawnableSingleton<Player>
     [SerializeField] private InputTranslator _inputTranslator;
     [SerializeField] private SFXConfig _sfxConfig;
     [SerializeField] private Rigidbody _rb;
-    [SerializeField] private PlayerStats _stats;
     [SerializeField] private SpamPrevention _spamPrevention;
     [SerializeField] private HeatGauge _heatGauge;
     [SerializeField] private PlayerParticles _particles;
-    [SerializeField] private AbilityManager abilities;
+    [SerializeField] private DashHandler _dashHandler;
+    private Stats _stats;
 
     [SerializeField] private GameObject _mainCanvas;
     private PlayerUI _ui;
@@ -31,7 +33,11 @@ public class Player : NonSpawnableSingleton<Player>
 
     private PlayerStateMachine _playerStateMachine;
     private PlayerStateCache _playerStateCache;
-    
+
+    private List<EffectData> _activeEffectsTier1 = new();
+    private List<EffectData> _activeEffectsTier2 = new();
+    private List<EffectData> _activeEffectsTier3 = new();
+
     public PlayerHealth Health { get => _health; }
     public PlayerComboMeter ComboMeter { get => _comboMeter; }
     public PlayerAnimator Animator { get => _animator; }
@@ -43,12 +49,15 @@ public class Player : NonSpawnableSingleton<Player>
     public PlayerXP XP { get => _xp; }
     public InputTranslator InputTranslator { get => _inputTranslator; }
     public Rigidbody RB { get => _rb; }
-    public PlayerStats Stats { get => _stats; }
     public SpamPrevention SpamPrevention { get => _spamPrevention; }
     public HeatGauge HeatGauge { get => _heatGauge; }
     public PlayerParticles PlayerParticles { get => _particles; }
     public PlayerUI UI { get => _ui; }
-    public AbilityManager Abilities { get => abilities; }
+    public Stats Stats { get => _stats; }
+    public DashHandler DashHandler { get => _dashHandler; }
+    public List<EffectData> ActiveEffectsTier1 { get => _activeEffectsTier1; }
+    public List<EffectData> ActiveEffectsTier2 { get => _activeEffectsTier2; }
+    public List<EffectData> ActiveEffectsTier3 { get => _activeEffectsTier3; }
 
     private void InitStateCache()
     {
@@ -98,6 +107,8 @@ public class Player : NonSpawnableSingleton<Player>
         _playerStateMachine = new();
         _playerStateCache = new();
 
+        _stats = new Stats();
+
         _ui = Instantiate(_mainCanvas, transform).GetComponent<PlayerUI>();
     }
     private void Start()
@@ -144,6 +155,9 @@ public class Player : NonSpawnableSingleton<Player>
         _xp.ResetXP();
         _heatGauge.UseCharge(99);
         _currencySystem.SetGoldCurrency(0);
+        _stats.Reset();
+        _weaponHolder.ResetEffects();
+        _dashHandler.ClearEffects();
     }
 
     public void InvokeAttackEnded()

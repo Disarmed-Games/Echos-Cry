@@ -37,7 +37,7 @@ public class SlotScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         if (canDrop && slotItem != null)
         {
             droppedItem.GetComponent<DroppedItem>().item = slotItem.data;
-            Instantiate(droppedItem, PlayerRef.Transform.position + new Vector3(0, 0, -1f), Quaternion.identity);
+            Instantiate(droppedItem, Player.Instance.transform.position + new Vector3(0, 0, -1f), Quaternion.identity);
             InventoryManager.Instance.Remove(slotItem.data);
         }
     }

@@ -21,12 +21,12 @@ public class PlayerComboMeter : MonoBehaviour
     private bool _isDraining = false;
 
     public static event Action<float, float> OnComboMeterChangeEvent;
-    public static event Action<PassiveEffect> OnComboMeterPassiveUnlocked;
+    public static event Action OnComboMeterStateChanged;
     public float ComboMeterAmount { get { return _comboMeterAmount; } }
 
     public enum MeterState
     {
-        Starting,
+        Starting = 0,
         OneThird,
         TwoThirds,
         Full
@@ -96,9 +96,8 @@ public class PlayerComboMeter : MonoBehaviour
     }
     private void UpdateComboMeterState()
     {
-        if (playerRef.WeaponHolder.CurrentlyEquippedWeapon.CurrentAttackData == null) return;
-
-        ThreePassiveEffects currentPassives = playerRef.WeaponHolder.CurrentlyEquippedWeapon.CurrentAttackData.PassiveEffects;
+        //if (playerRef.WeaponHolder.CurrentlyEquippedWeapon._currentAttackData == null) return;
+        //ThreePassiveEffects currentPassives = playerRef.WeaponHolder.CurrentlyEquippedWeapon.CurrentAttackData.PassiveEffects;
 
         float progress = _comboMeterAmount / _comboMeterMax;
         float oneThird = .33f;
@@ -107,22 +106,22 @@ public class PlayerComboMeter : MonoBehaviour
         if (progress < oneThird)
         {
             _currentMeterState = MeterState.Starting;
-            OnComboMeterPassiveUnlocked?.Invoke(null);
+            OnComboMeterStateChanged?.Invoke();
         }
         else if (progress >= oneThird && progress < twoThirds)
         {
             _currentMeterState = MeterState.OneThird;
-            OnComboMeterPassiveUnlocked?.Invoke(currentPassives.OneThirdEffect);
+            OnComboMeterStateChanged?.Invoke();
         } 
         else if (progress >= twoThirds && progress < 1f)
         {
             _currentMeterState = MeterState.TwoThirds;
-            OnComboMeterPassiveUnlocked?.Invoke(currentPassives.TwoThirdsEffect);
+            OnComboMeterStateChanged?.Invoke();
         }  
         else
         {
             _currentMeterState = MeterState.Full;
-            OnComboMeterPassiveUnlocked?.Invoke(currentPassives.FullEffect);
+            OnComboMeterStateChanged?.Invoke();
         }  
     }
 

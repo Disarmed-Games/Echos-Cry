@@ -64,7 +64,7 @@ public class PlayerMoveState : PlayerActionState
     }
     public override void FixedUpdate()
     {
-        _playerContext.Movement.Move(_playerStateMachine.Locomotion, 1f);
+        _playerContext.Movement.Move(_playerStateMachine.Locomotion, _playerContext.Stats.MovementMultiplier);
     }
     private IEnumerator RepeatSoundFootstep(float clipLength)
     {

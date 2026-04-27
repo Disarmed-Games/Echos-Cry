@@ -1,16 +1,20 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using EchosCry.Combo;
+using Ink.Parsed;
+using System.Collections.Generic;
 
-public class ComboState
+namespace EchosCry.Combo
 {
-    public ComboState NextLightAttack;
-    public ComboState NextHeavyAttack;
-    public AttackData AttackData;
-}
+    public class ComboState
+    {
+        public ComboState NextLightAttack = null;
+        public ComboState NextHeavyAttack = null;
+        public AttackData AttackData = null;
+        public List<EffectData> Effects = new();
+    }
 
-public class ComboTree
-{
     public enum StateName
     {
         Start = -1,
@@ -18,6 +22,10 @@ public class ComboTree
         Heavy1, Heavy2, Heavy3
     }
 
+}
+
+public class ComboTree
+{
     //Tree root
     private ComboState   _startState;
 
@@ -31,7 +39,22 @@ public class ComboTree
     {
         InitTree();
     }
- 
+
+    public void AddEffect(StateName index, EffectData effect)
+    {
+        _comboStates[(int)index].Effects.Add(effect);
+    }
+    public void ResetEffects()
+    {
+        foreach(ComboState state in _comboStates)
+        {
+            state.Effects.Clear();
+        }
+    }
+    public ComboState GetCurrentState()
+    {
+        return _currentState;
+    }
     public ComboState ProcessPrimaryAction()
     {
         if (_currentState == null) return null;
