@@ -82,6 +82,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WaveManager
   _timeBetweenWaves: 5
+  _spawnDistance: 5
   _allWaves: []
   _enemySpawner: {fileID: 4634003130030037239}
   _updateKillCountChannel: {fileID: 11400000, guid: 7cab49118f492584f9f027f6ec0fa05a, type: 2}
+  chestObject: {fileID: 7184626627433337931, guid: 2eb33d305212ee042a4b52ddaad10a41, type: 3}

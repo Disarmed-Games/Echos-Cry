@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0af6e37581d16d47aa4a2ce36e29f5c, type: 3}
   m_Name: Boom
   m_EditorClassIdentifier: Assembly-CSharp::AudioSystem.soundEffect
-  sfxVolume: 0.1
+  sfxVolume: 0.6
   sfxClips:
   - {fileID: 8300000, guid: d02ba186ba6e7ee4da61d1824f86204f, type: 3}
   sfxMixerGroup: {fileID: 57649532358978260, guid: ac2ef84a7ad88f74fb5e10f3c7be54d1, type: 2}

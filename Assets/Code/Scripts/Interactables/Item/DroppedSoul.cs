@@ -49,6 +49,7 @@ public class DroppedSoul : ItemDropHandler
     {
         if (dropItem != null)
         {
+            CameraManager.Instance.ScreenShake(0.8f, 0.75f);
             InventoryManager.Instance.Add(dropItem);
         }
     }
