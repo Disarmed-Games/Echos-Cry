@@ -19,7 +19,7 @@ MonoBehaviour:
   EffectUseInterval: 0.5
   EffectDuration: 2
   MaxStacks: 3
-  EffectTier: 1
+  EffectTier: 0
   Effects:
   - rid: 3227708212704182372
   references:
