@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Ice Blast Effect
   m_EditorClassIdentifier: Echos Cry Core::EffectData
   EffectName: Ice Blast
-  EffectDescription: Freezes enemies and deals extra damage.
+  EffectDescription: Use your special AOE attack to freeze enemies and deal extra
+    damage.
   EffectIcon: {fileID: 21300000, guid: 012e9cb1c198c194da708e72b3e44388, type: 3}
   IsEffectUseOneTime: 1
   EffectUseInterval: 0
