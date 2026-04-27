@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Echos Cry Core::MarkedForDeathEffect
   displayName: Marked for Death
   description: All hits on effected enemies deal more damage.
-  icon: {fileID: 21300000, guid: fed6dd84509e96747897f82c287018ea, type: 3}
+  icon: {fileID: 21300000, guid: a64ab6a7aa63e6643b39541efaecbcdd, type: 3}
   isStackable: 0
   effect: {fileID: 11400000, guid: 8b81b240e2635e54e88167f791b48de2, type: 2}

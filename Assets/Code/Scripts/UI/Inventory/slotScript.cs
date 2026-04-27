@@ -13,7 +13,9 @@ public class SlotScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     [SerializeField] private InputTranslator inputTranslator;
     [SerializeField] private GameObject droppedItem;
 
-    private string description;
+    private string itemDescription;
+    private string itemName;
+    private bool itemStackable;
     private InventoryItem slotItem;
     private bool canDrop = false;
 
@@ -51,7 +53,7 @@ public class SlotScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
             slotIcon.enabled = false;
             slotIcon.sprite = null;
             stackAmountText.text = "";
-            description = "";
+            itemDescription = "";
             return;
         }
 
@@ -63,7 +65,9 @@ public class SlotScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         else
             stackAmountText.text = "";
         
-        description = item.data.description;
+        itemDescription = item.data.description;
+        itemName = item.data.displayName;
+        itemStackable = item.data.isStackable;
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -72,8 +76,11 @@ public class SlotScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
         if (slotItem != null)
         {
-            string dropText = $"\nPress '{inputTranslator.PlayerInputs.Gameplay.Drop.GetBindingDisplayString(InputBinding.MaskByGroup("KeyboardMouse"))}' to drop.";
-            UITip.Instance.StartMessage(description + dropText);
+            string stackableText = "";
+            if (!itemStackable) stackableText = "This item applies a passive effect.";
+            else stackableText = "This item is single use.";
+            string dropText = $"Press '{inputTranslator.PlayerInputs.Gameplay.Drop.GetBindingDisplayString(InputBinding.MaskByGroup("KeyboardMouse"))}' to drop.";
+            UITip.Instance.StartMessage($"<color=#008080>{itemName}</color>:\n<color=yellow>{stackableText}</color>\n{itemDescription}\n<color=#C0C0C0>{dropText}</color>");
         }
     }
 

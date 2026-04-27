@@ -28,5 +28,5 @@ MonoBehaviour:
     - rid: 3227708212704182371
       type: {class: DamageMultiplierEffect, ns: , asm: Echos Cry Core}
       data:
-        damageMultiplier: 5
+        damageMultiplier: 3
         multiplierChance: 0.15
