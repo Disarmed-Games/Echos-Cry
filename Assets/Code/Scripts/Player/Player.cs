@@ -35,9 +35,7 @@ public class Player : NonSpawnableSingleton<Player>
     private PlayerStateMachine _playerStateMachine;
     private PlayerStateCache _playerStateCache;
 
-    private List<EffectData> _activeEffectsTier1 = new();
-    private List<EffectData> _activeEffectsTier2 = new();
-    private List<EffectData> _activeEffectsTier3 = new();
+    private List<EffectData> _activeEffects = new();
 
     public PlayerHealth Health { get => _health; }
     public PlayerComboMeter ComboMeter { get => _comboMeter; }
