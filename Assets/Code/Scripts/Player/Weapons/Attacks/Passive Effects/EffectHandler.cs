@@ -54,13 +54,19 @@ public class EffectHandler : MonoBehaviour
             }
 
             _activeEffectData.Remove(effectEnum);
+
             _activeEffectData.Add(effectEnum, new EffectNode(newRoutine, newStack));
+
+            foreach (Effect e in effect.Effects)
+            {
+                e.Apply(enemy, this);
+            }
             return;
         }
 
         _activeEffects.Add(effectEnum); //Add effect to active effects
 
-        StartCoroutine(EndRoutineEffect(effect)); //Start coroutine for effect duration
+        StartCoroutine(EndRoutineEffect(effect, enemy)); //Start coroutine for effect duration
 
         Coroutine routine = null;
         if(effect.IsEffectUseOneTime) 
@@ -75,7 +81,7 @@ public class EffectHandler : MonoBehaviour
         _activeEffectData.Add(effectEnum, new EffectNode(routine, 1)); //Add to activeEffectData
     }
 
-    public void RemovePassiveEffect(EffectData effect)
+    public void RemovePassiveEffect(EffectData effect, Enemy enemy)
     {
         string effectEnum = effect.EffectName;
 
@@ -85,12 +91,17 @@ public class EffectHandler : MonoBehaviour
         }
         _activeEffects.Remove(effectEnum);
         _activeEffectData.Remove(effectEnum);
+
+        foreach (Effect e in effect.Effects)
+        {
+            e.Remove(enemy, this);
+        }
     }
 
-    private IEnumerator EndRoutineEffect(EffectData effect)
+    private IEnumerator EndRoutineEffect(EffectData effect, Enemy enemy)
     {
         yield return new WaitForSeconds(effect.EffectDuration);
-        RemovePassiveEffect(effect);
+        RemovePassiveEffect(effect, enemy);
     }
 
     private IEnumerator RoutineEffect(EffectData effect, Enemy enemy)

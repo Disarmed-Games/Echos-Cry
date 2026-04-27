@@ -3,11 +3,11 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Dash Attack", menuName = "Echo's Cry/Inventory/Dash Attack")]
 public class DashAttackItemData : InventoryItemData
 {
-    [SerializeField] EventChannel _dashAttackChannel;
+    [SerializeField] EffectData _dashAttack;
 
     public override void Use(Player player)
     {
-        _dashAttackChannel.Invoke();
+        player.DashHandler.AddEffect(_dashAttack);
     }
 
     public override bool CanUse(Player player)

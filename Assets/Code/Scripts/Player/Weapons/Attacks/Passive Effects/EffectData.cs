@@ -1,4 +1,5 @@
 using AudioSystem;
+using Codice.Client.BaseCommands;
 using Ink.Parsed;
 using System;
 using System.Collections;
@@ -29,7 +30,9 @@ public class EffectData : ScriptableObject
 [Serializable]
 public abstract class Effect
 {
-    public abstract void Use(Enemy enemy, EffectHandler handler, int stackCount);  
+    public abstract void Use(Enemy enemy, EffectHandler handler, int stackCount); 
+    public virtual void Apply(Enemy enemy, EffectHandler handler) { }
+    public virtual void Remove(Enemy enemy, EffectHandler handler) { }
 }
 
 //Does damage to target enemy on Use
@@ -49,8 +52,8 @@ public class DamageEffect : Effect
         if(sound != null) EchosCry.Sound.PlaySFX(sound, enemy.transform, 0);
         else EchosCry.Sound.PlaySFX(enemy.SoundConfig.HitSFX, enemy.transform, 0);
 
-        enemy.EnemyAnimator.TintFlash(tintColor, 0.2f);
-        enemy.EnemyAnimator.PlayBloodVisualEffect();
+        enemy.Animator.TintFlash(tintColor, 0.2f);
+        enemy.Animator.PlayBloodVisualEffect();
 
         if (DamageLabelManager.Instance != null && DamageLabelManager.Instance.isActiveAndEnabled)
             DamageLabelManager.Instance.SpawnPopup(attackDamage, enemy.transform.position, textColor);
@@ -87,5 +90,27 @@ public class DamageMultiplierEffect : Effect
     {
         yield return new WaitForSeconds(time);
         enemy.Stats.DamageMultiplier /= damageMultiplier;
+    }
+}
+
+[Serializable]
+public class MovementAdjustEffect : Effect
+{
+    public float speedAdjustment = 1;
+    public Color tintColor = Color.white;
+    public override void Use(Enemy enemy, EffectHandler handler, int stackCount)
+    {
+        for (int i = 0; i < stackCount; i++)
+        {
+            enemy.Stats.MovementMultiplier *= speedAdjustment;
+        }
+    }
+    public override void Apply(Enemy enemy, EffectHandler handler)
+    {
+        enemy.Animator.SetTint(tintColor);
+    }
+    public override void Remove(Enemy enemy, EffectHandler handler)
+    {
+            enemy.Animator.ResetTint();
     }
 }

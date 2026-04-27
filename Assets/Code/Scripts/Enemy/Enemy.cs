@@ -20,7 +20,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private HealthSystem _health;
     [SerializeField] private NavMeshAgent _navMeshAgent;
     [SerializeField] private Rigidbody _rigidbody;
-    [SerializeField] private EnemyAnimator _enemyAnimator;
+    [SerializeField] private EnemyAnimator _animator;
     [SerializeField] private EnemySoundConfig _soundConfig;
     [SerializeField] private Collider _collider;
     [SerializeField] private EffectHandler _passiveEffectHandler;
@@ -32,6 +32,8 @@ public class Enemy : MonoBehaviour
     private EnemyStateHandler _stateHandler;
     private EnemyStateData _stateData;
     private Stats _stats;
+
+    public float DefaultMovementSpeed { get; private set; }
 
     public AttackInfo DeathInfo;
 
@@ -52,7 +54,7 @@ public class Enemy : MonoBehaviour
     public HealthSystem Health { get => _health; }
     public NavMeshAgent NavMeshAgent { get => _navMeshAgent; }
     public Rigidbody Rigidbody { get => _rigidbody; }
-    public EnemyAnimator EnemyAnimator { get => _enemyAnimator; }
+    public EnemyAnimator Animator { get => _animator; }
     public EnemySoundConfig SoundConfig { get => _soundConfig; }
     public Collider Collider { get => _collider; }
     public EffectHandler PassiveEffectHandler { get => _passiveEffectHandler; }
@@ -89,12 +91,15 @@ public class Enemy : MonoBehaviour
         if (_statsData != null) _stats = new(_statsData);
         else _stats = new();
 
+        DefaultMovementSpeed = _navMeshAgent.speed;
+
         _initMethods[_enemyType].Execute(this);
     }
 
     private void OnEnable()
     {
         TickManager.Instance.GetTimer(0.2f).Tick += TickCheck;
+        
         _playerAttackEndChannel.Channel += ResetCollider;
         
         ResetCollider();
@@ -108,7 +113,9 @@ public class Enemy : MonoBehaviour
     private void OnDisable()
     {
         StopAllCoroutines();
+        
         if(TickManager.Instance != null) TickManager.Instance.GetTimer(0.2f).Tick -= TickCheck;
+        
         _playerAttackEndChannel.Channel -= ResetCollider; 
     }
 
@@ -131,7 +138,7 @@ public class Enemy : MonoBehaviour
         _updateWaveCount.Invoke(EnemySpawnerID);
 
         DeathEffectHandler deathEffectPrefab = Instantiate(_deathEffect, transform.position, Quaternion.identity).GetComponent<DeathEffectHandler>();
-        deathEffectPrefab.SetSpriteShape(_enemyAnimator.EnemySprite);
+        deathEffectPrefab.SetSpriteShape(_animator.EnemySprite);
 
         ScoreManager scoreManager = ScoreManager.Instance;
         if (scoreManager != null) {

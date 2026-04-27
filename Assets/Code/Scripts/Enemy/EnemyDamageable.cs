@@ -36,8 +36,8 @@ public class EnemyDamageable : MonoBehaviour, IDamageable
         if (_enemy.Health.CurrentArmor > 0)
         {
             EchosCry.Sound.PlaySFX(_enemy.SoundConfig.ArmorHitSFX, _enemy.transform, 0);
-            _enemy.EnemyAnimator.TintFlash(_enemy.Data.TintShieldFlash, _enemy.Data.TintFlashDuration);
-            _enemy.EnemyAnimator.PlayArmorVisualEffect();
+            _enemy.Animator.TintFlash(_enemy.Data.TintShieldFlash, _enemy.Data.TintFlashDuration);
+            _enemy.Animator.PlayArmorVisualEffect();
         }
         else
         {
@@ -48,8 +48,8 @@ public class EnemyDamageable : MonoBehaviour, IDamageable
             }
             DecalManager.Instance.GetBloodDecal().transform.position = _enemy.transform.position;
             EchosCry.Sound.PlaySFX(_enemy.SoundConfig.HitSFX, _enemy.transform, 0);
-            _enemy.EnemyAnimator.TintFlash(_enemy.Data.TintHealthFlash, _enemy.Data.TintFlashDuration);
-            _enemy.EnemyAnimator.PlayBloodVisualEffect();
+            _enemy.Animator.TintFlash(_enemy.Data.TintHealthFlash, _enemy.Data.TintFlashDuration);
+            _enemy.Animator.PlayBloodVisualEffect();
         }
             
         if(DamageLabelManager.Instance != null && DamageLabelManager.Instance.isActiveAndEnabled)

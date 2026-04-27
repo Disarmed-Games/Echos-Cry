@@ -56,12 +56,19 @@ public class EnemyAnimator : MonoBehaviour
     {
         _staggerParticles.Stop();
     }
-
-    private IEnumerator TintFlashCoroutine(Color tintColor, float flashDuration)
+    public void SetTint(Color tintColor)
     {
         _enemySprite.material.SetColor(hashedTintColor, tintColor);
-        yield return new WaitForSeconds(flashDuration);
+    }
+    public void ResetTint()
+    {
         _enemySprite.material.SetColor(hashedTintColor, _defaultTintColor);
+    }
+    private IEnumerator TintFlashCoroutine(Color tintColor, float flashDuration)
+    {
+        SetTint(tintColor);
+        yield return new WaitForSeconds(flashDuration);
+        ResetTint();
     }
 
     private void Awake()

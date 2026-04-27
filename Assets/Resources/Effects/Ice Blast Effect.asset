@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a24831c2a3be90f4ea678b9b4739ad3c, type: 3}
+  m_Name: Ice Blast Effect
+  m_EditorClassIdentifier: Echos Cry Core::EffectData
+  EffectName: Ice Blast
+  EffectDescription: 
+  EffectIcon: {fileID: 0}
+  IsEffectUseOneTime: 1
+  EffectUseInterval: 0
+  EffectDuration: 3
+  MaxStacks: 1
+  EffectTier: 0
+  Effects:
+  - rid: 3227708254238539925
+  - rid: 3227708254238539924
+  references:
+    version: 2
+    RefIds:
+    - rid: 3227708254238539924
+      type: {class: DamageEffect, ns: , asm: Echos Cry Core}
+      data:
+        damage: 2
+        textColor: {r: 1, g: 1, b: 1, a: 1}
+        tintColor: {r: 1, g: 0, b: 0, a: 1}
+        sound: {fileID: 0}
+    - rid: 3227708254238539925
+      type: {class: MovementAdjustEffect, ns: , asm: Echos Cry Core}
+      data:
+        speedAdjustment: 0.75
+        tintColor: {r: 0.6084906, g: 0.9882593, b: 1, a: 1}

@@ -7,5 +7,5 @@ public abstract class InventoryItemData : ScriptableObject
     public Sprite icon;
     public bool isStackable;
     public abstract void Use(Player player);
-    public abstract bool CanUse(Player player);
+    public virtual bool CanUse(Player player) { return true; }
 }
