@@ -13,13 +13,12 @@ MonoBehaviour:
   m_Name: Flame Effect
   m_EditorClassIdentifier: Echos Cry Core::EffectData
   EffectName: Flaming Touch
-  EffectDescription: 
+  EffectDescription: Enemies are set on fire for 3 seconds.
   EffectIcon: {fileID: 21300000, guid: 18fc345cacadc55419c9498c16340343, type: 3}
   IsEffectUseOneTime: 0
   EffectUseInterval: 0.5
   EffectDuration: 3
   MaxStacks: 2
-  EffectEnum: 4
   EffectTier: 0
   Effects:
   - rid: 3227708235182244004

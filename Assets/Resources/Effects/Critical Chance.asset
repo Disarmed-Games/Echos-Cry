@@ -13,13 +13,12 @@ MonoBehaviour:
   m_Name: Critical Chance
   m_EditorClassIdentifier: Echos Cry Core::EffectData
   EffectName: Critical Effect
-  EffectDescription: 
+  EffectDescription: Roll the dice and deal some serious damage if luck is with you.
   EffectIcon: {fileID: 21300000, guid: 6879e49a661d7844eb8fe6ac95c88e4b, type: 3}
   IsEffectUseOneTime: 1
   EffectUseInterval: 0
   EffectDuration: 2
   MaxStacks: 1
-  EffectEnum: 3
   EffectTier: 0
   Effects:
   - rid: 3227708212704182371

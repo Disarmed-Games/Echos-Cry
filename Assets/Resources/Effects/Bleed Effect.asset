@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Bleed Effect
   m_EditorClassIdentifier: Echos Cry Core::EffectData
   EffectName: Bleed Effect
-  EffectDescription: 
+  EffectDescription: Hitting enemies causes them to bleed.
   EffectIcon: {fileID: 21300000, guid: 7614c7064a94cc14b84af01090920b9a, type: 3}
   IsEffectUseOneTime: 0
   EffectUseInterval: 0.5

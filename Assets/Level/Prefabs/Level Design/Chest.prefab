@@ -5220,6 +5220,14 @@ MonoBehaviour:
     frequency: 0.5
   - item: {fileID: 11400000, guid: 4afaaff39d334064db9338724993ab13, type: 2}
     frequency: 0.5
+  - item: {fileID: 11400000, guid: cedabceb09e396f428d5eb07bdebbe34, type: 2}
+    frequency: 0.5
+  - item: {fileID: 11400000, guid: 782296dd326585b459639de613d71138, type: 2}
+    frequency: 0.5
+  - item: {fileID: 11400000, guid: 264b3c52165550e4484c7789b8891004, type: 2}
+    frequency: 0.5
+  - item: {fileID: 11400000, guid: 930f8bb0d3c560b46975abaea34cf747, type: 2}
+    frequency: 0.5
 --- !u!65 &117534156992106354
 BoxCollider:
   m_ObjectHideFlags: 0

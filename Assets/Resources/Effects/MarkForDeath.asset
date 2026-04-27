@@ -13,13 +13,12 @@ MonoBehaviour:
   m_Name: MarkForDeath
   m_EditorClassIdentifier: Echos Cry Core::EffectData
   EffectName: Mark For Death Effect
-  EffectDescription: 
+  EffectDescription: All hits on effected enemies deal more damage.
   EffectIcon: {fileID: 21300000, guid: a64ab6a7aa63e6643b39541efaecbcdd, type: 3}
   IsEffectUseOneTime: 1
   EffectUseInterval: 0
   EffectDuration: 2
   MaxStacks: 1
-  EffectEnum: 2
   EffectTier: 2
   Effects:
   - rid: 3227708212704182370
