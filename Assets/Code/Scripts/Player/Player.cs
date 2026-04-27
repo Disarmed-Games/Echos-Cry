@@ -55,9 +55,7 @@ public class Player : NonSpawnableSingleton<Player>
     public AbilityManager Abilities { get => abilities; }
     public Stats Stats { get => _stats; }
     public DashHandler DashHandler { get => _dashHandler; }
-    public List<EffectData> ActiveEffectsTier1 { get => _activeEffectsTier1; }
-    public List<EffectData> ActiveEffectsTier2 { get => _activeEffectsTier2; }
-    public List<EffectData> ActiveEffectsTier3 { get => _activeEffectsTier3; }
+    public List<EffectData> ActiveEffects { get => _activeEffects; }
 
     private void InitStateCache()
     {
