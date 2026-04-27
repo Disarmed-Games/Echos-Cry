@@ -1,38 +1,50 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class DroppedSoul : ItemDropHandler
+public class ChestDropHandler : ItemDropHandler
 {
-    [SerializeField] private ItemChance[] itemChances;
     private InventoryItemData dropItem;
 
-    private InventoryItemData CalculateDroppedItem()
+    private int CalculateDroppedItemIndex()
     {
         float totalFrequency = 0;
-        foreach (var item in itemChances)
+        foreach (var item in DropManager.Instance.EffectDropList)
         {
             totalFrequency += item.frequency;
         }
         float randomChance = UnityEngine.Random.Range(0f, totalFrequency);
 
         totalFrequency = 0;
-        foreach (var item in itemChances)
+        for (int i = 0; i < DropManager.Instance.EffectDropList.Count; i++)
         {
-            totalFrequency += item.frequency;
+            totalFrequency += DropManager.Instance.EffectDropList[i].frequency;
 
             if (totalFrequency >= randomChance)
             {
-                return item.item;
+                return i;
             }
         }
-        return null;
+        return -1;
     }
 
     protected override void OnTriggerEnter(Collider other)
     {
         if (dropItem == null)
-            dropItem = CalculateDroppedItem();
-        
+        {
+            int index = CalculateDroppedItemIndex();
+            if (index >= 0)
+            {
+                dropItem = DropManager.Instance.EffectDropList[index].item;
+                DropManager.Instance.EffectDropList.RemoveAt(index);
+            }
+            else
+            {
+                Debug.Log("Out of items to give to player!");
+                return;
+            }
+        }
+
         if (InventoryManager.Instance.IsFull(dropItem)) return;
 
         base.OnTriggerEnter(other);
@@ -47,3 +59,4 @@ public class DroppedSoul : ItemDropHandler
         }
     }
 }
+

@@ -49,6 +49,7 @@ public abstract class ItemDropHandler : MonoBehaviour
         {
             Instantiate(particleEffect, transform.position, Quaternion.identity);
         }
+
         OnInteraction(other);
         _collider.enabled = false;
         Destroy(gameObject);

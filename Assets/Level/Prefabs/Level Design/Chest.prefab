@@ -5138,10 +5138,10 @@ PrefabInstance:
       addedObject: {fileID: 1830857328581519001}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b724cb5f769d4564bbf998af897f2fb3, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 7150904480317057257}
+      addedObject: {fileID: 117534156992106354}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b724cb5f769d4564bbf998af897f2fb3, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 117534156992106354}
+      addedObject: {fileID: 6578348545871211723}
   m_SourcePrefab: {fileID: 100100000, guid: b724cb5f769d4564bbf998af897f2fb3, type: 3}
 --- !u!1 &7184626627433337931 stripped
 GameObject:
@@ -5196,40 +5196,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &7150904480317057257
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7184626627433337931}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02841dd39fcf134408f6f5093779b78b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Echos Cry Core::DroppedSoul
-  moveToPlayer: 0
-  itemSpeed: 4
-  itemDragDistance: 4
-  itemBody: {fileID: 1830857328581519001}
-  pickupSFX: {fileID: 11400000, guid: 5b2a8fd7734880b4f9b9c5dd539d3788, type: 2}
-  particleEffect: {fileID: 9114766157686003436, guid: c648d6641e69b1d43a3aa15ea5f7ed51, type: 3}
-  _collider: {fileID: 6421922639047462677}
-  itemChances:
-  - item: {fileID: 11400000, guid: 4513485bf0508f246b18623af4aa3614, type: 2}
-    frequency: 0.5
-  - item: {fileID: 11400000, guid: 4afaaff39d334064db9338724993ab13, type: 2}
-    frequency: 0.5
-  - item: {fileID: 11400000, guid: cedabceb09e396f428d5eb07bdebbe34, type: 2}
-    frequency: 0.5
-  - item: {fileID: 11400000, guid: 782296dd326585b459639de613d71138, type: 2}
-    frequency: 0.5
-  - item: {fileID: 11400000, guid: 264b3c52165550e4484c7789b8891004, type: 2}
-    frequency: 0.5
-  - item: {fileID: 11400000, guid: 930f8bb0d3c560b46975abaea34cf747, type: 2}
-    frequency: 0.5
-  - item: {fileID: 11400000, guid: ad5d7c9693ecb3e4f83a13fa6af705bf, type: 2}
-    frequency: 0.5
 --- !u!65 &117534156992106354
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5251,6 +5217,25 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2, y: 1.5, z: 1.5}
   m_Center: {x: 0, y: 0.75, z: 0}
+--- !u!114 &6578348545871211723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7184626627433337931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b85db8bfaef31b47a83e754b6e6309a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  moveToPlayer: 0
+  itemSpeed: 4
+  itemDragDistance: 4
+  itemBody: {fileID: 1830857328581519001}
+  pickupSFX: {fileID: 11400000, guid: 5b2a8fd7734880b4f9b9c5dd539d3788, type: 2}
+  particleEffect: {fileID: 9114766157686003436, guid: c648d6641e69b1d43a3aa15ea5f7ed51, type: 3}
+  _collider: {fileID: 117534156992106354}
 --- !u!4 &7565831279301250801 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b724cb5f769d4564bbf998af897f2fb3, type: 3}
