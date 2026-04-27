@@ -8,4 +8,5 @@ public class EnemySoundConfig : ScriptableObject
     public soundEffect AttackSFX;
     public soundEffect ArmorHitSFX;
     public soundEffect ArmorBreakSFX;
+    public soundEffect WhiplashSFX;
 }
