@@ -57,7 +57,6 @@ MonoBehaviour:
   _hitQualityObject: {fileID: 1854601228085438648, guid: 122643eea4d6d2e4bbf94e742093c9fd, type: 3}
   _hitEffectAnimator1: {fileID: 1600509396250293528}
   _hitEffectAnimator2: {fileID: 9152819120111161284}
-  showHitText: 1
 --- !u!1 &1474931822065792554
 GameObject:
   m_ObjectHideFlags: 0
@@ -167,6 +166,7 @@ GameObject:
   - component: {fileID: 2190171911145028400}
   - component: {fileID: 933401646701994883}
   - component: {fileID: 4053906623231119769}
+  - component: {fileID: 4645329974014092271}
   m_Layer: 5
   m_Name: BeatIndicator
   m_TagString: Untagged
@@ -213,7 +213,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: 229ed0687e7296844834c5ca8dd72768, type: 2}
   m_Color: {r: 0.9333334, g: 0.7607844, b: 0.11764707, a: 0.5882353}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -231,6 +231,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &4645329974014092271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1724233076351701615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac600b6e0f3ab204c9bb832ef02cd591, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Echos Cry Core::ManageBeatShaderMaterials
+  _material: {fileID: 2100000, guid: 229ed0687e7296844834c5ca8dd72768, type: 2}
 --- !u!1 &1876986815508510191
 GameObject:
   m_ObjectHideFlags: 0
@@ -506,6 +519,7 @@ GameObject:
   - component: {fileID: 532483059895953977}
   - component: {fileID: 4121579976075746167}
   - component: {fileID: 1451942690618722674}
+  - component: {fileID: 6421667664515808568}
   m_Layer: 5
   m_Name: BeatIndicator (1)
   m_TagString: Untagged
@@ -552,7 +566,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: 229ed0687e7296844834c5ca8dd72768, type: 2}
   m_Color: {r: 0.9333334, g: 0.7607844, b: 0.11764707, a: 0.5882353}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -570,3 +584,16 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &6421667664515808568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6028283332221876389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac600b6e0f3ab204c9bb832ef02cd591, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Echos Cry Core::ManageBeatShaderMaterials
+  _material: {fileID: 2100000, guid: 229ed0687e7296844834c5ca8dd72768, type: 2}
