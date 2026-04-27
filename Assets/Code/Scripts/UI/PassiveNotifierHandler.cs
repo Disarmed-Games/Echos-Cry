@@ -32,14 +32,14 @@ public class PassiveNotifierHandler : MonoBehaviour
                 effectList = null;
                 break;
             case PlayerComboMeter.MeterState.OneThird:
-                effectList = Player.Instance.ActiveEffectsTier1;
+                effectList = new(Player.Instance.ActiveEffectsTier1);
                 break;
             case PlayerComboMeter.MeterState.TwoThirds:
-                effectList = Player.Instance.ActiveEffectsTier1;
+                effectList = new(Player.Instance.ActiveEffectsTier1);
                 effectList.AddRange(Player.Instance.ActiveEffectsTier2);
                 break;
             case PlayerComboMeter.MeterState.Full:
-                effectList = Player.Instance.ActiveEffectsTier1;
+                effectList = new(Player.Instance.ActiveEffectsTier1);
                 effectList.AddRange(Player.Instance.ActiveEffectsTier2);
                 effectList.AddRange(Player.Instance.ActiveEffectsTier3);
                 break;
