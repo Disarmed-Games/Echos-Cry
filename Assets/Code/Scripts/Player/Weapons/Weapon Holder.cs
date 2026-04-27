@@ -1,9 +1,9 @@
+using System;
 using UnityEngine;
 
 public class WeaponHolder : MonoBehaviour
 {
     [SerializeField] private GameObject[] _weaponInventory;
-
     [SerializeField] private Weapon primaryWeapon;
     [SerializeField] private Weapon specialWeapon;
 
@@ -16,6 +16,8 @@ public class WeaponHolder : MonoBehaviour
     public bool HasWeapon => _currentlyEquippedWeapon != null;
     public bool DidWeaponHit => _currentlyEquippedWeapon.Collider.HitColliders.Count > 0;
     public bool IsActionEnded => _currentlyEquippedWeapon.IsAttackEnded;
+
+    public static event Action OnEffectAdded;
 
     private void Awake()
     {
@@ -61,11 +63,13 @@ public class WeaponHolder : MonoBehaviour
     }
     public void AddEffectPrimary(EchosCry.Combo.StateName index, EffectData data)
     {
-        primaryWeapon.AddEffect(index, data);   
+        primaryWeapon.AddEffect(index, data);
+        OnEffectAdded?.Invoke();
     }
     public void AddEffectSpecial(EchosCry.Combo.StateName index, EffectData data)
     {
         specialWeapon.AddEffect(index, data);
+        OnEffectAdded?.Invoke();
     }
     public void ResetEffects()
     {
