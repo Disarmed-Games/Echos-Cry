@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -12,6 +13,7 @@ public class SlotScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     [SerializeField] private InputActionReference useItemInput;
     [SerializeField] private InputTranslator inputTranslator;
     [SerializeField] private GameObject droppedItem;
+    [SerializeField] private int slotIndex;
 
     private string itemDescription;
     private string itemName;
@@ -28,10 +30,34 @@ public class SlotScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     private void OnEnable()
     {
         inputTranslator.OnDropEvent += DropItem;
+        RemapOptionHandler.OnActionRemappedEvent += UpdateBinding;
+        UpdateBinding();
     }
     private void OnDisable()
     {
         inputTranslator.OnDropEvent -= DropItem;
+        RemapOptionHandler.OnActionRemappedEvent -= UpdateBinding;
+    }
+
+    private void UpdateBinding()
+    {
+        string updatedKey = "";
+        switch (slotIndex)
+        {
+            case 0:
+                updatedKey = inputTranslator.PlayerInputs.Gameplay.Item1.GetBindingDisplayString(InputBinding.MaskByGroup("KeyboardMouse"));
+                break;
+            case 1:
+                updatedKey = inputTranslator.PlayerInputs.Gameplay.Item2.GetBindingDisplayString(InputBinding.MaskByGroup("KeyboardMouse"));
+                break;
+            case 2:
+                updatedKey = inputTranslator.PlayerInputs.Gameplay.Item3.GetBindingDisplayString(InputBinding.MaskByGroup("KeyboardMouse"));
+                break;
+            case 3:
+                updatedKey = inputTranslator.PlayerInputs.Gameplay.Item4.GetBindingDisplayString(InputBinding.MaskByGroup("KeyboardMouse"));
+                break;
+        }
+        keyTooltipText.text = updatedKey;
     }
 
     private void DropItem()

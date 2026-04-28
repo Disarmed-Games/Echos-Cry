@@ -20,6 +20,9 @@ public class ControlRemapManager : MonoBehaviour
                     if (binding.isComposite)
                         continue;
 
+                    if (string.IsNullOrEmpty(binding.groups) || !binding.groups.Contains("KeyboardMouse"))
+                        continue;
+
                     string actionName = action.name;
                     if (binding.isPartOfComposite)
                     {
