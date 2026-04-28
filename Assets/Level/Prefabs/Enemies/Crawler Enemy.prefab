@@ -359,6 +359,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyDamageable
   _enemy: {fileID: 4360009675706835626}
+  _knockbackExplosion: {fileID: 8653895834777587694, guid: 7e2548855fcb6424b8479148fad228be, type: 3}
 --- !u!195 &1592182489320676592
 NavMeshAgent:
   m_ObjectHideFlags: 0

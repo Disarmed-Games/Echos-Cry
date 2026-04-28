@@ -22,13 +22,19 @@ public class RCLaserProjectile : AttackMethod
         currentLaser = Instantiate(laserPrefab, transform);
         smoothedTarget = Player.Instance.transform.position;
         
-        StopAllCoroutines();
         StartCoroutine(StartAttack());
         StartCoroutine(AttackDuration(_duration));
     }
 
+    private void OnDisable()
+    {
+        AttackFinished();
+    }
+
     private IEnumerator StartAttack()
     {
+        rayLength = 0;
+
         while (true)
         {
             if (_attackEnded) yield break;
@@ -71,7 +77,8 @@ public class RCLaserProjectile : AttackMethod
     {
         rayLength = 0;
         _attackEnded = true;
-        Destroy(currentLaser);
+        if (currentLaser != null)
+            Destroy(currentLaser);
     }
 
     private void Damage(Collider collider)

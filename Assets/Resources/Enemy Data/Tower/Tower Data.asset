@@ -15,8 +15,8 @@ MonoBehaviour:
   _distanceCheck: 12
   _attackChargeTime: 0.6
   _attackDashForce: 0
-  _attackDuration: 5
-  _attackCooldown: 2
+  _attackDuration: 0
+  _attackCooldown: 4
   _staggerDuration: 1.2
   _baseDamage: 6
   _stoppingDistance: 7

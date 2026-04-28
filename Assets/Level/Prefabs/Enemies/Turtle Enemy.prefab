@@ -412,7 +412,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyDamageable
   _enemy: {fileID: 8010943512667726129}
-  _explodeBitch: {fileID: 0}
+  _knockbackExplosion: {fileID: 8653895834777587694, guid: 7e2548855fcb6424b8479148fad228be, type: 3}
 --- !u!65 &8838160874129828706
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -521,10 +521,10 @@ MonoBehaviour:
   _projectileSound: {fileID: 11400000, guid: b3053e6ade645fb49b3e24c600501329, type: 2}
   _projectileCount: 5
   _rb: {fileID: 6827338249854996756}
-  _blowbackForce: 2
+  _blowbackForce: 1.8
   spawnOffset: {x: 0, y: 1, z: 0}
   _enemy: {fileID: 8010943512667726129}
-  projectileSpawnDistance: 1
+  projectileSpawnDistance: 0.8
   invincibleCooldown: 2.6
   _canvasGroup: {fileID: 6878465253286725886}
 --- !u!1001 &1204147580395218985
