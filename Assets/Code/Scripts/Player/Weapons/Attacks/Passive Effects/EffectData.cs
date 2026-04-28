@@ -77,6 +77,13 @@ public class DamageMultiplierEffect : Effect
         if (CheckHitChance())
         {
             enemy.Stats.DamageMultiplier *= damageMultiplier;
+
+            /*
+            The issues that I see:
+            - Remove is called even if CheckHitChance does not return true -> therefore DamageMultiplier is divided by damageMultiplier, and heads to 0.
+            - Effects that stack like Knockback are not removed by the stacked amount it seems. Same with movement speed. Should call remove n (stackcount) times.
+            */
+
             //enemy.StartCoroutine(ResetDamageMultiplier(duration, enemy));
         }
     }
