@@ -6,6 +6,7 @@ public class SpikeAttack : RangedAttack
     [SerializeField] private Enemy _enemy;
     [SerializeField] private float projectileSpawnDistance = 1f;
     [SerializeField] private float invincibleCooldown;
+    [SerializeField] private CanvasGroup _canvasGroup;
 
     protected override void ShootProjectile(Transform origin, Vector3 direction, float damage)
     {
@@ -21,6 +22,7 @@ public class SpikeAttack : RangedAttack
     protected override IEnumerator ProjectileAttack(float damage, Vector3 direction, Transform origin)
     {
         _enemy.Health.IsInvincible = true;
+        _canvasGroup.alpha = 0;
 
         int count = 0;
         while (count < _projectileCount)
@@ -36,6 +38,7 @@ public class SpikeAttack : RangedAttack
 
         yield return new WaitForSeconds(invincibleCooldown);
         _enemy.Health.IsInvincible = false;
+        _canvasGroup.alpha = 1;
         _attackEnded = true;
     }
 }

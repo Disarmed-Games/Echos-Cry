@@ -26,34 +26,44 @@ public class PassiveNotifierHandler : MonoBehaviour
         }
         ActiveNotifers.Clear();
 
-        List<EffectData> effectList = null;
+        List<(EffectData effect, bool enabled)> effectList = new();
+
+        void AddTier(List<EffectData> tier, bool enabled)
+        {
+            foreach (var effect in tier)
+                effectList.Add((effect, enabled));
+        }
 
         switch (PlayerComboMeter.CurrentMeterState)
         {
             case PlayerComboMeter.MeterState.Starting:
-                effectList = null;
+                AddTier(Player.Instance.ActiveEffectsTier1, false);
+                AddTier(Player.Instance.ActiveEffectsTier2, false);
+                AddTier(Player.Instance.ActiveEffectsTier3, false);
                 break;
             case PlayerComboMeter.MeterState.OneThird:
-                effectList = new(Player.Instance.ActiveEffectsTier1);
+                AddTier(Player.Instance.ActiveEffectsTier1, true);
+                AddTier(Player.Instance.ActiveEffectsTier2, false);
+                AddTier(Player.Instance.ActiveEffectsTier3, false);
                 break;
             case PlayerComboMeter.MeterState.TwoThirds:
-                effectList = new(Player.Instance.ActiveEffectsTier1);
-                effectList.AddRange(Player.Instance.ActiveEffectsTier2);
+                AddTier(Player.Instance.ActiveEffectsTier1, true);
+                AddTier(Player.Instance.ActiveEffectsTier2, true);
+                AddTier(Player.Instance.ActiveEffectsTier3, false);
                 break;
             case PlayerComboMeter.MeterState.Full:
-                effectList = new(Player.Instance.ActiveEffectsTier1);
-                effectList.AddRange(Player.Instance.ActiveEffectsTier2);
-                effectList.AddRange(Player.Instance.ActiveEffectsTier3);
+                AddTier(Player.Instance.ActiveEffectsTier1, true);
+                AddTier(Player.Instance.ActiveEffectsTier2, true);
+                AddTier(Player.Instance.ActiveEffectsTier3, true);
                 break;
             default:
                 break;
         }
 
-        if (effectList == null) return;
         foreach (var effect in effectList)
         {
             GameObject notifierPrefab = Instantiate(notifierObject, transform);
-            notifierPrefab.GetComponent<PassiveNotifier>().SetupNotification(effect);
+            notifierPrefab.GetComponent<PassiveNotifier>().SetupNotification(effect.effect, effect.enabled);
             ActiveNotifers.Add(notifierPrefab);
         }
     }

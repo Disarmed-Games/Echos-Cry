@@ -18,7 +18,7 @@ MonoBehaviour:
   _attackDuration: 0
   _attackCooldown: 3
   _staggerDuration: 1
-  _baseDamage: 7.5
+  _baseDamage: 7
   _stoppingDistance: 3
   _tintFlashDuration: 0.2
   _knockbackDuration: 0.15
