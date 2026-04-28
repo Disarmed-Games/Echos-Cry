@@ -7,7 +7,7 @@ public class MarkedForDeathEffect : InventoryItemData
 
     public override void Use(Player player)
     {
-        player.ActiveEffectsTier2.Add(effect);
+        player.ActiveEffectsTier3.Add(effect);
         player.WeaponHolder.AddEffectPrimary(EchosCry.Combo.StateName.Light1, effect);
         player.WeaponHolder.AddEffectPrimary(EchosCry.Combo.StateName.Light2, effect);
         player.WeaponHolder.AddEffectPrimary(EchosCry.Combo.StateName.Light3, effect);

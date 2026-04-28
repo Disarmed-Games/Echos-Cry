@@ -7,7 +7,7 @@ public class BlazingStepsItemData : InventoryItemData
 
     public override void Use(Player player)
     {
-        player.ActiveEffectsTier2.Add(_effect);
+        player.ActiveEffectsTier3.Add(_effect);
         player.DashHandler.AddEffect(_effect);
     }
 }

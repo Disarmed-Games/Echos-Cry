@@ -51,6 +51,7 @@ public class EffectHandler : MonoBehaviour
                 return;
 
             _activeEffectData[effectEnum] = new EffectNode(node.coroutine, newStack);
+
             return;
         }
 
@@ -64,7 +65,7 @@ public class EffectHandler : MonoBehaviour
         StartCoroutine(EndRoutineEffect(effect, enemy)); //Start coroutine for effect duration
 
         Coroutine routine = null;
-        if(effect.IsEffectUseOneTime) 
+        if (effect.IsEffectUseOneTime) 
         {
             UseEffect(effect, enemy, 1); //Use once if only one time use
         }

@@ -82,7 +82,7 @@ public class DamageMultiplierEffect : Effect
     }
     public override void Remove(Enemy enemy, EffectHandler handler)
     {
-        enemy.Stats.DamageMultiplier /= damageMultiplier;
+        //enemy.Stats.DamageMultiplier /= damageMultiplier;
     }
     private bool CheckHitChance()
     {
