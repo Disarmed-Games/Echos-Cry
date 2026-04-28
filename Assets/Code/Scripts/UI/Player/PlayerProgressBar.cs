@@ -24,28 +24,23 @@ public class PlayerProgressBar : MonoBehaviour
     private float frontVelocity;
     private float backVelocity;
     private float targetFraction = 1f;
-    private HealthSystem playerHealth = null;
+    private PlayerHealth playerHealth = null;
 
     void OnEnable()
     {
         if (healthChannel != null) healthChannel.Channel += UpdateBar;
         GameManager.OnPlayerDeathEvent += UpdateLives;
 
+        if (playerHealth == null)
+            playerHealth = Player.Instance.Health;
+
         if (barType == Bar.HEALTH)
         {
-            if (playerHealth == null)
-                playerHealth = FindAnyObjectByType<HealthSystem>();
-            
-            if (playerHealth != null)
-                UpdateBar(playerHealth.CurrentHealth, playerHealth.MaxHealth);
+            UpdateBar(playerHealth.CurrentHealth, playerHealth.MaxHealth);
         }
         else if (barType == Bar.ARMOR)
         {
-            if (playerHealth == null)
-                playerHealth = FindAnyObjectByType<HealthSystem>();
-
-            if (playerHealth != null)  
-                UpdateBar(playerHealth.CurrentArmor, playerHealth.MaxArmor);  
+            UpdateBar(playerHealth.CurrentArmor, playerHealth.MaxArmor);  
         }
 
         UpdateLives();
@@ -61,10 +56,6 @@ public class PlayerProgressBar : MonoBehaviour
     {
         if (barType == Bar.HEALTH)
             livesRemainingText.text = $"Lives Remaining: {GameManager.PlayerLives}";
-
-        targetFraction = 1f;
-        frontBar.fillAmount = 1f;
-        backBar.fillAmount = 1f;
     }
 
     private void UpdateBar(float currentValue, float maxValue)
