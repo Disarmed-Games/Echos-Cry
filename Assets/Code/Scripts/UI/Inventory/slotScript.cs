@@ -106,7 +106,7 @@ public class SlotScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
             if (!itemStackable) stackableText = "This item applies a passive effect.";
             else stackableText = "This item is single use.";
             string dropText = $"Press '{inputTranslator.PlayerInputs.Gameplay.Drop.GetBindingDisplayString(InputBinding.MaskByGroup("KeyboardMouse"))}' to drop.";
-            UITip.Instance.StartMessage($"<color=#008080>{itemName}</color>:\n<color=yellow>{stackableText}</color>\n{itemDescription}\n<color=#C0C0C0>{dropText}</color>");
+            UITip.Instance.StartMessage($"<color=#008080>{itemName}</color>:\n<color=yellow>{stackableText}</color>\n{itemDescription}\n<color=#C0C0C0>{dropText}</color>", this);
         }
     }
 
@@ -114,6 +114,6 @@ public class SlotScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     {
         canDrop = false;
 
-        UITip.Instance.StopMessage();
+        UITip.Instance.StopMessage(this);
     }
 }

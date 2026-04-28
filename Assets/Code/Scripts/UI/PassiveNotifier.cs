@@ -45,14 +45,14 @@ public class PassiveNotifier : MonoBehaviour, IPointerEnterHandler, IPointerExit
         if (currentPassive != null)
         {
             if (isActive)
-                UITip.Instance.StartMessage(currentPassive.EffectDescription);
+                UITip.Instance.StartMessage(currentPassive.EffectDescription, this);
             else
-                UITip.Instance.StartMessage($"<color=red>This effect is not currently active.</color>\n{currentPassive.EffectDescription}");
+                UITip.Instance.StartMessage($"<color=red>This effect is not currently active.</color>\n{currentPassive.EffectDescription}", this);
         }
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        UITip.Instance.StopMessage();
+        UITip.Instance.StopMessage(this);
     }
 }

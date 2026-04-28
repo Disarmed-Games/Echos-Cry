@@ -13,6 +13,8 @@ public class UITip : MonoBehaviour
     [SerializeField] private GameObject messagePanel;
     [SerializeField] private RectTransform rectTransform;
     private bool messageActive = false;
+    private Coroutine currentRoutine;
+    private object currentOwner;
 
     private void Awake()
     {
@@ -42,37 +44,66 @@ public class UITip : MonoBehaviour
         }
     }
 
-    public void StartMessage(string message)
+    public void StopAllMessage()
     {
-        textMessage.text = message;
-        messageActive = true;
-        messagePanel.SetActive(messageActive);
-        StopAllCoroutines();
-        StartCoroutine(LerpMessageAlpha(0f, 1f));
-    }
-    public void StopMessage()
-    {
-        StopAllCoroutines();
-        StartCoroutine(LerpMessageAlpha(0f, 1f));
-        StartCoroutine(EndMessageRoutine());
-    }
-
-    private IEnumerator EndMessageRoutine()
-    {
-        yield return StartCoroutine(LerpMessageAlpha(canvasGroup.alpha, 0f));
+        currentOwner = null;
         messageActive = false;
-        messagePanel.SetActive(messageActive);
+
+        if (currentRoutine != null)
+        {
+            StopCoroutine(currentRoutine);
+            currentRoutine = null;
+        }
+
+        StopAllCoroutines();
+
+        canvasGroup.alpha = 0f;
+        messagePanel.SetActive(false);
     }
 
-    private IEnumerator LerpMessageAlpha(float currentAlpha, float targetAlpha)
+    public void StartMessage(string message, object owner)
     {
+        currentOwner = owner;
+
+        textMessage.text = message;
+        messagePanel.SetActive(true);
+        messageActive = true;
+
+        if (currentRoutine != null)
+            StopCoroutine(currentRoutine);
+
+        currentRoutine = StartCoroutine(Fade(1f));
+    }
+
+    public void StopMessage(object owner)
+    {
+        if (currentOwner != owner)
+            return;
+
+        currentOwner = null;
+        messageActive = false;
+
+        if (currentRoutine != null)
+            StopCoroutine(currentRoutine);
+
+        currentRoutine = StartCoroutine(Fade(0f));
+    }
+
+    private IEnumerator Fade(float targetAlpha)
+    {
+        float startAlpha = canvasGroup.alpha;
         float t = 0f;
 
-        while (t < 1)
+        while (t < 1f)
         {
             t += Time.deltaTime / 0.5f;
-            canvasGroup.alpha = Mathf.Lerp(currentAlpha, targetAlpha, t);
+            canvasGroup.alpha = Mathf.Lerp(startAlpha, targetAlpha, t);
             yield return null;
         }
+
+        canvasGroup.alpha = targetAlpha;
+
+        if (targetAlpha == 0f)
+            messagePanel.SetActive(false);
     }
 }
