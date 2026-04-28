@@ -284,7 +284,7 @@ MonoBehaviour:
   maxRayLength: 10
   raySpeed: 8
   targetLerpSpeed: 1
-  _duration: 4
+  _duration: 3.5
   laserPrefab: {fileID: 1095420324342751943, guid: eeec02d454a247c46b0274cb8a82d3f0, type: 3}
 --- !u!1 &6900823288402649937
 GameObject:
@@ -432,6 +432,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyDamageable
   _enemy: {fileID: 8010943512667726129}
+  _explodeBitch: {fileID: 0}
 --- !u!65 &8838160874129828706
 BoxCollider:
   m_ObjectHideFlags: 0

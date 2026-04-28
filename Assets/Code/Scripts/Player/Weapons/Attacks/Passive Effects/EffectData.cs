@@ -19,7 +19,6 @@ public class EffectData : ScriptableObject
     public EchosCry.EffectTier EffectTier = EchosCry.EffectTier.One;
 
     [SerializeReference] public List<Effect> Effects;
-
     private void OnEnable()
     {
         Effects ??= new();

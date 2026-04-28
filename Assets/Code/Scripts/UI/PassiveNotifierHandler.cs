@@ -11,11 +11,13 @@ public class PassiveNotifierHandler : MonoBehaviour
     {
         PlayerComboMeter.OnComboMeterStateChanged += UpdatePassiveNotifiers;
         WeaponHolder.OnEffectAdded += UpdatePassiveNotifiers;
+        DashHandler.OnDashEffectAdded += UpdatePassiveNotifiers;
     }
     private void OnDisable()
     {
         PlayerComboMeter.OnComboMeterStateChanged -= UpdatePassiveNotifiers;
         WeaponHolder.OnEffectAdded -= UpdatePassiveNotifiers;
+        DashHandler.OnDashEffectAdded -= UpdatePassiveNotifiers;
     }
     
     private void UpdatePassiveNotifiers()

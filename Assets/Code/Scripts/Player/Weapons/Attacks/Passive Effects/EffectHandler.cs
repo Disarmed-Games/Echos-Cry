@@ -41,15 +41,16 @@ public class EffectHandler : MonoBehaviour
     {
         string effectEnum = effect.EffectName;
 
-        if (_activeEffects.Contains(effectEnum)) //Check if effect active
+        if (_activeEffects.Contains(effectEnum))
         {
-            int newStack = _activeEffectData[effectEnum].stacks + 1; 
-            if (newStack > effect.MaxStacks) return; //If new stack count greater than max count, return
+            if (!_activeEffectData.TryGetValue(effectEnum, out var node))
+                return;
 
-            _activeEffectData.Remove(effectEnum);
+            int newStack = node.stacks + 1;
+            if (newStack > effect.MaxStacks)
+                return;
 
-            _activeEffectData.Add(effectEnum, new EffectNode(_activeEffectData[effectEnum].coroutine, newStack));
-
+            _activeEffectData[effectEnum] = new EffectNode(node.coroutine, newStack);
             return;
         }
 

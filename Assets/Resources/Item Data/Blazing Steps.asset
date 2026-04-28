@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Blazing Steps
   m_EditorClassIdentifier: Echos Cry Core::BlazingStepsItemData
   displayName: Blazing Steps
-  description: With the fury of the sun, burn your foes to dust!
+  description: Applied when dashing, burn your foes to dust!
   icon: {fileID: 21300000, guid: e687064753a88c349a203902dc2873a2, type: 3}
   isStackable: 0
   _effect: {fileID: 11400000, guid: 0ddc26c79ac75334c8b260108d3f3236, type: 2}
