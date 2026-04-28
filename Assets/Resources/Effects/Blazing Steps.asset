@@ -30,7 +30,7 @@ MonoBehaviour:
     - rid: 3227708259094233284
       type: {class: DamageMultiplierEffect, ns: , asm: Echos Cry Core}
       data:
-        damageMultiplier: 2.5
+        damageMultiplier: 2
         multiplierChance: 1
     - rid: 3227708259094233285
       type: {class: DamageEffect, ns: , asm: Echos Cry Core}

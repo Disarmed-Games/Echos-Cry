@@ -22,5 +22,5 @@ MonoBehaviour:
   ItemChanceDrops:
   - prefab: {fileID: 2018058594230188048, guid: 0db0e2166c91dcd4eb824e4f56ff3a36, type: 3}
     dropAmount: 1
-    dropChancePercent: 0.15
+    dropChancePercent: 0.8
   itemExplosionSpeed: 3
