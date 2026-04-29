@@ -6,6 +6,7 @@ public class GameoverManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI livesLeftText;
     [SerializeField] private TextMeshProUGUI deathText;
+    [SerializeField] private TextMeshProUGUI deathButtonText;
     [SerializeField] private SceneField sceneTarget;
     [SerializeField] private SceneField sceneEndTarget;
 
@@ -13,9 +14,15 @@ public class GameoverManager : MonoBehaviour
     {
         livesLeftText.text = $"Lives Left: {GameManager.PlayerLives}";
         if (GameManager.PlayerLives > 0)
+        {
             deathText.text = "You Died.";
+            deathButtonText.text = "Respawn";
+        }  
         else
+        {
             deathText.text = "Game Over.";
+            deathButtonText.text = "Retry";
+        }  
     }
     private void DisableGameoverMenu()
     {
@@ -30,8 +37,13 @@ public class GameoverManager : MonoBehaviour
     {
         DisableGameoverMenu();
         if (GameManager.Instance.IsGameOver)
+        {
+            GameManager.Instance.ResetGame();
             GameManager.Instance.SceneManager.TransitionScene(sceneEndTarget, GameManager.Instance);
+        }
         else
+        {
             GameManager.Instance.SceneManager.TransitionScene(sceneTarget, GameManager.Instance);
+        }
     }
 }
