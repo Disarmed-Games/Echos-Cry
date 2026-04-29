@@ -7,7 +7,8 @@ using static ScoreSceneManager;
 
 public class ScoreSceneManager : MonoBehaviour
 {
-    [SerializeField] private SceneField sceneTarget;
+    [SerializeField] private SceneField townScene;
+    [SerializeField] private SceneField creditsScene;
     [SerializeField] private soundEffect boomSFX;
     [SerializeField] private StarUIHandler[] starImages = new StarUIHandler[5];
     [SerializeField] private TextMeshProUGUI ratingText;
@@ -52,7 +53,11 @@ public class ScoreSceneManager : MonoBehaviour
     }
     public void ContinueButton()
     {
-        GameManager.Instance.SceneManager.TransitionScene(sceneTarget, GameManager.Instance);
+        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == SceneNames.Level5)
+            GameManager.Instance.SceneManager.TransitionScene(creditsScene, GameManager.Instance);
+        else
+            GameManager.Instance.SceneManager.TransitionScene(townScene, GameManager.Instance);
+        
         MenuManager.Instance.DisablePauseMenu();
     }
     private void OnEnable()

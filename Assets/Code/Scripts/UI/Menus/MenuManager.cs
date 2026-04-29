@@ -107,7 +107,7 @@ public class MenuManager : Singleton<MenuManager>
         _currentMenu = menuName;
 
         if (UITip.Instance != null)
-            UITip.Instance.StopMessage(); //Reset any messages that may be opened still.
+            UITip.Instance.StopAllMessage(); //Reset any messages that may be opened still.
 
         if (hideHUD && menuName == "HUD") return;
 

@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 
 public class RemapOptionHandler : MonoBehaviour
 {
+    public static Action OnActionRemappedEvent;
     [SerializeField] private TextMeshProUGUI _ActionNameText;
     [SerializeField] private TextMeshProUGUI _ActionBindingText;
 
@@ -35,9 +36,9 @@ public class RemapOptionHandler : MonoBehaviour
 
     private void OnRebindingOperationComplete(InputActionRebindingExtensions.RebindingOperation operation)
     {
-        _ActionBindingText.text = operation.action.bindings[_bindingIndex].ToDisplayString();
-
         operation.action.Enable();
-        rebindingOperationKeyboard.Cancel();
+        _ActionBindingText.text = operation.action.GetBindingDisplayString(_bindingIndex);
+        rebindingOperationKeyboard.Dispose();
+        OnActionRemappedEvent?.Invoke();
     }
 }

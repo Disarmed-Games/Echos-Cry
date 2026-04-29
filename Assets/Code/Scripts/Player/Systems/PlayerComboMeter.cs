@@ -14,7 +14,7 @@ public class PlayerComboMeter : MonoBehaviour
     private float _comboDrainDelay = 8f;
     private float _comboMeterAmount = 0;
     private float _comboBaseIncrease = 2f;
-    private float _comboBaseDecrease = 20f;
+    private float _comboBaseDecrease = 15f;
     private float _comboGoodRate = 0.8f;
     private float _comboExcellentRate = 1.5f;
     private float _comboMeterMax = 120f;
@@ -32,6 +32,7 @@ public class PlayerComboMeter : MonoBehaviour
         Full
     }
     private static MeterState _currentMeterState = MeterState.Starting;
+    private static MeterState _pastMeterState = MeterState.Starting;
     public static MeterState CurrentMeterState { get { return _currentMeterState; } }
 
     private Player playerRef;
@@ -105,24 +106,27 @@ public class PlayerComboMeter : MonoBehaviour
 
         if (progress < oneThird)
         {
+            _pastMeterState = _currentMeterState;
             _currentMeterState = MeterState.Starting;
-            OnComboMeterStateChanged?.Invoke();
         }
         else if (progress >= oneThird && progress < twoThirds)
         {
+            _pastMeterState = _currentMeterState;
             _currentMeterState = MeterState.OneThird;
-            OnComboMeterStateChanged?.Invoke();
+
         } 
         else if (progress >= twoThirds && progress < 1f)
         {
+            _pastMeterState = _currentMeterState;
             _currentMeterState = MeterState.TwoThirds;
-            OnComboMeterStateChanged?.Invoke();
         }  
         else
         {
+            _pastMeterState = _currentMeterState;
             _currentMeterState = MeterState.Full;
-            OnComboMeterStateChanged?.Invoke();
-        }  
+        } 
+
+        if (_currentMeterState != _pastMeterState) OnComboMeterStateChanged?.Invoke();
     }
 
     private IEnumerator DrainResetWait()

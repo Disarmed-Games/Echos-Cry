@@ -30,6 +30,10 @@ public class GameManager : NonSpawnableSingleton<GameManager>
     {
         OnGameStartEvent?.Invoke();
     }
+    public void ResetGame()
+    {
+        PlayerLives = _maxPlayerLives;
+    }
 
     public void HandlePlayerDeath(Player player)
     {

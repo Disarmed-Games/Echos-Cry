@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: Blazing Steps
   m_EditorClassIdentifier: Echos Cry Core::EffectData
   EffectName: Blazing Steps
-  EffectDescription: With the fury of the sun, burn your foes to dust!
+  EffectDescription: Applied when dashing, burn your foes to dust!
   EffectIcon: {fileID: 21300000, guid: e687064753a88c349a203902dc2873a2, type: 3}
   IsEffectUseOneTime: 0
   EffectUseInterval: 0.75
   EffectDuration: 2.5
   MaxStacks: 1
-  EffectTier: 1
+  EffectTier: 2
   Effects:
   - rid: 3227708259094233284
   - rid: 3227708259094233285
@@ -30,7 +30,7 @@ MonoBehaviour:
     - rid: 3227708259094233284
       type: {class: DamageMultiplierEffect, ns: , asm: Echos Cry Core}
       data:
-        damageMultiplier: 2.5
+        damageMultiplier: 2
         multiplierChance: 1
     - rid: 3227708259094233285
       type: {class: DamageEffect, ns: , asm: Echos Cry Core}

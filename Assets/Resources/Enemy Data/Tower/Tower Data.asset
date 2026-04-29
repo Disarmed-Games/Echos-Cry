@@ -15,13 +15,13 @@ MonoBehaviour:
   _distanceCheck: 12
   _attackChargeTime: 0.6
   _attackDashForce: 0
-  _attackDuration: 5
-  _attackCooldown: 1.5
+  _attackDuration: 0
+  _attackCooldown: 4
   _staggerDuration: 1.2
   _baseDamage: 6
   _stoppingDistance: 7
   _tintFlashDuration: 0.2
-  _knockbackDuration: 0.15
+  _knockbackDuration: 0.12
   _tintHealthFlash: {r: 1, g: 0, b: 0, a: 1}
   _tintShieldFlash: {r: 0, g: 0, b: 1, a: 1}
   _baseScore: 130

@@ -57,4 +57,28 @@ public class JumpAOEAttack : AttackMethod
         particles.Stop();
         GameObject.Destroy(particles.gameObject, _aoeEffectTime);
     }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+
+        int segments = 50;
+        float angleStep = 360f / segments;
+
+        Vector3 prevPoint = transform.position + new Vector3(_aoeRadius, 0, 0);
+
+        for (int i = 1; i <= segments; i++)
+        {
+            float angle = i * angleStep * Mathf.Deg2Rad;
+
+            Vector3 newPoint = transform.position + new Vector3(
+                Mathf.Cos(angle) * _aoeRadius,
+                0,
+                Mathf.Sin(angle) * _aoeRadius
+            );
+
+            Gizmos.DrawLine(prevPoint, newPoint);
+            prevPoint = newPoint;
+        }
+    }
 }

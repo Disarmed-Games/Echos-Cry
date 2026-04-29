@@ -58,7 +58,7 @@ MonoBehaviour:
   m_ScaleMode: 0
   m_Offset: {x: 0, y: 0, z: 0}
   m_Size: {x: 2, y: 2, z: 1}
-  m_FadeFactor: 0.5
+  m_FadeFactor: 1
   version: 1
   m_DecalLayerMask: 1
 --- !u!114 &8530822479291310140

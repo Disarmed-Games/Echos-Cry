@@ -412,6 +412,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyDamageable
   _enemy: {fileID: 8010943512667726129}
+  _knockbackExplosion: {fileID: 8653895834777587694, guid: 7e2548855fcb6424b8479148fad228be, type: 3}
 --- !u!65 &8838160874129828706
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -520,11 +521,12 @@ MonoBehaviour:
   _projectileSound: {fileID: 11400000, guid: b3053e6ade645fb49b3e24c600501329, type: 2}
   _projectileCount: 5
   _rb: {fileID: 6827338249854996756}
-  _blowbackForce: 2
+  _blowbackForce: 1.8
   spawnOffset: {x: 0, y: 1, z: 0}
   _enemy: {fileID: 8010943512667726129}
-  projectileSpawnDistance: 1
+  projectileSpawnDistance: 0.8
   invincibleCooldown: 2.6
+  _canvasGroup: {fileID: 6878465253286725886}
 --- !u!1001 &1204147580395218985
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -624,19 +626,39 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2310162611674093079, guid: ecdbe2f4f7389a545b4000ed534075a7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6878465253286725886}
   m_SourcePrefab: {fileID: 100100000, guid: ecdbe2f4f7389a545b4000ed534075a7, type: 3}
 --- !u!114 &1385049851521198975 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 255951293329867606, guid: ecdbe2f4f7389a545b4000ed534075a7, type: 3}
   m_PrefabInstance: {fileID: 1204147580395218985}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 3511300828136963646}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 82c5850fc9bb3b64091bf35ee4167cf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+--- !u!1 &3511300828136963646 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2310162611674093079, guid: ecdbe2f4f7389a545b4000ed534075a7, type: 3}
+  m_PrefabInstance: {fileID: 1204147580395218985}
+  m_PrefabAsset: {fileID: 0}
+--- !u!225 &6878465253286725886
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3511300828136963646}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!224 &5754186599565763595 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6876723821600328738, guid: ecdbe2f4f7389a545b4000ed534075a7, type: 3}
