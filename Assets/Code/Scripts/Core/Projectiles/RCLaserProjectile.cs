@@ -1,8 +1,10 @@
+using EchosCry.Enemy.StateSystem;
 using System.Collections;
 using UnityEngine;
 
 public class RCLaserProjectile : AttackMethod
 {
+    [SerializeField] private Enemy _enemyRef;
     [SerializeField] private LayerMask layerMask;
     [SerializeField] private float maxRayLength;
     [SerializeField] private float raySpeed;
@@ -29,6 +31,11 @@ public class RCLaserProjectile : AttackMethod
     private void OnDisable()
     {
         AttackFinished();
+    }
+
+    private void Update()
+    {
+        if (_enemyRef.StateHandler.CurrentState != EnemyStates.Attack) AttackFinished();
     }
 
     private IEnumerator StartAttack()
