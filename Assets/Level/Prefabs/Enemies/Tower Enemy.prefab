@@ -278,6 +278,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1214d16a342d4be4ebea44f1226a7d72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Echos Cry Core::RCLaserProjectile
+  _enemyRef: {fileID: 8010943512667726129}
   layerMask:
     serializedVersion: 2
     m_Bits: 1024
@@ -366,7 +367,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a13bb9d731c3ce45a893640fcd98ebb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
-  _enemyType: 1
+  _enemyType: 7
   _health: {fileID: 854592342237272632}
   _navMeshAgent: {fileID: 1592182489320676592}
   _rigidbody: {fileID: 6827338249854996756}

@@ -1,8 +1,10 @@
+using EchosCry.Enemy.StateSystem;
 using System.Collections;
 using UnityEngine;
 
 public class RCLaserProjectile : AttackMethod
 {
+    [SerializeField] private Enemy _enemyRef;
     [SerializeField] private LayerMask layerMask;
     [SerializeField] private float maxRayLength;
     [SerializeField] private float raySpeed;
@@ -31,6 +33,11 @@ public class RCLaserProjectile : AttackMethod
         AttackFinished();
     }
 
+    private void Update()
+    {
+        if (_enemyRef.StateHandler.CurrentState != EnemyStates.Attack) AttackFinished();
+    }
+
     private IEnumerator StartAttack()
     {
         rayLength = 0;
@@ -49,7 +56,6 @@ public class RCLaserProjectile : AttackMethod
             );
 
             Vector3 direction = (smoothedTarget - transform.position).normalized;
-            //direction.y = 0f;
 
             transform.rotation = Quaternion.LookRotation(direction, Vector3.up);
             currentLaser.transform.localPosition = Vector3.forward * (rayLength * 0.5f);
