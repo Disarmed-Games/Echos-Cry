@@ -15,7 +15,6 @@ public class EffectData : ScriptableObject
     public float EffectUseInterval;
     public float EffectDuration;
     [Min(1)] public int MaxStacks = 1;
-    //public EchosCry.Effects EffectEnum = EchosCry.Effects.None;
     public EchosCry.EffectTier EffectTier = EchosCry.EffectTier.One;
 
     [SerializeReference] public List<Effect> Effects;
@@ -98,12 +97,9 @@ public class MovementAdjustEffect : Effect
     public Color tintColor = Color.white;
     public override void Use(Enemy enemy, EffectHandler handler, int stackCount, float duration)
     {
-        for (int i = 0; i < stackCount; i++)
-        {
-            enemy.Stats.MovementMultiplier *= speedAdjustment;
-        }
+        enemy.Stats.MovementMultiplier *= speedAdjustment;
         enemy.Animator.SetTint(tintColor);
-        handler.StartCoroutine(ResetMovementMultiplier(1f, enemy));
+        handler.StartCoroutine(ResetMovementMultiplier(duration, enemy));
     }
     private IEnumerator ResetMovementMultiplier(float time, Enemy enemy)
     {
@@ -121,12 +117,10 @@ public class KnockbackAdjustEffect : Effect
     public Color tintColor = Color.white;
     public override void Use(Enemy enemy, EffectHandler handler, int stackCount, float duration)
     {
-        for (int i = 0; i < stackCount; i++)
-        {
-            enemy.Stats.KnockbackMultiplier *= knockbackAdjustment;
-        }
+        enemy.Stats.KnockbackMultiplier *= knockbackAdjustment;
+
         enemy.Animator.SetTint(tintColor);
-        handler.StartCoroutine(ResetKnockbackMultiplier(1f, enemy));
+        handler.StartCoroutine(ResetKnockbackMultiplier(duration, enemy));
     }
     private IEnumerator ResetKnockbackMultiplier(float time, Enemy enemy)
     {

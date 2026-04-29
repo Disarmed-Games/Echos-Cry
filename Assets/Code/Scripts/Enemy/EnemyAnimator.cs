@@ -65,10 +65,12 @@ public class EnemyAnimator : MonoBehaviour
     public void SetTint(Color tintColor)
     {
         _enemySprite.material.SetColor(hashedTintColor, tintColor);
+        _currentTintColor = tintColor;
     }
     public void ResetTint()
     {
         _enemySprite.material.SetColor(hashedTintColor, _defaultTintColor);
+        _currentTintColor = _defaultTintColor;
     }
     private IEnumerator TintFlashCoroutine(Color tintColor, float flashDuration)
     {

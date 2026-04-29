@@ -17,7 +17,7 @@ namespace EchosCry
 
 public class EffectHandler : MonoBehaviour
 {
-    struct EffectNode
+    class EffectNode
     {
         public Coroutine coroutine;
         public int stacks;
@@ -46,31 +46,27 @@ public class EffectHandler : MonoBehaviour
             int newStack = _activeEffectData[effectName].stacks + 1; 
             if (newStack > effect.MaxStacks) return; //If new stack count greater than max count, return
 
-            _activeEffectData.Remove(effectName);
-
-            _activeEffectData.Add(effectName, new EffectNode(_activeEffectData[effectName].coroutine, newStack));
+            _activeEffectData[effectName].stacks = newStack;
 
             return;
         }
 
         _activeEffects.Add(effectName); //Add effect to active effects
 
-        StartCoroutine(EndRoutineEffect(effect, enemy)); //Start coroutine for effect duration
+        StartCoroutine(EndRoutineEffect(effect)); //Start coroutine for effect duration
 
-        Coroutine routine = null;
+        _activeEffectData.Add(effectName, new EffectNode(null, 1)); //Add to activeEffectData
         if(effect.IsEffectUseOneTime) 
         {
             UseEffect(effect, enemy, 1); //Use once if only one time use
         }
         else
         {
-            routine = StartCoroutine(RoutineEffect(effect, enemy)); //Else start coroutine
+            _activeEffectData[effectName].coroutine = StartCoroutine(RoutineEffect(effect, enemy)); //Else start coroutine
         }
-
-        _activeEffectData.Add(effectName, new EffectNode(routine, 1)); //Add to activeEffectData
     }
 
-    public void RemovePassiveEffect(EffectData effect, Enemy enemy)
+    public void RemovePassiveEffect(EffectData effect)
     {
         string effectEnum = effect.EffectName;
 
@@ -82,19 +78,18 @@ public class EffectHandler : MonoBehaviour
         _activeEffectData.Remove(effectEnum);
     }
 
-    private IEnumerator EndRoutineEffect(EffectData effect, Enemy enemy)
+    private IEnumerator EndRoutineEffect(EffectData effect)
     {
         yield return new WaitForSeconds(effect.EffectDuration);
-        RemovePassiveEffect(effect, enemy);
+        RemovePassiveEffect(effect);
     }
 
     private IEnumerator RoutineEffect(EffectData effect, Enemy enemy)
     {
         while (_activeEffects.Contains(effect.EffectName))
         {
-            yield return new WaitForSeconds(effect.EffectUseInterval);
-            
             UseEffect(effect, enemy, _activeEffectData[effect.EffectName].stacks);
+            yield return new WaitForSeconds(effect.EffectUseInterval);
         }
     }
 
