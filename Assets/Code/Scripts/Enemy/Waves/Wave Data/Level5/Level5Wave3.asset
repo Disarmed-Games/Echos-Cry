@@ -18,7 +18,7 @@ MonoBehaviour:
   - enemySpawnType: {fileID: 6900823288402649937, guid: b6393c099ff99e547b82c84b1a483987, type: 3}
     enemySpawnCount: 2
   - enemySpawnType: {fileID: 6900823288402649937, guid: 9847284d3467756489d3f6673964dd70, type: 3}
-    enemySpawnCount: 1
+    enemySpawnCount: 2
   - enemySpawnType: {fileID: 6900823288402649937, guid: 4e6ad55f889d65e40b6ce9414d619049, type: 3}
     enemySpawnCount: 1
   - enemySpawnType: {fileID: 6900823288402649937, guid: cc2412d36d40d54469f1a824c37f02e4, type: 3}
