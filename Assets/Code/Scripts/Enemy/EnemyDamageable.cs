@@ -85,7 +85,7 @@ public class EnemyDamageable : MonoBehaviour, IDamageable
             DamageEnemy(damage);
             _enemy.Animator.TintFlash(_enemy.Data.TintHealthFlash, _enemy.Data.TintFlashDuration);
             EchosCry.Sound.PlaySFX(_enemy.SoundConfig.HitSFX, _enemy.transform, 0);
-            Instantiate(_knockbackExplosion, _enemy.transform);
+            Instantiate(_knockbackExplosion, _enemy.transform.position, Quaternion.identity);
         }
 
         _enemy.Rigidbody.isKinematic = true;
