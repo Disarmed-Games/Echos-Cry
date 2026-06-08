@@ -11,6 +11,7 @@ TagManager:
   - HealthCanvas
   - Item
   - Projectile
+  - BlockInput
   layers:
   - Default
   - TransparentFX

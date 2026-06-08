@@ -40,7 +40,7 @@ public class DialogueTrigger : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             ToolTipPrefab.GetComponent<ToolTip>().text =
-                $"'{_inputTranslator.PlayerInputs.Gameplay.Interact.GetBindingDisplayString(InputBinding.MaskByGroup("KeyboardMouse"))}'";
+                $"'{_inputTranslator.PlayerInputs.Gameplay.Interact.GetBindingDisplayString(InputBinding.MaskByGroup("KeyboardMouse"))}' to talk.";
             Instantiate(ToolTipPrefab, this.transform.position + new Vector3(0, 1, -1), Quaternion.identity);
         }
     }

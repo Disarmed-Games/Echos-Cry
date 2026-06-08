@@ -1003,7 +1003,7 @@ GameObject:
   - component: {fileID: 975472691}
   m_Layer: 5
   m_Name: ContinueButton
-  m_TagString: Untagged
+  m_TagString: BlockInput
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1025,7 +1025,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 960, y: -1152.7909}
+  m_AnchoredPosition: {x: 960.00006, y: -1104.9448}
   m_SizeDelta: {x: 256, y: 64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &975472688
@@ -1193,7 +1193,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Version 2.0
+  m_text: Version 2.1
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: caafb0e39abac1f42bc58ea30b28ade9, type: 2}
   m_sharedMaterial: {fileID: 3582427398192158066, guid: caafb0e39abac1f42bc58ea30b28ade9, type: 2}
@@ -1536,7 +1536,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 960, y: -174.31012}
+  m_AnchoredPosition: {x: 960.00006, y: -168.99387}
   m_SizeDelta: {x: 1537, y: 256}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1189542617
@@ -1718,11 +1718,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7037231287620920825, guid: 2ba960b8c1b9d3a4997206480d622fc9, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 960
+      value: 960.00006
       objectReference: {fileID: 0}
     - target: {fileID: 7037231287620920825, guid: 2ba960b8c1b9d3a4997206480d622fc9, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -522.9303
+      value: -506.9816
       objectReference: {fileID: 0}
     - target: {fileID: 7037231287620920825, guid: 2ba960b8c1b9d3a4997206480d622fc9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -6802,7 +6802,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 960, y: -807.55054}
+  m_AnchoredPosition: {x: 960.00006, y: -780.96936}
   m_SizeDelta: {x: 640, y: 128}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1645726409
@@ -7411,7 +7411,7 @@ GameObject:
   - component: {fileID: 1975400780}
   m_Layer: 5
   m_Name: RetryButton
-  m_TagString: Untagged
+  m_TagString: BlockInput
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7433,7 +7433,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 960, y: -996.17065}
+  m_AnchoredPosition: {x: 960.00006, y: -958.9571}
   m_SizeDelta: {x: 256, y: 64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1975400777

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -34,7 +35,7 @@ public class CalibrationManager : MonoBehaviour
     {
         if (!isPressed
             || _hitCount >= _maxHitCount
-            || EventSystem.current.IsPointerOverGameObject()) return;
+            || IsPointerOverBlockingUI()) return;
 
         EchosCry.Sound.PlaySFX(tapSFX, this.transform, 0);
 
@@ -46,6 +47,28 @@ public class CalibrationManager : MonoBehaviour
         _continueButton.interactable = (_hitCount >= _maxHitCount);
 
         CalculateOverallAccuracy();
+    }
+    private bool IsPointerOverBlockingUI()
+    {
+        if (Pointer.current == null)
+            return false;
+
+        PointerEventData eventData = new PointerEventData(EventSystem.current)
+        {
+            position = Pointer.current.position.ReadValue()
+        };
+
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventData, results);
+
+        foreach (var result in results)
+        {
+            if (result.gameObject.CompareTag("BlockInput"))
+            {
+                return true;
+            }
+        }
+        return false;
     }
     private void CalculateOverallAccuracy()
     {
