@@ -18,8 +18,8 @@ Default gamepad layout (Xbox / PlayStation labels)
 | Dash | B / Circle |
 | Interact / dialogue continue / UI submit | A / Cross |
 | Special attack | Right trigger |
-| Item 1 / 2 / 3 / 4 | D-pad up / right / down / left |
-| Drop selected or hovered inventory item | Left bumper |
+| Select and use item slot 1 / 2 / 3 / 4 | D-pad up / right / down / left |
+| Drop last-used inventory slot | L1 / Left bumper |
 | Pause / resume | Start / Options |
 | Upgrades | View / Share |
 | Close shop | B / Circle |
@@ -42,8 +42,13 @@ sliders, toggles, and other selected controls receive a gold tint and display a 
 gold frame with a dark border while controller input is active. The frame uses a
 separate screen overlay so menu masks and canvas sorting cannot obscure it. The frame hides when keyboard
 or mouse input takes over and does not block clicks or affect the UI layout. Inventory
-slots and settings tabs support selection; selected item tooltips anchor to the
-item instead of requiring a mouse. Gameplay inventory hotkeys remain on the D-pad.
+settings tabs support selection. Gameplay inventory slots are excluded from
+EventSystem navigation, so neither stick changes their focus. Each D-pad direction
+selects and uses its corresponding slot in one press. No slot is highlighted by
+default; a press flashes that slot's gold border for 0.2 seconds, then clears it.
+Slot labels show their D-pad bindings. Keyboard keys 1–4 still use their slots
+directly, and mouse hover plus Q still drops the hovered item. L1 drops the last
+slot used with the controller; R1/L2 no longer select or use items.
 
 The controls page lists bindings for both schemes. Rebinding restricts candidates
 to the selected scheme, pauses the translator's enabled actions during capture,

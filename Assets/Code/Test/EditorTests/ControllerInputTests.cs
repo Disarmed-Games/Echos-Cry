@@ -84,7 +84,7 @@ public class ControllerInputTests : InputTestFixture
     }
 
     [Test]
-    public void EveryActionHasBothSchemesAndDisconnectFallsBack()
+    public void ActionsHaveBothSchemesAndDisconnectFallsBack()
     {
         foreach (var map in translator.PlayerInputs.asset.actionMaps)
             foreach (var action in map.actions)

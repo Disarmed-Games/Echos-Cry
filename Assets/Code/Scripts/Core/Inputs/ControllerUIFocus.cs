@@ -112,6 +112,7 @@ public class ControllerUIFocus : MonoBehaviour
     private static bool CanFocus(Selectable control)
     {
         if (control == null || !control.IsActive() || !control.IsInteractable()) return false;
+        if (control.GetComponent<SlotScript>() != null) return false;
         var canvas = control.GetComponentInParent<Canvas>();
         if (canvas == null || !canvas.isActiveAndEnabled) return false;
         var bindingsList = control.GetComponentInParent<VisibleBindingNavigation>();

@@ -18,6 +18,7 @@ public class InputTranslator : ScriptableObject,
         _playerInputs = new PlayerInputs();
         EnsureUpgradeControllerBinding();
         _playerInputs.Gameplay.SetCallbacks(this);
+        ConfigureItemControls();
         _playerInputs.PauseMenu.SetCallbacks(this);
         _playerInputs.ShopMenu.SetCallbacks(this);
         _playerInputs.Dialogue.SetCallbacks(this);
@@ -32,6 +33,7 @@ public class InputTranslator : ScriptableObject,
             _playerInputs = new PlayerInputs();
             EnsureUpgradeControllerBinding();
             _playerInputs.Gameplay.SetCallbacks(this);
+            ConfigureItemControls();
             _playerInputs.PauseMenu.SetCallbacks(this);
             _playerInputs.ShopMenu.SetCallbacks(this);
             _playerInputs.Dialogue.SetCallbacks(this);
@@ -109,21 +111,25 @@ public class InputTranslator : ScriptableObject,
     }
     public void OnItem1(InputAction.CallbackContext context)
     {
+        FlashItemSlot(context, 0);
         if (context.started) OnItem1Event?.Invoke(true, 0);
         else if (context.canceled) OnItem1Event?.Invoke(false, 0);
     }
     public void OnItem2(InputAction.CallbackContext context)
     {
+        FlashItemSlot(context, 1);
         if (context.started) OnItem2Event?.Invoke(true, 1);
         else if (context.canceled) OnItem2Event?.Invoke(false, 1);
     }
     public void OnItem3(InputAction.CallbackContext context)
     {
+        FlashItemSlot(context, 2);
         if (context.started) OnItem3Event?.Invoke(true, 2);
         else if (context.canceled) OnItem3Event?.Invoke(false, 2);
     }
     public void OnItem4(InputAction.CallbackContext context)
     {
+        FlashItemSlot(context, 3);
         if (context.started) OnItem4Event?.Invoke(true, 3);
         else if (context.canceled) OnItem4Event?.Invoke(false, 3);
     }
@@ -158,6 +164,44 @@ public class InputTranslator : ScriptableObject,
     public string ActiveControlScheme { get; private set; } = KeyboardMouseScheme;
     public event Action OnBindingsChanged;
     private InputDevice _lastDevice;
+    public int SelectedItemSlot { get; private set; } = -1;
+    public event Action<int> OnItemSlotUsedEvent;
+
+    private void ConfigureItemControls()
+    {
+        var map = _playerInputs.Gameplay.Get();
+        foreach (string name in new[] { "Previous Item Slot", "Next Item Slot", "Use Selected Item" })
+            map.FindAction(name)?.RemoveAction();
+        ItemAction(map, "Item 1", "<Gamepad>/dpad/up");
+        ItemAction(map, "Item 2", "<Gamepad>/dpad/right");
+        ItemAction(map, "Item 3", "<Gamepad>/dpad/down");
+        ItemAction(map, "Item 4", "<Gamepad>/dpad/left");
+        var drop = _playerInputs.Gameplay.Drop;
+        for (int i = 0; i < drop.bindings.Count; i++)
+            if (InputBinding.MaskByGroup(ControllerScheme).Matches(drop.bindings[i]) &&
+                drop.bindings[i].path == "<Gamepad>/dpad/down") drop.ChangeBinding(i).WithPath("<Gamepad>/leftShoulder");
+    }
+
+    private static InputAction ItemAction(InputActionMap map, string name, string path)
+    {
+        var action = map.FindAction(name) ?? map.AddAction(name, InputActionType.Button);
+        action.expectedControlType = "Button";
+        for (int i = 0; i < action.bindings.Count; i++)
+        {
+            var binding = action.bindings[i];
+            if (!InputBinding.MaskByGroup(ControllerScheme).Matches(binding)) continue;
+            return action;
+        }
+        action.AddBinding(path, groups: ControllerScheme);
+        return action;
+    }
+
+    private void FlashItemSlot(InputAction.CallbackContext context, int index)
+    {
+        if (!context.started || !(context.control.device is Gamepad)) return;
+        SelectedItemSlot = index;
+        OnItemSlotUsedEvent?.Invoke(index);
+    }
 
     public string GetBindingDisplayString(InputAction action)
     {
