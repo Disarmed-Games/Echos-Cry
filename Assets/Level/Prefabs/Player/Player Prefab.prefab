@@ -20992,10 +20992,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6af117172cafd104ca1164b39dbfcbc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerOrientation
-  IsRotating: 1
+  inputTranslator: {fileID: 11400000, guid: da8057efcf3a45a47bb320ce196e8d61, type: 2}
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  IsRotating: 1
 --- !u!1 &7389077857036745485
 GameObject:
   m_ObjectHideFlags: 0
