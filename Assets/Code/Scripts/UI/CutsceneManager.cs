@@ -24,10 +24,12 @@ public class CutsceneManager : MonoBehaviour
         UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
         _inputTranslator.OnInteractEvent += RequestSkipScene;
 
-        skipText.text = $"Press '{_inputTranslator.PlayerInputs.Gameplay.Interact.GetBindingDisplayString(InputBinding.MaskByGroup("KeyboardMouse"))}' to Skip";
+        _inputTranslator.OnBindingsChanged += RefreshBinding;
+        RefreshBinding();
     }
     public void OnDisable()
     {
+        _inputTranslator.OnBindingsChanged -= RefreshBinding;
         UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnSceneLoaded;
         _inputTranslator.OnInteractEvent -= RequestSkipScene;
     }
@@ -98,5 +100,9 @@ public class CutsceneManager : MonoBehaviour
             timer += Time.deltaTime;
             yield return null;
         }
+    }
+    private void RefreshBinding()
+    {
+        skipText.text = $"Press '{_inputTranslator.GetBindingDisplayString(_inputTranslator.PlayerInputs.Gameplay.Interact)}' to Skip";
     }
 }

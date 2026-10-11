@@ -11,16 +11,34 @@ public class UpgradeSelector : MonoBehaviour, IPointerEnterHandler, IPointerExit
     [SerializeField] private Button _useButton;
 
     private bool isActive = true;
+    private bool pointerHovered;
+    private bool controllerFocused;
     private UpgradeManager.UpgradeType currentUpgrade;
+    public Button UseButton => _useButton;
+    public TextMeshProUGUI DescriptionText => _upgradeDescriptionText;
+    public bool IsPresentationFocused
+    {
+        get
+        {
+            var menu = GetComponentInParent<UpgradeMenuNavigation>();
+            return menu != null ? (menu.IsUsingController ? controllerFocused : pointerHovered) :
+                pointerHovered || controllerFocused;
+        }
+    }
+    public string Description => !isActive ? "You need to level up before you can view these upgrades!" :
+        IsPresentationFocused && UpgradeManager.Instance != null ? UpgradeManager.Instance.GetDescription(currentUpgrade) :
+        "Select an upgrade to see the improvements!";
 
     public void SetUpgrade(UpgradeManager.UpgradeType upgrade)
     {
         currentUpgrade = upgrade;
         _upgradeNameText.text = currentUpgrade.ToString();
+        RefreshPresentation();
     }
 
     public void UseUpgrade()
     {
+        if (!isActive || UpgradeManager.Instance == null || UpgradeManager.Instance.GetAvailablePoints() <= 0) return;
         UpgradeManager.Instance.ApplyUpgrade(currentUpgrade);
         UpgradeManager.Instance.Roll();
     }
@@ -33,28 +51,44 @@ public class UpgradeSelector : MonoBehaviour, IPointerEnterHandler, IPointerExit
         if (!isActive)
         {
             _upgradeNameText.text = "???";
-            _upgradeDescriptionText.text = "You need to level up before you can view these upgrades!";
         }
         else
         {
             _upgradeNameText.text = currentUpgrade.ToString().Replace("_", " ");
         }
+        RefreshPresentation();
     }
     public void OnPointerEnter(PointerEventData eventData)
     {
-        _highlight.SetActive(true);
-        if (isActive)
-        { 
-            _upgradeDescriptionText.text = UpgradeManager.Instance.GetDescription(currentUpgrade);
-        }
+        pointerHovered = true;
+        RefreshPresentation();
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        _highlight.SetActive(false);
-        if (isActive)
-        {
-            _upgradeDescriptionText.text = "Hover over an upgrade to see the improvements!";
-        }
+        pointerHovered = false;
+        RefreshPresentation();
+    }
+
+    public void SetControllerFocus(bool focused)
+    {
+        if (controllerFocused == focused) return;
+        controllerFocused = focused;
+        RefreshPresentation();
+    }
+
+    private void RefreshPresentation()
+    {
+        bool focused = IsPresentationFocused;
+        _highlight.SetActive(focused);
+        var menu = GetComponentInParent<UpgradeMenuNavigation>();
+        if (menu != null && menu.isActiveAndEnabled) menu.RefreshDescriptions();
+        else _upgradeDescriptionText.text = Description;
+    }
+
+    private void OnDisable()
+    {
+        pointerHovered = controllerFocused = false;
+        RefreshPresentation();
     }
 }

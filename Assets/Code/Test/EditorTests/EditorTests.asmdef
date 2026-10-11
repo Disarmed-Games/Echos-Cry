@@ -4,7 +4,11 @@
     "references": [
         "GUID:27619889b8ba8c24980f49ee34dbb44a",
         "GUID:0acc523941302664db1f4e527237feb3",
-        "GUID:3114860c4c1a33e4d8c1f2309e8421e9"
+        "GUID:3114860c4c1a33e4d8c1f2309e8421e9",
+        "Unity.InputSystem",
+        "Unity.InputSystem.TestFramework",
+        "UnityEngine.UI",
+        "Unity.TextMeshPro"
     ],
     "includePlatforms": [
         "Editor"

@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ShopItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class ShopItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ISelectHandler, IDeselectHandler
 {
     [SerializeField] TextMeshProUGUI amountText;
     [SerializeField] TextMeshProUGUI costText;
@@ -85,4 +85,12 @@ public class ShopItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         ToggleHighlight(false);
         UITip.Instance.StopMessage(this);
     }
+
+    public void OnSelect(BaseEventData eventData)
+    {
+        ToggleHighlight(true);
+        UITip.Instance.StartMessage(itemData.description, this, transform);
+    }
+
+    public void OnDeselect(BaseEventData eventData) => OnPointerExit(null);
 }

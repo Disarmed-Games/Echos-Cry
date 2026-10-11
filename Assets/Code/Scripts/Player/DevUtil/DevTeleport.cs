@@ -19,6 +19,7 @@ public class DevTeleport : MonoBehaviour
 
     private void TeleportPlayer()
     {
+        if (Mouse.current == null || CameraManager.MainCamera == null) return;
         Ray ray = CameraManager.MainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
 
         if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, ground))

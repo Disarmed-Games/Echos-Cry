@@ -115,6 +115,8 @@ public class MenuManager : Singleton<MenuManager>
         { 
             if (menu.key == menuName) 
             {
+                if (menuName == "Upgrade" && menu.value.GetComponent<UpgradeMenuNavigation>() == null)
+                    menu.value.AddComponent<UpgradeMenuNavigation>();
                 menu.value.SetActive(true);
             }
             else

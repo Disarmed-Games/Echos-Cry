@@ -15,6 +15,7 @@ public class UITip : MonoBehaviour
     private bool messageActive = false;
     private Coroutine currentRoutine;
     private object currentOwner;
+    private Transform selectionAnchor;
 
     private void Awake()
     {
@@ -30,7 +31,8 @@ public class UITip : MonoBehaviour
     {
         if (messageActive)
         {
-            Vector2 mousePos = Mouse.current.position.ReadValue();
+            Vector2 mousePos = selectionAnchor != null ? (Vector2)selectionAnchor.position :
+                Mouse.current != null ? Mouse.current.position.ReadValue() : new Vector2(Screen.width / 2f, Screen.height / 2f);
             this.transform.position = mousePos;
 
             if (mousePos.x < Screen.width / 2f)
@@ -47,6 +49,7 @@ public class UITip : MonoBehaviour
     public void StopAllMessage()
     {
         currentOwner = null;
+        selectionAnchor = null;
         messageActive = false;
 
         if (currentRoutine != null)
@@ -61,9 +64,10 @@ public class UITip : MonoBehaviour
         messagePanel.SetActive(false);
     }
 
-    public void StartMessage(string message, object owner)
+    public void StartMessage(string message, object owner, Transform anchor = null)
     {
         currentOwner = owner;
+        selectionAnchor = anchor;
 
         textMessage.text = message;
         messagePanel.SetActive(true);
@@ -75,12 +79,18 @@ public class UITip : MonoBehaviour
         currentRoutine = StartCoroutine(Fade(1f));
     }
 
+    public void UpdateMessage(string message, object owner)
+    {
+        if (currentOwner == owner) textMessage.text = message;
+    }
+
     public void StopMessage(object owner)
     {
         if (currentOwner != owner)
             return;
 
         currentOwner = null;
+        selectionAnchor = null;
         messageActive = false;
 
         if (currentRoutine != null)

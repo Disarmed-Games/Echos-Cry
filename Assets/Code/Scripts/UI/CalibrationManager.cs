@@ -50,6 +50,7 @@ public class CalibrationManager : MonoBehaviour
     }
     private bool IsPointerOverBlockingUI()
     {
+        if (_inputTranslator.ActiveControlScheme == InputTranslator.ControllerScheme) return false;
         if (Pointer.current == null)
             return false;
 

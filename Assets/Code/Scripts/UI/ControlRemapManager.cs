@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class ControlRemapManager : MonoBehaviour
 {
@@ -20,10 +21,12 @@ public class ControlRemapManager : MonoBehaviour
                     if (binding.isComposite)
                         continue;
 
-                    if (string.IsNullOrEmpty(binding.groups) || !binding.groups.Contains("KeyboardMouse"))
+                    bool controller = InputBinding.MaskByGroup(InputTranslator.ControllerScheme).Matches(binding);
+                    bool keyboardMouse = InputBinding.MaskByGroup(InputTranslator.KeyboardMouseScheme).Matches(binding);
+                    if (!controller && !keyboardMouse)
                         continue;
 
-                    string actionName = action.name;
+                    string actionName = action.name + (controller ? " [Controller]" : " [Keyboard/Mouse]");
                     if (binding.isPartOfComposite)
                     {
                         actionName += $" ({binding.name})";
@@ -40,5 +43,8 @@ public class ControlRemapManager : MonoBehaviour
                 }
             }
         }
+        var scroll = _controlsContainer.GetComponentInParent<ScrollRect>();
+        if (scroll != null && _controlsContainer.GetComponent<VisibleBindingNavigation>() == null)
+            _controlsContainer.AddComponent<VisibleBindingNavigation>().Setup(scroll);
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-public class SlotScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class SlotScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ISelectHandler, IDeselectHandler
 {
     [SerializeField] private Image slotIcon;
     [SerializeField] private TextMeshProUGUI stackAmountText;
@@ -21,22 +21,29 @@ public class SlotScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     private InventoryItem slotItem;
     private bool canDrop = false;
 
+    private void Awake()
+    {
+        if (GetComponent<Selectable>() == null) gameObject.AddComponent<Selectable>();
+    }
+
     private void Start()
     {
         InventoryManager.Instance.AddInventorySlot(this);
-        keyTooltipText.text = useItemInput.action.GetBindingDisplayString(InputBinding.MaskByGroup("KeyboardMouse"));
+        UpdateBinding();
     }
 
     private void OnEnable()
     {
         inputTranslator.OnDropEvent += DropItem;
-        RemapOptionHandler.OnActionRemappedEvent += UpdateBinding;
+        inputTranslator.OnBindingsChanged += UpdateBinding;
         UpdateBinding();
     }
     private void OnDisable()
     {
         inputTranslator.OnDropEvent -= DropItem;
-        RemapOptionHandler.OnActionRemappedEvent -= UpdateBinding;
+        inputTranslator.OnBindingsChanged -= UpdateBinding;
+        canDrop = false;
+        if (UITip.Instance != null) UITip.Instance.StopMessage(this);
     }
 
     private void UpdateBinding()
@@ -45,19 +52,21 @@ public class SlotScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         switch (slotIndex)
         {
             case 0:
-                updatedKey = inputTranslator.PlayerInputs.Gameplay.Item1.GetBindingDisplayString(InputBinding.MaskByGroup("KeyboardMouse"));
+                updatedKey = inputTranslator.GetBindingDisplayString(inputTranslator.PlayerInputs.Gameplay.Item1);
                 break;
             case 1:
-                updatedKey = inputTranslator.PlayerInputs.Gameplay.Item2.GetBindingDisplayString(InputBinding.MaskByGroup("KeyboardMouse"));
+                updatedKey = inputTranslator.GetBindingDisplayString(inputTranslator.PlayerInputs.Gameplay.Item2);
                 break;
             case 2:
-                updatedKey = inputTranslator.PlayerInputs.Gameplay.Item3.GetBindingDisplayString(InputBinding.MaskByGroup("KeyboardMouse"));
+                updatedKey = inputTranslator.GetBindingDisplayString(inputTranslator.PlayerInputs.Gameplay.Item3);
                 break;
             case 3:
-                updatedKey = inputTranslator.PlayerInputs.Gameplay.Item4.GetBindingDisplayString(InputBinding.MaskByGroup("KeyboardMouse"));
+                updatedKey = inputTranslator.GetBindingDisplayString(inputTranslator.PlayerInputs.Gameplay.Item4);
                 break;
         }
         keyTooltipText.text = updatedKey;
+        if (canDrop && slotItem != null && UITip.Instance != null)
+            UITip.Instance.UpdateMessage(GetItemMessage(), this);
     }
 
     private void DropItem()
@@ -102,12 +111,26 @@ public class SlotScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
         if (slotItem != null)
         {
-            string stackableText = "";
-            if (!itemStackable) stackableText = "This item applies a passive effect.";
-            else stackableText = "This item is single use.";
-            string dropText = $"Press '{inputTranslator.PlayerInputs.Gameplay.Drop.GetBindingDisplayString(InputBinding.MaskByGroup("KeyboardMouse"))}' to drop.";
-            UITip.Instance.StartMessage($"<color=#008080>{itemName}</color>:\n<color=yellow>{stackableText}</color>\n{itemDescription}\n<color=#C0C0C0>{dropText}</color>", this);
+            UITip.Instance.StartMessage(GetItemMessage(), this);
         }
+    }
+
+    private string GetItemMessage()
+    {
+        string stackableText = itemStackable ? "This item is single use." : "This item applies a passive effect.";
+        string dropText = $"Press '{inputTranslator.GetBindingDisplayString(inputTranslator.PlayerInputs.Gameplay.Drop)}' to drop.";
+        return $"<color=#008080>{itemName}</color>:\n<color=yellow>{stackableText}</color>\n{itemDescription}\n<color=#C0C0C0>{dropText}</color>";
+    }
+
+    public void OnSelect(BaseEventData eventData)
+    {
+        canDrop = true;
+        if (slotItem != null) UITip.Instance.StartMessage(GetItemMessage(), this, transform);
+    }
+
+    public void OnDeselect(BaseEventData eventData)
+    {
+        OnPointerExit(null);
     }
 
     public void OnPointerExit(PointerEventData eventData)

@@ -31,6 +31,8 @@ public class DialogueManager : NonSpawnableSingleton<DialogueManager>
     
     private Coroutine displayLineCoroutine;
     private EventSystem currentEventSystem;
+    private string currentLineTemplate;
+    private string currentLineAction;
 
 
     void Start()
@@ -55,10 +57,12 @@ public class DialogueManager : NonSpawnableSingleton<DialogueManager>
     private void OnEnable()
     {
         _inputTranslator.OnSubmitEvent += ContinueIfPossible;
+        _inputTranslator.OnBindingsChanged += RefreshLineBinding;
     }
     private void OnDisable()
     {
         _inputTranslator.OnSubmitEvent -= ContinueIfPossible;
+        _inputTranslator.OnBindingsChanged -= RefreshLineBinding;
     }
     public void EnterDialogueMode(TextAsset inkJSON)
     {       
@@ -111,14 +115,27 @@ public class DialogueManager : NonSpawnableSingleton<DialogueManager>
 
     private string ProcessLineVariables(string line)
     {
+        currentLineTemplate = line;
+        currentLineAction = null;
         if (currentStory.variablesState.GlobalVariableExistsWithName("actionName"))
         {
             string actionName = (string)currentStory.variablesState["actionName"];
+            currentLineAction = actionName;
             var action = _inputTranslator.PlayerInputs.asset.FindAction(actionName);
-            string buttonName = action.GetBindingDisplayString(InputBinding.MaskByGroup("KeyboardMouse"));
+            string buttonName = _inputTranslator.GetBindingDisplayString(action);
             line = line.Replace("REPLACE_BUTTON", buttonName);
         }
         return line;
+    }
+
+    private void RefreshLineBinding()
+    {
+        if (!isDialoguePlaying || string.IsNullOrEmpty(currentLineAction)) return;
+        var action = _inputTranslator.PlayerInputs.asset.FindAction(currentLineAction);
+        if (action == null) return;
+        bool fullyVisible = dialogueText.maxVisibleCharacters >= dialogueText.text.Length;
+        dialogueText.text = currentLineTemplate.Replace("REPLACE_BUTTON", _inputTranslator.GetBindingDisplayString(action));
+        if (fullyVisible) dialogueText.maxVisibleCharacters = dialogueText.text.Length;
     }
 
     private void ContinueStory()
@@ -216,7 +233,7 @@ public class DialogueManager : NonSpawnableSingleton<DialogueManager>
             // if the submit button is pressed, finish up displaying the line right away
             if (interruptTextDisplayer) 
             {
-                dialogueText.maxVisibleCharacters = line.Length;
+                dialogueText.maxVisibleCharacters = dialogueText.text.Length;
                 interruptTextDisplayer = false;
                 break;
             }
@@ -239,6 +256,7 @@ public class DialogueManager : NonSpawnableSingleton<DialogueManager>
             }
         }
 
+        dialogueText.maxVisibleCharacters = dialogueText.text.Length;
         DisplayChoices();
 
         canContinueToNextLine = true;

@@ -2285,6 +2285,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
+  - component: {fileID: 1900000001}
   - component: {fileID: 5767275381570197079}
   - component: {fileID: 810577476091878560}
   - component: {fileID: 4990651943784082541}
@@ -7516,6 +7517,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
+  - component: {fileID: 1900000002}
   - component: {fileID: 5831496405187709365}
   - component: {fileID: 580741884825748229}
   - component: {fileID: 7706265879505254646}
@@ -7573,7 +7575,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Press 'Tab' to Upgade!
+  m_text: Press 'Tab' to upgrade!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: caafb0e39abac1f42bc58ea30b28ade9, type: 2}
   m_sharedMaterial: {fileID: 3582427398192158066, guid: caafb0e39abac1f42bc58ea30b28ade9, type: 2}
@@ -10813,3 +10815,28 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5450505272705634852, guid: 46536b767d911fb4b9acbf7e4546d261, type: 3}
   m_PrefabInstance: {fileID: 8019231663582657308}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1900000001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2090455849903640846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b986f1d97a44a6bb0e02e22c8279530, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+--- !u!114 &1900000002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8241805832665662899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1a785ba2b73444ab928487fbc326177, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  translator: {fileID: 11400000, guid: da8057efcf3a45a47bb320ce196e8d61, type: 2}

@@ -18,13 +18,12 @@ public abstract class DoorManager : MonoBehaviour
         {
             if (!isLocked)
             {
-                ToolTipPrefab.GetComponent<ToolTip>().text =
-                    $"'{translator.PlayerInputs.Gameplay.Interact.GetBindingDisplayString(InputBinding.MaskByGroup("KeyboardMouse"))}' to Open";
+                ToolTipPrefab.GetComponent<ToolTip>().ConfigureBinding(translator, "Gameplay/Interact", "'{0}' to Open");
                 Instantiate(ToolTipPrefab, this.transform.position + new Vector3(0, 2, -1), Quaternion.identity);
             }
             else
             {
-                ToolTipPrefab.GetComponent<ToolTip>().text = "This Door is Locked.";
+                ToolTipPrefab.GetComponent<ToolTip>().ConfigureBinding(null, null, "This Door is Locked.");
                 Instantiate(ToolTipPrefab, this.transform.position + new Vector3(0, 2, -1), Quaternion.identity);
             }
 

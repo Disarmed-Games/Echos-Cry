@@ -18,18 +18,28 @@ public class PlayerXpBar : MonoBehaviour
 
     private void OnEnable()
     {
-        eventChannel.Channel += UpdateXP;
+        if (eventChannel != null) eventChannel.Channel += UpdateXP;
+        RefreshFromPlayer();
     }
     private void OnDisable()
     {
-        eventChannel.Channel -= UpdateXP;
+        if (eventChannel != null) eventChannel.Channel -= UpdateXP;
+    }
+
+    private void Start() => RefreshFromPlayer();
+
+    private void RefreshFromPlayer()
+    {
+        var player = Player.Instance;
+        if (player == null || player.XP == null) return;
+        UpdateXP(player.XP.CurrentXPAmount, player.XP.GoalXPAmount, player.XP.CurrentLevel);
     }
 
     private void UpdateXP(float xp, float goalXP, int currentLevel)
     {
         xpText.text = $"{xp} / {goalXP}";
         levelText.text = currentLevel.ToString();
-        hFraction = (float)xp / goalXP;
+        hFraction = goalXP > 0f ? Mathf.Clamp01(xp / goalXP) : 0f;
         lerpTimer = 0f;
     }
 
@@ -57,6 +67,6 @@ public class PlayerXpBar : MonoBehaviour
             frontXpBar.fillAmount = Mathf.Lerp(fillF, backXpBar.fillAmount, percentComplete);
         }
 
-        upgradeReminder.SetActive(UpgradeManager.Instance.GetAvailablePoints() > 0);
+        upgradeReminder.SetActive(UpgradeManager.Instance != null && UpgradeManager.Instance.GetAvailablePoints() > 0);
     }
 }

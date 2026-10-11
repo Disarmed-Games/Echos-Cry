@@ -2,10 +2,10 @@ using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Controls;
+using UnityEngine.InputSystem.LowLevel;
 
 [CreateAssetMenu(menuName = "Echo's Cry/Input System/Input Translator")]
-
-//ISSUE: This system needs to handle updating and sending invoke for when bindings are changed in settings menu, this updates supporting tool tips to know what the current binding is.
 
 public class InputTranslator : ScriptableObject, 
     PlayerInputs.IGameplayActions,
@@ -16,6 +16,7 @@ public class InputTranslator : ScriptableObject,
     private void Awake()
     {
         _playerInputs = new PlayerInputs();
+        EnsureUpgradeControllerBinding();
         _playerInputs.Gameplay.SetCallbacks(this);
         _playerInputs.PauseMenu.SetCallbacks(this);
         _playerInputs.ShopMenu.SetCallbacks(this);
@@ -23,9 +24,13 @@ public class InputTranslator : ScriptableObject,
     }
     private void OnEnable()
     {
+        InputSystem.onEvent += OnDeviceInput;
+        InputSystem.onDeviceChange += OnDeviceChange;
+        RemapOptionHandler.OnActionRemappedEvent += NotifyBindingsChanged;
         if (_playerInputs == null)
         {
             _playerInputs = new PlayerInputs();
+            EnsureUpgradeControllerBinding();
             _playerInputs.Gameplay.SetCallbacks(this);
             _playerInputs.PauseMenu.SetCallbacks(this);
             _playerInputs.ShopMenu.SetCallbacks(this);
@@ -38,6 +43,9 @@ public class InputTranslator : ScriptableObject,
     }
     private void OnDisable()
     {
+        InputSystem.onEvent -= OnDeviceInput;
+        InputSystem.onDeviceChange -= OnDeviceChange;
+        RemapOptionHandler.OnActionRemappedEvent -= NotifyBindingsChanged;
         _playerInputs.Gameplay.Disable();
         _playerInputs.PauseMenu.Disable();
         _playerInputs.ShopMenu.Disable();
@@ -54,6 +62,7 @@ public class InputTranslator : ScriptableObject,
         _playerInputs.PauseMenu.RemoveCallbacks(this);
         _playerInputs.ShopMenu.RemoveCallbacks(this);
         _playerInputs.Dialogue.RemoveCallbacks(this);
+        _playerInputs.Dispose();
         _playerInputs = null;
     }
 
@@ -142,7 +151,80 @@ public class InputTranslator : ScriptableObject,
     }
 
     private PlayerInputs _playerInputs;
-    public PlayerInputs PlayerInputs { get { return _playerInputs; } }  
+    public PlayerInputs PlayerInputs { get { return _playerInputs; } }
+
+    public const string KeyboardMouseScheme = "KeyboardMouse";
+    public const string ControllerScheme = "Controller";
+    public string ActiveControlScheme { get; private set; } = KeyboardMouseScheme;
+    public event Action OnBindingsChanged;
+    private InputDevice _lastDevice;
+
+    public string GetBindingDisplayString(InputAction action)
+    {
+        // References from the inspector belong to the asset, not our runtime copy.
+        var runtimeAction = _playerInputs.asset.FindAction(action.id.ToString()) ?? action;
+        return runtimeAction.GetBindingDisplayString(InputBinding.MaskByGroup(ActiveControlScheme));
+    }
+
+    private void EnsureUpgradeControllerBinding()
+    {
+        var action = _playerInputs.Gameplay.Upgrade;
+        foreach (var binding in action.bindings)
+            if (InputBinding.MaskByGroup(ControllerScheme).Matches(binding)) return;
+        // Keep the menu accessible if Unity regenerates the wrapper from an older action asset.
+        action.AddBinding("<Gamepad>/select", groups: ControllerScheme);
+    }
+
+    private void NotifyBindingsChanged() => OnBindingsChanged?.Invoke();
+
+    private void SetActiveDevice(InputDevice device)
+    {
+        _lastDevice = device;
+        string scheme = device is Gamepad ? ControllerScheme : KeyboardMouseScheme;
+        if (ActiveControlScheme == scheme) return;
+        ActiveControlScheme = scheme;
+        NotifyBindingsChanged();
+    }
+
+    private void OnDeviceInput(InputEventPtr eventPtr, InputDevice device)
+    {
+        if (IsMeaningfulInput(eventPtr, device)) SetActiveDevice(device);
+    }
+
+    public static bool IsMeaningfulInput(InputEventPtr eventPtr, InputDevice device)
+    {
+        if (eventPtr.type != StateEvent.Type && eventPtr.type != DeltaStateEvent.Type) return false;
+        if (!(device is Keyboard) && !(device is Mouse) && !(device is Gamepad)) return false;
+
+        foreach (var control in eventPtr.EnumerateChangedControls(device, 0.25f))
+        {
+            if (control is ButtonControl button)
+            {
+                if (button.ReadValueFromEvent(eventPtr) < button.pressPointOrDefault) continue;
+            }
+            else if (device is Mouse mouse)
+            {
+                // Absolute pointer position and tiny delta jitter are not deliberate input.
+                if (control != mouse.delta.x && control != mouse.delta.y &&
+                    control != mouse.scroll.x && control != mouse.scroll.y) continue;
+                if (Mathf.Abs(((AxisControl)control).ReadValueFromEvent(eventPtr)) < 2f) continue;
+            }
+            else if (!(device is Gamepad)) continue;
+
+            return true;
+        }
+        return false;
+    }
+
+    private void OnDeviceChange(InputDevice device, InputDeviceChange change)
+    {
+        if (device != _lastDevice || (change != InputDeviceChange.Disconnected &&
+            change != InputDeviceChange.Removed && change != InputDeviceChange.Disabled)) return;
+        _lastDevice = null;
+        if (ActiveControlScheme == KeyboardMouseScheme) return;
+        ActiveControlScheme = KeyboardMouseScheme;
+        NotifyBindingsChanged();
+    }
 
     public event Action<Vector2>    OnMovementEvent;
     public event Action<bool>       OnDashEvent;
