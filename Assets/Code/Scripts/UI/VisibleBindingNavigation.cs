@@ -14,10 +14,14 @@ public class VisibleBindingNavigation : MonoBehaviour
     private Selectable controlsTab;
     private Selectable backButton;
     private Button lastFocusedBinding;
+    private Button keyboardButton;
+    private Button controllerButton;
 
-    public void Setup(ScrollRect scrollRect)
+    public void Setup(ScrollRect scrollRect, Button keyboard = null, Button controller = null)
     {
         scroll = scrollRect;
+        keyboardButton = keyboard;
+        controllerButton = controller;
         FindMenuLinks();
     }
 
@@ -72,7 +76,7 @@ public class VisibleBindingNavigation : MonoBehaviour
         {
             var navigation = visibleButtons[i].navigation;
             navigation.mode = Navigation.Mode.Explicit;
-            navigation.selectOnUp = i > 0 ? visibleButtons[i - 1] : null;
+            navigation.selectOnUp = i > 0 ? visibleButtons[i - 1] : Available(keyboardButton) ? keyboardButton : null;
             navigation.selectOnDown = i + 1 < visibleButtons.Count ? visibleButtons[i + 1] : null;
             navigation.selectOnLeft = Available(controlsTab) ? controlsTab : backButton;
             navigation.selectOnRight = scroll.verticalScrollbar != null ? scroll.verticalScrollbar : backButton;
@@ -123,6 +127,8 @@ public class VisibleBindingNavigation : MonoBehaviour
     {
         var first = visibleButtons.Count > 0 ? visibleButtons[0] : null;
         var returnRow = lastFocusedBinding != null && visibleButtons.Contains(lastFocusedBinding) ? lastFocusedBinding : first;
+        ConfigureDeviceButton(keyboardButton, controlsTab, controllerButton, first);
+        ConfigureDeviceButton(controllerButton, keyboardButton, backButton, first);
         if (Available(scroll.verticalScrollbar))
         {
             var navigation = OriginalLinks(scroll.verticalScrollbar);
@@ -135,7 +141,7 @@ public class VisibleBindingNavigation : MonoBehaviour
         if (Available(controlsTab))
         {
             var navigation = OriginalLinks(controlsTab);
-            navigation.selectOnDown = first != null ? first : scroll.verticalScrollbar;
+            navigation.selectOnDown = Available(keyboardButton) ? keyboardButton : first != null ? first : scroll.verticalScrollbar;
             if (Available(backButton)) navigation.selectOnUp = backButton;
             controlsTab.navigation = navigation;
         }
@@ -146,6 +152,17 @@ public class VisibleBindingNavigation : MonoBehaviour
             navigation.selectOnUp = navigation.selectOnDown = controlsTab;
             backButton.navigation = navigation;
         }
+    }
+
+    private void ConfigureDeviceButton(Button button, Selectable left, Selectable right, Selectable first)
+    {
+        if (!Available(button)) return;
+        var navigation = OriginalLinks(button);
+        navigation.selectOnLeft = Available(left) ? left : null;
+        navigation.selectOnRight = Available(right) ? right : null;
+        navigation.selectOnUp = Available(controlsTab) ? controlsTab : backButton;
+        navigation.selectOnDown = first != null ? first : scroll.verticalScrollbar;
+        button.navigation = navigation;
     }
 
     public bool IsVisible(Selectable control)

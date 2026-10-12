@@ -45,6 +45,101 @@ public class ControllerNavigationTests : InputTestFixture
     }
 
     [Test]
+    public void DeviceButtonsFilterBindingsAndReturnFocusWhenSwitchingLists()
+    {
+        var translator = ScriptableObject.CreateInstance<InputTranslator>();
+        try
+        {
+            var listRect = Rect("Remap list", root.transform, new Vector2(1024, 640), Vector2.zero);
+            var scroll = listRect.gameObject.AddComponent<ScrollRect>();
+            var viewport = Rect("Viewport", listRect, new Vector2(1024, 560), Vector2.zero);
+            scroll.viewport = viewport;
+            var content = Rect("Content", viewport, new Vector2(1024, 560), Vector2.zero);
+            content.pivot = new Vector2(0.5f, 1f);
+            content.gameObject.AddComponent<VerticalLayoutGroup>();
+            content.gameObject.AddComponent<ContentSizeFitter>().verticalFit = ContentSizeFitter.FitMode.PreferredSize;
+            scroll.content = content;
+            var manager = root.AddComponent<ControlRemapManager>();
+            SetRemapField(manager, "_controlsContainer", content.gameObject);
+            SetRemapField(manager, "_inputTranslator", translator);
+            SetRemapField(manager, "_remapOptionPrefab", UnityEditor.AssetDatabase.LoadAssetAtPath<GameObject>(
+                "Assets/Level/Prefabs/UI/RemapOption.prefab"));
+            manager.SendMessage("Start");
+
+            var keyboard = root.transform.Find("Binding Device/KeyboardBindingsButton").GetComponent<Button>();
+            var controller = root.transform.Find("Binding Device/ControllerBindingsButton").GetComponent<Button>();
+            Assert.That(keyboard.transform.GetSiblingIndex(), Is.LessThan(controller.transform.GetSiblingIndex()));
+            Assert.That(listRect.rect.height, Is.EqualTo(560f));
+            int totalRows = content.childCount;
+            AssertBindingType(content, InputTranslator.KeyboardMouseScheme);
+            var selectedRow = content.GetComponentInChildren<Button>();
+            system.SetSelectedGameObject(selectedRow.gameObject);
+            controller.onClick.Invoke();
+            AssertBindingType(content, InputTranslator.ControllerScheme);
+            Assert.That(system.currentSelectedGameObject, Is.EqualTo(controller.gameObject));
+            Assert.That(scroll.verticalNormalizedPosition, Is.EqualTo(1f).Within(0.001f));
+            keyboard.onClick.Invoke();
+            AssertBindingType(content, InputTranslator.KeyboardMouseScheme);
+            Assert.That(content.childCount, Is.EqualTo(totalRows), "Switching must reuse the binding rows.");
+        }
+        finally
+        {
+            Object.DestroyImmediate(translator);
+        }
+    }
+
+    private static void SetRemapField(ControlRemapManager manager, string name, object value)
+    {
+        typeof(ControlRemapManager).GetField(name, System.Reflection.BindingFlags.Instance |
+            System.Reflection.BindingFlags.NonPublic).SetValue(manager, value);
+    }
+
+    private static void AssertBindingType(Transform content, string type)
+    {
+        var rows = content.GetComponentsInChildren<RemapOptionHandler>();
+        Assert.That(rows.Length, Is.GreaterThan(0));
+        foreach (var row in rows)
+        {
+            var name = (TextMeshProUGUI)typeof(RemapOptionHandler).GetField("_ActionNameText",
+                System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic).GetValue(row);
+            Assert.That(name.text, Does.Not.Contain("[Keyboard/Mouse]").And.Not.Contain("[Controller]"));
+            var flags = System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic;
+            var action = (InputAction)typeof(RemapOptionHandler).GetField("_inputAction", flags).GetValue(row);
+            var index = (int)typeof(RemapOptionHandler).GetField("_bindingIndex", flags).GetValue(row);
+            Assert.That(InputBinding.MaskByGroup(type).Matches(action.bindings[index]), Is.True);
+        }
+    }
+
+    [Test]
+    public void DeviceButtonsHaveControllerPathsToEachOtherAndTheRemapList()
+    {
+        var tab = Rect("ControlTab", root.transform, Vector2.one * 20, Vector2.zero).gameObject.AddComponent<Button>();
+        var back = Rect("BackButton", root.transform, Vector2.one * 20, Vector2.zero).gameObject.AddComponent<Button>();
+        var keyboard = Rect("Keyboard", root.transform, Vector2.one * 20, Vector2.zero).gameObject.AddComponent<Button>();
+        var controller = Rect("Controller", root.transform, Vector2.one * 20, Vector2.zero).gameObject.AddComponent<Button>();
+        var viewport = Rect("Viewport", root.transform, new Vector2(200, 100), Vector2.zero);
+        var scroll = viewport.gameObject.AddComponent<ScrollRect>();
+        scroll.viewport = viewport;
+        var content = Rect("Content", viewport, new Vector2(200, 100), Vector2.zero);
+        scroll.content = content;
+        var row = Rect("Binding", content, new Vector2(100, 30), Vector2.zero).gameObject.AddComponent<Button>();
+        var navigation = content.gameObject.AddComponent<VisibleBindingNavigation>();
+        navigation.Setup(scroll, keyboard, controller);
+        navigation.SendMessage("Update");
+        system.SetSelectedGameObject(tab.gameObject);
+        Move(tab.gameObject, MoveDirection.Down);
+        Assert.That(system.currentSelectedGameObject, Is.EqualTo(keyboard.gameObject));
+        Move(keyboard.gameObject, MoveDirection.Right);
+        Assert.That(system.currentSelectedGameObject, Is.EqualTo(controller.gameObject));
+        Move(controller.gameObject, MoveDirection.Down);
+        Assert.That(system.currentSelectedGameObject, Is.EqualTo(row.gameObject));
+        Move(row.gameObject, MoveDirection.Up);
+        Assert.That(system.currentSelectedGameObject, Is.EqualTo(keyboard.gameObject));
+        Move(keyboard.gameObject, MoveDirection.Up);
+        Assert.That(system.currentSelectedGameObject, Is.EqualTo(tab.gameObject));
+    }
+
+    [Test]
     public void PauseNavigationIncludesMainMenuInBothDirections()
     {
         var panel = Rect("Pause", root.transform, new Vector2(200, 300), Vector2.zero);
