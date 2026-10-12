@@ -8,10 +8,25 @@ public class ShopItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     [SerializeField] TextMeshProUGUI amountText;
     [SerializeField] TextMeshProUGUI costText;
     [SerializeField] GameObject highlightImage;
+    [SerializeField] private Image itemIcon;
     [SerializeField] InventoryItemData itemData;
     [SerializeField] private float initCost = 0f;
     private int buyAmount;
     private float actualCost = 0f;
+    private bool iconSelected;
+
+    private void Awake()
+    {
+        if (itemIcon != null && itemIcon.GetComponent<ShopItemIcon>() == null)
+            itemIcon.gameObject.AddComponent<ShopItemIcon>();
+    }
+
+    private void OnDisable()
+    {
+        iconSelected = false;
+        ToggleHighlight(false);
+        if (UITip.Instance != null) UITip.Instance.StopMessage(this);
+    }
 
     public void ToggleHighlight(bool state)
     {
@@ -73,6 +88,7 @@ public class ShopItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        if (iconSelected) return;
         if (eventData.pointerEnter != null && eventData.pointerEnter.GetComponent<Image>() != null)
         {
             ToggleHighlight(true);
@@ -82,15 +98,21 @@ public class ShopItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        if (iconSelected) return;
         ToggleHighlight(false);
         UITip.Instance.StopMessage(this);
     }
 
     public void OnSelect(BaseEventData eventData)
     {
+        iconSelected = true;
         ToggleHighlight(true);
-        UITip.Instance.StartMessage(itemData.description, this, transform);
+        UITip.Instance.StartMessage(itemData.description, this, itemIcon != null ? itemIcon.transform : transform);
     }
 
-    public void OnDeselect(BaseEventData eventData) => OnPointerExit(null);
+    public void OnDeselect(BaseEventData eventData)
+    {
+        iconSelected = false;
+        OnPointerExit(null);
+    }
 }
