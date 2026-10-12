@@ -16,6 +16,8 @@ public class ControllerInputTests : InputTestFixture
         pad = InputSystem.AddDevice<Gamepad>();
         keyboard = InputSystem.AddDevice<Keyboard>();
         mouse = InputSystem.AddDevice<Mouse>();
+        typeof(InputTranslator).GetMethod("InitializeCursorVisibility",
+            System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.NonPublic).Invoke(null, null);
         translator = ScriptableObject.CreateInstance<InputTranslator>();
     }
 
@@ -23,6 +25,85 @@ public class ControllerInputTests : InputTestFixture
     {
         Object.DestroyImmediate(translator);
         base.TearDown();
+    }
+
+    [Test]
+    public void EmulatedMouseBeforeTriggerInSameUpdateDoesNotAttack()
+    {
+        int normal = 0, special = 0;
+        translator.OnPrimaryActionEvent += value => normal += value ? 1 : 0;
+        translator.OnSpecialAttackEvent += value => special += value ? 1 : 0;
+        InputSystem.QueueStateEvent(mouse, new MouseState().WithButton(MouseButton.Left));
+        InputSystem.QueueStateEvent(pad, new GamepadState { rightTrigger = 1f });
+        InputSystem.Update();
+        Assert.That(normal, Is.Zero);
+        Assert.That(special, Is.EqualTo(1));
+    }
+
+    [Test]
+    public void PartialTriggerDoesNotRequestSpecialOrEmulatedNormalAttack()
+    {
+        int normal = 0, special = 0;
+        translator.OnPrimaryActionEvent += value => normal += value ? 1 : 0;
+        translator.OnSpecialAttackEvent += value => special += value ? 1 : 0;
+        Set(pad.rightTrigger, 0.1f);
+        Press(mouse.leftButton);
+        Assert.That(normal, Is.Zero);
+        Assert.That(special, Is.Zero);
+        Set(pad.rightTrigger, 1f);
+        Assert.That(special, Is.EqualTo(1));
+    }
+
+    [Test]
+    public void TriggerOnlyRequestsSpecialEvenWithEmulatedMouseClick()
+    {
+        int normal = 0, special = 0;
+        translator.OnPrimaryActionEvent += value => normal += value ? 1 : 0;
+        translator.OnSecondaryActionEvent += value => normal += value ? 1 : 0;
+        translator.OnSpecialAttackEvent += value => special += value ? 1 : 0;
+        Press(pad.rightTrigger);
+        Press(mouse.leftButton);
+        Assert.That(normal, Is.Zero);
+        Assert.That(special, Is.EqualTo(1));
+    }
+
+    [Test]
+    public void PlayStationCrossDoesNotAttackEvenWithEmulatedSpace()
+    {
+        int attacks = 0;
+        translator.OnPrimaryActionEvent += value => attacks += value ? 1 : 0;
+        translator.OnSecondaryActionEvent += value => attacks += value ? 1 : 0;
+        translator.OnSpecialAttackEvent += value => attacks += value ? 1 : 0;
+        Press(pad.buttonSouth);
+        Press(keyboard.spaceKey);
+        Press(mouse.leftButton);
+        Assert.That(attacks, Is.Zero);
+    }
+
+    [Test]
+    public void RightStickCursorIgnoresEmulatedMouseAndOtherControllerInputHidesIt()
+    {
+        Set(pad.rightStick, Vector2.right);
+        InputSystem.QueueStateEvent(mouse, new MouseState { delta = new Vector2(10, 0) });
+        InputSystem.Update();
+        Set(pad.rightStick, Vector2.zero);
+        Assert.That(translator.ActiveControlScheme, Is.EqualTo("Controller"));
+        Assert.That(Cursor.visible, Is.True);
+        Press(pad.buttonSouth);
+        Assert.That(Cursor.visible, Is.False);
+    }
+
+    [Test]
+    public void RightStickCursorHidesAfterTimeout()
+    {
+        Set(pad.rightStick, Vector2.right);
+        Set(pad.rightStick, Vector2.zero);
+        typeof(InputTranslator).GetField("_stickCursorUntil",
+            System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.NonPublic)
+            .SetValue(null, Time.realtimeSinceStartup - 1f);
+        InputSystem.Update();
+        Assert.That(Cursor.visible, Is.False);
+        Assert.That(translator.ActiveControlScheme, Is.EqualTo("Controller"));
     }
 
     [Test]

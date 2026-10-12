@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -27,6 +28,7 @@ public class InputTranslator : ScriptableObject,
     {
         ClearItemSelection();
         InputSystem.onEvent += OnDeviceInput;
+        InputSystem.onAfterUpdate += FlushAttackInputs;
         InputSystem.onDeviceChange += OnDeviceChange;
         RemapOptionHandler.OnActionRemappedEvent += NotifyBindingsChanged;
         if (_playerInputs == null)
@@ -47,6 +49,8 @@ public class InputTranslator : ScriptableObject,
     private void OnDisable()
     {
         InputSystem.onEvent -= OnDeviceInput;
+        InputSystem.onAfterUpdate -= FlushAttackInputs;
+        _pendingAttackInputs.Clear();
         InputSystem.onDeviceChange -= OnDeviceChange;
         RemapOptionHandler.OnActionRemappedEvent -= NotifyBindingsChanged;
         _playerInputs.Gameplay.Disable();
@@ -80,13 +84,11 @@ public class InputTranslator : ScriptableObject,
     }
     public void OnLightAttack(InputAction.CallbackContext context)
     {
-        if (context.started) OnPrimaryActionEvent?.Invoke(true);
-        else if(context.canceled) OnPrimaryActionEvent?.Invoke(false);
+        QueueAttackInput(context, 0);
     }
     public void OnHeavyAttack(InputAction.CallbackContext context)
     {
-        if (context.started) OnSecondaryActionEvent?.Invoke(true);
-        else if (context.canceled) OnSecondaryActionEvent?.Invoke(false);
+        QueueAttackInput(context, 1);
     }
 
     public void OnPause(InputAction.CallbackContext context)
@@ -153,8 +155,7 @@ public class InputTranslator : ScriptableObject,
     }
     public void OnSpecialAttack(InputAction.CallbackContext context)
     {
-        if (context.started) OnSpecialAttackEvent?.Invoke(true);
-        else if(context.canceled) OnSpecialAttackEvent?.Invoke(false);
+        QueueAttackInput(context, 2);
     }
 
     private PlayerInputs _playerInputs;
@@ -166,24 +167,95 @@ public class InputTranslator : ScriptableObject,
     public event Action OnBindingsChanged;
     private InputDevice _lastDevice;
     private static InputDevice _cursorDevice;
+    private static float _stickCursorUntil;
+    private const float StickCursorHoldSeconds = 3f;
+
+    private struct AttackInput
+    {
+        public int Attack;
+        public bool Pressed;
+        public bool Controller;
+    }
+
+    private readonly List<AttackInput> _pendingAttackInputs = new List<AttackInput>();
+
+    private void QueueAttackInput(InputAction.CallbackContext context, int attack)
+    {
+        // Analog triggers start before reaching the actual button press threshold.
+        if (!context.performed && !context.canceled) return;
+        _pendingAttackInputs.Add(new AttackInput
+        {
+            Attack = attack,
+            Pressed = context.performed,
+            Controller = context.control.device is Gamepad
+        });
+    }
+
+    private void FlushAttackInputs()
+    {
+        if (_pendingAttackInputs.Count == 0) return;
+        // Resolve after the full batch: mouse emulation can precede the gamepad event.
+        bool controllerAttack = _pendingAttackInputs.Exists(input => input.Controller);
+        bool reservedControllerInput = false;
+        foreach (var pad in Gamepad.all)
+            reservedControllerInput |= pad.rightTrigger.ReadValue() > 0.01f || pad.buttonSouth.isPressed;
+        var inputs = _pendingAttackInputs.ToArray();
+        _pendingAttackInputs.Clear();
+        foreach (var input in inputs)
+        {
+            if (!input.Controller && (controllerAttack || reservedControllerInput)) continue;
+            switch (input.Attack)
+            {
+                case 0: OnPrimaryActionEvent?.Invoke(input.Pressed); break;
+                case 1: OnSecondaryActionEvent?.Invoke(input.Pressed); break;
+                case 2: OnSpecialAttackEvent?.Invoke(input.Pressed); break;
+            }
+        }
+    }
 
     // Listen globally so cursor switching also works in menus and across scene changes.
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     private static void InitializeCursorVisibility()
     {
         _cursorDevice = null;
+        _stickCursorUntil = 0f;
         Cursor.visible = true;
         InputSystem.onEvent -= UpdateCursorDevice;
         InputSystem.onEvent += UpdateCursorDevice;
         InputSystem.onDeviceChange -= RestoreCursorOnDisconnect;
         InputSystem.onDeviceChange += RestoreCursorOnDisconnect;
+        InputSystem.onAfterUpdate -= UpdateStickCursorTimeout;
+        InputSystem.onAfterUpdate += UpdateStickCursorTimeout;
     }
 
     private static void UpdateCursorDevice(InputEventPtr eventPtr, InputDevice device)
     {
         if (!IsMeaningfulInput(eventPtr, device)) return;
+        if (device is Gamepad pad)
+        {
+            bool otherInput = false;
+            foreach (var control in eventPtr.EnumerateChangedControls(device, 0.25f))
+            {
+                if (control == pad.rightStick.x || control == pad.rightStick.y) continue;
+                if (control is ButtonControl button && button.ReadValueFromEvent(eventPtr) < button.pressPointOrDefault) continue;
+                otherInput = true;
+                break;
+            }
+            if (otherInput) _stickCursorUntil = 0f;
+            else _stickCursorUntil = Time.realtimeSinceStartup + StickCursorHoldSeconds;
+        }
+        else if (device is Mouse && _stickCursorUntil > Time.realtimeSinceStartup) return;
+        else _stickCursorUntil = 0f;
         _cursorDevice = device;
-        Cursor.visible = !(device is Gamepad);
+        Cursor.visible = !(device is Gamepad) || _stickCursorUntil > Time.realtimeSinceStartup;
+    }
+
+    private static void UpdateStickCursorTimeout()
+    {
+        if (!(_cursorDevice is Gamepad pad)) return;
+        if (pad.rightStick.ReadValue().sqrMagnitude > 0.25f * 0.25f && _stickCursorUntil > 0f)
+            _stickCursorUntil = Time.realtimeSinceStartup + StickCursorHoldSeconds;
+        Cursor.visible = _stickCursorUntil > Time.realtimeSinceStartup;
     }
 
     private static void RestoreCursorOnDisconnect(InputDevice device, InputDeviceChange change)
@@ -282,6 +354,7 @@ public class InputTranslator : ScriptableObject,
 
     private void OnDeviceInput(InputEventPtr eventPtr, InputDevice device)
     {
+        if (device is Mouse && _stickCursorUntil > Time.realtimeSinceStartup) return;
         if (IsMeaningfulInput(eventPtr, device)) SetActiveDevice(device);
     }
 
