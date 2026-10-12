@@ -23,8 +23,8 @@ public class DashHandler : MonoBehaviour
     public void AddEffect(EffectData effect)
     {
         if (effect == null) return;
-        OnDashEffectAdded?.Invoke();
         effects.Add(effect);
+        OnDashEffectAdded?.Invoke();
     }
     public void ClearEffects()
     {

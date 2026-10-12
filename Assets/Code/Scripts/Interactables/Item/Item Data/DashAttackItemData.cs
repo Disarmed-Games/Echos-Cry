@@ -7,7 +7,7 @@ public class DashAttackItemData : InventoryItemData
 
     public override void Use(Player player)
     {
-        player.DashHandler.AddEffect(_dashAttack);
         player.ActiveEffectsTier1.Add(_dashAttack);
+        player.DashHandler.AddEffect(_dashAttack);
     }
 }
