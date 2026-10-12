@@ -20,8 +20,10 @@ public class SlotScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     private bool itemStackable;
     private InventoryItem slotItem;
     private bool canDrop = false;
-    private GameObject selectionFrame;
-    private Coroutine flashRoutine;
+    [SerializeField] private Color selectedSlotColor = new Color(0.65f, 0.85f, 1f, 1f);
+    private Image slotBackground;
+    private Color originalSlotColor;
+    private bool controllerSelected;
 
     private void Awake()
     {
@@ -29,15 +31,8 @@ public class SlotScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         var navigation = GetComponent<Selectable>().navigation;
         navigation.mode = Navigation.Mode.None;
         GetComponent<Selectable>().navigation = navigation;
-        selectionFrame = new GameObject("Selected Item Slot", typeof(RectTransform), typeof(CanvasRenderer), typeof(ControllerFocusOutline));
-        selectionFrame.layer = gameObject.layer;
-        var frame = (RectTransform)selectionFrame.transform;
-        frame.SetParent(transform, false);
-        frame.anchorMin = Vector2.zero;
-        frame.anchorMax = Vector2.one;
-        frame.offsetMin = new Vector2(-7f, -7f);
-        frame.offsetMax = new Vector2(7f, 7f);
-        selectionFrame.SetActive(false);
+        slotBackground = GetComponent<Image>();
+        if (slotBackground != null) originalSlotColor = slotBackground.color;
     }
 
     private void Start()
@@ -65,7 +60,7 @@ public class SlotScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     private void UpdateBinding()
     {
-        if (inputTranslator.ActiveControlScheme != InputTranslator.ControllerScheme) ClearFlash();
+        RefreshControllerSelection();
         string updatedKey = "";
         switch (slotIndex)
         {
@@ -82,6 +77,11 @@ public class SlotScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
                 updatedKey = inputTranslator.GetBindingDisplayString(inputTranslator.PlayerInputs.Gameplay.Item4);
                 break;
         }
+        if (inputTranslator.ActiveControlScheme == InputTranslator.ControllerScheme)
+        {
+            var apply = inputTranslator.PlayerInputs.Gameplay.Get().FindAction("Use Selected Item");
+            updatedKey += " / " + inputTranslator.GetBindingDisplayString(apply);
+        }
         keyTooltipText.text = updatedKey;
         if (canDrop && slotItem != null && UITip.Instance != null)
             UITip.Instance.UpdateMessage(GetItemMessage(), this);
@@ -89,24 +89,31 @@ public class SlotScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     private void FlashSlot(int index)
     {
-        ClearFlash();
-        if (index != slotIndex) return;
-        selectionFrame.SetActive(true);
-        flashRoutine = StartCoroutine(HideSlotFlash());
+        RefreshControllerSelection();
     }
 
-    private IEnumerator HideSlotFlash()
+    private void RefreshControllerSelection()
     {
-        yield return new WaitForSecondsRealtime(0.2f);
-        selectionFrame.SetActive(false);
-        flashRoutine = null;
+        bool wasSelected = controllerSelected;
+        controllerSelected = inputTranslator.ActiveControlScheme == InputTranslator.ControllerScheme
+            && inputTranslator.SelectedItemSlot == slotIndex;
+        if (slotBackground != null)
+        {
+            Color tint = controllerSelected ? selectedSlotColor : originalSlotColor;
+            tint.a = originalSlotColor.a;
+            slotBackground.color = tint;
+        }
+        if (UITip.Instance == null) return;
+        if (controllerSelected && slotItem != null && slotItem.stackSize > 0)
+            UITip.Instance.StartMessage(GetItemMessage(), this, transform);
+        else if (wasSelected || controllerSelected)
+            UITip.Instance.StopMessage(this);
     }
 
     private void ClearFlash()
     {
-        if (flashRoutine != null) StopCoroutine(flashRoutine);
-        flashRoutine = null;
-        if (selectionFrame != null) selectionFrame.SetActive(false);
+        controllerSelected = false;
+        if (slotBackground != null) slotBackground.color = originalSlotColor;
     }
 
     private void DropItem()
@@ -130,6 +137,7 @@ public class SlotScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
             slotIcon.sprite = null;
             stackAmountText.text = "";
             itemDescription = "";
+            RefreshControllerSelection();
             return;
         }
 
@@ -144,10 +152,12 @@ public class SlotScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         itemDescription = item.data.description;
         itemName = item.data.displayName;
         itemStackable = item.data.isStackable;
+        RefreshControllerSelection();
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        if (inputTranslator.ActiveControlScheme == InputTranslator.ControllerScheme) return;
         canDrop = true;
 
         if (slotItem != null)
@@ -177,7 +187,7 @@ public class SlotScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     public void OnPointerExit(PointerEventData eventData)
     {
         canDrop = false;
-
+        if (controllerSelected) return;
         UITip.Instance.StopMessage(this);
     }
 }

@@ -4,6 +4,8 @@ using UnityEngine.UI;
 // A hollow frame keeps labels, toggle state, and slider values fully visible.
 public class ControllerFocusOutline : MaskableGraphic
 {
+    public Color OutlineColor { get; set; } = new Color32(255, 220, 65, 255);
+    public float OutlineOpacity { get; set; } = 1f;
     protected override void Awake()
     {
         base.Awake();
@@ -15,12 +17,14 @@ public class ControllerFocusOutline : MaskableGraphic
     {
         mesh.Clear();
         Rect bounds = rectTransform.rect;
-        AddRing(mesh, bounds, 7f, new Color32(10, 14, 22, 245));
+        AddRing(mesh, bounds, 7f, new Color(10f / 255f, 14f / 255f, 22f / 255f, 245f / 255f * OutlineOpacity));
         bounds.xMin += 2f;
         bounds.xMax -= 2f;
         bounds.yMin += 2f;
         bounds.yMax -= 2f;
-        AddRing(mesh, bounds, 3f, new Color32(255, 220, 65, 255));
+        Color tint = OutlineColor;
+        tint.a *= OutlineOpacity;
+        AddRing(mesh, bounds, 3f, tint);
     }
 
     private static void AddRing(VertexHelper mesh, Rect bounds, float thickness, Color32 tint)

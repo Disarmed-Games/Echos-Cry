@@ -9,14 +9,27 @@ public class HitQualityTextUI : MonoBehaviour
     [SerializeField] private Animator _hitEffectAnimator2;
     [SerializeField] private Animator _hitEffectAnimator3;
     [SerializeField] private Animator _hitEffectAnimator4;
+    private GameObject activeHitText;
 
     public void UpdateText()
     {
+        UpdateText(TempoConductor.Instance.CurrentHitQuality);
+    }
+
+    public void UpdateText(TempoConductor.HitQuality quality)
+    {
+        // Replace the previous result immediately so two animated labels cannot overlap.
+        if (activeHitText != null)
+        {
+            activeHitText.SetActive(false);
+            Destroy(activeHitText);
+        }
         GameObject hitTextObject = Instantiate(_hitQualityObject, transform);
-        hitTextObject.GetComponent<TextMeshProUGUI>().text = TempoConductor.Instance.CurrentHitQuality.ToString();
+        activeHitText = hitTextObject;
+        hitTextObject.GetComponent<TextMeshProUGUI>().text = quality.ToString();
         hitTextObject.GetComponent<Animator>().SetTrigger("Bounce");
 
-        switch (TempoConductor.Instance.CurrentHitQuality)
+        switch (quality)
         {
             case TempoConductor.HitQuality.Excellent:
                 hitTextObject.GetComponent<TextMeshProUGUI>().color = new Color(110f / 255f, 44f / 255f, 222f / 255f, 1f); //purple

@@ -124,13 +124,13 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-        if (_stateHandler == null || _stateData == null) return;
+        if (Time.timeScale == 0f || _stateHandler == null || _stateData == null) return;
         _stateMachine.CheckSwitchStates(this);
         _stateMachine.UpdateStates(this);
     }
     private void FixedUpdate()
     {
-        if (_stateHandler == null || _stateData == null) return;
+        if (Time.timeScale == 0f || _stateHandler == null || _stateData == null) return;
         _stateMachine.FixedUpdateStates(this);
     }
 

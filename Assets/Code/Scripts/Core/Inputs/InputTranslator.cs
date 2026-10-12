@@ -25,6 +25,7 @@ public class InputTranslator : ScriptableObject,
     }
     private void OnEnable()
     {
+        ClearItemSelection();
         InputSystem.onEvent += OnDeviceInput;
         InputSystem.onDeviceChange += OnDeviceChange;
         RemapOptionHandler.OnActionRemappedEvent += NotifyBindingsChanged;
@@ -111,25 +112,25 @@ public class InputTranslator : ScriptableObject,
     }
     public void OnItem1(InputAction.CallbackContext context)
     {
-        FlashItemSlot(context, 0);
+        if (SelectControllerItemSlot(context, 0)) return;
         if (context.started) OnItem1Event?.Invoke(true, 0);
         else if (context.canceled) OnItem1Event?.Invoke(false, 0);
     }
     public void OnItem2(InputAction.CallbackContext context)
     {
-        FlashItemSlot(context, 1);
+        if (SelectControllerItemSlot(context, 1)) return;
         if (context.started) OnItem2Event?.Invoke(true, 1);
         else if (context.canceled) OnItem2Event?.Invoke(false, 1);
     }
     public void OnItem3(InputAction.CallbackContext context)
     {
-        FlashItemSlot(context, 2);
+        if (SelectControllerItemSlot(context, 2)) return;
         if (context.started) OnItem3Event?.Invoke(true, 2);
         else if (context.canceled) OnItem3Event?.Invoke(false, 2);
     }
     public void OnItem4(InputAction.CallbackContext context)
     {
-        FlashItemSlot(context, 3);
+        if (SelectControllerItemSlot(context, 3)) return;
         if (context.started) OnItem4Event?.Invoke(true, 3);
         else if (context.canceled) OnItem4Event?.Invoke(false, 3);
     }
@@ -164,6 +165,34 @@ public class InputTranslator : ScriptableObject,
     public string ActiveControlScheme { get; private set; } = KeyboardMouseScheme;
     public event Action OnBindingsChanged;
     private InputDevice _lastDevice;
+    private static InputDevice _cursorDevice;
+
+    // Listen globally so cursor switching also works in menus and across scene changes.
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    private static void InitializeCursorVisibility()
+    {
+        _cursorDevice = null;
+        Cursor.visible = true;
+        InputSystem.onEvent -= UpdateCursorDevice;
+        InputSystem.onEvent += UpdateCursorDevice;
+        InputSystem.onDeviceChange -= RestoreCursorOnDisconnect;
+        InputSystem.onDeviceChange += RestoreCursorOnDisconnect;
+    }
+
+    private static void UpdateCursorDevice(InputEventPtr eventPtr, InputDevice device)
+    {
+        if (!IsMeaningfulInput(eventPtr, device)) return;
+        _cursorDevice = device;
+        Cursor.visible = !(device is Gamepad);
+    }
+
+    private static void RestoreCursorOnDisconnect(InputDevice device, InputDeviceChange change)
+    {
+        if (device != _cursorDevice || (change != InputDeviceChange.Disconnected &&
+            change != InputDeviceChange.Removed && change != InputDeviceChange.Disabled)) return;
+        _cursorDevice = null;
+        Cursor.visible = true;
+    }
     public int SelectedItemSlot { get; private set; } = -1;
     public event Action<int> OnItemSlotUsedEvent;
 
@@ -176,6 +205,9 @@ public class InputTranslator : ScriptableObject,
         ItemAction(map, "Item 2", "<Gamepad>/dpad/right");
         ItemAction(map, "Item 3", "<Gamepad>/dpad/down");
         ItemAction(map, "Item 4", "<Gamepad>/dpad/left");
+        var apply = map.FindAction("Use Selected Item") ?? map.AddAction("Use Selected Item", InputActionType.Button);
+        apply.AddBinding("<Gamepad>/leftTrigger", groups: ControllerScheme);
+        apply.performed += ApplySelectedItem;
         var drop = _playerInputs.Gameplay.Drop;
         for (int i = 0; i < drop.bindings.Count; i++)
             if (InputBinding.MaskByGroup(ControllerScheme).Matches(drop.bindings[i]) &&
@@ -196,13 +228,31 @@ public class InputTranslator : ScriptableObject,
         return action;
     }
 
-    private void FlashItemSlot(InputAction.CallbackContext context, int index)
+    private bool SelectControllerItemSlot(InputAction.CallbackContext context, int index)
     {
-        if (!context.started || !(context.control.device is Gamepad)) return;
-        SelectedItemSlot = index;
-        OnItemSlotUsedEvent?.Invoke(index);
+        if (!(context.control.device is Gamepad)) return false;
+        if (!context.started) return true;
+        SelectedItemSlot = SelectedItemSlot == index ? -1 : index;
+        OnItemSlotUsedEvent?.Invoke(SelectedItemSlot);
+        return true;
     }
 
+    private void ApplySelectedItem(InputAction.CallbackContext context)
+    {
+        if (SelectedItemSlot < 0) return;
+        switch (SelectedItemSlot)
+        {
+            case 0: OnItem1Event?.Invoke(true, 0); break;
+            case 1: OnItem2Event?.Invoke(true, 1); break;
+            case 2: OnItem3Event?.Invoke(true, 2); break;
+            case 3: OnItem4Event?.Invoke(true, 3); break;
+        }
+    }
+    public void ClearItemSelection()
+    {
+        SelectedItemSlot = -1;
+        OnItemSlotUsedEvent?.Invoke(-1);
+    }
     public string GetBindingDisplayString(InputAction action)
     {
         // References from the inspector belong to the asset, not our runtime copy.

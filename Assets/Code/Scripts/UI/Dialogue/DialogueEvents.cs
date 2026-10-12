@@ -56,3 +56,32 @@ public class DialogueEvents : MonoBehaviour
         OnUpdateChoiceIndex?.Invoke(choiceIndex);
     }
 }
+
+// Dialogue owns its pause and restores the speed that was active before it opened.
+internal static class DialogueGameplayPause
+{
+    private static readonly HashSet<object> owners = new HashSet<object>();
+    private static float previousTimeScale = 1f;
+    public static bool IsPaused => owners.Count > 0;
+
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+    private static void Reset()
+    {
+        owners.Clear();
+        previousTimeScale = 1f;
+    }
+
+    public static void Acquire(object owner)
+    {
+        if (owners.Contains(owner)) return;
+        if (owners.Count == 0) previousTimeScale = HitStop.IsStopping ? 1f : Time.timeScale;
+        owners.Add(owner);
+        Time.timeScale = 0f;
+    }
+
+    public static void Release(object owner)
+    {
+        if (!owners.Remove(owner) || owners.Count > 0) return;
+        Time.timeScale = previousTimeScale;
+    }
+}

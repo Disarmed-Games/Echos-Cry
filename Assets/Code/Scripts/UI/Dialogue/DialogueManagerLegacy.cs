@@ -26,6 +26,7 @@ public class DialogueManagerLegacy : MonoBehaviour
     }
     private void OnDisable()
     {
+        DialogueGameplayPause.Release(this);
         DialogueEvents.Instance.OnEnterDiaglogue -= EnterDialogue;
         DialogueEvents.Instance.OnSubmitPressed -= SubmitPressed;
         DialogueEvents.Instance.OnUpdateChoiceIndex -= UpdateChoiceIndex;
@@ -47,6 +48,7 @@ public class DialogueManagerLegacy : MonoBehaviour
     {
         if (_dialoguePlaying) return;
         _dialoguePlaying = true;
+        DialogueGameplayPause.Acquire(this);
 
         _inputTranslator.PlayerInputs.Gameplay.Disable();
         _inputTranslator.PlayerInputs.Dialogue.Enable();
@@ -87,6 +89,7 @@ public class DialogueManagerLegacy : MonoBehaviour
         yield return null; //Avoiding race conditions.
         //Debug.Log("Exiting dialogue.");
         _dialoguePlaying = false;
+        DialogueGameplayPause.Release(this);
 
         _inputTranslator.PlayerInputs.Gameplay.Enable();
         _inputTranslator.PlayerInputs.Dialogue.Disable();

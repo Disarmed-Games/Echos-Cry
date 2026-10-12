@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 public class ControllerItemSelectionTests : InputTestFixture
 {
     [Test]
-    public void DpadUsesItsSlotAndSticksDoNotSelectOrUseItems()
+    public void DpadSelectsAndLeftTriggerAppliesSelectedSlot()
     {
         var pad = InputSystem.AddDevice<Gamepad>();
         var keyboard = InputSystem.AddDevice<Keyboard>();
@@ -29,29 +29,49 @@ public class ControllerItemSelectionTests : InputTestFixture
             Assert.That(uses, Is.Zero);
             Assert.That(flashes, Is.Zero);
             Press(pad.dpad.up);
-            Assert.That(usedSlot, Is.Zero);
+            Assert.That(translator.SelectedItemSlot, Is.Zero);
             Release(pad.dpad.up);
             Press(pad.dpad.right);
-            Assert.That(usedSlot, Is.EqualTo(1));
+            Assert.That(translator.SelectedItemSlot, Is.EqualTo(1));
             Release(pad.dpad.right);
             Press(pad.dpad.down);
-            Assert.That(usedSlot, Is.EqualTo(2));
+            Assert.That(translator.SelectedItemSlot, Is.EqualTo(2));
             Release(pad.dpad.down);
             Press(pad.dpad.left);
-            Assert.That(usedSlot, Is.EqualTo(3));
+            Assert.That(translator.SelectedItemSlot, Is.EqualTo(3));
             Assert.That(flashes, Is.EqualTo(4));
-            Assert.That(uses, Is.EqualTo(4));
+            Assert.That(uses, Is.Zero);
             Release(pad.dpad.left);
             Press(pad.rightShoulder);
             Press(pad.leftTrigger);
-            Assert.That(uses, Is.EqualTo(4));
+            Assert.That(uses, Is.EqualTo(1));
+            Assert.That(usedSlot, Is.EqualTo(3));
+            Release(pad.leftTrigger);
+            translator.PlayerInputs.Gameplay.Disable();
+            Press(pad.leftTrigger);
+            Assert.That(uses, Is.EqualTo(1));
+            Release(pad.leftTrigger);
+            translator.PlayerInputs.Gameplay.Enable();
             translator.OnItem1Event += (pressed, slot) => { if (pressed) keyboardUses++; };
             Press(keyboard.digit1Key);
             Assert.That(keyboardUses, Is.EqualTo(1));
             Assert.That(flashes, Is.EqualTo(4), "Keyboard hotkeys do not flash controller slots.");
+            Release(keyboard.digit1Key);
+            Press(pad.dpad.left);
+            Assert.That(translator.SelectedItemSlot, Is.EqualTo(-1));
+            Release(pad.dpad.left);
+            Press(pad.leftTrigger);
+            Assert.That(uses, Is.EqualTo(2), "L2 with no selection must not apply an item.");
+            Release(pad.leftTrigger);
+            Press(pad.dpad.up);
+            Assert.That(translator.SelectedItemSlot, Is.Zero);
+            Release(pad.dpad.up);
+            translator.ClearItemSelection();
+            Assert.That(translator.SelectedItemSlot, Is.EqualTo(-1));
+            int selectionsBeforeDisable = flashes;
             translator.PlayerInputs.Gameplay.Disable();
             Press(pad.dpad.up);
-            Assert.That(flashes, Is.EqualTo(4));
+            Assert.That(flashes, Is.EqualTo(selectionsBeforeDisable));
         }
         finally
         {

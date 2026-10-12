@@ -5,10 +5,12 @@ public class HitStop : Singleton<HitStop>
 {
     readonly float _cooldown = 1f;
     bool _canHit = true;
+    public static bool IsStopping { get; private set; }
     public void Execute(float duration)
     {
-        if (!_canHit) return;
+        if (!_canHit || DialogueGameplayPause.IsPaused) return;
         Time.timeScale = 0;
+        IsStopping = true;
         StartCoroutine(TimeDuration(duration));
         //StartCoroutine(Cooldown());
     }
@@ -16,8 +18,9 @@ public class HitStop : Singleton<HitStop>
     {
         _canHit = false;
         yield return new WaitForSecondsRealtime(duration);
+        IsStopping = false;
         StartCoroutine(Cooldown());
-        Time.timeScale = 1;
+        if (!DialogueGameplayPause.IsPaused) Time.timeScale = 1;
     }
     IEnumerator Cooldown()
     {

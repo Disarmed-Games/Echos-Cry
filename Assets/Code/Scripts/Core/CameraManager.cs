@@ -70,7 +70,7 @@ public class CameraManager : MonoBehaviour
         float time = 0f;
         while (time < zoomDuration)
         {
-            time += Time.deltaTime;
+            time += Time.unscaledDeltaTime;
             float t = time / zoomDuration;
             cameraBrain.Lens.OrthographicSize = Mathf.Lerp(startZoom, endZoom, t);
             yield return null;

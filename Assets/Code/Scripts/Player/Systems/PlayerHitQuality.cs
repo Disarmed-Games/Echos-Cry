@@ -24,16 +24,14 @@ public class PlayerHitQuality : MonoBehaviour
     {
         if (buttonPressed && !SpamPrevention.InputLocked)
         {
-            Sound.PlayHitSound(player.SFXConfig, TempoConductor.Instance.CurrentHitQuality, transform);
-            player.UI.HitQualityText.UpdateText();
+            DisplayQuality(TempoConductor.Instance.CurrentHitQuality);
         }
     }
     public void HandleSecondary(bool buttonPressed)
     {
         if(player.HeatGauge.CurrentCharge >= 2 && buttonPressed && !SpamPrevention.InputLocked)
         {
-            Sound.PlayHitSound(player.SFXConfig, TempoConductor.Instance.CurrentHitQuality, transform);
-            player.UI.HitQualityText.UpdateText();
+            DisplayQuality(TempoConductor.Instance.CurrentHitQuality);
         }
     }
 
@@ -41,8 +39,17 @@ public class PlayerHitQuality : MonoBehaviour
     {
         if (player.HeatGauge.CurrentCharge >= 6 && buttonPressed && !SpamPrevention.InputLocked)
         {
-            Sound.PlayHitSound(player.SFXConfig, TempoConductor.Instance.CurrentHitQuality, transform);
-            player.UI.HitQualityText.UpdateText();
+            var tempo = TempoConductor.Instance;
+            var quality = tempo.GetSpecialAttackIndex() != 0
+                ? tempo.CurrentHitQuality : TempoConductor.HitQuality.Miss;
+            DisplayQuality(quality);
         }
+    }
+
+    private void DisplayQuality(TempoConductor.HitQuality quality)
+    {
+        // Text, tint, and sound all use one result captured for this press.
+        Sound.PlayHitSound(player.SFXConfig, quality, transform);
+        player.UI.HitQualityText.UpdateText(quality);
     }
 }

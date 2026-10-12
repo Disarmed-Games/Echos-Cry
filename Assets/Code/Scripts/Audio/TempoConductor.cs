@@ -78,8 +78,9 @@ public class TempoConductor : Singleton<TempoConductor>
         float t = Mathf.InverseLerp(0.1f, 0.9f, accuracy);
         t = 1f - t;
 
-        _excellentPercent = Mathf.Lerp(0.1f, 0.3f, t);
-        _goodPercent = Mathf.Lerp(0.2f, 0.4f, t);
+        // Widen both total windows by 10% at every calibration difficulty.
+        _excellentPercent = Mathf.Lerp(0.1f, 0.3f, t) * 1.1f;
+        _goodPercent = Mathf.Lerp(0.2f, 0.4f, t) * 1.1f;
 
         _excellentPercent = Mathf.Clamp(_excellentPercent, 0f, 1f);
         _goodPercent = Mathf.Clamp(_goodPercent, 0f, 1f);

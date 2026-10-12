@@ -66,6 +66,8 @@ public class UITip : MonoBehaviour
 
     public void StartMessage(string message, object owner, Transform anchor = null)
     {
+        // Tooltips render above inventory slots and their selection frames.
+        transform.SetAsLastSibling();
         currentOwner = owner;
         selectionAnchor = anchor;
 

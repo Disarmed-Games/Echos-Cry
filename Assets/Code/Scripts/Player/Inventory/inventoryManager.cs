@@ -19,6 +19,7 @@ public class InventoryManager : Singleton<InventoryManager>
 
     void Start()
     {
+        _inputTranslator.ClearItemSelection();
         inventoryList = new List<InventoryItem>();
         itemDictionary = new Dictionary<InventoryItemData, InventoryItem>();
         _player = GameObject.FindWithTag("Player")?.GetComponent<Player>();

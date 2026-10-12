@@ -61,12 +61,15 @@ public class DialogueManager : NonSpawnableSingleton<DialogueManager>
     }
     private void OnDisable()
     {
+        DialogueGameplayPause.Release(this);
         _inputTranslator.OnSubmitEvent -= ContinueIfPossible;
         _inputTranslator.OnBindingsChanged -= RefreshLineBinding;
     }
     public void EnterDialogueMode(TextAsset inkJSON)
     {       
+        if (isDialoguePlaying) return;
         currentStory = new Story(inkJSON.text);
+        DialogueGameplayPause.Acquire(this);
         isDialoguePlaying = true;
         onDialogueStarted?.Invoke(); 
 
@@ -79,7 +82,8 @@ public class DialogueManager : NonSpawnableSingleton<DialogueManager>
 
     public IEnumerator ExitDialogueMode()
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSecondsRealtime(0.1f);
+        DialogueGameplayPause.Release(this);
         isDialoguePlaying = false;
         dialogueText.text = "";
         onDialogueEnded?.Invoke();
@@ -91,6 +95,7 @@ public class DialogueManager : NonSpawnableSingleton<DialogueManager>
 
     public void ExitDialogueModeInstant()
     {
+        DialogueGameplayPause.Release(this);
         isDialoguePlaying = false;
         dialogueText.text = "";
         CameraManager.Instance.ZoomOutCamera(.8f);
@@ -252,7 +257,7 @@ public class DialogueManager : NonSpawnableSingleton<DialogueManager>
             {
                 //play dialogue sound here
                 dialogueText.maxVisibleCharacters++;
-                yield return new WaitForSeconds(typingSpeed);
+                yield return new WaitForSecondsRealtime(typingSpeed);
             }
         }
 

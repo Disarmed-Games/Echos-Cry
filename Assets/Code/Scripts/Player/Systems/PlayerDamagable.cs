@@ -7,7 +7,7 @@ public class PlayerDamagable : MonoBehaviour, IDamageable
 
     public void Execute(AttackInfo attackData)
     {
-        if (player.Health.IsInvincible) return;
+        if (DialogueGameplayPause.IsPaused || player.Health.IsInvincible) return;
 
         player.Health.Damage(attackData.Damage);
         if (player.Health.HasArmor)

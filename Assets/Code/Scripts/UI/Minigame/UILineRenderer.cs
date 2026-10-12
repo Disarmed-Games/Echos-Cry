@@ -13,7 +13,6 @@ public class UILineRenderer : Graphic
     [SerializeField] private Color onBeatLineColor;
     [SerializeField] private Color secondBeatLineColor;
     [SerializeField] private Color fourthBeatLineColor;
-
     [Header("Hit Ranges")]
     [SerializeField] private Color badRangeColor = new Color(1f, 0f, 0f, 0.45f);
     [SerializeField] private Color goodRangeColor = new Color(47f / 255f, 235f / 255f, 81f / 255f, 0.45f);
@@ -95,13 +94,18 @@ public class UILineRenderer : Graphic
             int idx = vh.currentVertCount;
 
             vertex = UIVertex.simpleVert;
+            vertex.color = onBeatLineColor;
 
             if (Player.Instance != null && BeatManager.Instance)
             {
                 if (BeatManager.Instance.BeatInMeasure == 0 && Player.Instance.HeatGauge.CurrentCharge >= 6)
+                {
                     vertex.color = secondBeatLineColor;
+                }
                 else if (BeatManager.Instance.BeatInMeasure == 2 && Player.Instance.HeatGauge.CurrentCharge >= 6)
+                {
                     vertex.color = fourthBeatLineColor;
+                }
                 else
                     vertex.color = onBeatLineColor;
             }
@@ -122,6 +126,7 @@ public class UILineRenderer : Graphic
             vh.AddTriangle(idx + 2, idx + 3, idx);
         }
     }
+
     private static void AddRange(VertexHelper vh, Rect rect, float left, float right, Color leftColor, Color rightColor)
     {
         if (right <= left) return;
