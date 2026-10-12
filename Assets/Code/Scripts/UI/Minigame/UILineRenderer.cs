@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class UILineRenderer : Graphic
 {
     private List<Vector2> onBeatPoints = new List<Vector2>();
-    private float alpha = 0f;
+    [SerializeField] private Color beatTargetColor = Color.white;
 
     [SerializeField] private RectTransform mRectTransform;
     [SerializeField] private float thickness = 10f;
@@ -14,22 +14,22 @@ public class UILineRenderer : Graphic
     [SerializeField] private Color secondBeatLineColor;
     [SerializeField] private Color fourthBeatLineColor;
 
-    [Header("Gradient")]
-    [SerializeField] private Color leftColor = Color.white;
-    [SerializeField] private Color rightColor = Color.black;
+    [Header("Hit Ranges")]
+    [SerializeField] private Color badRangeColor = new Color(1f, 0f, 0f, 0.45f);
+    [SerializeField] private Color goodRangeColor = new Color(47f / 255f, 235f / 255f, 81f / 255f, 0.45f);
+    [SerializeField] private Color excellentRangeColor = new Color(110f / 255f, 44f / 255f, 222f / 255f, 0.45f);
     
     private void Update()
     {
         if (!BeatManager.Instance) return;
 
-        float progress = 1 - BeatManager.Instance.BeatProgress;
+        float progress = Mathf.Repeat(0.5f - BeatManager.Instance.BeatProgress, 1f);
         float rectWidth = mRectTransform.rect.width;
 
         onBeatPoints.Clear();
-        onBeatPoints.Add(new Vector2((rectWidth * progress) - (rectWidth / 2) - (lineWidth / 2), 0));
-        onBeatPoints.Add(new Vector2((rectWidth * progress) - (rectWidth / 2) + (lineWidth / 2), 0));
+        onBeatPoints.Add(new Vector2(mRectTransform.rect.xMin + (rectWidth * progress) - (lineWidth / 2), 0));
+        onBeatPoints.Add(new Vector2(mRectTransform.rect.xMin + (rectWidth * progress) + (lineWidth / 2), 0));
 
-        alpha = 1 - progress;
 
         SetVerticesDirty();
     }
@@ -39,29 +39,43 @@ public class UILineRenderer : Graphic
         vh.Clear();
         Rect rect = mRectTransform.rect;
 
-        //Gradient Background
-        int startIdx = vh.currentVertCount;
-
+        // Marker speed is one bar width per beat. The scoring percentages are
+        // total window widths, so each colored band uses the same fraction of the bar.
+        var tempo = Application.isPlaying ? TempoConductor.Instance : null;
+        float excellent = tempo != null ? tempo.ExcellentPercent : 0.1f;
+        float good = tempo != null ? tempo.GoodPercent : 0.2f;
+        float excellentHalf = rect.width * Mathf.Clamp01(excellent) * 0.5f;
+        float goodHalf = rect.width * Mathf.Clamp01(Mathf.Max(good, excellent)) * 0.5f;
+        float target = rect.center.x;
+        // Blend narrowly around the scoring boundaries, keeping each range readable.
+        float blend = Mathf.Min(excellentHalf, goodHalf - excellentHalf) * 0.2f;
+        float goodLeft = target - goodHalf;
+        float excellentLeft = target - excellentHalf;
+        float excellentRight = target + excellentHalf;
+        float goodRight = target + goodHalf;
+        Color fadedBad = badRangeColor;
+        fadedBad.a = 0f;
+        AddRange(vh, rect, rect.xMin, goodLeft - blend, fadedBad, badRangeColor);
+        AddRange(vh, rect, goodLeft - blend, goodLeft + blend, badRangeColor, goodRangeColor);
+        AddRange(vh, rect, goodLeft + blend, excellentLeft - blend, goodRangeColor, goodRangeColor);
+        AddRange(vh, rect, excellentLeft - blend, excellentLeft + blend, goodRangeColor, excellentRangeColor);
+        AddRange(vh, rect, excellentLeft + blend, excellentRight - blend, excellentRangeColor, excellentRangeColor);
+        AddRange(vh, rect, excellentRight - blend, excellentRight + blend, excellentRangeColor, goodRangeColor);
+        AddRange(vh, rect, excellentRight + blend, goodRight - blend, goodRangeColor, goodRangeColor);
+        AddRange(vh, rect, goodRight - blend, goodRight + blend, goodRangeColor, badRangeColor);
+        AddRange(vh, rect, goodRight + blend, rect.xMax, badRangeColor, fadedBad);
         UIVertex vertex = UIVertex.simpleVert;
-
-        vertex.position = new Vector3(rect.xMin, rect.yMin);
-        vertex.color = leftColor;
-        vh.AddVert(vertex);
-
-        vertex.position = new Vector3(rect.xMin, rect.yMax);
-        vertex.color = leftColor;
-        vh.AddVert(vertex);
-
-        vertex.position = new Vector3(rect.xMax, rect.yMax);
-        vertex.color = rightColor;
-        vh.AddVert(vertex);
-
-        vertex.position = new Vector3(rect.xMax, rect.yMin);
-        vertex.color = rightColor;
-        vh.AddVert(vertex);
-
-        vh.AddTriangle(startIdx, startIdx + 1, startIdx + 2);
-        vh.AddTriangle(startIdx + 2, startIdx + 3, startIdx);
+        // Fixed full-height center target; the moving marker crosses it on each beat.
+        int targetIndex = vh.currentVertCount;
+        float center = rect.center.x;
+        float halfWidth = Mathf.Max(1f, lineWidth * 0.15f);
+        vertex.color = beatTargetColor;
+        vertex.position = new Vector3(center - halfWidth, rect.yMin); vh.AddVert(vertex);
+        vertex.position = new Vector3(center - halfWidth, rect.yMax); vh.AddVert(vertex);
+        vertex.position = new Vector3(center + halfWidth, rect.yMax); vh.AddVert(vertex);
+        vertex.position = new Vector3(center + halfWidth, rect.yMin); vh.AddVert(vertex);
+        vh.AddTriangle(targetIndex, targetIndex + 1, targetIndex + 2);
+        vh.AddTriangle(targetIndex + 2, targetIndex + 3, targetIndex);
 
         //On Beat Line Renderer
         for (int i = 0; i < onBeatPoints.Count - 1; i++)
@@ -107,5 +121,19 @@ public class UILineRenderer : Graphic
             vh.AddTriangle(idx, idx + 1, idx + 2);
             vh.AddTriangle(idx + 2, idx + 3, idx);
         }
+    }
+    private static void AddRange(VertexHelper vh, Rect rect, float left, float right, Color leftColor, Color rightColor)
+    {
+        if (right <= left) return;
+        int index = vh.currentVertCount;
+        var vertex = UIVertex.simpleVert;
+        vertex.color = leftColor;
+        vertex.position = new Vector3(left, rect.yMin); vh.AddVert(vertex);
+        vertex.position = new Vector3(left, rect.yMax); vh.AddVert(vertex);
+        vertex.color = rightColor;
+        vertex.position = new Vector3(right, rect.yMax); vh.AddVert(vertex);
+        vertex.position = new Vector3(right, rect.yMin); vh.AddVert(vertex);
+        vh.AddTriangle(index, index + 1, index + 2);
+        vh.AddTriangle(index + 2, index + 3, index);
     }
 }

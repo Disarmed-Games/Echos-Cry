@@ -26,14 +26,11 @@ public class PlayerMoveState : PlayerActionState
         }
         else if(_playerStateMachine.UsingSpecialAction && _playerContext.HeatGauge.CurrentCharge >= 6)
         {
-            if(BeatManager.Instance.BeatInMeasure == 1)
-            {
+            int special = _playerStateMachine.SpecialAttackIndex;
+            if (special == 1)
                 _playerStateMachine.SwitchState(_playerStateCache.RequestState(PlayerStateCache.PlayerState.SpecialAttack1));
-            }
-            else if(BeatManager.Instance.BeatInMeasure == 3)
-            {
+            else if (special == 2)
                 _playerStateMachine.SwitchState(_playerStateCache.RequestState(PlayerStateCache.PlayerState.SpecialAttack2));
-            }
         }
         else if (_playerStateMachine.CanDash && _playerContext.Movement.HasDash && _playerStateMachine.IsDashing)
         {

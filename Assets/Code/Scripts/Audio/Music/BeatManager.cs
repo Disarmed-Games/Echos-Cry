@@ -9,11 +9,13 @@ public class BeatManager : MonoBehaviour
     [SerializeField] private float _bpm;
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private Intervals[] _intervals;
-    private float beatProgress;
-    private int beatInMeasure;
-
-    public int BeatInMeasure => beatInMeasure;
-    public float BeatProgress => beatProgress;
+    // Read playback on demand: input callbacks run before MonoBehaviour.Update.
+    public double BeatPosition => _audioSource != null && _audioSource.clip != null && _bpm > 0
+        ? (double)_audioSource.timeSamples / _audioSource.clip.frequency * _bpm / 60.0
+        : 0.0;
+    public bool HasSong => _audioSource != null && _audioSource.clip != null && _bpm > 0;
+    public int BeatInMeasure => (int)(Math.Floor(BeatPosition) % 4);
+    public float BeatProgress { get { double position = BeatPosition; return (float)(position - Math.Floor(position)); } }
     public float BPM => _bpm;
 
     public event Action onWholeBeat;
@@ -39,13 +41,10 @@ public class BeatManager : MonoBehaviour
 
     private void Update()
     {
+        if (!HasSong || _intervals == null) return;
         foreach (var interval in _intervals)
         {
             float sampledTime = (_audioSource.timeSamples / (_audioSource.clip.frequency * interval.GetIntervalLength(_bpm)));
-
-            beatProgress = sampledTime - Mathf.Floor(sampledTime);
-            beatInMeasure = (int)Mathf.Floor(sampledTime) % 4;
-            //Debug.Log(beatInMeasure);
 
             interval.CheckForNewInterval(sampledTime);
         }
@@ -53,7 +52,7 @@ public class BeatManager : MonoBehaviour
 
     public float GetTimeBetweenBeats()
     {
-        return _intervals[0].GetIntervalLength(_bpm);
+        return _bpm > 0 ? 60f / _bpm : 0f;
     }
 
     public void ActivateWholeBeatEvent()

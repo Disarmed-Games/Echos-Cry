@@ -13,7 +13,6 @@ public class CalibrationManager : MonoBehaviour
     [SerializeField] private InputTranslator _inputTranslator;
     [SerializeField] private TextMeshProUGUI _resultsText;
     [SerializeField] private Button _continueButton;
-    private float _currentBeatProgress = 0;
     private int _hitCount = 0;
     private int _maxHitCount = 5;
     private float _overallAccuracy = 0;
@@ -39,8 +38,9 @@ public class CalibrationManager : MonoBehaviour
 
         EchosCry.Sound.PlaySFX(tapSFX, this.transform, 0);
 
-        //Debug.Log(_currentBeatProgress);
-        float distanceFromBeat = Mathf.Min(_currentBeatProgress, 1f - _currentBeatProgress);
+        if (BeatManager.Instance == null || !BeatManager.Instance.HasSong) return;
+        float progress = BeatManager.Instance.BeatProgress;
+        float distanceFromBeat = Mathf.Min(progress, 1f - progress);
         _accuracyList.Add(distanceFromBeat);
         _hitCount++;
 
@@ -88,10 +88,6 @@ public class CalibrationManager : MonoBehaviour
     private void DisplayResults()
     {
         _resultsText.text = $"Results:\nBeat Hit: {_hitCount} | Accuracy: {(_overallAccuracy * 100f):F1}%";
-    }
-    private void Update()
-    {
-        _currentBeatProgress = BeatManager.Instance.BeatProgress;
     }
     public void ContinueButton()
     {

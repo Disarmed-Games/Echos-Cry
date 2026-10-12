@@ -10,13 +10,8 @@ public class TempoConductor : Singleton<TempoConductor>
         Excellent
     }
 
-    private HitQuality _currentHitQuality;
-    private HitQuality _currentOffHitQuality;
-    public HitQuality CurrentHitQuality { get { return _currentHitQuality; } }
-    public HitQuality CurrentOffHitQuality {  get {  return _currentOffHitQuality; } }
-
-    //Beat Timing Values
-    private float _currentBeatProgress = 0;
+    public HitQuality CurrentHitQuality => EvaluateCurrentQuality(0f);
+    public HitQuality CurrentOffHitQuality => EvaluateCurrentQuality(0.5f);
 
     //Hit Time Window --> Higher values are easier to hit within!
     private float _excellentPercent;
@@ -33,50 +28,40 @@ public class TempoConductor : Singleton<TempoConductor>
 
     public bool IsOnBeat()
     {
-        return (_currentHitQuality == HitQuality.Good || _currentHitQuality == HitQuality.Excellent);
-    }
-    void Update()
-    {
-        UpdateHitQuality();
+        return CurrentHitQuality != HitQuality.Miss;
     }
 
-    /*
-    if (progress <= _excellentPercent || progress >= (1f - _excellentPercent))
-    if (progress <= _goodPercent || progress >= (1f - _goodPercent))
-    */
 
     private HitQuality GetHitQuality(float progress)
     {
-        if (progress <= _excellentPercent * 0.5f || progress >= (1f - _excellentPercent))
+        float distance = Mathf.Min(progress, 1f - progress);
+        // Percentages describe the total window, split evenly before and after a beat.
+        if (distance <= _excellentPercent * 0.5f)
             return HitQuality.Excellent;
 
-        if (progress <= _goodPercent * 0.5f || progress >= (1f - _goodPercent))
+        if (distance <= _goodPercent * 0.5f)
             return HitQuality.Good;
 
         return HitQuality.Miss;
     }
 
-    private void UpdateHitQuality()
+    private HitQuality EvaluateCurrentQuality(float offset)
     {
-        //--------------------
-        // On Beat Check
-        //--------------------
-        //Closer to 0 or 1 is perfectly on beat. Close to 0.5 is offbeat.
-        _currentBeatProgress = BeatManager.Instance.BeatProgress;
-        _currentHitQuality = GetHitQuality(_currentBeatProgress);
+        var beat = BeatManager.Instance;
+        return beat != null && beat.HasSong
+            ? GetHitQuality(Mathf.Repeat(beat.BeatProgress - offset, 1f)) : HitQuality.Miss;
+    }
 
-        //--------------------
-        // Off Beat Check
-        //--------------------
-        //Off Beats are inbetween regular beats. Denoted by &: 1 & 2 & 3 & 4 (4/4 signature)
-        int currentBeat = BeatManager.Instance.BeatInMeasure; //Beats are held as 0 - 3
-        float offbeatProgress = _currentBeatProgress - 0.5f;
-        if (offbeatProgress < 0) offbeatProgress += 1f;
-
-        if (currentBeat == 0 || currentBeat == 1)
-        { //Check the offbeat between beats 0 - 1 (1 & 2).
-            _currentOffHitQuality = GetHitQuality(offbeatProgress);
-        }
+    // Shared by the indicator and both movement states. 1/2 are attacks on beats 2/4.
+    public int GetSpecialAttackIndex()
+    {
+        var beat = BeatManager.Instance;
+        if (beat == null || !beat.HasSong) return 0;
+        double position = beat.BeatPosition;
+        double nearest = Math.Floor(position + 0.5);
+        if (Math.Abs(position - nearest) > _goodPercent * 0.5) return 0;
+        int measureBeat = (int)(nearest % 4);
+        return measureBeat == 1 ? 1 : measureBeat == 3 ? 2 : 0;
     }
 
     private void Awake()

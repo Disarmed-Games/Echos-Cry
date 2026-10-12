@@ -7,6 +7,8 @@ public class HitQualityTextUI : MonoBehaviour
     [SerializeField] private GameObject _hitQualityObject;
     [SerializeField] private Animator _hitEffectAnimator1;
     [SerializeField] private Animator _hitEffectAnimator2;
+    [SerializeField] private Animator _hitEffectAnimator3;
+    [SerializeField] private Animator _hitEffectAnimator4;
 
     public void UpdateText()
     {
@@ -29,5 +31,7 @@ public class HitQualityTextUI : MonoBehaviour
 
         _hitEffectAnimator1.Play(lightFlashHash);
         _hitEffectAnimator2.Play(lightFlashHash); 
+        _hitEffectAnimator3.Play(lightFlashHash);
+        _hitEffectAnimator4.Play(lightFlashHash);
     }
 }

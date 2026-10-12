@@ -18,6 +18,7 @@ public class PlayerStateMachine : AbstractStateMachine<PlayerActionState>
     public bool UsingPrimaryAction { get => _usingPrimaryAction; set => _usingPrimaryAction = value; }
     public bool UsingSecondaryAction { get => _usingSecondaryAction; set => _usingSecondaryAction = value; }
     public bool UsingSpecialAction { get => _usingSpecialAction; set => _usingSpecialAction = value; }
+    public int SpecialAttackIndex { get; private set; }
     public bool IsDashing { get => _isDashing; set => _isDashing = value; }
     public bool CanDash { get => _canDash; set => _canDash = value; }
     public bool CanPush { get => _canPush; set => _canPush = value; }
@@ -81,14 +82,10 @@ public class PlayerStateMachine : AbstractStateMachine<PlayerActionState>
 
     public void HandleSpecialAction(bool buttonPressed)
     {
-        if(TempoConductor.Instance.IsOnBeat() && buttonPressed && !SpamPrevention.InputLocked)
-        {
-            _usingSpecialAction = true;
-        }
-        else
-        {
-            _usingSpecialAction = false;
-        }
+        // Preserve the decision made at press time when the state updates later this frame.
+        SpecialAttackIndex = buttonPressed && !SpamPrevention.InputLocked
+            ? TempoConductor.Instance.GetSpecialAttackIndex() : 0;
+        _usingSpecialAction = SpecialAttackIndex != 0;
     }
     public void HandleDash(bool buttonPressed)
     {
