@@ -21,7 +21,7 @@ public class PlayerIdleState : PlayerActionState
         {
             _playerStateMachine.SwitchState(_playerStateCache.RequestState(PlayerStateCache.PlayerState.HeavyAttack));
         }
-        else if (_playerStateMachine.UsingSpecialAction && _playerContext.HeatGauge.CurrentCharge >= 6)
+        else if (_playerStateMachine.UsingSpecialAction && _playerContext.HeatGauge.CurrentCharge >= HeatGauge.SpecialAttackCost)
         {
             int special = _playerStateMachine.SpecialAttackIndex;
             if (special == 1)

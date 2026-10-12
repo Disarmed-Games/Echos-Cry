@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class HeatGauge : MonoBehaviour
 {
+    public const int SpecialAttackCost = 6;
     [SerializeField] private int m_maxCharge = 9;
     [SerializeField] private DoubleIntEventChannel _heatUpdateEvent;
     [SerializeField] private HeatGaugeUI _heatGaugeUI;

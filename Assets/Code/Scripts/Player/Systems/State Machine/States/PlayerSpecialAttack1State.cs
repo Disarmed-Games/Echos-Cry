@@ -8,7 +8,7 @@ public class PlayerSpecialAttack1State : PlayerActionState
     public override void Enter()
     {
         _playerStateMachine.CurrentStateEnum = PlayerState.Special1;
-        _playerContext.HeatGauge.UseCharge(6);
+        _playerContext.HeatGauge.UseCharge(HeatGauge.SpecialAttackCost);
 
         _playerContext.WeaponHolder.SwitchToSpecial();
         _playerContext.WeaponHolder.ActivateCurrentWeapon();

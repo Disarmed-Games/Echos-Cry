@@ -98,11 +98,11 @@ public class UILineRenderer : Graphic
 
             if (Player.Instance != null && BeatManager.Instance)
             {
-                if (BeatManager.Instance.BeatInMeasure == 0 && Player.Instance.HeatGauge.CurrentCharge >= 6)
+                if (BeatManager.Instance.BeatInMeasure == 0 && Player.Instance.HeatGauge.CurrentCharge >= HeatGauge.SpecialAttackCost)
                 {
                     vertex.color = secondBeatLineColor;
                 }
-                else if (BeatManager.Instance.BeatInMeasure == 2 && Player.Instance.HeatGauge.CurrentCharge >= 6)
+                else if (BeatManager.Instance.BeatInMeasure == 2 && Player.Instance.HeatGauge.CurrentCharge >= HeatGauge.SpecialAttackCost)
                 {
                     vertex.color = fourthBeatLineColor;
                 }

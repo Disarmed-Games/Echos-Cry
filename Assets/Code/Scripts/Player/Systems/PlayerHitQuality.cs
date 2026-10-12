@@ -37,7 +37,7 @@ public class PlayerHitQuality : MonoBehaviour
 
     public void HandleSpecial(bool buttonPressed)
     {
-        if (player.HeatGauge.CurrentCharge >= 6 && buttonPressed && !SpamPrevention.InputLocked)
+        if (player.HeatGauge.CurrentCharge >= HeatGauge.SpecialAttackCost && buttonPressed && !SpamPrevention.InputLocked)
         {
             var tempo = TempoConductor.Instance;
             var quality = tempo.GetSpecialAttackIndex() != 0

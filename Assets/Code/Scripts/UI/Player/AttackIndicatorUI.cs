@@ -34,7 +34,7 @@ struct SpriteNode
 
     void Update()
     {
-        if (Player.Instance.HeatGauge.CurrentCharge < 6)
+        if (Player.Instance.HeatGauge.CurrentCharge < HeatGauge.SpecialAttackCost)
         {
             SetAttackIndicator(0);
             return;
