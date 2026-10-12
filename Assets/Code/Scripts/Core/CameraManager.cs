@@ -1,6 +1,7 @@
 using System.Collections;
 using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class CameraManager : MonoBehaviour
 {
@@ -18,7 +19,56 @@ public class CameraManager : MonoBehaviour
     private float startingOrthagaphicSize;
 
     [SerializeField] private Transform target;
+    [Header("Leaf Cutaway")]
+    [SerializeField] private bool leafCutawayEnabled = true;
+    [SerializeField, Min(0.01f)] private float leafCutawayRadius = 2.5f;
+    [SerializeField, Min(0.01f)] private float leafCutawayEdgeSoftness = 0.8f;
+    [SerializeField] private float leafCutawayAnchorHeight = 1f;
+    [SerializeField] private float leafCutawayMinimumHeight = 1.5f;
+    [SerializeField, Min(0.01f)] private float leafCutawayHeightBlend = 0.5f;
+
+    private static readonly int LeafAnchorId = Shader.PropertyToID("_LeafCutawayAnchor");
+    private static readonly int LeafSettingsId = Shader.PropertyToID("_LeafCutawaySettings");
+    private Transform leafCutawayPlayer;
     public static Camera MainCamera { get { return _mainCamera; } }
+
+    private void OnEnable()
+    {
+        RenderPipelineManager.beginCameraRendering += UpdateLeafCutaway;
+    }
+
+    private void OnDisable()
+    {
+        RenderPipelineManager.beginCameraRendering -= UpdateLeafCutaway;
+        Shader.SetGlobalVector(LeafAnchorId, Vector4.zero);
+    }
+
+    private void UpdateLeafCutaway(ScriptableRenderContext context, Camera renderingCamera)
+    {
+        // Runs after Cinemachine has positioned the camera. Other cameras get no effect.
+        if (renderingCamera != _mainCamera || !leafCutawayEnabled)
+        {
+            Shader.SetGlobalVector(LeafAnchorId, Vector4.zero);
+            return;
+        }
+
+        if (target != null)
+            leafCutawayPlayer = target;
+        else if (leafCutawayPlayer == null && Player.Instance != null)
+            leafCutawayPlayer = Player.Instance.transform;
+
+        if (leafCutawayPlayer == null)
+        {
+            Shader.SetGlobalVector(LeafAnchorId, Vector4.zero);
+            return;
+        }
+
+        Vector3 anchor = leafCutawayPlayer.position + Vector3.up * leafCutawayAnchorHeight;
+        Shader.SetGlobalVector(LeafAnchorId, new Vector4(anchor.x, anchor.y, anchor.z, 1f));
+        Shader.SetGlobalVector(LeafSettingsId, new Vector4(
+            Mathf.Max(0.01f, leafCutawayRadius), Mathf.Max(0.01f, leafCutawayEdgeSoftness),
+            leafCutawayPlayer.position.y + leafCutawayMinimumHeight, Mathf.Max(0.01f, leafCutawayHeightBlend)));
+    }
 
     private void Awake()
     {
