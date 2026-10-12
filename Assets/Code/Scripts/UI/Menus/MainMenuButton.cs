@@ -5,7 +5,7 @@ public class MainMenuButton : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 {
     [SerializeField] private GameObject _selectImage;
 
-    private void Start()
+    private void OnEnable()
     {
         _selectImage.SetActive(EventSystem.current != null && EventSystem.current.currentSelectedGameObject == gameObject);
     }
