@@ -138,6 +138,9 @@ public class Enemy : MonoBehaviour
 
     public void HandleDeath()
     {
+        if (GlobalSFXManager.Instance != null && GlobalSFXManager.Instance.EnemyDeathSFX != null)
+            EchosCry.Sound.PlaySFX(GlobalSFXManager.Instance.EnemyDeathSFX, transform, 0f);
+
         _updateWaveCount.Invoke(EnemySpawnerID);
 
         DeathEffectHandler deathEffectPrefab = Instantiate(_deathEffect, transform.position, Quaternion.identity).GetComponent<DeathEffectHandler>();

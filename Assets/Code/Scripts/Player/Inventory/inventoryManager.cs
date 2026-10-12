@@ -65,6 +65,8 @@ public class InventoryManager : Singleton<InventoryManager>
             EchosCry.Sound.PlaySFX(_useItemSound, Player.Instance.transform, 0);
             usedItem.data.Use(_player);
             Remove(usedItem.data);
+            if (_inputTranslator.ActiveControlScheme == InputTranslator.ControllerScheme)
+                _inputTranslator.ClearItemSelection();
         }
         else
             EchosCry.Sound.PlaySFX(_invalidItemSound, Player.Instance.transform, 0);

@@ -46,3 +46,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Echos Cry Core::GlobalSFXManager
   ArmorHitSFX: {fileID: 11400000, guid: f83534ee1030a2941a4bef753d73a245, type: 2}
   ArmorBreakSFX: {fileID: 11400000, guid: ae887be74a883064b9243d72a90da102, type: 2}
+  EnemyDeathSFX: {fileID: 11400000, guid: 7fd288bc70ea45dc8fb17ec611f0d912, type: 2}
