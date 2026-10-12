@@ -81,29 +81,13 @@ public class ControllerInputTests : InputTestFixture
     }
 
     [Test]
-    public void RightStickCursorIgnoresEmulatedMouseAndOtherControllerInputHidesIt()
+    public void RightStickDoesNotShowCursorOrMoveMouse()
     {
+        Vector2 before = mouse.position.ReadValue();
         Set(pad.rightStick, Vector2.right);
-        InputSystem.QueueStateEvent(mouse, new MouseState { delta = new Vector2(10, 0) });
-        InputSystem.Update();
-        Set(pad.rightStick, Vector2.zero);
-        Assert.That(translator.ActiveControlScheme, Is.EqualTo("Controller"));
-        Assert.That(Cursor.visible, Is.True);
-        Press(pad.buttonSouth);
         Assert.That(Cursor.visible, Is.False);
-    }
-
-    [Test]
-    public void RightStickCursorHidesAfterTimeout()
-    {
-        Set(pad.rightStick, Vector2.right);
-        Set(pad.rightStick, Vector2.zero);
-        typeof(InputTranslator).GetField("_stickCursorUntil",
-            System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.NonPublic)
-            .SetValue(null, Time.realtimeSinceStartup - 1f);
-        InputSystem.Update();
-        Assert.That(Cursor.visible, Is.False);
-        Assert.That(translator.ActiveControlScheme, Is.EqualTo("Controller"));
+        Assert.That(mouse.position.ReadValue(), Is.EqualTo(before));
+        Assert.That(translator.ActiveControlScheme, Is.EqualTo(InputTranslator.ControllerScheme));
     }
 
     [Test]

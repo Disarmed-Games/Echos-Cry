@@ -168,8 +168,6 @@ public class InputTranslator : ScriptableObject,
     private InputDevice _lastDevice;
     public Gamepad ActiveGamepad => _lastDevice as Gamepad;
     private static InputDevice _cursorDevice;
-    private static float _stickCursorUntil;
-    private const float StickCursorHoldSeconds = 3f;
 
     private struct AttackInput
     {
@@ -219,44 +217,18 @@ public class InputTranslator : ScriptableObject,
     private static void InitializeCursorVisibility()
     {
         _cursorDevice = null;
-        _stickCursorUntil = 0f;
         Cursor.visible = true;
         InputSystem.onEvent -= UpdateCursorDevice;
         InputSystem.onEvent += UpdateCursorDevice;
         InputSystem.onDeviceChange -= RestoreCursorOnDisconnect;
         InputSystem.onDeviceChange += RestoreCursorOnDisconnect;
-        InputSystem.onAfterUpdate -= UpdateStickCursorTimeout;
-        InputSystem.onAfterUpdate += UpdateStickCursorTimeout;
     }
 
     private static void UpdateCursorDevice(InputEventPtr eventPtr, InputDevice device)
     {
         if (!IsMeaningfulInput(eventPtr, device)) return;
-        if (device is Gamepad pad)
-        {
-            bool otherInput = false;
-            foreach (var control in eventPtr.EnumerateChangedControls(device, 0.25f))
-            {
-                if (control == pad.rightStick.x || control == pad.rightStick.y) continue;
-                if (control is ButtonControl button && button.ReadValueFromEvent(eventPtr) < button.pressPointOrDefault) continue;
-                otherInput = true;
-                break;
-            }
-            if (otherInput) _stickCursorUntil = 0f;
-            else _stickCursorUntil = Time.realtimeSinceStartup + StickCursorHoldSeconds;
-        }
-        else if (device is Mouse && _stickCursorUntil > Time.realtimeSinceStartup) return;
-        else _stickCursorUntil = 0f;
         _cursorDevice = device;
-        Cursor.visible = !(device is Gamepad) || _stickCursorUntil > Time.realtimeSinceStartup;
-    }
-
-    private static void UpdateStickCursorTimeout()
-    {
-        if (!(_cursorDevice is Gamepad pad)) return;
-        if (pad.rightStick.ReadValue().sqrMagnitude > 0.25f * 0.25f && _stickCursorUntil > 0f)
-            _stickCursorUntil = Time.realtimeSinceStartup + StickCursorHoldSeconds;
-        Cursor.visible = _stickCursorUntil > Time.realtimeSinceStartup;
+        Cursor.visible = !(device is Gamepad);
     }
 
     private static void RestoreCursorOnDisconnect(InputDevice device, InputDeviceChange change)
@@ -355,7 +327,6 @@ public class InputTranslator : ScriptableObject,
 
     private void OnDeviceInput(InputEventPtr eventPtr, InputDevice device)
     {
-        if (device is Mouse && _stickCursorUntil > Time.realtimeSinceStartup) return;
         if (IsMeaningfulInput(eventPtr, device)) SetActiveDevice(device);
     }
 
