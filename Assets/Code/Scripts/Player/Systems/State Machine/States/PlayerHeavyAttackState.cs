@@ -9,6 +9,7 @@ public class PlayerHeavyAttackState : PlayerActionState
     {
         _playerStateMachine.CurrentStateEnum = PlayerState.Heavy;
         _playerContext.HeatGauge.UseCharge(2);
+        ControllerRumble.Play(_playerContext.InputTranslator, 0.4f, 0.5f, 0.15f);
 
         _playerContext.WeaponHolder.SwitchToPrimary();
         _playerContext.WeaponHolder.ActivateCurrentWeapon();

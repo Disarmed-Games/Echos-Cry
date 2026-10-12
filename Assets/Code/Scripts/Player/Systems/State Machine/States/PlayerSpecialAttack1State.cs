@@ -9,6 +9,7 @@ public class PlayerSpecialAttack1State : PlayerActionState
     {
         _playerStateMachine.CurrentStateEnum = PlayerState.Special1;
         _playerContext.HeatGauge.UseCharge(HeatGauge.SpecialAttackCost);
+        ControllerRumble.Play(_playerContext.InputTranslator, 0.65f, 0.8f, 0.25f);
 
         _playerContext.WeaponHolder.SwitchToSpecial();
         _playerContext.WeaponHolder.ActivateCurrentWeapon();

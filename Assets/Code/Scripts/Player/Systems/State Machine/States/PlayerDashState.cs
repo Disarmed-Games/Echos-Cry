@@ -13,6 +13,7 @@ public class PlayerDashState : PlayerActionState
     public override void Enter()
     {
         _playerStateMachine.CurrentStateEnum = PlayerState.Dash;
+        ControllerRumble.Play(_playerContext.InputTranslator, 0.1f, 0.25f, 0.08f);
 
         // Handle Dash Attack
         //--------------------

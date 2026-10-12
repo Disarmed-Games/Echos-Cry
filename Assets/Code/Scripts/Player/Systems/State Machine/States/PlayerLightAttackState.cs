@@ -9,6 +9,7 @@ public class PlayerLightAttackState : PlayerActionState
     public override void Enter()
     {
         _playerStateMachine.CurrentStateEnum = PlayerState.Light;
+        ControllerRumble.Play(_playerContext.InputTranslator, 0.15f, 0.3f, 0.08f);
 
         _playerContext.WeaponHolder.SwitchToPrimary();
         _playerContext.WeaponHolder.ActivateCurrentWeapon();

@@ -166,6 +166,7 @@ public class InputTranslator : ScriptableObject,
     public string ActiveControlScheme { get; private set; } = KeyboardMouseScheme;
     public event Action OnBindingsChanged;
     private InputDevice _lastDevice;
+    public Gamepad ActiveGamepad => _lastDevice as Gamepad;
     private static InputDevice _cursorDevice;
     private static float _stickCursorUntil;
     private const float StickCursorHoldSeconds = 3f;

@@ -75,7 +75,10 @@ public class PlayerHealth : MonoBehaviour
     /// </summary>
     public void Damage(float damage)
     {
+        float before = CurrentHealth + CurrentArmor;
         _healthSystem.Damage(damage);
+        if (CurrentHealth + CurrentArmor < before && Player.Instance != null)
+            ControllerRumble.Play(Player.Instance.InputTranslator, 0.8f, 0.6f, 0.22f);
 
         if (DamageLabelManager.Instance != null && DamageLabelManager.Instance.isActiveAndEnabled)
             DamageLabelManager.Instance.SpawnPopup(damage, Player.Instance.transform.position, Color.red);
