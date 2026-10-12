@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: 76a890534af64b13aef06d710e2b0748
+AudioImporter:
+  externalObjects: {}
+  serializedVersion: 8
+  defaultSettings:
+    serializedVersion: 2
+    loadType: 0
+    sampleRateSetting: 0
+    sampleRateOverride: 48000
+    compressionFormat: 0
+    quality: 1
+    conversionMode: 0
+    preloadAudioData: 1
+  platformSettingOverrides: {}
+  forceToMono: 0
+  normalize: 1
+  loadInBackground: 0
+  ambisonic: 0
+  3D: 0
+  userData: 100 BPM; 256 beats; 64 bars; 153.6 seconds; stronger accents on beats 2 and 4; PCM preserves loop timing
+  assetBundleName:
+  assetBundleVariant:
