@@ -66,6 +66,11 @@ public class TempoConductor : Singleton<TempoConductor>
 
     private void Awake()
     {
+        ApplyCalibrationAccuracy(CalibrationManager.HitAccuracy);
+    }
+
+    public void ApplyCalibrationAccuracy(float accuracy)
+    {
         //--------------------
         // Beat Accuracy Algorithm
         //--------------------
@@ -73,7 +78,7 @@ public class TempoConductor : Singleton<TempoConductor>
         //So if your accuracy is between 90% - 100%, then it is the hardest range of 0.1 for excellent and 0.2 for good.
         //The lowest accuracy of 0% - 10% creates a range of 0.3 for excellent and 0.4 for good.
 
-        float accuracy = Mathf.Clamp01(CalibrationManager.HitAccuracy);
+        accuracy = Mathf.Clamp01(accuracy);
 
         float t = Mathf.InverseLerp(0.1f, 0.9f, accuracy);
         t = 1f - t;

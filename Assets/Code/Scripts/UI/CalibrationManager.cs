@@ -14,7 +14,7 @@ public class CalibrationManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _resultsText;
     [SerializeField] private Button _continueButton;
     private int _hitCount = 0;
-    private int _maxHitCount = 5;
+    private int _maxHitCount = 8;
     private float _overallAccuracy = 0;
     private List<float> _accuracyList = new List<float>();
 
@@ -23,6 +23,7 @@ public class CalibrationManager : MonoBehaviour
     private void OnEnable()
     {
         _inputTranslator.OnPrimaryActionEvent += CheckHitAccuracy;
+        UpdateBeatWindow();
         DisplayResults();
     }
     private void OnDisable()
@@ -82,7 +83,15 @@ public class CalibrationManager : MonoBehaviour
 
         float averageDistance = total / _accuracyList.Count;
         _overallAccuracy = 1f - (averageDistance * 2f);
+        UpdateBeatWindow();
         DisplayResults();
+    }
+
+    private void UpdateBeatWindow()
+    {
+        HitAccuracy = _overallAccuracy;
+        var tempo = TempoConductor.Instance;
+        if (tempo != null) tempo.ApplyCalibrationAccuracy(HitAccuracy);
     }
 
     private void DisplayResults()
@@ -103,6 +112,7 @@ public class CalibrationManager : MonoBehaviour
         _hitCount = 0;
         _overallAccuracy = 0;
         _continueButton.interactable = false;
+        UpdateBeatWindow();
         DisplayResults();
     }
 }

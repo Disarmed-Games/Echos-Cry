@@ -1561,7 +1561,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "Before you start, the game needs to calibrate to your sense of rhythm.\nWhen
-    you're ready, tap along with the beat 5 times.\nWe\u2019ll measure your average
+    you're ready, tap along with the beat 8 times.\nWe\u2019ll measure your average
     accuracy to create a fair and responsive experience tailored to you."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: caafb0e39abac1f42bc58ea30b28ade9, type: 2}
