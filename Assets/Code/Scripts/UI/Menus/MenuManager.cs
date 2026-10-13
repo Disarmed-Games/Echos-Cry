@@ -58,6 +58,8 @@ public class MenuManager : Singleton<MenuManager>
 
     public void EnableGameoverMenu()
     {
+        if (GameManager.Instance.IsGameOver) return;
+
         SetMenu("Gameover");
         VolumeManager.Instance.SetDepthOfField(true);
         VolumeManager.Instance.SetColorSaturationGrey();

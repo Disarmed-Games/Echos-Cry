@@ -82,6 +82,13 @@ public class TempoConductor : Singleton<TempoConductor>
         _excellentPercent = Mathf.Lerp(0.1f, 0.3f, t) * 1.1f;
         _goodPercent = Mathf.Lerp(0.2f, 0.4f, t) * 1.1f;
 
+        // Give players below 60% calibration accuracy 20% wider timing windows.
+        if (accuracy < 0.6f)
+        {
+            _excellentPercent *= 1.2f;
+            _goodPercent *= 1.2f;
+        }
+
         _excellentPercent = Mathf.Clamp(_excellentPercent, 0f, 1f);
         _goodPercent = Mathf.Clamp(_goodPercent, 0f, 1f);
 

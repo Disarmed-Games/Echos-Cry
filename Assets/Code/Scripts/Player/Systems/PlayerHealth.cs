@@ -186,10 +186,13 @@ public class PlayerHealth : MonoBehaviour
 internal sealed class PlayerDamageScreenFlash : MonoBehaviour
 {
     private const float Duration = 0.35f;
+    private const float Opacity = 0.1f;
     private Canvas _canvas;
     private RawImage _image;
     private Texture2D _texture;
     private float _remaining;
+    private int _screenWidth;
+    private int _screenHeight;
 
     private void Awake()
     {
@@ -209,42 +212,63 @@ internal sealed class PlayerDamageScreenFlash : MonoBehaviour
         rect.offsetMin = Vector2.zero;
         rect.offsetMax = Vector2.zero;
 
-        const int size = 128;
-        _texture = new Texture2D(size, size, TextureFormat.RGBA32, false);
+        RefreshGradient();
+        _canvas.enabled = false;
+    }
+
+    private void RefreshGradient()
+    {
+        int screenWidth = Mathf.Max(1, Screen.width);
+        int screenHeight = Mathf.Max(1, Screen.height);
+        if (_texture != null && _screenWidth == screenWidth && _screenHeight == screenHeight) return;
+
+        _screenWidth = screenWidth;
+        _screenHeight = screenHeight;
+        if (_texture != null) Destroy(_texture);
+
+        // Use equal texture-pixel density on both axes for an even screen-space border.
+        float shortestSide = Mathf.Min(screenWidth, screenHeight);
+        int width = Mathf.CeilToInt(256f * screenWidth / shortestSide);
+        int height = Mathf.CeilToInt(256f * screenHeight / shortestSide);
+        float thickness = shortestSide * 0.1f;
+        _texture = new Texture2D(width, height, TextureFormat.RGBA32, false);
         _texture.name = "Damage Edge Gradient";
         _texture.wrapMode = TextureWrapMode.Clamp;
         _texture.filterMode = FilterMode.Bilinear;
-        var pixels = new Color[size * size];
-        for (int y = 0; y < size; y++)
+        var pixels = new Color[width * height];
+        for (int y = 0; y < height; y++)
         {
-            for (int x = 0; x < size; x++)
+            for (int x = 0; x < width; x++)
             {
-                float horizontal = Mathf.Abs(2f * x / (size - 1) - 1f);
-                float vertical = Mathf.Abs(2f * y / (size - 1) - 1f);
-                float edge = Mathf.Max(horizontal, vertical);
-                float alpha = Mathf.SmoothStep(0f, 1f, Mathf.InverseLerp(0.94f, 1f, edge));
-                pixels[y * size + x] = new Color(1f, 0f, 0f, alpha);
+                float u = (x + 0.5f) / width;
+                float v = (y + 0.5f) / height;
+                float horizontalDistance = Mathf.Min(u, 1f - u) * screenWidth;
+                float verticalDistance = Mathf.Min(v, 1f - v) * screenHeight;
+                float edgeDistance = Mathf.Min(horizontalDistance, verticalDistance);
+                float alpha = Mathf.SmoothStep(1f, 0f, Mathf.Clamp01(edgeDistance / thickness));
+                pixels[y * width + x] = new Color(1f, 0f, 0f, alpha);
             }
         }
         _texture.SetPixels(pixels);
         _texture.Apply(false, true);
         _image.texture = _texture;
-        _canvas.enabled = false;
     }
 
     public void Flash()
     {
+        RefreshGradient();
         _remaining = Duration;
-        _image.color = new Color(1f, 1f, 1f, 0.245f);
+        _image.color = new Color(1f, 1f, 1f, Opacity);
         _canvas.enabled = true;
     }
 
     private void Update()
     {
         if (_remaining <= 0f) return;
+        RefreshGradient();
         _remaining = Mathf.Max(0f, _remaining - Time.unscaledDeltaTime);
         float strength = _remaining / Duration;
-        _image.color = new Color(1f, 1f, 1f, 0.245f * strength * strength);
+        _image.color = new Color(1f, 1f, 1f, Opacity * strength * strength);
         _canvas.enabled = _remaining > 0f;
     }
 

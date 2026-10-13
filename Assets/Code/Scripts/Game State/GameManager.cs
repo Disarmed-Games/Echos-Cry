@@ -24,6 +24,7 @@ public class GameManager : NonSpawnableSingleton<GameManager>
     protected override void OnAwake()
     {
         _sceneManager = new();
+        ResetGame();
     }
 
     public void GameStart()
@@ -33,19 +34,22 @@ public class GameManager : NonSpawnableSingleton<GameManager>
     public void ResetGame()
     {
         PlayerLives = _maxPlayerLives;
+        _isGameOver = false;
     }
 
     public void HandlePlayerDeath(Player player)
     {
-        PlayerLives--;
+        if (_isGameOver) return;
+
+        PlayerLives = Mathf.Max(0, PlayerLives - 1);
+        _isGameOver = PlayerLives == 0;
         OnPlayerDeathEvent?.Invoke();
 
         if (PlayerLives <= 0)
         {
-            _isGameOver = true;
-            //player.FullReset();
-            //PlayerLives = _maxPlayerLives;
-            //OnGameOverEvent?.Invoke();
+            CreditsManager.ShowGameOverOnNextLoad = true;
+            Time.timeScale = 1f;
+            UnityEngine.SceneManagement.SceneManager.LoadScene(SceneNames.Credits);
         }
     }
     private void OnEnable()
@@ -102,6 +106,9 @@ public class SceneManager
     }
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        if (scene.name == SceneNames.Credits || scene.name == SceneNames.MainMenu || scene.name == SceneNames.Cutscene)
+            return;
+
         if (_inputTranslator != null)
         {
             _inputTranslator.PlayerInputs.Gameplay.Pause.Disable();

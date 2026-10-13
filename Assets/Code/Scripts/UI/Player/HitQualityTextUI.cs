@@ -3,12 +3,10 @@ using UnityEngine;
 
 public class HitQualityTextUI : MonoBehaviour
 {
-    static private int lightFlashHash = Animator.StringToHash("LightFlash");
+    private static readonly int lightFlashHash = Animator.StringToHash("LightFlash");
     [SerializeField] private GameObject _hitQualityObject;
     [SerializeField] private Animator _hitEffectAnimator1;
     [SerializeField] private Animator _hitEffectAnimator2;
-    [SerializeField] private Animator _hitEffectAnimator3;
-    [SerializeField] private Animator _hitEffectAnimator4;
     private GameObject activeHitText;
 
     public void UpdateText()
@@ -42,9 +40,7 @@ public class HitQualityTextUI : MonoBehaviour
                 break;
         }
 
-        _hitEffectAnimator1.Play(lightFlashHash);
-        _hitEffectAnimator2.Play(lightFlashHash); 
-        _hitEffectAnimator3.Play(lightFlashHash);
-        _hitEffectAnimator4.Play(lightFlashHash);
+        if (_hitEffectAnimator1 != null) _hitEffectAnimator1.Play(lightFlashHash);
+        if (_hitEffectAnimator2 != null) _hitEffectAnimator2.Play(lightFlashHash);
     }
 }

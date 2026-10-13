@@ -726,6 +726,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   _returnSceneName: TownScene
+  _headingText: {fileID: 920577161}
 --- !u!1 &818567013
 GameObject:
   m_ObjectHideFlags: 0
