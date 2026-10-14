@@ -16,6 +16,9 @@ public class CutsceneManager : MonoBehaviour
     [SerializeField] private float sceneWaitTime;
     [SerializeField] private soundEffect slideSFX;
     [SerializeField] private soundEffect screamsSFX;
+    [SerializeField, Min(0.1f)] private float blinkCloseDuration = 1.5f;
+
+    [SerializeField, Min(0.1f)] private float blinkOpenDuration = 3.5f;
 
     private bool _skipSceneRequested = false;
 
@@ -63,7 +66,40 @@ public class CutsceneManager : MonoBehaviour
 
             count++;
         }
-        UnityEngine.SceneManagement.SceneManager.LoadScene(SceneNames.Tutorial);
+        yield return CloseBlink();
+    }
+    private IEnumerator CloseBlink()
+    {
+        // Cover the entire intro, including its text, before loading the tutorial.
+        GameObject overlay = new GameObject("BlinkFade", typeof(RectTransform), typeof(Canvas), typeof(CanvasGroup));
+        Canvas canvas = overlay.GetComponent<Canvas>();
+        canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+        canvas.sortingOrder = short.MaxValue;
+        CanvasGroup group = overlay.GetComponent<CanvasGroup>();
+        group.alpha = 0f;
+
+        GameObject imageObject = new GameObject("Black", typeof(RectTransform), typeof(UnityEngine.UI.Image));
+        imageObject.transform.SetParent(overlay.transform, false);
+        RectTransform rect = imageObject.GetComponent<RectTransform>();
+        rect.anchorMin = Vector2.zero;
+        rect.anchorMax = Vector2.one;
+        rect.offsetMin = Vector2.zero;
+        rect.offsetMax = Vector2.zero;
+        imageObject.GetComponent<UnityEngine.UI.Image>().color = Color.black;
+
+        float elapsed = 0f;
+        float duration = Mathf.Max(0.1f, blinkCloseDuration);
+        while (elapsed < duration)
+        {
+            elapsed += Time.unscaledDeltaTime;
+            group.alpha = Mathf.SmoothStep(0f, 1f, elapsed / duration);
+            yield return null;
+        }
+        group.alpha = 1f;
+        // Render a fully black frame before the scene swap.
+        yield return null;
+        DontDestroyOnLoad(overlay);
+        overlay.AddComponent<TutorialBlinkReveal>().Begin(blinkOpenDuration);
     }
     IEnumerator FadeStep(CanvasGroup cg)
     {
@@ -104,5 +140,31 @@ public class CutsceneManager : MonoBehaviour
     private void RefreshBinding()
     {
         skipText.text = $"Press '{_inputTranslator.GetBindingDisplayString(_inputTranslator.PlayerInputs.Gameplay.Interact)}' to Skip";
+    }
+}
+
+// Runs on the persistent overlay so destroying the intro cannot stop the reveal.
+public class TutorialBlinkReveal : MonoBehaviour
+{
+    public void Begin(float duration)
+    {
+        StartCoroutine(LoadAndReveal(Mathf.Max(0.1f, duration)));
+    }
+
+    private IEnumerator LoadAndReveal(float duration)
+    {
+        yield return UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(SceneNames.Tutorial);
+        yield return new WaitForSecondsRealtime(1f);
+
+        CanvasGroup group = GetComponent<CanvasGroup>();
+        float elapsed = 0f;
+        while (elapsed < duration)
+        {
+            elapsed += Time.unscaledDeltaTime;
+            group.alpha = 1f - Mathf.SmoothStep(0f, 1f, elapsed / duration);
+            yield return null;
+        }
+        group.alpha = 0f;
+        Destroy(gameObject);
     }
 }

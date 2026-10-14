@@ -175,7 +175,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 2.017}
+  m_AnchoredPosition: {x: 0, y: 2.0170288}
   m_SizeDelta: {x: 4, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &5485041222767312124
@@ -254,7 +254,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   textMeshPro: {fileID: 2449679018934426242}
+  renderTextWithoutBloom: 1
   text: Press 'E' to talk.
+  bindingTranslator: {fileID: 0}
+  bindingAction: 
+  bindingFormat: 
   displayTime: 1
 --- !u!114 &2537680531963021833
 MonoBehaviour:
