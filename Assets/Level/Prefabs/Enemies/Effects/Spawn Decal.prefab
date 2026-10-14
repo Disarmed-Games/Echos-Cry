@@ -4926,7 +4926,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea07031b24d8a9f4ca7368458aaa6f07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Echos Cry Core::timedDestroy
-  destroyTime: 4
+  destroyTime: 3
   destroyOnStart: 1
 --- !u!1001 &1290032623816181330
 PrefabInstance:
