@@ -13,11 +13,15 @@ public class UpgradeMenuNavigation : MonoBehaviour
     private readonly List<Button> availableButtons = new List<Button>();
     private bool selectInitial;
     private bool usingController;
+    private bool waitingForSubmitRelease;
+    public bool WaitingForSubmitRelease => waitingForSubmitRelease;
     public bool IsUsingController => usingController;
     private readonly Dictionary<TextMeshProUGUI, UpgradeSelector> descriptions = new Dictionary<TextMeshProUGUI, UpgradeSelector>();
 
     private void OnEnable()
     {
+        ClearMenuSelection();
+        waitingForSubmitRelease = IsControllerSubmitHeld();
         selectors = GetComponentsInChildren<UpgradeSelector>(true);
         var player = Player.Instance;
         usingController = player != null && player.InputTranslator != null &&
@@ -37,6 +41,12 @@ public class UpgradeMenuNavigation : MonoBehaviour
 
     private void Update()
     {
+        if (waitingForSubmitRelease)
+        {
+            // Interacting with the anvil must not also submit a menu button.
+            if (IsControllerSubmitHeld()) return;
+            waitingForSubmitRelease = false;
+        }
         RefreshNavigation();
         var system = EventSystem.current;
         if (system == null) return;
@@ -107,7 +117,23 @@ public class UpgradeMenuNavigation : MonoBehaviour
     private void OnDisable()
     {
         InputSystem.onEvent -= OnInput;
+        ClearMenuSelection();
         if (selectors == null) return;
         foreach (var selector in selectors) selector.SetControllerFocus(false);
+    }
+
+    private static bool IsControllerSubmitHeld()
+    {
+        foreach (var pad in Gamepad.all)
+            if (pad.buttonSouth.isPressed) return true;
+        return false;
+    }
+
+    private void ClearMenuSelection()
+    {
+        var system = EventSystem.current;
+        var selected = system != null ? system.currentSelectedGameObject : null;
+        if (selected != null && selected.transform.IsChildOf(transform))
+            system.SetSelectedGameObject(null);
     }
 }

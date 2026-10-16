@@ -4,9 +4,51 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
-public class UpgradeMenuNavigationTests
+public class UpgradeMenuNavigationTests : InputTestFixture
 {
+    [Test]
+    public void AnvilSubmitCanCloseAndReopenMenuWithoutSubmittingBackAgain()
+    {
+        var pad = InputSystem.AddDevice<Gamepad>();
+        var root = new GameObject("UpgradeCanvas", typeof(RectTransform), typeof(Canvas));
+        root.SetActive(false);
+        var events = new GameObject("Events", typeof(EventSystem));
+        var system = events.GetComponent<EventSystem>();
+        EventSystem.current = system;
+        try
+        {
+            var backObject = new GameObject("BackButton", typeof(RectTransform), typeof(Button));
+            backObject.transform.SetParent(root.transform, false);
+            var back = backObject.GetComponent<Button>();
+            back.onClick.AddListener(() => root.SetActive(false));
+            var navigation = root.AddComponent<UpgradeMenuNavigation>();
+            for (int attempt = 0; attempt < 3; attempt++)
+            {
+                Press(pad.buttonSouth);
+                root.SetActive(true);
+                navigation.SendMessage("Update");
+                Assert.That(navigation.WaitingForSubmitRelease, Is.True);
+                Assert.That(system.currentSelectedGameObject, Is.Null);
+                var canFocus = typeof(ControllerUIFocus).GetMethod("CanFocus",
+                    BindingFlags.Static | BindingFlags.NonPublic);
+                Assert.That(canFocus.Invoke(null, new object[] { back }), Is.False);
+                Release(pad.buttonSouth);
+                navigation.SendMessage("Update");
+                Assert.That(system.currentSelectedGameObject, Is.EqualTo(backObject));
+                ExecuteEvents.Execute(backObject, new BaseEventData(system), ExecuteEvents.submitHandler);
+                Assert.That(root.activeSelf, Is.False);
+                Assert.That(system.currentSelectedGameObject, Is.Null);
+            }
+        }
+        finally
+        {
+            Object.DestroyImmediate(root);
+            Object.DestroyImmediate(events);
+        }
+    }
+
     [Test]
     public void UseButtonsCanBeReachedSubmittedAndExitedWithoutSelectingLockedUpgrades()
     {
@@ -51,6 +93,15 @@ public class UpgradeMenuNavigationTests
             navigation.SendMessage("Update");
             Assert.That(system.currentSelectedGameObject, Is.EqualTo(back.gameObject));
             Assert.That(back.navigation.selectOnRight, Is.Null);
+
+            // Closing on Back must not leave it selected for the next anvil interaction.
+            root.SetActive(false);
+            Assert.That(system.currentSelectedGameObject, Is.Null);
+            root.SetActive(true);
+            Assert.That(system.currentSelectedGameObject, Is.Null);
+            first.SetSelectorState(true);
+            navigation.SendMessage("Update");
+            Assert.That(system.currentSelectedGameObject, Is.EqualTo(first.UseButton.gameObject));
         }
         finally
         {
