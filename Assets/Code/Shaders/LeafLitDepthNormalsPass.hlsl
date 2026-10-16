@@ -66,6 +66,7 @@ Varyings DepthNormalsVertex(Attributes input)
     #if defined(REQUIRES_UV_INTERPOLATOR)
         output.uv = TRANSFORM_TEX(input.texcoord, _BaseMap);
     #endif
+    ApplyLeafSway(input.positionOS.xyz, input.normal, input.tangentOS);
     output.positionCS = TransformObjectToHClip(input.positionOS.xyz);
 
     VertexPositionInputs vertexInput = GetVertexPositionInputs(input.positionOS.xyz);

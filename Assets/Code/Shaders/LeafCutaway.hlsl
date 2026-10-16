@@ -1,6 +1,7 @@
 #ifndef ECHOS_CRY_LEAF_CUTAWAY_INCLUDED
 #define ECHOS_CRY_LEAF_CUTAWAY_INCLUDED
 #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+#include "LeafSway.hlsl"
 
 // Set per camera immediately before rendering. No player means no cutaway.
 float4 _LeafCutawayAnchor; // xyz: world position, w: enabled

@@ -35,6 +35,7 @@ Varyings DepthOnlyVertex(Attributes input)
     #if defined(_ALPHATEST_ON)
         output.uv = TRANSFORM_TEX(input.texcoord, _BaseMap);
     #endif
+    input.position.xyz = LeafSwayPosition(input.position.xyz, _Time.y);
     output.positionCS = TransformObjectToHClip(input.position.xyz);
     return output;
 }

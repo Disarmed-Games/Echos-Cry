@@ -162,6 +162,7 @@ Varyings LitPassVertex(Attributes input)
     UNITY_TRANSFER_INSTANCE_ID(input, output);
     UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(output);
 
+    ApplyLeafSway(input.positionOS.xyz, input.normalOS, input.tangentOS);
     VertexPositionInputs vertexInput = GetVertexPositionInputs(input.positionOS.xyz);
 
     // normalWS and tangentWS already normalize.
