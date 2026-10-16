@@ -44,7 +44,24 @@ public class CutsceneManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        StartCoroutine(RevealIntro());
         StartCoroutine(FadeThroughImages());
+    }
+    private IEnumerator RevealIntro()
+    {
+        GameObject overlay = CreateFadeOverlay();
+        CanvasGroup group = overlay.GetComponent<CanvasGroup>();
+        group.alpha = 1f;
+
+        float elapsed = 0f;
+        float duration = Mathf.Max(0.1f, blinkOpenDuration);
+        while (elapsed < duration)
+        {
+            elapsed += Time.unscaledDeltaTime;
+            group.alpha = 1f - Mathf.SmoothStep(0f, 1f, elapsed / duration);
+            yield return null;
+        }
+        Destroy(overlay);
     }
     IEnumerator FadeThroughImages()
     {
@@ -68,9 +85,8 @@ public class CutsceneManager : MonoBehaviour
         }
         yield return CloseBlink();
     }
-    private IEnumerator CloseBlink()
+    private GameObject CreateFadeOverlay()
     {
-        // Cover the entire intro, including its text, before loading the tutorial.
         GameObject overlay = new GameObject("BlinkFade", typeof(RectTransform), typeof(Canvas), typeof(CanvasGroup));
         Canvas canvas = overlay.GetComponent<Canvas>();
         canvas.renderMode = RenderMode.ScreenSpaceOverlay;
@@ -86,6 +102,14 @@ public class CutsceneManager : MonoBehaviour
         rect.offsetMin = Vector2.zero;
         rect.offsetMax = Vector2.zero;
         imageObject.GetComponent<UnityEngine.UI.Image>().color = Color.black;
+
+        return overlay;
+    }
+    private IEnumerator CloseBlink()
+    {
+        // Cover the entire intro, including its text, before loading the tutorial.
+        GameObject overlay = CreateFadeOverlay();
+        CanvasGroup group = overlay.GetComponent<CanvasGroup>();
 
         float elapsed = 0f;
         float duration = Mathf.Max(0.1f, blinkCloseDuration);

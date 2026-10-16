@@ -265,8 +265,9 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 252109370183578809, guid: a37415a1292df9245940773ffdc6b8a4, type: 3}
       propertyPath: text
-      value: While young Echo was cleaning his cellar, he chanced upon a clarinet
-        and with it, perhaps, the means to restore peace to his shattered world.
+      value: One day, while young Echo was cleaning his cellar, he chanced upon a
+        clarinet and with it, perhaps, the means to restore peace to his shattered
+        world.
       objectReference: {fileID: 0}
     - target: {fileID: 3862440350256192616, guid: a37415a1292df9245940773ffdc6b8a4, type: 3}
       propertyPath: m_Sprite
@@ -501,6 +502,8 @@ MonoBehaviour:
   sceneWaitTime: 10
   slideSFX: {fileID: 11400000, guid: 09b8b46fcb3c4654dab51ccd6ffe8715, type: 2}
   screamsSFX: {fileID: 11400000, guid: 343dda8f240f1e04fb72eb3eacc133fa, type: 2}
+  blinkCloseDuration: 1.5
+  blinkOpenDuration: 3.5
 --- !u!1 &920577159
 GameObject:
   m_ObjectHideFlags: 0
@@ -536,7 +539,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1118.0997, y: -948}
+  m_AnchoredPosition: {x: 1231.6477, y: -948}
   m_SizeDelta: {x: 1536, y: 128}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &920577161
@@ -999,7 +1002,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1118.0997, y: -1036}
+  m_AnchoredPosition: {x: 1231.6477, y: -1036}
   m_SizeDelta: {x: 1024, y: 48}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1641816051
@@ -1212,7 +1215,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 252109370183578809, guid: a37415a1292df9245940773ffdc6b8a4, type: 3}
       propertyPath: text
-      value: "Drawn by the town\u2019s music, the demons descended upon the people
+      value: "Drawn in by the town\u2019s music, the demons descended upon the people
         to wreak havoc. As the last of them fled or fell, an eerie silence settled
         over Fallenoak."
       objectReference: {fileID: 0}
@@ -1369,9 +1372,10 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 252109370183578809, guid: a37415a1292df9245940773ffdc6b8a4, type: 3}
       propertyPath: text
-      value: Fallenoak had once been a place of lively refinement, its square filled
-        with music and warm company until the earth split open. From a fire-lit chasm
-        arose unspeakable demons.
+      value: The town of Fallenoak was a lively place, its bustling square filled
+        with trade and music that echoed within its stone walls. But when the earth
+        split open and unspeakable demons emerged from the fire-lit chasm, that life
+        faded into a forgotten past, recalled only in terrified whispers.
       objectReference: {fileID: 0}
     - target: {fileID: 4661042279230515849, guid: a37415a1292df9245940773ffdc6b8a4, type: 3}
       propertyPath: m_Name
