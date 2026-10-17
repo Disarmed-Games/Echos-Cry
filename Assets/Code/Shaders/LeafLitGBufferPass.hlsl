@@ -197,11 +197,10 @@ Varyings LitGBufferPassVertex(Attributes input)
 }
 
 // Used in Standard (Physically Based) shader
-GBufferFragOutput LitGBufferPassFragment(Varyings input)
+GBufferFragOutput LitGBufferPassFragment(Varyings input, FRONT_FACE_TYPE facing : FRONT_FACE_SEMANTIC)
 {
     UNITY_SETUP_INSTANCE_ID(input);
     UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(input);
-    ApplyLeafCutaway(input.positionCS);
 
 #if defined(_PARALLAXMAP)
     #if defined(REQUIRES_TANGENT_SPACE_VIEW_DIR_INTERPOLATOR)
@@ -215,6 +214,7 @@ GBufferFragOutput LitGBufferPassFragment(Varyings input)
 
     SurfaceData surfaceData;
     InitializeStandardLitSurfaceData(input.uv, surfaceData);
+    ApplyLeafCutaway(input.positionCS);
 
 #ifdef LOD_FADE_CROSSFADE
     LODFadeCrossFade(input.positionCS);
@@ -222,6 +222,10 @@ GBufferFragOutput LitGBufferPassFragment(Varyings input)
 
     InputData inputData;
     InitializeInputData(input, surfaceData.normalTS, inputData);
+    half faceSign = IS_FRONT_VFACE(facing, 1.0h, -1.0h);
+    inputData.normalWS *= faceSign;
+    // Match the inexpensive underside fill in the forward lighting pass.
+    surfaceData.emission += surfaceData.albedo * (0.2h * saturate(-faceSign));
     SETUP_DEBUG_TEXTURE_DATA(inputData, UNDO_TRANSFORM_TEX(input.uv, _BaseMap));
 
 #if defined(_DBUFFER)

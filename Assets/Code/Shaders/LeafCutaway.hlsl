@@ -13,6 +13,21 @@ void ApplyLeafCutaway(float4 positionCS)
         return;
 
     float2 uv = positionCS.xy / _ScaledScreenParams.xy;
+    float radius = max(_LeafCutawaySettings.x, 0.001);
+
+    // Orthographic gameplay: reject pixels outside the cutaway before inverse
+    // projection, world/view transforms, height blending and Bayer dithering.
+    UNITY_BRANCH
+    if (unity_OrthoParams.w > 0.5)
+    {
+        float4 anchorScreen = ComputeScreenPos(TransformWorldToHClip(_LeafCutawayAnchor.xyz));
+        float2 anchorUV = anchorScreen.xy / anchorScreen.w;
+        float2 offsetVS = (uv - anchorUV) * 2.0 / float2(UNITY_MATRIX_P._m00, UNITY_MATRIX_P._m11);
+        UNITY_BRANCH
+        if (dot(offsetVS, offsetVS) >= radius * radius)
+            return;
+    }
+
     float depth = positionCS.z;
 #if !UNITY_REVERSED_Z
     depth = lerp(UNITY_NEAR_CLIP_VALUE, 1.0, depth);
@@ -22,7 +37,6 @@ void ApplyLeafCutaway(float4 positionCS)
     float3 fragmentVS = TransformWorldToView(positionWS);
 
     // A camera-facing circle is round on screen, including orthographic isometric views.
-    float radius = max(_LeafCutawaySettings.x, 0.001);
     float softness = clamp(_LeafCutawaySettings.y, 0.001, radius);
     float radialMask = 1.0 - smoothstep(radius - softness, radius,
         length(fragmentVS.xy - anchorVS.xy));

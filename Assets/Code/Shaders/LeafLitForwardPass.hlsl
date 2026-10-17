@@ -222,6 +222,7 @@ Varyings LitPassVertex(Attributes input)
 // Used in Standard (Physically Based) shader
 void LitPassFragment(
     Varyings input
+    , FRONT_FACE_TYPE facing : FRONT_FACE_SEMANTIC
     , out half4 outColor : SV_Target0
 #ifdef _WRITE_RENDERING_LAYERS
     , out uint outRenderingLayers : SV_Target1
@@ -230,7 +231,6 @@ void LitPassFragment(
 {
     UNITY_SETUP_INSTANCE_ID(input);
     UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(input);
-    ApplyLeafCutaway(input.positionCS);
 
 #if defined(_PARALLAXMAP)
 #if defined(REQUIRES_TANGENT_SPACE_VIEW_DIR_INTERPOLATOR)
@@ -244,6 +244,7 @@ void LitPassFragment(
 
     SurfaceData surfaceData;
     InitializeStandardLitSurfaceData(input.uv, surfaceData);
+    ApplyLeafCutaway(input.positionCS);
 
 #ifdef LOD_FADE_CROSSFADE
     LODFadeCrossFade(input.positionCS);
@@ -251,6 +252,11 @@ void LitPassFragment(
 
     InputData inputData;
     InitializeInputData(input, surfaceData.normalTS, inputData);
+    half faceSign = IS_FRONT_VFACE(facing, 1.0h, -1.0h);
+    inputData.normalWS *= faceSign;
+    // A small albedo-colored fill keeps unlit leaf undersides readable.
+    // Emission avoids an extra lighting pass and survives deferred rendering.
+    surfaceData.emission += surfaceData.albedo * (0.2h * saturate(-faceSign));
     SETUP_DEBUG_TEXTURE_DATA(inputData, UNDO_TRANSFORM_TEX(input.uv, _BaseMap));
 
 #if defined(_DBUFFER)

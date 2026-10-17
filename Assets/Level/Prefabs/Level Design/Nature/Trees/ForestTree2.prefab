@@ -10,15 +10,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 7df9a520ce176e44480b6b822baf2ecb, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7df9a520ce176e44480b6b822baf2ecb, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7df9a520ce176e44480b6b822baf2ecb, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7df9a520ce176e44480b6b822baf2ecb, type: 3}
       propertyPath: m_LocalPosition.x
@@ -71,15 +71,15 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 7df9a520ce176e44480b6b822baf2ecb, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 7d6fd2a8a382dfa44a718de5f114ae15, type: 2}
+      objectReference: {fileID: 2100000, guid: b1476a16b389eac46968f2036ea3cc22, type: 2}
     - target: {fileID: -7511558181221131132, guid: 7df9a520ce176e44480b6b822baf2ecb, type: 3}
       propertyPath: 'm_Materials.Array.data[1]'
       value: 
-      objectReference: {fileID: 2100000, guid: aa1176319d19da944a79095ad70ff58b, type: 2}
+      objectReference: {fileID: 2100000, guid: 108bf9a8111fb9343b57e11e679aea62, type: 2}
     - target: {fileID: -5754084199372789682, guid: 7df9a520ce176e44480b6b822baf2ecb, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 4781277628412113339, guid: b43a5b7258e92b34ca47f281d17b67da, type: 3}
+      objectReference: {fileID: -8515437268133518722, guid: e8df88d263afecd42bf11404223ba5d9, type: 3}
     - target: {fileID: 919132149155446097, guid: 7df9a520ce176e44480b6b822baf2ecb, type: 3}
       propertyPath: m_Name
       value: ForestTree2

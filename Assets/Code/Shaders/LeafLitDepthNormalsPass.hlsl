@@ -93,6 +93,7 @@ Varyings DepthNormalsVertex(Attributes input)
 
 void DepthNormalsFragment(
     Varyings input
+    , FRONT_FACE_TYPE facing : FRONT_FACE_SEMANTIC
     , out half4 outNormalWS : SV_Target0
 #ifdef _WRITE_RENDERING_LAYERS
     , out uint outRenderingLayers : SV_Target1
@@ -101,18 +102,19 @@ void DepthNormalsFragment(
 {
     UNITY_SETUP_INSTANCE_ID(input);
     UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(input);
-    ApplyLeafCutaway(input.positionCS);
 
     #if defined(_ALPHATEST_ON)
         Alpha(SampleAlbedoAlpha(input.uv, TEXTURE2D_ARGS(_BaseMap, sampler_BaseMap)).a, _BaseColor, _Cutoff);
     #endif
+
+    ApplyLeafCutaway(input.positionCS);
 
     #if defined(LOD_FADE_CROSSFADE)
         LODFadeCrossFade(input.positionCS);
     #endif
 
     #if defined(_GBUFFER_NORMALS_OCT)
-        float3 normalWS = normalize(input.normalWS);
+        float3 normalWS = normalize(input.normalWS) * IS_FRONT_VFACE(facing, 1.0h, -1.0h);
         float2 octNormalWS = PackNormalOctQuadEncode(normalWS);           // values between [-1, +1], must use fp32 on some platforms
         float2 remappedOctNormalWS = saturate(octNormalWS * 0.5 + 0.5);   // values between [ 0,  1]
         half3 packedNormalWS = PackFloat2To888(remappedOctNormalWS);      // values between [ 0,  1]
@@ -143,7 +145,7 @@ void DepthNormalsFragment(
             float3 normalWS = input.normalWS;
         #endif
 
-        outNormalWS = half4(NormalizeNormalPerPixel(normalWS), 0.0);
+        outNormalWS = half4(NormalizeNormalPerPixel(normalWS) * IS_FRONT_VFACE(facing, 1.0h, -1.0h), 0.0);
     #endif
 
     #ifdef _WRITE_RENDERING_LAYERS
