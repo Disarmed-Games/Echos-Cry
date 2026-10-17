@@ -71,7 +71,7 @@ PrefabInstance:
     - target: {fileID: -6719916215063423, guid: 683ff738c480add46a91f40a7f493ae6, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 4ae69f833e5201c4fb41fa597aa79c03, type: 2}
+      objectReference: {fileID: 2100000, guid: 56b6e7bc8a03c3c4aab927f52af10885, type: 2}
     - target: {fileID: 919132149155446097, guid: 683ff738c480add46a91f40a7f493ae6, type: 3}
       propertyPath: m_Name
       value: Bush3
